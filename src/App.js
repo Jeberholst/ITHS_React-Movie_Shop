@@ -1,9 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import MockDataHolder from './mockData/MockDataHolder'
+import { getTitleFull, getSearchedTitlePaged} from './mockData/mock-data-fetcher'
 
 function App() {
   return (
     <div className="App">
+
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -15,11 +19,22 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
+      
           Movie Shop
         </a>
       </header>
+
+      {/* {fetchMockData()}
+      <MockDataHolder></MockDataHolder> */}
+
+
     </div>
   );
+}
+
+function fetchMockData(){
+  getTitleFull()
+  getSearchedTitlePaged()
 }
 
 export default App;
