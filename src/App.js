@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+// import ShoppingCartRedux from './components/shopping-cart/ShoppingCartRedux';
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
           Movie Shop
         </a>
       </header>
+
+      {/* <ShoppingCartRedux></ShoppingCartRedux> */}
+
     </div>
   );
 }
