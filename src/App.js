@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-// import ShoppingCartRedux from './components/shopping-cart/ShoppingCartRedux';
+import ShoppingCart from './components/shopping-cart/ShoppingCartRedux';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
         </a>
       </header>
 
-      {/* <ShoppingCartRedux></ShoppingCartRedux> */}
+      <ShoppingCart></ShoppingCart>
 
     </div>
   );
