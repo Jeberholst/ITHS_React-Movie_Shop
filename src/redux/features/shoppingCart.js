@@ -6,6 +6,7 @@ const clearCart = createAction('clear cart');
 
 const actions = { addListMovie, removeCartItem, clearCart };
 
+
 const initialState = {
     listOfMovies : [],
     listCount : 0,

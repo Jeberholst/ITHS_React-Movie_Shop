@@ -1,10 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-// import ShoppingCart from './components/shopping-cart/ShoppingCartRedux';
+import ShoppingCart from './components/shopping-cart/ShoppingCartRedux';
+import { getTitleFull, getSearchedTitlePaged } from './mockData/mock-data-fetcher'
+import MockDataHolder from './mockData/MockDataHolder'
 
 function App() {
   return (
     <div className="App">
+
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -16,14 +19,23 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
+      
           Movie Shop
         </a>
       </header>
 
-      {/* <ShoppingCart></ShoppingCart> */}
+      {fetchMockData()}
+      <ShoppingCart></ShoppingCart>
+      <MockDataHolder></MockDataHolder>
+
 
     </div>
   );
+}
+
+function fetchMockData(){
+  getTitleFull()
+  getSearchedTitlePaged()
 }
 
 export default App;
