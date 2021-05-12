@@ -1,18 +1,19 @@
 /*NAVBAR CSS*/
 .navbar__container{
     display: flex;
-    width: 100%;
     height: 50px;
     background-color: rgb(107, 107, 107);
-    flex-flow: wrap row;
+    flex-direction: row;
     color: white;
     align-items: center;
-    justify-content: space-evenly;
-
+    justify-content: space-between;
+    border-bottom: solid 1px rgba(202, 202, 202, 0.377);
 }
 .navbar_logo{
     height: 40px;
     width: 40px;
+    margin-left: 20px;
+    
 }
 textarea:focus, input:focus{
     outline: none;
@@ -42,14 +43,17 @@ textarea:focus, input:focus{
 }
 
 .navbar__container_burger-menu{
-
+    margin-right: 20px;
 }
 .navbar__container_shop-cart{
-
+    
+}
+.menu_x_btn{
+    margin-right: 20px;
 }
 
 .navbar_company_title{
-    color: black;
+    
 }
 
 /* MENU CSS */
@@ -61,18 +65,20 @@ textarea:focus, input:focus{
     top:0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.397);
+    color: white;
 }
 .menu__container{
-    height: 50%;
     background-color: rgb(61, 61, 61);
     display: flex;
     flex-direction: column;
     align-items: center;
+    -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
+    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
 }
 .menu__categories_cont{
     display: flex;
     flex-direction: row;
-    width: 70%;
+
 }
 .menu_title_cont{
     width: 100%;
@@ -89,25 +95,56 @@ textarea:focus, input:focus{
     
 }
 .categories_left{
-    width: 150px;
+    
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
 }  
 .categories_right{
-    width: 150px;
+    
     display: flex;
     flex-direction: column;
     border-left: solid white 1px;
 }
 .categories_item{
-    height: 40px;
+    height: 50px;
     display: flex;
     align-items: center;
-    justify-content: center;
     border-bottom: solid white 1px;
-    font-size: 15px;
+    font-size: 17px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.menu_cat_icon{
+ padding: 10px;
 }
            
 .menu__bottom_cont{
-
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
 }
+.bottom_cont_box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+}
+.bottom_cont_box p{
+    margin-top: 2px;
+}
+.bottom_cont_icon_box{
+    background-color: rgba(255, 255, 255, 0.151);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    border: solid 1px white;
+    border-radius: 5px;
+}
+
