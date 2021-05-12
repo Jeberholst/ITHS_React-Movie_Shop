@@ -13,6 +13,7 @@ import SearchPage from "./pages/SearchPage";
 import ProfilePage from "./pages/ProfilePage";
 import GenrePage from "./pages/GenrePage";
 
+
 function App() {
   return (
       <div className="App">
