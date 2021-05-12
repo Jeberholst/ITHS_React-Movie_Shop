@@ -1,5 +1,5 @@
 import React from 'react'
-import AddToCartButton from '../components/shopping-cart/AddToCartButton'
+import ShoppingCartActionButtons from '../components/shopping-cart/ShoppingCartActionButtons';
 
 const MockMoviePaged = ({item}) => {
 
@@ -10,7 +10,7 @@ const MockMoviePaged = ({item}) => {
           {item.title}	
           {item.year}	
         </p>
-        <AddToCartButton mItem={item}></AddToCartButton>
+        <ShoppingCartActionButtons mItem={item} ACTIONS={'add'}/>
       </div>
     </React.Fragment>
   );

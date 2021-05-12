@@ -1,11 +1,11 @@
 import React from 'react'
-import AddToCartButton from '../components/shopping-cart/AddToCartButton'
+import CartActionButton from '../components/shopping-cart/ShoppingCartActionButtons'
 
 const MockMovieSingle = ({item}) => {
 
     return(
       <React.Fragment>
-          <div style={{display: 'flex', flexDirection: 'row', width: '50%'}}>
+          <div style={{display: 'block', flexDirection: 'row', width: '100%', fontSize: 12, overflow: 'hidden'}}>
             <p>
             {item.title}	
             {item.year}	
@@ -33,9 +33,8 @@ const MockMovieSingle = ({item}) => {
             {item.website}	
             {item.response}
           </p>
-
-         
         </div>
+        <CartActionButton mItem={item} ACTIONS={'add'}/>
       </React.Fragment>
     );
   

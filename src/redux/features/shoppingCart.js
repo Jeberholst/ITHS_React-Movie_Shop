@@ -6,7 +6,6 @@ const clearCart = createAction('clear cart');
 
 const actions = { addListMovie, removeCartItem, clearCart };
 
-
 const initialState = {
     listOfMovies : [],
     listCount : 0,
@@ -14,11 +13,13 @@ const initialState = {
 
 const reducer = createReducer(initialState, {
     [addListMovie] : (state, action) => { 
+        console.log('Add this object ' + action.payload)
         const value = action.payload
         state.listCount = (state.listOfMovies.length + 1)
         state.listOfMovies.push(value)
     },
     [removeCartItem] : (state, action) => { 
+        console.log('Remove this object... ' + action.payload)
         const list = state.listOfMovies.filter(function(item) {
             return item !== action.payload
         })
@@ -27,6 +28,7 @@ const reducer = createReducer(initialState, {
         state.listOfMovies = list
     },
     [clearCart] : (state, action) => { 
+        console.log('Clearing cart...')
         const list = [];
         state.listCount = (0)
         state.listOfMovies = list

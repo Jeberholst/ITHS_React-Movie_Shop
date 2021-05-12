@@ -22,11 +22,15 @@ function App() {
       
           Movie Shop
         </a>
+        {fetchMockData()}
+        <div>
+          <ShoppingCart></ShoppingCart>
+        </div>
+        <MockDataHolder></MockDataHolder>
+
       </header>
 
-      {fetchMockData()}
-      <ShoppingCart></ShoppingCart>
-      <MockDataHolder></MockDataHolder>
+
 
 
     </div>

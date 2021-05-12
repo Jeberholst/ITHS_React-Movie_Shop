@@ -1,9 +1,10 @@
-import { Button, ButtonGroup, Container, Divider, makeStyles, Paper } from "@material-ui/core";
+import { ButtonGroup, Container, Divider, makeStyles } from "@material-ui/core";
 import { ShoppingCartRounded } from "@material-ui/icons";
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux"
-import { actions } from "./../../redux/features/shoppingCart";
-import RemoveFromCartButton from './RemoveFromCartButton'
+import React from "react";
+import { useSelector } from "react-redux"
+import CartItem from './CartItem'
+import CartTotal from './CartTotal'
+import ShoppingCartActionButtons from "./ShoppingCartActionButtons";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -12,106 +13,96 @@ const useStyles = makeStyles((theme) => ({
       alignItems: 'left',
       textAlign: 'left',
       alignContent: 'left',
-      padding: 15,
-      maxWidth: '30%',
-      margin: 15,
+      maxWidth: '100%',
+      height: '100%',
+    },
+    header: {
+      padding: 5,
+      margin: 5,
+    },
+    dividerSection: {
+      marginTop: 15,
+      marginBottom: 15,
+      backgroundColor: 'rgba(255, 255, 255, 0.2)'
+    },
+    cartListItems: {
+      width: '100%'
     },
     cartItemContainer: {
       display: 'flex',
       flexDirection: 'column',
+      width: '100%'
     },
-    cartItemSubContainer: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'left',
-      alignContent: 'left',
-      textAlign: 'left',
-    },
-    cartItem: {
-      margin: 10,
-    }
-  }));
+}));
 
 const ShoppingCartRedux = () => {
+
     const classes = useStyles();
-
-    const [movieItem, setMovieItem] = useState('');
-
-    const dispatch = useDispatch();
     const shoppingCartCount = useSelector(state => state.shoppingCart.listCount);
-
-    const clearCart = () => {
-      console.log('Clearing cart')
-      dispatch(actions.clearCart());
-    }
 
     return (
         <Container className={classes.root}>
 
-            <ShoppingCartRounded></ShoppingCartRounded>
-            <h3>Shopping Cart ({shoppingCartCount})</h3>
-            <div>
-              <ListItems></ListItems>
+            <div className={classes.header}>
+
+              <ShoppingCartRounded></ShoppingCartRounded>
+              <h3>Shopping Cart ({shoppingCartCount})</h3>
+
+              <ButtonGroup>
+                <ShoppingCartActionButtons style={{marginTop: 5}} mItem={''} ACTIONS={'clear'}/>
+                {/* <Button variant='contained' color='secondary' style={{marginTop: 5}} onClick={clearCart}>Clear cart</Button> */}
+              </ButtonGroup>
+
             </div>
 
-            <ButtonGroup>
-              <Button variant='contained' color='secondary' style={{marginTop: 15}} onClick={clearCart}>Clear cart</Button>
-            </ButtonGroup>
+            <Divider className={classes.dividerSection}></Divider> 
 
+              <div className={classes.cartListItems}>
+                
+                <CartListItems></CartListItems>
+
+              </div>
+
+            <Divider className={classes.dividerSection}></Divider> 
+
+            <div className={classes.cartTotal}>
+                
+                <CartTotal></CartTotal>
+
+                <ShoppingCartActionButtons ACTIONS={'checkout'}/>
+
+            </div>
 
         </Container>
     )
 }
 
-const ListItems = () => {
+
+
+const CartListItems = () => {
   const classes = useStyles();
   const shoppingCartItems = useSelector(state => state.shoppingCart.listOfMovies);
-  console.log("Items in CART: " + shoppingCartItems)
+  // console.log("Items in CART: " + shoppingCartItems)
 
-  return (
-    <React.Fragment>
-         <div className={classes.cartItemContainer}>
-            {shoppingCartItems.map((element) => (
-              [element].map( subElement => (
-                <p>{subElement}</p>
-              
-            ))
-           
-                // <CartItem item={element}></CartItem>
-            ))}
+  if(shoppingCartItems.length !== 0){
+    return (
+      <React.Fragment>
+           <div className={classes.cartItemContainer}>
+              {shoppingCartItems.map((element) => (
+               <CartItem key={element.imdbId} item={element}></CartItem>
+              ))}
+          </div>
+      </React.Fragment>
+    );
+  } else {
+    return (
+      <React.Fragment>
+         {/*TODO: add styling to div*/}
+        <div>
+          <p>No items added to cart...</p>   
         </div>
-    </React.Fragment>
-  );
-}
-
-const CartItem = ({ item }) => {
-  const classes = useStyles();
-  console.log(item)
-  console.log("Cart ITEM: " + {item})
-
-  return(
-    <React.Fragment>
-      <div className={classes.cartItemSubContainer}>
-        <CartLabel>{item.itemID}</CartLabel>
-        <CartLabel>{item.year}</CartLabel>
-        {/* Put item id here? with removal? */}
-       <RemoveFromCartButton itemIndex={'3'}></RemoveFromCartButton>
-      </div>
- 
-      <Divider></Divider> 
-
-    </React.Fragment>
- 
-  );
-}
-
-
-const CartLabel = ({ item }) => {
-  const classes = useStyles();
-
-  return(
-      <div className={classes.cartItem}>{item}</div>
-  );
-}
-
+      </React.Fragment>
+    );
+  };
+};
 export default ShoppingCartRedux;

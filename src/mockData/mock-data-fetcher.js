@@ -104,11 +104,11 @@ function titlePlotFullItem(title,	year,	rated,	released,	runtime,
 };
 
 
-function pagedTitleSearchItem(title, year, imdbID, type, poster) {
+function pagedTitleSearchItem(title, year, imdbId, type, poster) {
   return {
       title,
       year,
-      imdbID,
+      imdbId,
       type,
       poster,
   };
