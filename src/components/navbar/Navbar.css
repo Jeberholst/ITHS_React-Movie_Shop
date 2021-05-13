@@ -66,6 +66,8 @@ textarea:focus, input:focus{
     left: 0;
     background-color: rgba(0, 0, 0, 0.397);
     color: white;
+    z-index: 10000;
+    overflow: hidden;
 }
 .menu__container{
     background-color: rgb(61, 61, 61);
