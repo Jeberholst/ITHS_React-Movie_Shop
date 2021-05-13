@@ -1,11 +1,9 @@
 import './Navbar.css';
 import React from 'react'
 import dummyLogo from '../../img/Logo/dummy_ic.jpg'
+import tempLogo from '../../img/Logo/temp-movie-logo.svg'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggelMenu } from '../../redux/features/navbarSlice'
-
-
-
 
 const CATEGORIES = {
         default: "fas fa-exclamation-triangle",
@@ -26,7 +24,7 @@ const Bar = () => {
   const dispatch = useDispatch()
   return (
     <div className="navbar__container">
-     <img src={dummyLogo} alt="" className="navbar_logo" />
+     <img src={tempLogo} alt="" className="navbar_logo" />
      <div className="searchbar__container">
          <input type="text" className="searchbar__container_search-field" />
          <i className="fas fa-search searchbar__container_search-field_logo"></i>
