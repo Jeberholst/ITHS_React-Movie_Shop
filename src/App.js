@@ -7,11 +7,27 @@ import Navbar from './components/navbar/Navbar';
 
 function App() {
   return (
-    <>
-    <Navbar></Navbar>
-      {/* {fetchMockData()}
-      <MockDataHolder></MockDataHolder> */}
-    </>
+    <div className="App">
+
+      <header className="App-NavBar">
+        <Navbar></Navbar>
+      </header>
+
+      <div className='App-Main'>
+      
+        <header className="App-Header">
+          <h1 style={{color: '#388e3c'}}>Header-container--</h1>
+        </header>
+
+        <div className="App-Content">
+          <h1 style={{color: '#388e3c'}}>Content-container--</h1>
+          {fetchMockData()}
+          <MockDataHolder></MockDataHolder>
+        </div>
+
+      </div>
+
+    </div>
   );
 }
 
