@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 import React from 'react'
-import CartActionButton from '../components/shopping-cart/ShoppingCartActionButtons'
+import ShoppingCartActionButton from '../components/shopping-cart/ShoppingCartActionButtons'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,7 +53,7 @@ const MockMovieSingle = ({item}) => {
               {item.response}
           </div>
         </div>
-        <CartActionButton mItem={item} ACTIONS={'add'}/>
+        <ShoppingCartActionButton mItem={item} ACTIONS={'add'}/>
       </React.Fragment>
     );
   

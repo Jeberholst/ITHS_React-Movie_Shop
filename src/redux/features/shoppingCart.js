@@ -13,17 +13,34 @@ const initialState = {
 
 const reducer = createReducer(initialState, {
     [addListMovie] : (state, action) => { 
-        console.log('Add this object ' + action.payload)
         const value = action.payload
-        state.listCount = (state.listOfMovies.length + 1)
-        state.listOfMovies.push(value)
+        const jsonVal = JSON.parse(action.payload)
+
+        if(state.listOfMovies.length === 0){
+
+            state.listCount = (state.listOfMovies.length + 1)
+            state.listOfMovies.push(value)
+        
+        } else {
+
+            const checkAdded = state.listOfMovies.some(x => JSON.parse(x).imdbId === jsonVal.imdbId)
+
+            if(checkAdded){
+                console.log('Movie already added to CART...')
+            } else {
+                console.log('Adding to CART ' + action.payload)
+                state.listCount = (state.listOfMovies.length + 1)
+                state.listOfMovies.push(value)
+            }
+
+        }
+
     },
     [removeCartItem] : (state, action) => { 
         console.log('Remove this object... ' + action.payload)
         const list = state.listOfMovies.filter(function(item) {
             return item !== action.payload
         })
-        
         state.listCount = (list.length)
         state.listOfMovies = list
     },

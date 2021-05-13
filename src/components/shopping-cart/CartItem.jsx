@@ -1,12 +1,16 @@
 
-import { Divider, makeStyles } from "@material-ui/core";
+import { Container, makeStyles, Paper } from "@material-ui/core";
 import React from "react";
 import ShoppingCartActionButtons from "./ShoppingCartActionButtons";
 
-const cartItemStyle = makeStyles((theme) => ({
+const useStyle = makeStyles((theme) => ({
     root: {
-        marginTop: 10,
-        marginBottom: 10,
+      marginTop: 10,
+      marginBottom: 10,
+      background: 'rgb(0,0,0, 0.1)',
+      padding: 5,
+      borderRadius: 5,
+      fontSize: '0.875rem',
     },
     containerInfo: {
       display: 'flex',
@@ -21,6 +25,10 @@ const cartItemStyle = makeStyles((theme) => ({
       display: 'flex',
       flexDirection: 'row-reverse',
       width: '100%',
+      alignItems: 'center',
+      marginTop: 5,
+      marginBottom: 5,
+      borderTop: '1px solid rgb(68,68,68, 0.5)'
     },
     thumbnail: {
       width: 'fit-content',
@@ -29,15 +37,29 @@ const cartItemStyle = makeStyles((theme) => ({
       objectFit: 'scale-down'
     },
     label: {
-        marginLeft: 10,
-        padding: 3,
-        fontSize: 12,
+      marginLeft: 10,
+      padding: 3,
+      fontSize: 12,
     },
+    labelCost: {
+      fontSize: '0.875rem',
+      fontWeight: "lighter",
+      fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+      borderRadius: 5,
+      color: 'white',
+      background: 'rgb(79,174,109, 0.5)',
+      width: 'fit-content',
+      padding: '6px 8px',
+      height: '100%',
+      minWidth: '16px',
+      letterSpacing: '0.02857em'
+  },
 }));
+
 
 const CartItem = ({ item }) => {
     
-    const classes = cartItemStyle();
+    const classes = useStyle();
     const pItem = JSON.parse(item)
   
     const poster = pItem.poster
@@ -65,16 +87,13 @@ const CartItem = ({ item }) => {
           
           <div className={classes.containerButton}>
             <ShoppingCartActionButtons
-                btnVariant={'contained'}
-                btnColor={'default'}
                 mItem={item} 
                 ACTIONS={'remove'}
               />
+              <CostLabel text={'20.00'}/>
           </div>
           
         </div>
-   
-        <Divider></Divider> 
   
       </React.Fragment>
    
@@ -83,9 +102,17 @@ const CartItem = ({ item }) => {
 export default CartItem;
 
 const Label = ({text}) => {
-    const classes = cartItemStyle();
+    const classes = useStyle();
 
     return(
         <div className={classes.label}>{text}</div>
     );
+}
+
+const CostLabel = ({text}) => {
+  const classes = useStyle();
+
+  return(
+      <div className={classes.labelCost}>${text} </div>
+  );
 }

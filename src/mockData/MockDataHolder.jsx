@@ -1,9 +1,10 @@
 
 import React from 'react';
-import { arrayPlotFull, arraySearchPaged} from './mock-data-fetcher'
+import { arrayPlotFull, arraySearchPaged } from './mock-data-fetcher'
 import MockMovieSingle from './MockMovieSingle'
 import MockMoviePaged from './MockMoviePaged'
 import { makeStyles } from '@material-ui/core';
+import { getTitleFull, getSearchedTitlePaged } from './mock-data-fetcher'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,6 +21,8 @@ const useStyles = makeStyles((theme) => ({
 
 const MockDataHolder = () => {
     const classes = useStyles();
+    
+    getMockData()
     
     return(
       <React.Fragment>
@@ -39,5 +42,11 @@ const MockDataHolder = () => {
       </React.Fragment>
     );
 };
+
+function getMockData(){
+  getTitleFull();
+  getSearchedTitlePaged();
+}
+
 
 export default MockDataHolder;

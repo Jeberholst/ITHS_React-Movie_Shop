@@ -1,7 +1,5 @@
 import './App.css';
 import React from 'react';
-import MockDataHolder from './mockData/MockDataHolder'
-import { getTitleFull, getSearchedTitlePaged} from './mockData/mock-data-fetcher'
 import Navbar from './components/navbar/Navbar';
 import  {
     Route,
@@ -16,7 +14,6 @@ import ShoppingCartPage from "./pages/ShoppingCartPage";
 import SearchPage from "./pages/SearchPage";
 import ProfilePage from "./pages/ProfilePage";
 import GenrePage from "./pages/GenrePage";
-
 import firebase from "firebase/app";
 import "firebase/firestore";
 import {firebaseConfig} from "./util/firebase";
@@ -38,8 +35,7 @@ function App() {
           <h1 style={{color: '#388e3c'}}>Header-container--</h1>
         </header>
 
-
-          <Router  basename={`${process.env.PUBLIC_URL}/`}>
+          <Router basename={`${process.env.PUBLIC_URL}/`}>
               <ul style={{display: 'flex', flexDirection: 'column',  textAlign: "start" }}>
                   <li><Link to="/">LandingPage</Link></li>
                   <li><Link to="/genre">genre</Link></li>
@@ -63,12 +59,14 @@ function App() {
                   </Switch>
               </div>
           </Router>
-          
+
       </div>
 
     </div>
   );
 }
+
+
 
 
 export default App;

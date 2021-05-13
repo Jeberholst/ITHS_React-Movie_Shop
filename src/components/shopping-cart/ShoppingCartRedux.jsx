@@ -1,9 +1,10 @@
 import { ButtonGroup, Container, Divider, makeStyles } from "@material-ui/core";
-import { ShoppingCartRounded } from "@material-ui/icons";
+import { DeleteRounded, ShoppingCartRounded } from "@material-ui/icons";
 import React from "react";
 import { useSelector } from "react-redux"
 import CartItem from './CartItem'
 import CartTotal from './CartTotal'
+import CartBillingInfo from './CartBillingInfo'
 import ShoppingCartActionButtons from "./ShoppingCartActionButtons";
 
 const useStyles = makeStyles((theme) => ({
@@ -43,23 +44,17 @@ const useStyles = makeStyles((theme) => ({
 const ShoppingCartRedux = () => {
 
     const classes = useStyles();
-    const shoppingCartCount = useSelector(state => state.shoppingCart.listCount);
 
     return (
         <Container className={classes.root}>
 
             <div className={classes.header}>
 
-              <ShoppingCartRounded></ShoppingCartRounded>
-              <h3>Shopping Cart ({shoppingCartCount})</h3>
-
               <ButtonGroup>
                 <ShoppingCartActionButtons 
                   style={{marginTop: 5}}
-                  btnVariant={'contained'} 
-                  btnColor={'primary'} 
                   mItem={''} 
-                  ACTIONS={'clear'}/>
+                  ACTIONS={'empty'}/>
               </ButtonGroup>
 
             </div>
@@ -75,18 +70,19 @@ const ShoppingCartRedux = () => {
             <Divider className={classes.dividerSection}></Divider> 
 
             <div className={classes.cartTotal}>
+                <CartTotal/>
                 
-                <CartTotal></CartTotal>
+                <Divider className={classes.dividerSection}></Divider> 
 
+                <CartBillingInfo/>
             </div>
 
+        
             <Divider className={classes.dividerSection}></Divider> 
 
             <div className={classes.checkOutContainer}>
 
                 <ShoppingCartActionButtons 
-                  btnVariant={'contained'} 
-                  btnColor={'secondary'}
                   ACTIONS={'checkout'}
                   />
 
@@ -95,8 +91,6 @@ const ShoppingCartRedux = () => {
         </Container>
     )
 }
-
-
 
 const CartListItems = () => {
   const classes = useStyles();
@@ -108,7 +102,9 @@ const CartListItems = () => {
       <React.Fragment>
            <div className={classes.cartItemContainer}>
               {shoppingCartItems.map((element) => (
-               <CartItem key={element.imdbId} item={element}></CartItem>
+               <CartItem 
+                  key={element.imdbId} 
+                  item={element}/>
               ))}
           </div>
       </React.Fragment>
@@ -118,7 +114,7 @@ const CartListItems = () => {
       <React.Fragment>
          {/*TODO: add styling to div*/}
         <div>
-          <p>No items added to cart...</p>   
+          <p>No items added to cart :(</p>   
         </div>
       </React.Fragment>
     );
