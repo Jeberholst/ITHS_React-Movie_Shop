@@ -1,7 +1,9 @@
+import Header from '../components/Header.js'
+
 const ShoppingCartPage = () => {
 
 
-    return <p>ShoppingCartPage</p>
+    return <Header page="Shoppingcart">Shopping Cart</Header>
 
 
 }

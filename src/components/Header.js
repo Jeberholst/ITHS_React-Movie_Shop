@@ -5,7 +5,7 @@ function Header({children,page}) {
     
   let iconsClasses = {
         default: "fas fa-exclamation-triangle",
-        shoppingcart: "fa-shopping-basket",
+        shoppingcart: "fas fa-shopping-cart",
         payment:"far fa-credit-card",
         action: "fas fa-fighter-jet",
         comedy:"fas fa-grin-beam",

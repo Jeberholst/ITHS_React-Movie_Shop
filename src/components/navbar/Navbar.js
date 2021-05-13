@@ -3,6 +3,7 @@ import React from 'react'
 import dummyLogo from '../../img/Logo/dummy_ic.jpg'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggelMenu } from '../../redux/features/navbarSlice'
+import  { Link } from "react-router-dom";
 
 
 
@@ -61,31 +62,63 @@ let Menu = () => {
         </div>
         <div className="menu__categories_cont">
           <div className="categories_left">
-            <div className="categories_item"><i className={`${CATEGORIES.action} menu_cat_icon`}></i>Action</div>
+            <Link to="/genre/action" onClick={()=>dispatch(toggelMenu())}>
+              <div className="categories_item"><i className={`${CATEGORIES.action} menu_cat_icon`}></i>Action</div>
+            </Link>
+
+            <Link to="/genre/comedy" onClick={()=>dispatch(toggelMenu())}>
             <div className="categories_item"><i className={`${CATEGORIES.comedy} menu_cat_icon`}></i>Comedy</div>
+            </Link>
+            
+            <Link to="/genre/drama" onClick={()=>dispatch(toggelMenu())}>
             <div className="categories_item"><i className={`${CATEGORIES.drama} menu_cat_icon`}></i>Drama</div>
+            </Link>
+            
+            <Link to="/genre/romance" onClick={()=>dispatch(toggelMenu())}>
             <div className="categories_item"><i className={`${CATEGORIES.romance} menu_cat_icon`}></i>Romance</div>
+            </Link>
           </div>
           <div className="categories_right">
-            <div className="categories_item"><i className={`${CATEGORIES.fantasy} menu_cat_icon`}></i>Fantasy</div>
-            <div className="categories_item"><i className={`${CATEGORIES.horror} menu_cat_icon`}></i>Horror</div>
-            <div className="categories_item"><i className={`${CATEGORIES.mystery} menu_cat_icon`}></i>Mystery</div>
-            <div className="categories_item"><i className={`${CATEGORIES.thriller} menu_cat_icon`}></i>Thriller</div>
+            <Link to="/genre/fantasy" onClick={()=>dispatch(toggelMenu())}>
+              <div className="categories_item"><i className={`${CATEGORIES.fantasy} menu_cat_icon`}></i>Fantasy</div>
+            </Link>
+
+            <Link to="/genre/horror" onClick={()=>dispatch(toggelMenu())}>
+              <div className="categories_item"><i className={`${CATEGORIES.horror} menu_cat_icon`}></i>Horror</div>
+            </Link>
+            
+            <Link to="/genre/mystery" onClick={()=>dispatch(toggelMenu())}>
+              <div className="categories_item"><i className={`${CATEGORIES.mystery} menu_cat_icon`}></i>Mystery</div>
+            </Link>
+            
+            <Link to="/genre/thriller" onClick={()=>dispatch(toggelMenu())}>
+              <div className="categories_item"><i className={`${CATEGORIES.thriller} menu_cat_icon`}></i>Thriller</div>
+            </Link>
+            
           </div>
         </div>
         <div className="menu__bottom_cont">
-          <div className="bottom_cont_box">
-          <i className="fas fa-shopping-cart bottom_cont_icon_box"></i>
-          <p>cart</p>
-          </div>
-          <div className="bottom_cont_box">
-          <i className="fas fa-question bottom_cont_icon_box"></i>
-          <p>unknown</p>
-          </div>
-          <div className="bottom_cont_box">
-          <i className="fas fa-user bottom_cont_icon_box"></i>
-          <p>account</p>
-          </div>
+          
+          <Link to="/shopping-cart" onClick={()=>dispatch(toggelMenu())}>
+            <div className="bottom_cont_box">
+            <i className="fas fa-shopping-cart bottom_cont_icon_box"></i>
+            <p>cart</p>
+            </div>
+          </Link>
+
+          <Link to="/" onClick={()=>dispatch(toggelMenu())}>
+            <div className="bottom_cont_box">
+            <i className="fas fa-question bottom_cont_icon_box"></i>
+            <p>unknown</p>
+            </div>
+          </Link>
+
+          <Link to="/profile" onClick={()=>dispatch(toggelMenu())}>
+            <div className="bottom_cont_box">
+            <i className="fas fa-user bottom_cont_icon_box"></i>
+            <p>account</p>
+            </div>
+          </Link>
 
         </div>
       </div>
