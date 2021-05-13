@@ -1,4 +1,5 @@
-import { Button} from "@material-ui/core";
+import { Button, IconButton} from "@material-ui/core";
+import { DeleteOutlined, DeleteRounded } from "@material-ui/icons";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { actions } from "../../redux/features/shoppingCart";
@@ -10,7 +11,7 @@ import { actions } from "../../redux/features/shoppingCart";
 //     checkout: 'checkout'
 // }
 
-const ShoppingCartActionButtons = ( { mItem, ACTIONS } ) => {
+const ShoppingCartActionButtons = ( { btnVariant, btnColor, mItem, ACTIONS } ) => {
 
     const dispatch = useDispatch();
     let UseAction = (null)
@@ -45,21 +46,43 @@ const ShoppingCartActionButtons = ( { mItem, ACTIONS } ) => {
     const onAction = () => {
         UseAction();
     }
-  
-    return(
-        <React.Fragment>
-            <Button
-                variant='contained'
-                color='primary'
-                onClick={() => {
-                        onAction()
+
+    if(ACTIONS !== 'remove'){
+        return(
+            <React.Fragment>
+                <Button
+                    variant={btnVariant}
+                    color={btnColor}
+                    onClick={() => {
+                            onAction()
+                        }
                     }
-                }
-            >{ACTIONS}</Button>
+                >{ACTIONS}</Button>
 
+            </React.Fragment>
+        );
+    } else {
+        return(
+            <React.Fragment>
+                 <IconButton 
+                    aria-label="delete"
+                    color="secondary"
+                    onClick={() => {
+                            onAction()
+                        }
+                    }>
+                    <DeleteRounded
+                    />
 
-        </React.Fragment>
-    );
+                </IconButton>
+
+            </React.Fragment>
+
+        );
+
+    };
+  
+
 
 }
 

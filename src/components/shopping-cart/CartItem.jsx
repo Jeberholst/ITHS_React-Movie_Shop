@@ -64,7 +64,12 @@ const CartItem = ({ item }) => {
           </div>
           
           <div className={classes.containerButton}>
-            <ShoppingCartActionButtons mItem={item} ACTIONS={'remove'}/>
+            <ShoppingCartActionButtons
+                btnVariant={'contained'}
+                btnColor={'default'}
+                mItem={item} 
+                ACTIONS={'remove'}
+              />
           </div>
           
         </div>
@@ -77,7 +82,6 @@ const CartItem = ({ item }) => {
 };
 export default CartItem;
 
-  
 const Label = ({text}) => {
     const classes = cartItemStyle();
 

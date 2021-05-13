@@ -33,6 +33,11 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: 'column',
       width: '100%'
     },
+    checkOutContainer: {
+      display: 'flex',
+      flexDirection: 'row-reverse',
+      width: '100%'
+    },
 }));
 
 const ShoppingCartRedux = () => {
@@ -49,8 +54,12 @@ const ShoppingCartRedux = () => {
               <h3>Shopping Cart ({shoppingCartCount})</h3>
 
               <ButtonGroup>
-                <ShoppingCartActionButtons style={{marginTop: 5}} mItem={''} ACTIONS={'clear'}/>
-                {/* <Button variant='contained' color='secondary' style={{marginTop: 5}} onClick={clearCart}>Clear cart</Button> */}
+                <ShoppingCartActionButtons 
+                  style={{marginTop: 5}}
+                  btnVariant={'contained'} 
+                  btnColor={'primary'} 
+                  mItem={''} 
+                  ACTIONS={'clear'}/>
               </ButtonGroup>
 
             </div>
@@ -69,7 +78,17 @@ const ShoppingCartRedux = () => {
                 
                 <CartTotal></CartTotal>
 
-                <ShoppingCartActionButtons ACTIONS={'checkout'}/>
+            </div>
+
+            <Divider className={classes.dividerSection}></Divider> 
+
+            <div className={classes.checkOutContainer}>
+
+                <ShoppingCartActionButtons 
+                  btnVariant={'contained'} 
+                  btnColor={'secondary'}
+                  ACTIONS={'checkout'}
+                  />
 
             </div>
 
