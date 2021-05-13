@@ -17,6 +17,12 @@ import SearchPage from "./pages/SearchPage";
 import ProfilePage from "./pages/ProfilePage";
 import GenrePage from "./pages/GenrePage";
 
+import firebase from "firebase/app";
+import "firebase/firestore";
+import {firebaseConfig} from "./util/firebase";
+import "firebase/auth";
+
+firebase.initializeApp(firebaseConfig);
 
 function App() {
   return (
