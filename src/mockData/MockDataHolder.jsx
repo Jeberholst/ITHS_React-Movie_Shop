@@ -7,12 +7,16 @@ import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'block',
+    display: 'flex',
+    flexDirection: 'column',
     width: '100%',
     height: '100%',
-    overflow: 'auto',
+    alignItems: 'left',
+    textAlign: 'left',
+    alignContent: 'left',
   },
 }));
+
 
 const MockDataHolder = () => {
     const classes = useStyles();
