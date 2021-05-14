@@ -1,10 +1,11 @@
-import { ButtonGroup, Container, Divider, makeStyles } from "@material-ui/core";
+import { ButtonGroup, Container, Divider, makeStyles, Slide } from "@material-ui/core";
 import React from "react";
 import { useSelector } from "react-redux"
 import CartItem from './CartItem'
 import CartTotal from './CartTotal'
 import CartBillingInfo from './CartBillingInfo'
 import ShoppingCartActionButtons from "./ShoppingCartActionButtons";
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,18 +27,18 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: 'rgba(255, 255, 255, 0.2)'
     },
     cartListItems: {
-      width: '100%'
+      width: '100%',
     },
     cartItemContainer: {
       display: 'flex',
       flexDirection: 'column',
-      width: '100%'
+      width: '100%',
     },
     checkOutContainer: {
       display: 'flex',
       flexDirection: 'row-reverse',
       width: '100%'
-    },
+    }
 }));
 
 const ShoppingCartRedux = () => {
@@ -48,26 +49,27 @@ const ShoppingCartRedux = () => {
         <Container className={classes.root}>
 
             <div className={classes.header}>
-
-              <ButtonGroup>
-                <ShoppingCartActionButtons 
-                  style={{marginTop: 5}}
-                  mItem={''} 
-                  ACTIONS={'empty'}/>
-              </ButtonGroup>
-
+                <ButtonGroup>
+                  <ShoppingCartActionButtons 
+                    style={{marginTop: 5}}
+                    mItem={''} 
+                    ACTIONS={'empty'}/>
+                </ButtonGroup>
             </div>
 
             <Divider className={classes.dividerSection}></Divider> 
 
+            <Slide direction="right" in={true} mountOnEnter>
               <div className={classes.cartListItems}>
+              
+                  <CartListItems></CartListItems>
                 
-                <CartListItems></CartListItems>
-
               </div>
+            </Slide>
 
             <Divider className={classes.dividerSection}></Divider> 
 
+            <Slide direction="right" in={true} mountOnEnter>
             <div className={classes.cartTotal}>
                 <CartTotal/>
                 
@@ -75,7 +77,7 @@ const ShoppingCartRedux = () => {
 
                 <CartBillingInfo/>
             </div>
-
+            </Slide>
         
             <Divider className={classes.dividerSection}></Divider> 
 
@@ -99,13 +101,15 @@ const CartListItems = () => {
   if(shoppingCartItems.length !== 0){
     return (
       <React.Fragment>
-           <div className={classes.cartItemContainer}>
-              {shoppingCartItems.map((element) => (
-               <CartItem 
-                  key={element.imdbId} 
-                  item={element}/>
-              ))}
-          </div>
+            <div className={classes.cartItemContainer}>
+      
+                {shoppingCartItems.map((element) => (
+                      <CartItem 
+                          key={element.imdbId} 
+                          item={element}/>
+                ))}
+            
+            </div>
       </React.Fragment>
     );
   } else {

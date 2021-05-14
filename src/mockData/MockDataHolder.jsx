@@ -27,11 +27,11 @@ const MockDataHolder = () => {
     return(
       <React.Fragment>
         <div className={classes.root}>
-            <h1>Single Item</h1>
+            {/* <h1>Single Item</h1>
     
             {arrayPlotFull.map((item) => (
               <MockMovieSingle key={'single-full-' + item.imdbId} item={item}></MockMovieSingle>
-            ))}
+            ))} */}
     
             <h1>Paged search</h1>
             
