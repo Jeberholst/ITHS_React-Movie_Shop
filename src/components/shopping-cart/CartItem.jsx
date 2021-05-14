@@ -68,35 +68,37 @@ const CartItem = ({ item }) => {
     const year = pItem.year
   
     return(
+    
       <React.Fragment>
-        <div className={classes.root}>
-  
-          <div className={classes.containerInfo}>
-  
-            <div className={classes.containerThumbnail}>
-              <img className={classes.thumbnail} src={poster} alt={'poster'}/>
+           
+            <div id={'cart-item'} className={classes.root}>
+      
+              <div className={classes.containerInfo}>
+      
+                <div className={classes.containerThumbnail}>
+                  <img className={classes.thumbnail} src={poster} alt={'poster'}/>
+                </div>
+      
+                <div className={classes.infoContainer}>
+                  <Label text={id}/>
+                  <Label text={title}/>
+                  <Label text={year}/>
+                </div>
+      
+              </div>
+              
+              <div className={classes.containerButton}>
+                <ShoppingCartActionButtons
+                    mItem={item} 
+                    ACTIONS={'remove'}
+                  />
+                  <CostLabel text={'20.00'}/>
+              </div>
+              
             </div>
-  
-            <div className={classes.infoContainer}>
-              <Label text={id}/>
-              <Label text={title}/>
-              <Label text={year}/>
-            </div>
-  
-          </div>
-          
-          <div className={classes.containerButton}>
-            <ShoppingCartActionButtons
-                mItem={item} 
-                ACTIONS={'remove'}
-              />
-              <CostLabel text={'20.00'}/>
-          </div>
-          
-        </div>
-  
+
       </React.Fragment>
-   
+
     );
 };
 export default CartItem;
