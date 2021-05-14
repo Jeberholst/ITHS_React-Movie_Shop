@@ -3,7 +3,7 @@ import { AddShoppingCartRounded, DeleteRounded, RemoveShoppingCartRounded, ShopR
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actions as shopingCartActions } from "../../redux/features/shoppingCart";
-import { actions as snackBarActions, SEVERITY_TYPE } from "../../redux/features/snackbars";
+import { actions as snackBarActions, SEVERITY_TYPE, SNACK_TEXT } from "../../redux/features/snackbars";
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -50,8 +50,9 @@ const ShoppingCartActionButtons = ({ mItem, ACTIONS } ) => {
                 if(stateListOfMovies.length === 0){
 
                     console.log('Adding FIRST item to CART...')
-                    dispatch(snackBarActions.setSnackBarType(SEVERITY_TYPE.success))
+                    dispatch(snackBarActions.setSeverity(SEVERITY_TYPE.success))
                     dispatch(snackBarActions.showSnackBar(true))
+                    dispatch(snackBarActions.setText(SNACK_TEXT.cartAdded))
                     dispatch(shopingCartActions.addListMovie(JSON.stringify(mItem)))
 
                 
@@ -60,12 +61,14 @@ const ShoppingCartActionButtons = ({ mItem, ACTIONS } ) => {
                     const checkAdded = stateListOfMovies.some(x => (JSON.parse(x)).imdbId === mItem.imdbId)
 
                     if(checkAdded){
-                        dispatch(snackBarActions.setSnackBarType(SEVERITY_TYPE.warning))
+                        dispatch(snackBarActions.setSeverity(SEVERITY_TYPE.warning))
+                        dispatch(snackBarActions.setText(SNACK_TEXT.cartItemExists))
                         dispatch(snackBarActions.showSnackBar(true))
                         console.log('Movie already added to CART...')
         
                     } else {
-                        dispatch(snackBarActions.setSnackBarType(SEVERITY_TYPE.success))
+                        dispatch(snackBarActions.setSeverity(SEVERITY_TYPE.success))
+                        dispatch(snackBarActions.setText(SNACK_TEXT.cartAdded))
                         dispatch(snackBarActions.showSnackBar(true))
                         dispatch(shopingCartActions.addListMovie(JSON.stringify(mItem)))
                         console.log('Adding item to CART...')
@@ -85,6 +88,9 @@ const ShoppingCartActionButtons = ({ mItem, ACTIONS } ) => {
 
             UseAction = () => { 
                 console.log('Remove item?: ' + mItem)
+                dispatch(snackBarActions.setSeverity(SEVERITY_TYPE.warning))
+                dispatch(snackBarActions.setText(SNACK_TEXT.cartRemoved))
+                dispatch(snackBarActions.showSnackBar(true))
                 dispatch(shopingCartActions.removeCartItem(mItem)) 
             };
 
@@ -96,6 +102,9 @@ const ShoppingCartActionButtons = ({ mItem, ACTIONS } ) => {
             startIcon = <RemoveCircleRounded/>
 
             UseAction = () => { 
+                dispatch(snackBarActions.setSeverity(SEVERITY_TYPE.info))
+                dispatch(snackBarActions.setText(SNACK_TEXT.cartCleared))
+                dispatch(snackBarActions.showSnackBar(true))
                 dispatch(shopingCartActions.clearCart()) 
             };
             break;

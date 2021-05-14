@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
@@ -25,7 +24,8 @@ const SnackBarsRedux = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const isOpen = useSelector(state => state.snackbar.isOpen);
-  const snackBarType = useSelector(state => state.snackbar.snackBarType);
+  const severity = useSelector(state => state.snackbar.severity);
+  const text = useSelector(state => state.snackbar.text);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -33,14 +33,13 @@ const SnackBarsRedux = () => {
     }
     dispatch(snackBarActions.showSnackBar(false))
   };
-  const text = getAlertText(snackBarType)
-  console.log(text)
+  //CHANGE TO TYPE
 
   return (
     <div className={classes.root}>
       <Snackbar open={isOpen} autoHideDuration={3000} onClose={handleClose}>
 
-        <Alert onClose={handleClose} severity={snackBarType}>
+        <Alert onClose={handleClose} severity={severity}>
           {text}
         </Alert>
      
