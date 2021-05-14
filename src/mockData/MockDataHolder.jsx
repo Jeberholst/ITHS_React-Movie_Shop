@@ -1,10 +1,8 @@
 
 import React from 'react';
-import { arrayPlotFull, arraySearchPaged } from './mock-data-fetcher'
-import MockMovieSingle from './MockMovieSingle'
-import MockMoviePaged from './MockMoviePaged'
 import { makeStyles } from '@material-ui/core';
 import { getTitleFull, getSearchedTitlePaged } from './mock-data-fetcher'
+import MockMovieSection from './MockMovieSection';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,17 +25,9 @@ const MockDataHolder = () => {
     return(
       <React.Fragment>
         <div className={classes.root}>
-            {/* <h1>Single Item</h1>
-    
-            {arrayPlotFull.map((item) => (
-              <MockMovieSingle key={'single-full-' + item.imdbId} item={item}></MockMovieSingle>
-            ))} */}
-    
-            <h1>Paged search</h1>
-            
-            {arraySearchPaged.map((item) => (
-              <MockMoviePaged key={'paged-' + item.imdbId} item={item}></MockMoviePaged>
-            ))}
+
+            <MockMovieSection screen={'MovieGrid'}/>
+
         </div>
       </React.Fragment>
     );

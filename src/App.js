@@ -24,7 +24,7 @@ firebase.initializeApp(firebaseConfig);
 
 function App() {
   return (
-    <div className="App">§
+    <div className="App">
 
       <header className="App-NavBar">
         <Navbar/>
