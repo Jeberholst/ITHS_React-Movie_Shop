@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 import React from 'react'
 import ShoppingCartActionButton from '../components/shopping-cart/ShoppingCartActionButtons'
+import { actions as snackBarActions } from './../redux/features/snackbars';
 
 const useStyles = makeStyles((theme) => ({
   root: {

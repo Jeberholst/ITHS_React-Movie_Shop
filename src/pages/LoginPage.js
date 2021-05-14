@@ -1,4 +1,4 @@
-import {Button, Checkbox, FormControlLabel, Grid, Link, makeStyles, TextField, Typography} from "@material-ui/core";
+import {Button, Grid, Link, makeStyles, TextField, Typography} from "@material-ui/core";
 import React, {useEffect, useState} from "react";
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -42,8 +42,8 @@ const LoginPage = () => {
 
     const classes = useStyles();
     const [user, setUser]  = useState("no")
-    const [logEmail, setEmail]  = useState("")
-    const [logPassword, setPassword]  = useState("")
+    // const [logEmail, setEmail]  = useState("")
+    // const [logPassword, setPassword]  = useState("")
 
     const createUser = () => {
         let email = "test@test.test2";

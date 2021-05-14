@@ -18,12 +18,13 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import {firebaseConfig} from "./util/firebase";
 import "firebase/auth";
+import SnackBarsRedux from './util/SnackBarsRedux';
 
 firebase.initializeApp(firebaseConfig);
 
 function App() {
   return (
-    <div className="App">
+    <div className="App">§
 
       <header className="App-NavBar">
         <Navbar/>
@@ -61,6 +62,8 @@ function App() {
           </Router>
 
       </div>
+      
+      <SnackBarsRedux/>
 
     </div>
   );
