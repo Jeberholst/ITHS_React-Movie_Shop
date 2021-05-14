@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 import React from 'react'
+import ShoppingCartActionButtons from '../components/shopping-cart/ShoppingCartActionButtons';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,6 +28,7 @@ const MockMoviePaged = ({item}) => {
         <div className={classes.text}>
           {item.title}	
           {item.year}	
+          <ShoppingCartActionButtons mItem={item} ACTIONS={'add'}/>
         </div>
       </div>
     </React.Fragment>

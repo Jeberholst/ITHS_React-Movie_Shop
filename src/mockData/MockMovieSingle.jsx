@@ -1,5 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 import React from 'react'
+import ShoppingCartActionButton from '../components/shopping-cart/ShoppingCartActionButtons'
+import { actions as snackBarActions } from './../redux/features/snackbars';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,6 +54,7 @@ const MockMovieSingle = ({item}) => {
               {item.response}
           </div>
         </div>
+        <ShoppingCartActionButton mItem={item} ACTIONS={'add'}/>
       </React.Fragment>
     );
   

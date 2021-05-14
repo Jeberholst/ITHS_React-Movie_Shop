@@ -1,9 +1,10 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 
-const addMovie = createAction('add movie item');
 const addListMovie = createAction('add list movie item');
+const removeCartItem = createAction('remove list movie item');
+const clearCart = createAction('clear cart');
 
-const actions = { addMovie, addListMovie };
+const actions = { addListMovie, removeCartItem, clearCart };
 
 const initialState = {
     listOfMovies : [],
@@ -11,9 +12,27 @@ const initialState = {
 }
 
 const reducer = createReducer(initialState, {
-    [addMovie] : (state, action) => (
-        {...state, singleMovie: action.payload }
-    ),
+    [addListMovie] : (state, action) => { 
+        const value = action.payload
+        // const jsonVal = JSON.parse(action.payload)
+        state.listCount = (state.listOfMovies.length + 1)
+        state.listOfMovies.push(value)
+    },
+    [removeCartItem] : (state, action) => { 
+        console.log('Remove this object... ' + action.payload)
+        const list = state.listOfMovies.filter(function(item) {
+            return item !== action.payload
+        })
+        state.listCount = (list.length)
+        state.listOfMovies = list
+    },
+    [clearCart] : (state, action) => { 
+        console.log('Clearing cart...')
+        const list = [];
+        state.listCount = (0)
+        state.listOfMovies = list
+    },
 }) 
+
 
 export { actions, reducer };

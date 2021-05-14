@@ -72,7 +72,7 @@ const getTitleSearchPagedData = async () => {
 
 function titlePlotFullItem(title,	year,	rated,	released,	runtime,	
   genre, director,	writer,	actors,	plot,	language,	country, awards,	
-  poster,	ratings,	metascore, imdbrating,	imdbvotes,	imdbid,	type,	dvd,	
+  poster,	ratings,	metascore, imdbrating,	imdbvotes,	imdbId,	type,	dvd,	
   boxoffice,	production,	website,	response) {
   return {
       title,
@@ -93,7 +93,7 @@ function titlePlotFullItem(title,	year,	rated,	released,	runtime,
       metascore,
       imdbrating,
       imdbvotes,
-      imdbid,
+      imdbId,
       type,
       dvd,
       boxoffice,
@@ -104,11 +104,11 @@ function titlePlotFullItem(title,	year,	rated,	released,	runtime,
 };
 
 
-function pagedTitleSearchItem(title, year, imdbID, type, poster) {
+function pagedTitleSearchItem(title, year, imdbId, type, poster) {
   return {
       title,
       year,
-      imdbID,
+      imdbId,
       type,
       poster,
   };
