@@ -1,10 +1,9 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 
-const showSnackBar = createAction('show snackbar');
-const setSeverity = createAction('set snackbar type');
-const setText = createAction('set snackbar text');
+const displaySnackBar = createAction('display snackbar');
+const hideSnackBar = createAction('hide snackbar');
 
-const actions = { showSnackBar, setSeverity, setText };
+const actions = { displaySnackBar, hideSnackBar };
 
 export const SEVERITY_TYPE = {
     info: 'info',
@@ -23,34 +22,47 @@ export const SNACK_TEXT = {
 
 const initialState = {
     isOpen : false,
-    severity: SEVERITY_TYPE,
-    text: SNACK_TEXT
+    severity: SEVERITY_TYPE.default,
+    text: SNACK_TEXT.default
 };
 
 const reducer = createReducer(initialState, {
-    [showSnackBar] : (state, action) => { 
+    [displaySnackBar] : (state, action) => ({
+         ...state,
+
+            isOpen: action.payload.isOpen,
+            severity: action.payload.severity,
+            text: action.payload.text,
+    }),
+    [hideSnackBar] : (state, action) => {
         state.isOpen = action.payload;
     },
-    [setSeverity] : (state, action) => { 
 
-        switch(action.payload){
-            case SEVERITY_TYPE.success:
-                state.severity = 'success';
-                break;
-            case SEVERITY_TYPE.warning:
-                state.severity = 'warning';
-                break;
-            case SEVERITY_TYPE.error:
-                state.severity = 'removed';
-                break;
-            default:   
-                state.severity = 'info';
-                break;    
-        };
-    },
-    [setText] : (state, action) => { 
-        state.text = action.payload;
-    },
 });
 
+const cartAddSuccess = {
+    isOpen: true, 
+    severity: SEVERITY_TYPE.success, 
+    text: SNACK_TEXT.cartAdded
+}
+const cartAddFailed = {
+    isOpen: true, 
+    severity: SEVERITY_TYPE.warning, 
+    text: SNACK_TEXT.cartItemExists
+}
+
+const cartRemovedSuccess = {
+    isOpen: true, 
+    severity: SEVERITY_TYPE.info, 
+    text: SNACK_TEXT.cartRemoved
+}
+
+const cartCleared = {
+    isOpen: true, 
+    severity: SEVERITY_TYPE.error, 
+    text: SNACK_TEXT.cartCleared
+}
+
+
+export const cartNotifications = { cartAddSuccess, cartAddFailed, cartRemovedSuccess, cartCleared }
 export { actions, reducer };

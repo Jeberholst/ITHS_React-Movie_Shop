@@ -1,9 +1,12 @@
 import { Button, makeStyles} from "@material-ui/core";
-import { AddShoppingCartRounded, DeleteRounded, RemoveShoppingCartRounded, ShopRounded, RemoveCircleRounded } from "@material-ui/icons";
+import { AddShoppingCartRounded, RemoveShoppingCartRounded, ShopRounded, RemoveCircleRounded } from "@material-ui/icons";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { actions as shopingCartActions } from "../../redux/features/shoppingCart";
-import { actions as snackBarActions, SEVERITY_TYPE, SNACK_TEXT } from "../../redux/features/snackbars";
+import { actions as shopingCartActions, } from "../../redux/features/shoppingCart";
+import { 
+    actions as snackBarActions,  
+    cartNotifications
+} from "../../redux/features/snackbars";
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -23,97 +26,118 @@ const BTN_COLORS = {
     default: 'default',
 }
 
-const ShoppingCartActionButtons = ({ mItem, ACTIONS } ) => {
+export const BUTTON_TYPE = {
+    CART_ADD: {
+        btnVariant: BTN_VARIANTS.contained,
+        btnColor: BTN_COLORS.primary,
+        startIcon: <AddShoppingCartRounded/>,
+        friendlyName: "Add",
+    },
+    CART_REMOVE: {
+        btnVariant: BTN_VARIANTS.contained,
+        btnColor: BTN_COLORS.default,
+        startIcon: <RemoveShoppingCartRounded/>,
+        friendlyName: "Remove",
+    },
+    CART_CLEAR: {
+        btnVariant: BTN_VARIANTS.outlined,
+        btnColor: BTN_COLORS.secondary,
+        startIcon: <RemoveCircleRounded/>,
+        friendlyName: "Empty Cart",
+    },
+    CART_CHECKOUT: {
+        btnVariant: BTN_VARIANTS.contained,
+        btnColor: BTN_COLORS.secondary,
+        startIcon: <ShopRounded/>,
+        friendlyName: "Checkout",
+    }
+}
+
+const ShoppingCartActionButtons = ({ mItem, type } ) => {
+
     const classes = useStyles();
     const dispatch = useDispatch();
     let UseAction = (null)
-    let btnVariant = BTN_VARIANTS.contained
-    let btnColor = BTN_VARIANTS.secondary
-    let startIcon = <DeleteRounded/>
-    // const isOpen = useSelector(state => state.snackbar.isOpen);
-    const stateListOfMovies = useSelector(state => state.shoppingCart.listOfMovies);
 
+    let btnVariant = BUTTON_TYPE.CART_ADD.btnVariant
+    let btnColor = BUTTON_TYPE.CART_ADD.btnColor
+    let startIcon = BUTTON_TYPE.CART_ADD.startIcon
+    let friendlyName = BUTTON_TYPE.CART_ADD.friendlyName
+
+    const stateListOfMovies = useSelector(state => state.shoppingCart.listOfMovies);
 
     const onAction = () => {
         UseAction();
     }
 
-    switch(ACTIONS){
-        case 'add':
+    switch(type){
+        case BUTTON_TYPE.CART_ADD:
 
-            btnVariant = BTN_VARIANTS.contained
-            btnColor = BTN_COLORS.primary
-            startIcon = <AddShoppingCartRounded/>
+            btnVariant = BUTTON_TYPE.CART_ADD.btnVariant
+            btnColor = BUTTON_TYPE.CART_ADD.btnColor
+            startIcon = BUTTON_TYPE.CART_ADD.startIcon
+            friendlyName = BUTTON_TYPE.CART_ADD.friendlyName
             
             UseAction = () => { 
 
                 if(stateListOfMovies.length === 0){
 
                     console.log('Adding FIRST item to CART...')
-                    dispatch(snackBarActions.setSeverity(SEVERITY_TYPE.success))
-                    dispatch(snackBarActions.showSnackBar(true))
-                    dispatch(snackBarActions.setText(SNACK_TEXT.cartAdded))
                     dispatch(shopingCartActions.addListMovie(JSON.stringify(mItem)))
+                    dispatch(snackBarActions.displaySnackBar(cartNotifications.cartAddSuccess))
 
-                
                 } else {
-                    console.log(mItem.imdbId)
+                    // console.log(mItem.imdbId)
                     const checkAdded = stateListOfMovies.some(x => (JSON.parse(x)).imdbId === mItem.imdbId)
 
                     if(checkAdded){
-                        dispatch(snackBarActions.setSeverity(SEVERITY_TYPE.warning))
-                        dispatch(snackBarActions.setText(SNACK_TEXT.cartItemExists))
-                        dispatch(snackBarActions.showSnackBar(true))
+                        dispatch(snackBarActions.displaySnackBar(cartNotifications.cartAddFailed))
                         console.log('Movie already added to CART...')
-        
                     } else {
-                        dispatch(snackBarActions.setSeverity(SEVERITY_TYPE.success))
-                        dispatch(snackBarActions.setText(SNACK_TEXT.cartAdded))
-                        dispatch(snackBarActions.showSnackBar(true))
                         dispatch(shopingCartActions.addListMovie(JSON.stringify(mItem)))
                         console.log('Adding item to CART...')
-                   
-                
+                        dispatch(snackBarActions.displaySnackBar(cartNotifications.cartAddSuccess))
                     }
         
                 }
             };
 
             break;
-        case 'remove':
+        case BUTTON_TYPE.CART_REMOVE:
 
-            btnVariant = BTN_VARIANTS.contained
-            btnColor = BTN_COLORS.default
-            startIcon = <RemoveShoppingCartRounded/>
+            btnVariant = BUTTON_TYPE.CART_REMOVE.btnVariant
+            btnColor = BUTTON_TYPE.CART_REMOVE.btnColor
+            startIcon = BUTTON_TYPE.CART_REMOVE.startIcon
+            friendlyName = BUTTON_TYPE.CART_REMOVE.friendlyName
 
             UseAction = () => { 
                 console.log('Remove item?: ' + mItem)
-                dispatch(snackBarActions.setSeverity(SEVERITY_TYPE.warning))
-                dispatch(snackBarActions.setText(SNACK_TEXT.cartRemoved))
-                dispatch(snackBarActions.showSnackBar(true))
                 dispatch(shopingCartActions.removeCartItem(mItem)) 
+                dispatch(snackBarActions.displaySnackBar(cartNotifications.cartRemovedSuccess))
             };
 
             break;
-        case 'empty':
+        case BUTTON_TYPE.CART_CLEAR:
 
-            btnVariant = BTN_VARIANTS.outlined
-            btnColor = BTN_COLORS.secondary
-            startIcon = <RemoveCircleRounded/>
+            btnVariant = BUTTON_TYPE.CART_CLEAR.btnVariant
+            btnColor = BUTTON_TYPE.CART_CLEAR.btnColor
+            startIcon = BUTTON_TYPE.CART_CLEAR.startIcon
+            friendlyName = BUTTON_TYPE.CART_CLEAR.friendlyName
 
             UseAction = () => { 
-                dispatch(snackBarActions.setSeverity(SEVERITY_TYPE.info))
-                dispatch(snackBarActions.setText(SNACK_TEXT.cartCleared))
-                dispatch(snackBarActions.showSnackBar(true))
                 dispatch(shopingCartActions.clearCart()) 
+                dispatch(snackBarActions.displaySnackBar(cartNotifications.cartCleared))
             };
+
             break;
 
-        case 'checkout':
+        case BUTTON_TYPE.CART_CHECKOUT:
 
-            btnVariant = BTN_VARIANTS.contained
-            btnColor = BTN_COLORS.secondary
-            startIcon = <ShopRounded/>
+            btnVariant = BUTTON_TYPE.CART_CHECKOUT.btnVariant
+            btnColor = BUTTON_TYPE.CART_CHECKOUT.btnColor
+            startIcon = BUTTON_TYPE.CART_CHECKOUT.startIcon
+            friendlyName = BUTTON_TYPE.CART_CHECKOUT.friendlyName
+
             UseAction =  () => {};
 
             break;
@@ -122,8 +146,6 @@ const ShoppingCartActionButtons = ({ mItem, ACTIONS } ) => {
             UseAction = () => {};
     }
     
-    // console.log(ACTIONS + btnColor)
-
     return(
         <React.Fragment>
             <Button
@@ -135,7 +157,7 @@ const ShoppingCartActionButtons = ({ mItem, ACTIONS } ) => {
                     onAction()
                     }
                 }>
-                {ACTIONS}
+                {friendlyName}
                 </Button>
 
         </React.Fragment>
@@ -143,5 +165,6 @@ const ShoppingCartActionButtons = ({ mItem, ACTIONS } ) => {
     );
 
 };
+
 
 export default ShoppingCartActionButtons;

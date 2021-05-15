@@ -4,8 +4,7 @@ import { useSelector } from "react-redux"
 import CartItem from './CartItem'
 import CartTotal from './CartTotal'
 import CartBillingInfo from './CartBillingInfo'
-import ShoppingCartActionButtons from "./ShoppingCartActionButtons";
-
+import ShoppingCartActionButtons, { BUTTON_TYPE } from "./ShoppingCartActionButtons";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -53,7 +52,7 @@ const ShoppingCartRedux = () => {
                   <ShoppingCartActionButtons 
                     style={{marginTop: 5}}
                     mItem={''} 
-                    ACTIONS={'empty'}/>
+                    type={BUTTON_TYPE.CART_CLEAR}/>
                 </ButtonGroup>
             </div>
 
@@ -84,7 +83,7 @@ const ShoppingCartRedux = () => {
             <div className={classes.checkOutContainer}>
 
                 <ShoppingCartActionButtons 
-                  ACTIONS={'checkout'}
+                  type={BUTTON_TYPE.CART_CHECKOUT}
                   />
 
             </div>
@@ -96,7 +95,6 @@ const ShoppingCartRedux = () => {
 const CartListItems = () => {
   const classes = useStyles();
   const shoppingCartItems = useSelector(state => state.shoppingCart.listOfMovies);
-  // console.log("Items in CART: " + shoppingCartItems)
 
   if(shoppingCartItems.length !== 0){
     return (
