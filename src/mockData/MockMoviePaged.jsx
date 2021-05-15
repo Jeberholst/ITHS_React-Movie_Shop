@@ -1,6 +1,6 @@
-import { Button, Container, Divider, makeStyles, Paper } from '@material-ui/core';
+import { Divider, makeStyles } from '@material-ui/core';
 import React from 'react'
-import ShoppingCartActionButtons from '../components/shopping-cart/ShoppingCartActionButtons';
+import ShoppingCartActionButtons, { BUTTON_TYPE } from '../components/shopping-cart/ShoppingCartActionButtons';
 import ImdbLOGO from './../img/Other/imdb-logo-square.svg'
 import MockStarsComponent from './MockStarsComponent';
 
@@ -129,7 +129,7 @@ const MockMoviePaged = ( { item } ) => {
         <Divider className={classes.divider}></Divider>
 
         <div className={classes.containerBottomButtons}>
-            <ShoppingCartActionButtons mItem={item} ACTIONS={'add'}/>    
+            <ShoppingCartActionButtons mItem={item} type={BUTTON_TYPE.CART_ADD}/>    
         </div>
 
 

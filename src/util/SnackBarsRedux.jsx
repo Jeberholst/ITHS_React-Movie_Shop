@@ -3,7 +3,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector } from 'react-redux';
-import { actions as snackBarActions, SEVERITY_TYPE } from './../redux/features/snackbars'
+import { actions as snackBarActions } from './../redux/features/snackbars'
 import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
@@ -14,6 +14,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
+
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -31,9 +33,8 @@ const SnackBarsRedux = () => {
     if (reason === 'clickaway') {
       return;
     }
-    dispatch(snackBarActions.showSnackBar(false))
+    dispatch(snackBarActions.hideSnackBar(false))
   };
-  //CHANGE TO TYPE
 
   return (
     <div className={classes.root}>
@@ -47,24 +48,6 @@ const SnackBarsRedux = () => {
 
     </div>
   );
-}
-
-function getAlertText(severity) {
-
-    switch(severity){
-      case SEVERITY_TYPE.success:
-        return 'Added to cart!'
- 
-      case SEVERITY_TYPE.warning:
-        return 'Already in cart!'
-
-      case SEVERITY_TYPE.error:
-        return 'Error occured. Try again!'
-
-      default:   
-        return 'Information!'   
-  };
-  
 }
 
 export default SnackBarsRedux;

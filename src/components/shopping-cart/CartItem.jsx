@@ -1,7 +1,7 @@
 
 import { makeStyles } from "@material-ui/core";
 import React from "react";
-import ShoppingCartActionButtons from "./ShoppingCartActionButtons";
+import ShoppingCartActionButtons, { BUTTON_TYPE } from "./ShoppingCartActionButtons";
 
 const useStyle = makeStyles((theme) => ({
     root: {
@@ -90,7 +90,7 @@ const CartItem = ({ item }) => {
               <div className={classes.containerButton}>
                 <ShoppingCartActionButtons
                     mItem={item} 
-                    ACTIONS={'remove'}
+                    type={BUTTON_TYPE.CART_REMOVE}
                   />
                   <CostLabel text={'20.00'}/>
               </div>
