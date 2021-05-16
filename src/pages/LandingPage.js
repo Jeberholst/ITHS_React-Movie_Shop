@@ -1,13 +1,12 @@
 import MockDataHolder from "../mockData/MockDataHolder";
 import React from "react";
-import {getSearchedTitlePaged, getTitleFull} from "../mockData/mock-data-fetcher";
+import { fetchers } from "../mockData/mock-data-fetcher";
 
 const LandingPage = () => {
 
 
     function fetchMockData(){
-        getTitleFull()
-        getSearchedTitlePaged()
+        fetchers.fetchPopular()
     }
 
     return(

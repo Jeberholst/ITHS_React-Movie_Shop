@@ -85,14 +85,18 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const MockMoviePaged = ( { item } ) => {
+const MockMoviePopular = ( { item } ) => {
   
-    const classes = useStyles();
+  const classes = useStyles();
 
   const title = item.title
-  const year = item.year
-  const poster = item.poster
+  const releaseDate = item.releaseDate
+  const posterMainPath = 'https://image.tmdb.org/t/p/'
+  const posterSize = 'w300'
+  const itemPosterPath = item.posterPath
+
   const imdbRating = (Math.random() * 10).toFixed(2); //TODO: Change to variable
+  const posterPath = `${posterMainPath}/${posterSize}/${itemPosterPath}`
 
   return(
         <div id='hover-container' className={classes.root}>
@@ -105,7 +109,7 @@ const MockMoviePaged = ( { item } ) => {
         <div className={classes.mainContainer}>
             
             <div className={classes.imageContainer}>
-                <img className={classes.image} src={poster} alt="Movie-poster"></img>
+                <img className={classes.image} src={posterPath} alt="Movie-poster"></img>
             </div>
         
             <div className={classes.infoContainer}>
@@ -115,7 +119,7 @@ const MockMoviePaged = ( { item } ) => {
                 </div>
                 
                 <div className={classes.subBodies}>
-                    {year}
+                    {releaseDate}
                 </div>
 
                 <div className={classes.subBodies}>
@@ -151,4 +155,4 @@ const ImdbRating = ({ rating }) => {
 
 };
   
-export default MockMoviePaged;
+export default MockMoviePopular;

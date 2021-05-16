@@ -62,10 +62,14 @@ const CartItem = ({ item }) => {
     const classes = useStyle();
     const pItem = JSON.parse(item)
   
-    const poster = pItem.poster
-    const id = pItem.imdbID
+    const id = pItem.id
     const title = pItem.title
-    const year = pItem.year
+    const releaseData = pItem.releaseData
+
+    const posterMainPath = 'https://image.tmdb.org/t/p/'
+    const posterSize = 'w200'
+    const itemPosterPath = pItem.posterPath
+    const posterPathFull = `${posterMainPath}/${posterSize}/${itemPosterPath}`
   
     return(
     
@@ -76,13 +80,13 @@ const CartItem = ({ item }) => {
               <div className={classes.containerInfo}>
       
                 <div className={classes.containerThumbnail}>
-                  <img className={classes.thumbnail} src={poster} alt={'poster'}/>
+                  <img className={classes.thumbnail} src={posterPathFull} alt={'poster'}/>
                 </div>
       
                 <div className={classes.infoContainer}>
                   <Label text={id}/>
                   <Label text={title}/>
-                  <Label text={year}/>
+                  <Label text={releaseData}/>
                 </div>
       
               </div>
