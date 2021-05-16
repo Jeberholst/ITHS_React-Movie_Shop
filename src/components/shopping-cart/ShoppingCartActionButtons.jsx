@@ -88,7 +88,7 @@ const ShoppingCartActionButtons = ({ mItem, type } ) => {
 
                 } else {
                     // console.log(mItem.imdbId)
-                    const checkAdded = stateListOfMovies.some(x => (JSON.parse(x)).imdbId === mItem.imdbId)
+                    const checkAdded = stateListOfMovies.some(x => (JSON.parse(x)).id === mItem.id)
 
                     if(checkAdded){
                         dispatch(snackBarActions.displaySnackBar(cartNotifications.cartAddFailed))

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
-import { getTitleFull, getSearchedTitlePaged } from './mock-data-fetcher'
+import { fetchers } from './mock-data-fetcher'
 import MockMovieSection from './MockMovieSection';
 
 const useStyles = makeStyles((theme) => ({
@@ -34,8 +34,8 @@ const MockDataHolder = () => {
 };
 
 function getMockData(){
-  getTitleFull();
-  getSearchedTitlePaged();
+  fetchers.fetchPopular();
+  fetchers.fetchGenres();
 }
 
 

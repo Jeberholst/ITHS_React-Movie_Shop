@@ -1,7 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core';
-import MockMoviePaged from './MockMoviePaged';
-import { arraySearchPaged } from './mock-data-fetcher'
+import { listPopular } from './mock-data-fetcher'
+import MockMoviePopular from './MockMoviePopular';
 
 //TODO: MediaQuery on screen-size, change gridTemplateColumns
 
@@ -72,14 +72,15 @@ export default MockMovieSection;
 
 const MovieSectionGrid = () => {
     const classes = useStyles();
+    const useList = listPopular
 
     return (
         <React.Fragment>
 
             <div className={classes.rootGrid}>
 
-                {arraySearchPaged.map((item) => (
-                    <MockMoviePaged key={'paged-' + item.imdbId} item={item}></MockMoviePaged>
+                {useList.map((item) => (
+                    <MockMoviePopular key={'paged-' + item.id} item={item}/>
                 ))}
 
             </div>
