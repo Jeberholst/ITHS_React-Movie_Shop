@@ -78,7 +78,6 @@ const MovieSectionGrid = () => {
         <React.Fragment>
 
             <div className={classes.rootGrid}>
-                {console.log('Use list: ', useList)}
 
                 {useList.map((item) => (
                     <MockMoviePopular key={'paged-' + item.id} item={item}/>

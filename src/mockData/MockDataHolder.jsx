@@ -35,6 +35,7 @@ const MockDataHolder = () => {
 
 function getMockData(){
   fetchers.fetchPopular();
+  fetchers.fetchGenres();
 }
 
 
