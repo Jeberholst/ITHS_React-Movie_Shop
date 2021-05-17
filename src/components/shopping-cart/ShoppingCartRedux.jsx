@@ -1,47 +1,127 @@
-import { Button, ButtonGroup, Container, makeStyles, Paper, TextField } from "@material-ui/core";
-import { ShoppingCart } from "@material-ui/icons";
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux"
-import { actions } from "../../redux/features/shoppingCart";
+import { ButtonGroup, Container, Divider, makeStyles, Slide } from "@material-ui/core";
+import React from "react";
+import { useSelector } from "react-redux"
+import CartItem from './CartItem'
+import CartTotal from './CartTotal'
+import CartBillingInfo from './CartBillingInfo'
+import ShoppingCartActionButtons, { BUTTON_TYPE } from "./ShoppingCartActionButtons";
+import { fetchers } from './../../mockData/mock-data-fetcher'
 
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
-      textAlign: 'center',
-      alignContent: 'center',
-      padding: 15,
-      maxWidth: '30%',
-      margin: 15,
+      alignItems: 'left',
+      textAlign: 'left',
+      alignContent: 'left',
+      maxWidth: '100%',
+      height: '100%',
     },
-  }));
+    header: {
+      padding: 5,
+      margin: 5,
+    },
+    dividerSection: {
+      marginTop: 15,
+      marginBottom: 15,
+      backgroundColor: 'rgba(255, 255, 255, 0.2)'
+    },
+    cartListItems: {
+      width: '100%',
+    },
+    cartItemContainer: {
+      display: 'flex',
+      flexDirection: 'column',
+      width: '100%',
+    },
+    checkOutContainer: {
+      display: 'flex',
+      flexDirection: 'row-reverse',
+      width: '100%'
+    }
+}));
+
 
 const ShoppingCartRedux = () => {
+
     const classes = useStyles();
-
-    const shoppingCartCount = useSelector(state => state.shoppingCart.listCount);
-
-    const addToCart = () => {
- 
-    }
-
-    const removeItemFromCart = () => {
- 
-    }
+    fetchers.fetchBillingInfo()
 
     return (
-        <Container className={classes.root} component={Paper}>
-            <ShoppingCart></ShoppingCart>
-            <h3>Shopping Cart ({shoppingCartCount})</h3>
-            <ButtonGroup>
-          
-              <Button variant='outlined' color='secondary' onClick={removeItemFromCart}>Clear cart</Button>
-            </ButtonGroup>
+        <Container className={classes.root}>
+
+            <div className={classes.header}>
+                <ButtonGroup>
+                  <ShoppingCartActionButtons 
+                    style={{marginTop: 5}}
+                    mItem={''} 
+                    type={BUTTON_TYPE.CART_CLEAR}/>
+                </ButtonGroup>
+            </div>
+
+            <Divider className={classes.dividerSection}></Divider> 
+
+            <Slide direction="right" in={true} mountOnEnter>
+              <div className={classes.cartListItems}>
+              
+                  <CartListItems/>
+                
+              </div>
+            </Slide>
+
+            <Divider className={classes.dividerSection}></Divider> 
+
+            <Slide direction="right" in={true} mountOnEnter>
+              <div className={classes.cartTotal}>
+                  
+                  <CartTotal/>
+                  <CartBillingInfo/>
+
+              </div>
+            </Slide>
+        
+            {/* <Divider className={classes.dividerSection}></Divider>  */}
+
+            <div className={classes.checkOutContainer}>
+
+                <ShoppingCartActionButtons 
+                  type={BUTTON_TYPE.CART_CHECKOUT}
+                  />
+
+            </div>
 
         </Container>
     )
 }
 
+const CartListItems = () => {
+  
+  const classes = useStyles();
+  const shoppingCartItems = useSelector(state => state.shoppingCart.listOfMovies);
 
+  if(shoppingCartItems.length !== 0){
+    return (
+      <React.Fragment>
+            <div className={classes.cartItemContainer}>
+      
+                {shoppingCartItems.map((element) => (
+                      <CartItem 
+                          key={element.imdbId} 
+                          item={element}/>
+                ))}
+            
+            </div>
+      </React.Fragment>
+    );
+  } else {
+    return (
+      <React.Fragment>
+         {/*TODO: add styling to div*/}
+        <div>
+          <p>No items added to cart :(</p>   
+        </div>
+      </React.Fragment>
+    );
+  };
+};
 export default ShoppingCartRedux;

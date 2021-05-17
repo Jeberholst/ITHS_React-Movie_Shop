@@ -1,11 +1,15 @@
-  
-import Header from '../components/Header.js'
+import React from "react";
+import MockDataHolder from '../mockData/MockDataHolder';
+import ShoppingCart from '../components/shopping-cart/ShoppingCartRedux';
 
 const ShoppingCartPage = () => {
-
-
-    return <Header page="Shoppingcart">Shopping Cart</Header>
-
+    return(
+        <React.Fragment>
+            <p>ShoppingCartPage</p>
+            <ShoppingCart/>
+            <MockDataHolder/>
+        </React.Fragment>
+    );
 
 }
 
