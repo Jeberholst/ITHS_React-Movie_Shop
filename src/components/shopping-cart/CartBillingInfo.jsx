@@ -35,7 +35,7 @@ const CartBillingInfo = () => {
 
     const classes = cartTotalStyle();
 
-    console.log(userBillingInfo)
+    // console.log(userBillingInfo)
 
     return(
       <React.Fragment>

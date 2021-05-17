@@ -82,7 +82,7 @@ const ShoppingCartActionButtons = ({ mItem, type } ) => {
 
                 if(stateListOfMovies.length === 0){
 
-                    console.log('Adding FIRST item to CART...')
+                    // console.log('Adding FIRST item to CART...')
                     dispatch(shopingCartActions.addListMovie(JSON.stringify(mItem)))
                     dispatch(snackBarActions.displaySnackBar(cartNotifications.cartAddSuccess))
 
@@ -92,10 +92,10 @@ const ShoppingCartActionButtons = ({ mItem, type } ) => {
 
                     if(checkAdded){
                         dispatch(snackBarActions.displaySnackBar(cartNotifications.cartAddFailed))
-                        console.log('Movie already added to CART...')
+                        // console.log('Movie already added to CART...')
                     } else {
                         dispatch(shopingCartActions.addListMovie(JSON.stringify(mItem)))
-                        console.log('Adding item to CART...')
+                        // console.log('Adding item to CART...')
                         dispatch(snackBarActions.displaySnackBar(cartNotifications.cartAddSuccess))
                     }
         

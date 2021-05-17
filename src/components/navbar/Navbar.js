@@ -4,6 +4,7 @@ import dummyLogo from '../../img/Logo/dummy_ic.jpg'
 import tempLogo from '../../img/Logo/temp-movie-logo.svg'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggelMenu } from '../../redux/features/navbarSlice'
+import ShoppingCartBadge from './../shopping-cart/ShoppingCartBadge'
 
 const CATEGORIES = {
         default: "fas fa-exclamation-triangle",
@@ -30,7 +31,8 @@ const Bar = () => {
          <i className="fas fa-search searchbar__container_search-field_logo"></i>
      </div>
 
-     <i className="fas fa-shopping-cart navbar__container_shop-cart"></i>
+     {/* TODO: onClick function for ShoppingCartBadge */}
+     <ShoppingCartBadge/> 
      <i onClick={() => dispatch(toggelMenu())} className="fas fa-bars navbar__container_burger-menu"></i>
     
 

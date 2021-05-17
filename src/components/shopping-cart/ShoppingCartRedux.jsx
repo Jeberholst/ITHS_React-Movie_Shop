@@ -75,15 +75,12 @@ const ShoppingCartRedux = () => {
               <div className={classes.cartTotal}>
                   
                   <CartTotal/>
-                  
-                  <Divider className={classes.dividerSection}/>
-
                   <CartBillingInfo/>
 
               </div>
             </Slide>
         
-            <Divider className={classes.dividerSection}></Divider> 
+            {/* <Divider className={classes.dividerSection}></Divider>  */}
 
             <div className={classes.checkOutContainer}>
 
