@@ -13,7 +13,6 @@ const LandingPage = () => {
 
     <div className="App-Content">
         <p>LandingPage</p>
-        <h1 style={{color: '#388e3c'}}>Content-container--</h1>
         {fetchMockData()}
         <MockDataHolder/>
     </div>

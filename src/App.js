@@ -24,8 +24,8 @@ firebase.initializeApp(firebaseConfig);
 
 function App() {
   return (
-    <div className="App">
-
+      <div className="App">
+      <Router  basename={`${process.env.PUBLIC_URL}/`}>
       <header className="App-NavBar">
         <Navbar/>
       </header>
@@ -35,8 +35,6 @@ function App() {
         <header className="App-Header">
           <h1 style={{color: '#388e3c'}}>Header-container--</h1>
         </header>
-
-          <Router basename={`${process.env.PUBLIC_URL}/`}>
               <ul style={{display: 'flex', flexDirection: 'column',  textAlign: "start" }}>
                   <li><Link to="/">LandingPage</Link></li>
                   <li><Link to="/genre">genre</Link></li>
@@ -50,7 +48,7 @@ function App() {
               <div>
                   <Switch>
                       <Route exact path="/" component={LandingPage} />
-                      <Route exact path="/genre" component={GenrePage} />
+                      <Route exact path="/genre/:id" component={GenrePage} />
                       <Route exact path="/comment" component={CommentPage} />
                       <Route exact path="/login" component={LoginPage} />
                       <Route exact path="/profile" component={ProfilePage} />
@@ -59,10 +57,10 @@ function App() {
 
                   </Switch>
               </div>
-          </Router>
+          
 
       </div>
-      
+      </Router>
       <SnackBarsRedux/>
 
     </div>
