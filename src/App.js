@@ -14,18 +14,18 @@ import ShoppingCartPage from "./pages/ShoppingCartPage";
 import SearchPage from "./pages/SearchPage";
 import ProfilePage from "./pages/ProfilePage";
 import GenrePage from "./pages/GenrePage";
-import firebase from "firebase/app";
-import "firebase/firestore";
-import {firebaseConfig} from "./util/firebase";
-import "firebase/auth";
 import SnackBarsRedux from './util/SnackBarsRedux';
+import Firebaser, { initializeAuthListener } from './util/Firebaser'
+import { useDispatch } from 'react-redux';
 
-firebase.initializeApp(firebaseConfig);
 
 function App() {
+  const dispatch = useDispatch();
+
   return (
     <div className="App">
-
+      {Firebaser()}
+      {initializeAuthListener(dispatch)}
       <header className="App-NavBar">
         <Navbar/>
       </header>
@@ -68,8 +68,5 @@ function App() {
     </div>
   );
 }
-
-
-
 
 export default App;
