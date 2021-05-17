@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 import React from "react";
+import { userBillingInfo } from './../../mockData/mock-data-fetcher'
 
 const cartTotalStyle = makeStyles((theme) => ({
     root: {
@@ -34,6 +35,8 @@ const CartBillingInfo = () => {
 
     const classes = cartTotalStyle();
 
+    console.log(userBillingInfo)
+
     return(
       <React.Fragment>
           <div className={classes.root}>
@@ -42,14 +45,17 @@ const CartBillingInfo = () => {
                     <Label text={'Name'}/>
                     <Label text={'Address'}/>
                     <Label text={'Postal Code'}/>
+                    <Label text={'County'}/>
                     <Label text={'Country'}/>
                 </div>
                 
                 <div className={classes.right}>
-                    <Label text={'Firstname Lastname'}/>
-                    <Label text={'Streetaddress 10A'}/>
-                    <Label text={'666 66'}/>
-                    <Label text={'Sweden'}/>
+
+                    <Label text={userBillingInfo.firstName + ' ' + userBillingInfo.lastName}/>
+                    <Label text={userBillingInfo.address}/>
+                    <Label text={userBillingInfo.postalCode}/>
+                    <Label text={userBillingInfo.county}/>
+                    <Label text={userBillingInfo.country}/>
                 </div>
 
           </div>

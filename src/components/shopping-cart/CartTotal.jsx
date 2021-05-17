@@ -1,11 +1,11 @@
-import { makeStyles } from "@material-ui/core";
+import { Divider, makeStyles } from "@material-ui/core";
 import React from "react";
 import { useSelector } from "react-redux";
 
-const cartTotalStyle = makeStyles((theme) => ({
+const useStyle = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
         width: '100%',
         marginTop: 10,
         marginBottom: 10,
@@ -13,48 +13,74 @@ const cartTotalStyle = makeStyles((theme) => ({
         borderRadius: 5,
     },
     label: {
+        display: 'flex',
+        flexDirection: 'row',
         marginLeft: 10,
         marginRight: 10,
         fontSize: 12,
         paddingBottom: 5,
         paddingTop: 5,
     },
-    left: {
+    labelTotal: {
+        display: 'flex',
+        flexDirection: 'row',
+        marginLeft: 10,
+        marginRight: 10,
+        fontSize: 12,
+        color: 'rgb(79,174,109, 0.8)',
+        paddingBottom: 5,
+        paddingTop: 5,
+    },
+    labelLeft: {
         width: '50%',
     },
-    right: {
+    labelRight: {
         width: '50%',
         alignContent: 'right',
         alignItems: 'right',
         textAlign: 'right',
+    },
+    containerDetails: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    containerTotal: {
+        display: 'flex',
+        flexDirection: 'column',
+        paddingTop: 5,
+        paddingBottom: 5,
+        fontWeight: 'bold'
+    },
+    divider: {
+        background: 'rgb(0,0,0, 0.1)'
     }
 }));
 
 
 const CartTotal = () => {
 
-    const classes = cartTotalStyle();
+    const classes = useStyle();
     const shoppingCartCount = useSelector(state => state.shoppingCart.listCount);
     const cost = calculatedCost(shoppingCartCount)
 
     return(
       <React.Fragment>
           <div className={classes.root}>
-
-                <div className={classes.left}>
-                    <Label text={'Items'}/>
-                    <Label text={'Base amount'}/>
-                    <Label text={'VAT 25%'}/>
-                    <Label text={'Total'}/>
-                </div>
                 
-                <div className={classes.right}>
-                    <Label text={shoppingCartCount + ' pcs'}/>
-                    <Label type={1} text={cost.noVat}/>
-                    <Label type={1} text={cost.VAT}/>
-                    <Label type={1} text={cost.total}/>
-                </div>
+            <div className={classes.containerDetails}>
 
+                <Label text={'Base amount'} num={cost.noVat}/>
+                <Label text={'VAT 25%'} num={cost.VAT}/>
+            
+
+            </div>
+            
+
+            <div className={classes.containerTotal}>
+                <Divider/>
+                <LabelTotal text={'Total'} num={cost.total}/>
+            </div>
+                  
           </div>
       </React.Fragment>
   
@@ -87,18 +113,28 @@ function createCost(noVat, VAT, total){
     };
 }
   
-const Label = ({ type, text }) => {
+const Label = ( { text, num } ) => {
 
-    const classes = cartTotalStyle();
+    const classes = useStyle();
+    const fix = Number(num).toFixed(2)
 
-    if(type === 1){
-        const num = Number(text).toFixed(2)
-        return (
-            <div className={classes.label}>{num} $</div>
-        );
-    } else {
-        return (
-            <div className={classes.label}>{text}</div>
-        );
-    }
+    return (
+         <div className={classes.label}>
+             <div className={classes.labelLeft}>{text}</div>
+             <div className={classes.labelRight}>- {fix} $</div>
+         </div>
+    );
+};
+
+const LabelTotal = ( { text, num } ) => {
+
+    const classes = useStyle();
+    const fix = Number(num).toFixed(2)
+
+    return (
+         <div className={classes.labelTotal}>
+             <div className={classes.labelLeft}>{text}</div>
+             <div className={classes.labelRight}>- {fix} $</div>
+         </div>
+    );
 };

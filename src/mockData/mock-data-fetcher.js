@@ -1,8 +1,10 @@
 import mockGenres from './mock-data-genre.json';
 import mockPopular from './mock-data-popular.json';
+import mockDataGeneral from './mock-data-general.json';
 
 var listGenres = [];
 var listPopular = [];
+var userBillingInfo = createBillingInfo();
 
 // THE MOVIE DB
 // https://api.themoviedb.org/3/genre/movie/list?
@@ -30,7 +32,6 @@ const fetchPopular = async () => {
   listPopular = arr;
   const stringifyResponse = JSON.stringify(mockPopular.results)
 
-
   JSON.parse(stringifyResponse).forEach(props => {
 
       listPopular.push(createMovieItem(
@@ -53,7 +54,25 @@ const fetchPopular = async () => {
     });
 
 };
+
+const fetchBillingInfo = async () => {
+  // userBillingInfo
+  // const response = JSON.stringify(mockDataGeneral.billingInfo)
+  const response = mockDataGeneral.billingInfo
+  const billingInfo = createBillingInfo(
+    response.firstName, 
+    response.lastName,
+    response.address, 
+    response.postalCode, 
+    response.county, 
+    response.country
+  );
   
+  userBillingInfo = billingInfo
+    
+
+}
+
 
 function createGenre(genreId, genreName){
   return {
@@ -62,7 +81,7 @@ function createGenre(genreId, genreName){
   };
 }
 
-function createMovieItem(adult, backdropPath, genreIds, id,	originalLanguage,	originalTitle,	overview,	popularity,	posterPath,	releaseDate,	title,	video,	voteAverage,	voteCount){
+function createMovieItem(adult, backdropPath, genreIds, id, originalLanguage,	originalTitle, overview, popularity,	posterPath,	releaseDate, title, video, voteAverage, voteCount){
   return {
     adult,
     backdropPath,
@@ -81,10 +100,21 @@ function createMovieItem(adult, backdropPath, genreIds, id,	originalLanguage,	or
   };
 }
 
+function createBillingInfo(firstName, lastName, address, postalCode, county, country){
+  return {
+     firstName,
+     lastName,
+     address, 
+     postalCode, 
+     county, 
+     country
+  };
+}
 
-export const fetchers = { fetchGenres, fetchPopular }
+export const fetchers = { fetchGenres, fetchPopular, fetchBillingInfo }
 
 export {
   listGenres,
-  listPopular
+  listPopular,
+  userBillingInfo
 }

@@ -5,6 +5,7 @@ import CartItem from './CartItem'
 import CartTotal from './CartTotal'
 import CartBillingInfo from './CartBillingInfo'
 import ShoppingCartActionButtons, { BUTTON_TYPE } from "./ShoppingCartActionButtons";
+import { fetchers } from './../../mockData/mock-data-fetcher'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -40,9 +41,11 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+
 const ShoppingCartRedux = () => {
 
     const classes = useStyles();
+    fetchers.fetchBillingInfo()
 
     return (
         <Container className={classes.root}>
@@ -61,7 +64,7 @@ const ShoppingCartRedux = () => {
             <Slide direction="right" in={true} mountOnEnter>
               <div className={classes.cartListItems}>
               
-                  <CartListItems></CartListItems>
+                  <CartListItems/>
                 
               </div>
             </Slide>
@@ -69,13 +72,15 @@ const ShoppingCartRedux = () => {
             <Divider className={classes.dividerSection}></Divider> 
 
             <Slide direction="right" in={true} mountOnEnter>
-            <div className={classes.cartTotal}>
-                <CartTotal/>
-                
-                <Divider className={classes.dividerSection}></Divider> 
+              <div className={classes.cartTotal}>
+                  
+                  <CartTotal/>
+                  
+                  <Divider className={classes.dividerSection}/>
 
-                <CartBillingInfo/>
-            </div>
+                  <CartBillingInfo/>
+
+              </div>
             </Slide>
         
             <Divider className={classes.dividerSection}></Divider> 
@@ -93,6 +98,7 @@ const ShoppingCartRedux = () => {
 }
 
 const CartListItems = () => {
+  
   const classes = useStyles();
   const shoppingCartItems = useSelector(state => state.shoppingCart.listOfMovies);
 
