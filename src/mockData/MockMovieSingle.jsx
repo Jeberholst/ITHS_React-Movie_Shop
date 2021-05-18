@@ -1,31 +1,34 @@
 import { Button, Divider, makeStyles } from '@material-ui/core';
-import React from 'react'
+import React, { useState } from 'react'
 import ShoppingCartActionButtons, { BUTTON_TYPE } from '../components/shopping-cart/ShoppingCartActionButtons';
 import ImdbLOGO from './../img/Other/imdb-logo-square.svg'
 import { listGenres } from './mock-data-fetcher';
-import { createFakeIMDBRating, createPosterPathFull, matchGenreIdsToName, POSTER_SIZES } from './mockFunctions';
 import MockStarsComponent from './MockStarsComponent';
+import { createFakeIMDBRating, createPosterPathFull, matchGenreIdsToName, POSTER_SIZES } from './mockFunctions'
+import { useDispatch, useSelector } from 'react-redux';
 import { actions as actionsMovieSection } from './../redux/features/movieSection'
-import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     root: {
       width: '100%',
       height: '100%',
-      margin: 15,
-      fontSize: 12,
-      borderRadius: 10,
-      background: 'rgb(0,0,0, 0.1)',
-      flexWrap: 'column-reverse',
+    },
+    containerContent: {
+        width: '100%',
+        height: '100%',
+        margin: 15,
+        fontSize: 12,
+        borderRadius: 10,
+        background: 'rgb(0,0,0, 0.1)'
     },
     topRow: {
         display: 'flex',
-        width: '100%',
         flexDirection: 'row-reverse',
-        textAlign: 'end',
-        alignContent: 'end',
+        width: '100%',
+        textAlign: 'center',
+        alignContent: 'center',
         alignItems: 'center',
-        justifyContent: 'end',
+        justifyContent: 'right',
         '& *': {
             marginRight: 5,
         },
@@ -43,6 +46,12 @@ const useStyles = makeStyles((theme) => ({
     infoContainer: {
         width: '65%',
         marginLeft: 10,
+        '& *': {
+            marginTop: 5,
+            marginLeft: 5,
+            marginRight: 15,
+            marginBottom: 10
+        },
     },
     image: {
         width: '100%',
@@ -56,11 +65,12 @@ const useStyles = makeStyles((theme) => ({
     },
     subBodies: {
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
+        maxWidth: '70%',
         fontSize: '1.0em',
-        textAlign: 'center',
-        alignContent: 'center',
-        alignItems: 'center',
+        textAlign: 'left',
+        alignContent: 'left',
+        alignItems: 'left',
     },
     title: {
         display: 'flex',
@@ -84,12 +94,10 @@ const useStyles = makeStyles((theme) => ({
     },
     containerBottomButtons: {
         display: 'flex',
-        flexWrap: 'wrap-reverse',
         flexDirection: 'row-reverse',
+        textAlign: 'center',
+        alignContent: 'center',
         alignItems: 'center',
-        '& *': {
-            marginRight: 5,
-        },
     },
     genres: {
         display: 'flex',
@@ -106,67 +114,72 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const MockMoviePopular = ( { item } ) => {
+const MockMovieSingle = () => {
   
   const classes = useStyles();
 
+  const item = useSelector(state => state.movieSection.selectedMovie)
+
   const title = item.title
   const releaseDate = item.releaseDate
-
-  const movieGenresNamed = matchGenreIdsToName(item.genreIds, listGenres)
-  const posterPath = createPosterPathFull(POSTER_SIZES.w300, item.posterPath)
+  const itemOverView = item.overview
+  const movieGenresNamed = matchGenreIdsToName(item.genreIds, listGenres);
+  const posterPath = createPosterPathFull(POSTER_SIZES.w500, item.posterPath)
   const imdbRating = createFakeIMDBRating()//TODO: Change to variable
-
+ 
   return(
         <div id='hover-container' className={classes.root}>
 
-        <div className={classes.topRow}>
-            <MockStarsComponent/>
-            <ImdbRating rating={imdbRating}/>
-        </div>
-
-        <div className={classes.mainContainer}>
-            
-            <div className={classes.imageContainer}>
-                <img className={classes.image} src={posterPath} alt="Movie-poster"></img>
-            </div>
-        
-            <div className={classes.infoContainer}>
-
-                <div className={classes.title}>
-                    {title}
-                </div>
+        <ButtonBack/>
                 
-                <div className={classes.subBodies}>
-                    {releaseDate}
-                </div>
-
-                <div className={classes.subBodies}>
-                    <div className={classes.genres}>
-                        {movieGenresNamed.map((genre) => {
-                            return <div>{genre}</div>
-                        })}
-                    </div>
-                </div>
+        <div className={classes.containerContent}>      
             
+            <div className={classes.topRow}>
+                <MockStarsComponent/>
+                <ImdbRating rating={imdbRating}/>
             </div>
 
-        </div>
+            <div className={classes.mainContainer}>
+                
+                <div className={classes.imageContainer}>
+                    <img className={classes.image} src={posterPath} alt="Movie-poster"></img>
+                </div>
+            
+                <div className={classes.infoContainer}>
 
-        <Divider className={classes.divider}></Divider>
+                    <div className={classes.title}>
+                        {title}
+                    </div>
+                    
+                    <div className={classes.subBodies}>
+                        <div>{releaseDate}</div>
+                        <div>{itemOverView}</div>
+                        <div className={classes.genres}>
+                            {movieGenresNamed.map((genre) => {
+                                return <div>{genre}</div>
+                            })}
+                        </div>
+                    
+                        <div>{'Popularity---->' + item.popularity}</div>
+                        <div>{'Vote Avarage:-->' + item.voteAverage}</div>
+                        <div>{'Vote Count:---->' + item.voteCount}</div>
+                    </div>
 
-        <div className={classes.containerBottomButtons}>
-            <ShoppingCartActionButtons mItem={item} type={BUTTON_TYPE.CART_ADD}/>
-            <ButtonMore mItem={item}/>
-        </div>
+                </div>
 
+            </div>
+
+            <Divider className={classes.divider}></Divider>
+
+            <div className={classes.containerBottomButtons}>
+                <ShoppingCartActionButtons mItem={item} type={BUTTON_TYPE.CART_ADD}/>    
+            </div>
+        </div>  
     </div>
   );
 
 }
 
-
-//TODO: Move to single-file component for re-usage
 const ImdbRating = ({ rating }) => {
     const classes = useStyles();
 
@@ -179,33 +192,23 @@ const ImdbRating = ({ rating }) => {
 
 };
 
+const ButtonBack  = () => {
 
-//TODO: Move to single-file component for re-usage
-const bMoreUseStyle = makeStyles((theme) => ({
-    root: {
-      '& *': {
-   
-      },
-    },
-}));
-
-const ButtonMore = ({ mItem }) => {
-    const classes = bMoreUseStyle();
     const dispatch = useDispatch();
 
     return (
         <div>
             <Button
-                variant={'contained'}
-                color={'default'}
-                className={classes.root}
+                variant={'outlined'}
+                color={'primary'}
+                // className={classes.root}
                 onClick={
                     () => {
-                        dispatch(actionsMovieSection.setSelectedMovie(mItem))
+                        dispatch(actionsMovieSection.resetSelectedMovie())
                     }
-                }>More</Button>   
+                }>{'<<<<'}</Button>   
         </div>
-    );
-}
+    )
+};
 
-export default MockMoviePopular;
+export default MockMovieSingle;
