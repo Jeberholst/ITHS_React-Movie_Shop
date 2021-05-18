@@ -1,19 +1,25 @@
-import { Divider, makeStyles } from '@material-ui/core';
+import { Button, Divider, makeStyles } from '@material-ui/core';
 import React, { useState } from 'react'
 import ShoppingCartActionButtons, { BUTTON_TYPE } from '../components/shopping-cart/ShoppingCartActionButtons';
 import ImdbLOGO from './../img/Other/imdb-logo-square.svg'
 import { listGenres } from './mock-data-fetcher';
 import MockStarsComponent from './MockStarsComponent';
 import { createFakeIMDBRating, createPosterPathFull, matchGenreIdsToName, POSTER_SIZES } from './mockFunctions'
+import { useDispatch, useSelector } from 'react-redux';
+import { actions as actionsMovieSection } from './../redux/features/movieSection'
 
 const useStyles = makeStyles((theme) => ({
     root: {
       width: '100%',
       height: '100%',
-      margin: 15,
-      fontSize: 12,
-      borderRadius: 10,
-      background: 'rgb(0,0,0, 0.1)'
+    },
+    containerContent: {
+        width: '100%',
+        height: '100%',
+        margin: 15,
+        fontSize: 12,
+        borderRadius: 10,
+        background: 'rgb(0,0,0, 0.1)'
     },
     topRow: {
         display: 'flex',
@@ -92,12 +98,27 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
         alignContent: 'center',
         alignItems: 'center',
+    },
+    genres: {
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        '& *': {
+            marginTop: 5,
+            marginLeft: 5,
+            marginRight: 5,
+            padding: 5,
+            borderRadius: 5,
+            background: 'rgb(68,68,68, 0.5)',
+        },
     }
 }));
 
-const MockMovieSingle = ( { item } ) => {
+const MockMovieSingle = () => {
   
   const classes = useStyles();
+
+  const item = useSelector(state => state.movieSection.selectedMovie)
 
   const title = item.title
   const releaseDate = item.releaseDate
@@ -108,43 +129,52 @@ const MockMovieSingle = ( { item } ) => {
  
   return(
         <div id='hover-container' className={classes.root}>
-                
-        <div className={classes.topRow}>
-            <MockStarsComponent/>
-            <ImdbRating rating={imdbRating}/>
-        </div>
 
-        <div className={classes.mainContainer}>
+        <ButtonBack/>
+                
+        <div className={classes.containerContent}>      
             
-            <div className={classes.imageContainer}>
-                <img className={classes.image} src={posterPath} alt="Movie-poster"></img>
+            <div className={classes.topRow}>
+                <MockStarsComponent/>
+                <ImdbRating rating={imdbRating}/>
             </div>
-        
-            <div className={classes.infoContainer}>
 
-                <div className={classes.title}>
-                    {title}
-                </div>
+            <div className={classes.mainContainer}>
                 
-                <div className={classes.subBodies}>
-                    <div>{releaseDate}</div>
-                    <div>{itemOverView}</div>
-                    <div>{movieGenresNamed}</div>
-                    <div>{'Popularity---->' + item.popularity}</div>
-                    <div>{'Vote avarge:-->' + item.voteAverage}</div>
-                    <div>{'Vote Count:---->' + item.voteCount}</div>
+                <div className={classes.imageContainer}>
+                    <img className={classes.image} src={posterPath} alt="Movie-poster"></img>
+                </div>
+            
+                <div className={classes.infoContainer}>
+
+                    <div className={classes.title}>
+                        {title}
+                    </div>
+                    
+                    <div className={classes.subBodies}>
+                        <div>{releaseDate}</div>
+                        <div>{itemOverView}</div>
+                        <div className={classes.genres}>
+                            {movieGenresNamed.map((genre) => {
+                                return <div>{genre}</div>
+                            })}
+                        </div>
+                    
+                        <div>{'Popularity---->' + item.popularity}</div>
+                        <div>{'Vote Avarage:-->' + item.voteAverage}</div>
+                        <div>{'Vote Count:---->' + item.voteCount}</div>
+                    </div>
+
                 </div>
 
             </div>
 
-        </div>
+            <Divider className={classes.divider}></Divider>
 
-        <Divider className={classes.divider}></Divider>
-
-        <div className={classes.containerBottomButtons}>
-            <ShoppingCartActionButtons mItem={item} type={BUTTON_TYPE.CART_ADD}/>    
-        </div>
-
+            <div className={classes.containerBottomButtons}>
+                <ShoppingCartActionButtons mItem={item} type={BUTTON_TYPE.CART_ADD}/>    
+            </div>
+        </div>  
     </div>
   );
 
@@ -160,6 +190,25 @@ const ImdbRating = ({ rating }) => {
         </div>
     );
 
+};
+
+const ButtonBack  = () => {
+
+    const dispatch = useDispatch();
+
+    return (
+        <div>
+            <Button
+                variant={'outlined'}
+                color={'primary'}
+                // className={classes.root}
+                onClick={
+                    () => {
+                        dispatch(actionsMovieSection.resetSelectedMovie())
+                    }
+                }>{'<<<<'}</Button>   
+        </div>
+    )
 };
 
 export default MockMovieSingle;

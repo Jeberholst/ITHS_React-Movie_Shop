@@ -5,6 +5,8 @@ import ImdbLOGO from './../img/Other/imdb-logo-square.svg'
 import { listGenres } from './mock-data-fetcher';
 import { createFakeIMDBRating, createPosterPathFull, matchGenreIdsToName, POSTER_SIZES } from './mockFunctions';
 import MockStarsComponent from './MockStarsComponent';
+import { actions as actionsMovieSection } from './../redux/features/movieSection'
+import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -13,16 +15,17 @@ const useStyles = makeStyles((theme) => ({
       margin: 15,
       fontSize: 12,
       borderRadius: 10,
-      background: 'rgb(0,0,0, 0.1)'
+      background: 'rgb(0,0,0, 0.1)',
+      flexWrap: 'column-reverse',
     },
     topRow: {
         display: 'flex',
-        flexDirection: 'row-reverse',
         width: '100%',
-        textAlign: 'center',
-        alignContent: 'center',
+        flexDirection: 'row-reverse',
+        textAlign: 'end',
+        alignContent: 'end',
         alignItems: 'center',
-        justifyContent: 'right',
+        justifyContent: 'end',
         '& *': {
             marginRight: 5,
         },
@@ -81,8 +84,25 @@ const useStyles = makeStyles((theme) => ({
     },
     containerBottomButtons: {
         display: 'flex',
+        flexWrap: 'wrap-reverse',
         flexDirection: 'row-reverse',
         alignItems: 'center',
+        '& *': {
+            marginRight: 5,
+        },
+    },
+    genres: {
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        '& *': {
+            marginTop: 5,
+            marginLeft: 5,
+            marginRight: 5,
+            padding: 5,
+            borderRadius: 5,
+            background: 'rgb(68,68,68, 0.5)',
+        },
     }
 }));
 
@@ -99,7 +119,7 @@ const MockMoviePopular = ( { item } ) => {
 
   return(
         <div id='hover-container' className={classes.root}>
-                
+
         <div className={classes.topRow}>
             <MockStarsComponent/>
             <ImdbRating rating={imdbRating}/>
@@ -122,9 +142,11 @@ const MockMoviePopular = ( { item } ) => {
                 </div>
 
                 <div className={classes.subBodies}>
-                    {movieGenresNamed.map(item => {
-                        return <div>{item}</div>
-                    })}
+                    <div className={classes.genres}>
+                        {movieGenresNamed.map((genre) => {
+                            return <div>{genre}</div>
+                        })}
+                    </div>
                 </div>
             
             </div>
@@ -143,32 +165,8 @@ const MockMoviePopular = ( { item } ) => {
 
 }
 
-const bMoreUseStyle = makeStyles((theme) => ({
-    root: {
-      '& *': {
-   
-      },
-    },
-}));
 
-const ButtonMore = ({ mItem }) => {
-    const classes = bMoreUseStyle();
-
-    return (
-        <div>
-            <Button
-                variant={'contained'}
-                color={'default'}
-                className={classes.root}
-                onClick={
-                    () => {
-                        console.log(mItem)
-                    }
-                }>More</Button>   
-        </div>
-    );
-}
-
+//TODO: Move to single-file component for re-usage
 const ImdbRating = ({ rating }) => {
     const classes = useStyles();
 
@@ -180,5 +178,34 @@ const ImdbRating = ({ rating }) => {
     );
 
 };
-  
+
+
+//TODO: Move to single-file component for re-usage
+const bMoreUseStyle = makeStyles((theme) => ({
+    root: {
+      '& *': {
+   
+      },
+    },
+}));
+
+const ButtonMore = ({ mItem }) => {
+    const classes = bMoreUseStyle();
+    const dispatch = useDispatch();
+
+    return (
+        <div>
+            <Button
+                variant={'contained'}
+                color={'default'}
+                className={classes.root}
+                onClick={
+                    () => {
+                        dispatch(actionsMovieSection.setSelectedMovie(mItem))
+                    }
+                }>More</Button>   
+        </div>
+    );
+}
+
 export default MockMoviePopular;
