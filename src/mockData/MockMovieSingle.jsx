@@ -1,10 +1,10 @@
-import { Button, Divider, makeStyles } from '@material-ui/core';
-import React from 'react'
+import { Divider, makeStyles } from '@material-ui/core';
+import React, { useState } from 'react'
 import ShoppingCartActionButtons, { BUTTON_TYPE } from '../components/shopping-cart/ShoppingCartActionButtons';
 import ImdbLOGO from './../img/Other/imdb-logo-square.svg'
 import { listGenres } from './mock-data-fetcher';
-import { createFakeIMDBRating, createPosterPathFull, matchGenreIdsToName, POSTER_SIZES } from './mockFunctions';
 import MockStarsComponent from './MockStarsComponent';
+import { createFakeIMDBRating, createPosterPathFull, matchGenreIdsToName, POSTER_SIZES } from './mockFunctions'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -40,6 +40,12 @@ const useStyles = makeStyles((theme) => ({
     infoContainer: {
         width: '65%',
         marginLeft: 10,
+        '& *': {
+            marginTop: 5,
+            marginLeft: 5,
+            marginRight: 15,
+            marginBottom: 10
+        },
     },
     image: {
         width: '100%',
@@ -53,11 +59,12 @@ const useStyles = makeStyles((theme) => ({
     },
     subBodies: {
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
+        maxWidth: '70%',
         fontSize: '1.0em',
-        textAlign: 'center',
-        alignContent: 'center',
-        alignItems: 'center',
+        textAlign: 'left',
+        alignContent: 'left',
+        alignItems: 'left',
     },
     title: {
         display: 'flex',
@@ -82,21 +89,23 @@ const useStyles = makeStyles((theme) => ({
     containerBottomButtons: {
         display: 'flex',
         flexDirection: 'row-reverse',
+        textAlign: 'center',
+        alignContent: 'center',
         alignItems: 'center',
     }
 }));
 
-const MockMoviePopular = ( { item } ) => {
+const MockMovieSingle = ( { item } ) => {
   
   const classes = useStyles();
 
   const title = item.title
   const releaseDate = item.releaseDate
-
-  const movieGenresNamed = matchGenreIdsToName(item.genreIds, listGenres)
-  const posterPath = createPosterPathFull(POSTER_SIZES.w300, item.posterPath)
+  const itemOverView = item.overview
+  const movieGenresNamed = matchGenreIdsToName(item.genreIds, listGenres);
+  const posterPath = createPosterPathFull(POSTER_SIZES.w500, item.posterPath)
   const imdbRating = createFakeIMDBRating()//TODO: Change to variable
-
+ 
   return(
         <div id='hover-container' className={classes.root}>
                 
@@ -118,15 +127,14 @@ const MockMoviePopular = ( { item } ) => {
                 </div>
                 
                 <div className={classes.subBodies}>
-                    {releaseDate}
+                    <div>{releaseDate}</div>
+                    <div>{itemOverView}</div>
+                    <div>{movieGenresNamed}</div>
+                    <div>{'Popularity---->' + item.popularity}</div>
+                    <div>{'Vote avarge:-->' + item.voteAverage}</div>
+                    <div>{'Vote Count:---->' + item.voteCount}</div>
                 </div>
 
-                <div className={classes.subBodies}>
-                    {movieGenresNamed.map(item => {
-                        return <div>{item}</div>
-                    })}
-                </div>
-            
             </div>
 
         </div>
@@ -134,39 +142,12 @@ const MockMoviePopular = ( { item } ) => {
         <Divider className={classes.divider}></Divider>
 
         <div className={classes.containerBottomButtons}>
-            <ShoppingCartActionButtons mItem={item} type={BUTTON_TYPE.CART_ADD}/>
-            <ButtonMore mItem={item}/>
+            <ShoppingCartActionButtons mItem={item} type={BUTTON_TYPE.CART_ADD}/>    
         </div>
 
     </div>
   );
 
-}
-
-const bMoreUseStyle = makeStyles((theme) => ({
-    root: {
-      '& *': {
-   
-      },
-    },
-}));
-
-const ButtonMore = ({ mItem }) => {
-    const classes = bMoreUseStyle();
-
-    return (
-        <div>
-            <Button
-                variant={'contained'}
-                color={'default'}
-                className={classes.root}
-                onClick={
-                    () => {
-                        console.log(mItem)
-                    }
-                }>More</Button>   
-        </div>
-    );
 }
 
 const ImdbRating = ({ rating }) => {
@@ -180,5 +161,5 @@ const ImdbRating = ({ rating }) => {
     );
 
 };
-  
-export default MockMoviePopular;
+
+export default MockMovieSingle;

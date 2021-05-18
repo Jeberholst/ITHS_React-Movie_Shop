@@ -2,6 +2,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core';
 import { listPopular } from './mock-data-fetcher'
 import MockMoviePopular from './MockMoviePopular';
+import MockMovieSingle from './MockMovieSingle';
 
 //TODO: MediaQuery on screen-size, change gridTemplateColumns
 
@@ -97,8 +98,8 @@ const MovieSearchList = () => {
     return (
         <React.Fragment>
 
-            <div className={classes.rootSearch}>
-
+            <div className={classes.rootSearch}> 
+           
             </div>
 
         </React.Fragment>
@@ -108,12 +109,13 @@ const MovieSearchList = () => {
 
 const MovieSectionSingle = () => {
     const classes = useStyles();
+    const useItem = listPopular[5]
 
     return (
         <React.Fragment>
 
             <div className={classes.rootSingle}>
-
+                <MockMovieSingle key={'single-' + useItem.id} item={useItem}/>
             </div>
 
         </React.Fragment>

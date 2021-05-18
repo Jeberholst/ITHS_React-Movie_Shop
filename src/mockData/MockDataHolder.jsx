@@ -26,7 +26,9 @@ const MockDataHolder = () => {
       <React.Fragment>
         <div className={classes.root}>
 
-            <MockMovieSection screen={'MovieGrid'}/>
+            {/* <MockMovieSection screen={'MovieGrid'}/> */}
+            {/* <MockMovieSection screen={'MovieSearch'}/> */}
+            <MockMovieSection screen={'MovieSingle'}/>
 
         </div>
       </React.Fragment>
