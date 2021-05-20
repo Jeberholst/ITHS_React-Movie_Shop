@@ -58,7 +58,6 @@ const SlideContainer = ({children,width,translate,id}) => {
 }
 
 const Slide = ({img}) => {
-    console.log("hej")
     return <div style={{backgroundImage:`url(${img})`}} className="gener__slide"></div>
 }
 
