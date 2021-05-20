@@ -33,20 +33,6 @@ function App() {
         </header>
 
         <div className='App-Main'>
-
-          <header className="App-Header">
-            <h1 style={{color: '#388e3c'}}>Header-container--</h1>
-          </header>
-                <ul style={{display: 'flex', flexDirection: 'column',  textAlign: "start" }}>
-                    <li><Link to="/">LandingPage</Link></li>
-                    <li><Link to="/genre">genre</Link></li>
-                    <li><Link to="/comment">comment</Link></li>
-                    <li><Link to="/login">login</Link></li>
-                    <li><Link to="/profile">profile</Link></li>
-                    <li><Link to="/search">search</Link></li>
-                    <li><Link to="/shopping-cart">shopping-cart</Link></li>
-
-                </ul>
                 <div>
                     <Switch>
                         <Route exact path="/" component={LandingPage} />
