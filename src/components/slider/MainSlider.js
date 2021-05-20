@@ -6,8 +6,14 @@ import {toggelSlider} from '../../redux/features/mainSliderSlice'
 
 //slidecontainer element
 const MainSliderContainer = ({width,children,tran}) =>{
+    const sliderStyle = {
+        transform: `translateZ(0) translateX(${tran}px)`,
+        transition:`transform 0.25s ease-in-out`,
+        width:`${width}px`
+    }
+
     return (
-    <div style={{transform:`translateX(${tran}px)`, transition:`transform 0.45s ease-out` ,width:`${width}px`}} className="main-slider__content-container" >
+    <div style={sliderStyle} className="main-slider__content-container" >
     {children}
     </div>
     )
@@ -48,6 +54,7 @@ const MainSlider = ({imgList}) => {
     }
 
     var translate = useSelector( (state) =>  state.mainslider.translateX)
+  
 
     return(
         <div className="main-slider__container">

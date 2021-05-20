@@ -11,7 +11,6 @@ const LandingPage = () => {
     useEffect(()=>{
         getTitleFull()
        movies.current = getSearchedTitlePaged()
-       console.log(movies.current)
     },[])
 
 
@@ -48,7 +47,7 @@ const LandingPage = () => {
 
     <div className="App-Content">
         <MainSlider imgList = {images} ></MainSlider>
-        {GENRES.map((gener) => <GenreSlider key = {gener}  movies={posters}>{gener}</GenreSlider>)}
+        {GENRES.map((gener) => <GenreSlider key = {gener} id = {gener.toUpperCase()}  movies={posters}>{gener}</GenreSlider>)}
     </div>
     )
 

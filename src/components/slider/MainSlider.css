@@ -6,6 +6,8 @@
     flex-direction: column;
     overflow: hidden;
     justify-content: center;
+    -webkit-tap-highlight-color: transparent
+   
 }
 
 .main-slider__content-container{
@@ -78,6 +80,7 @@
       flex-direction: row;
       cursor: pointer;
       overflow: hidden;
+  
      
   }
   .arrow-box-right{
@@ -92,6 +95,7 @@
     flex-direction: row;
     overflow: hidden;
     cursor: pointer;
+  
    
 }
 
