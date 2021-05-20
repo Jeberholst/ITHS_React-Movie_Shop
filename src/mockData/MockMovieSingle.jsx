@@ -1,4 +1,4 @@
-import { Button, Divider, makeStyles } from '@material-ui/core';
+import { Button, ButtonGroup, Divider, makeStyles } from '@material-ui/core';
 import React, { useState } from 'react'
 import ShoppingCartActionButtons, { BUTTON_TYPE } from '../components/shopping-cart/ShoppingCartActionButtons';
 import ImdbLOGO from './../img/Other/imdb-logo-square.svg'
@@ -6,7 +6,8 @@ import { listGenres } from './mock-data-fetcher';
 import MockStarsComponent from './MockStarsComponent';
 import { createFakeIMDBRating, createPosterPathFull, matchGenreIdsToName, POSTER_SIZES } from './mockFunctions'
 import { useDispatch, useSelector } from 'react-redux';
-import { actions as actionsMovieSection } from './../redux/features/movieSection'
+import { actions as actionsMovieSection, MovieSectionScreens } from './../redux/features/movieSection'
+import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -130,7 +131,7 @@ const MockMovieSingle = () => {
   return(
         <div id='hover-container' className={classes.root}>
 
-        <ButtonBack/>
+        <ButtonNavigateBack/>
                 
         <div className={classes.containerContent}>      
             
@@ -163,6 +164,8 @@ const MockMovieSingle = () => {
                         <div>{'Popularity---->' + item.popularity}</div>
                         <div>{'Vote Avarage:-->' + item.voteAverage}</div>
                         <div>{'Vote Count:---->' + item.voteCount}</div>
+
+
                     </div>
 
                 </div>
@@ -172,7 +175,10 @@ const MockMovieSingle = () => {
             <Divider className={classes.divider}></Divider>
 
             <div className={classes.containerBottomButtons}>
-                <ShoppingCartActionButtons mItem={item} type={BUTTON_TYPE.CART_ADD}/>    
+  
+                    <ShoppingCartActionButtons mItem={item} type={BUTTON_TYPE.CART_ADD}/>    
+                    <ButtonNavigateComments/>
+             
             </div>
         </div>  
     </div>
@@ -192,7 +198,28 @@ const ImdbRating = ({ rating }) => {
 
 };
 
-const ButtonBack  = () => {
+const ButtonNavigateComments = () => {
+
+    const dispatch = useDispatch();
+
+    return (
+        <div>
+            <Button
+                variant={'contained'}
+                color={'default'}
+                startIcon={<StarBorderIcon/>}
+                // className={classes.root}
+                onClick={
+                    () => {
+                        dispatch(actionsMovieSection.setScreen(MovieSectionScreens.SINGLE_MOVIE_COMMENTS))
+                    }
+                }>{'COMMENTS'}</Button>   
+        </div>
+    )
+};
+
+//SHOULD USE GLOBAL NAV BUTTON WITH SWITCH
+const ButtonNavigateBack  = () => {
 
     const dispatch = useDispatch();
 
@@ -204,7 +231,7 @@ const ButtonBack  = () => {
                 // className={classes.root}
                 onClick={
                     () => {
-                        dispatch(actionsMovieSection.resetSelectedMovie())
+                        dispatch(actionsMovieSection.setScreen(MovieSectionScreens.GRID_MOVIES))
                     }
                 }>{'<<<<'}</Button>   
         </div>

@@ -11,7 +11,7 @@ const ShoppingCartPage = () => {
         </React.Fragment>
     );
 
-}
+};
 
 
-export default ShoppingCartPage
+export default ShoppingCartPage 

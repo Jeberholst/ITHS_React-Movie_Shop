@@ -1,13 +1,20 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 
+const setScreen = createAction('set screen');
 const setSelectedMovie = createAction('set selected movie');
 const resetSelectedMovie = createAction('set selected movie null');
 
-const actions = { setSelectedMovie, resetSelectedMovie };
+const actions = { setScreen, setSelectedMovie, resetSelectedMovie };
 
-//TODO: create custom state with null, search or single here later (selectedMovie)
+export const MovieSectionScreens = {
+    GRID_MOVIES: 'grid_movies',
+    LIST_SEARCHES: 'list_searches',
+    SINGLE_MOVIE: 'single_movie',
+    SINGLE_MOVIE_COMMENTS: 'single_movie_comments',
+}
 
 const initialState = {
+    screen: MovieSectionScreens.GRID_MOVIES,
     selectedMovie : null,
 }
 
@@ -24,6 +31,11 @@ const reducer = createReducer(initialState, {
         console.log('Set selectedMovie null')
         state.selectedMovie = null
 
+    },
+    [setScreen] : (state, action) => { 
+        const value = action.payload
+        console.log('Should set to screen: ', value)
+        state.screen = value
     },
 }) 
 

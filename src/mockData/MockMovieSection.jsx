@@ -3,6 +3,9 @@ import { makeStyles } from '@material-ui/core';
 import { listPopular } from './mock-data-fetcher'
 import MockMoviePopular from './MockMoviePopular';
 import MockMovieSingle from './MockMovieSingle';
+import { useSelector } from 'react-redux';
+import { MovieSectionScreens } from './../redux/features/movieSection'
+import MockMovieSingleComments from './MockMovieSingleComments';
 
 //TODO: MediaQuery on screen-size, change gridTemplateColumns
 
@@ -33,6 +36,14 @@ const useStyles = makeStyles((theme) => ({
         marginTop: 10,
         marginBottom: 10,
     },
+    rootSingleComments: {
+        display: 'flex',
+        flexDirection: 'column',
+        width: '75%',
+        height: '100%',
+        marginTop: 10,
+        marginBottom: 10,
+    },
     rootSearch: {
         display: 'flex',
         flexDirection: 'column',
@@ -45,21 +56,28 @@ const useStyles = makeStyles((theme) => ({
 }));
   
 
-const MockMovieSection = ({ screen }) => {
-    const currentScreen = String(screen)
+const MockMovieSection = () => {
+    //   const currentScreen = String(screen)
+
+     const screen = useSelector(state => state.movieSection.screen)
+     console.log('CurrentScreen:', screen)
     
-     switch(currentScreen){
-        case "MovieGrid":
+     switch(String(screen)){
+        case MovieSectionScreens.GRID_MOVIES:
             return (
-                <MovieSectionGrid></MovieSectionGrid>
+                <MovieSectionGrid/>
             )
-        case "MovieSearch": 
+        case MovieSectionScreens.LIST_SEARCHES: 
             return (
-                <MovieSearchList></MovieSearchList>
+                <MovieSearchList/>
             )
-        case "MovieSingle": 
+        case MovieSectionScreens.SINGLE_MOVIE: 
             return (
-                <MovieSectionSingle></MovieSectionSingle>
+                <MovieSectionSingle/>
+            )
+        case MovieSectionScreens.SINGLE_MOVIE_COMMENTS: 
+            return (
+                <MovieSectionSingleMovieComments/>
             )
         default:
             return(
@@ -109,13 +127,30 @@ const MovieSearchList = () => {
 
 const MovieSectionSingle = () => {
     const classes = useStyles();
-    const useItem = listPopular[5]
 
     return (
         <React.Fragment>
 
             <div className={classes.rootSingle}>
-                <MockMovieSingle key={'single-' + useItem.id} item={useItem}/>
+                <MockMovieSingle/>
+            </div>
+
+        </React.Fragment>
+    );
+
+}
+
+const MovieSectionSingleMovieComments = () => {
+    const classes = useStyles();
+
+    return (
+        <React.Fragment>
+            
+            <div className={classes.rootSingleComments}>
+
+               <MockMovieSingleComments/>
+
+
             </div>
 
         </React.Fragment>

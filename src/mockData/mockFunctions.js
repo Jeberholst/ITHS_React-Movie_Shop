@@ -6,8 +6,8 @@ export function createFakeIMDBRating(){
 export function matchGenreIdsToName(movieItemGenres, availableGenres){
     var movieGenresNamed = []
 
-    console.log('MovieItem Genres', movieItemGenres)
-    console.log('Available Genres', availableGenres)
+   // console.log('MovieItem Genres', movieItemGenres)
+   // console.log('Available Genres', availableGenres)
 
     movieItemGenres.forEach(genreNum => {
         availableGenres.forEach(listItem => {
@@ -16,7 +16,7 @@ export function matchGenreIdsToName(movieItemGenres, availableGenres){
             }
         }); 
     });
-    console.log('Genres matched ', movieGenresNamed)
+   // console.log('Genres matched ', movieGenresNamed)
 
     return movieGenresNamed;
 }
