@@ -20,18 +20,17 @@ const useStyles = makeStyles((theme) => ({
       gap: 5,
     },
     rootGrid: {
-        display: 'grid',
-        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        width: '95%',
         height: '100%',
         marginTop: 10,
         marginBottom: 10,
-        gridTemplateColumns: '30% 30% 30%',
-        gap: 5,
     },
     rootSingle: {
         display: 'flex',
         flexDirection: 'column',
-        width: '75%',
+        width: '95%',
         height: '100%',
         marginTop: 10,
         marginBottom: 10,
@@ -39,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     rootSingleComments: {
         display: 'flex',
         flexDirection: 'column',
-        width: '75%',
+        width: '95%',
         height: '100%',
         marginTop: 10,
         marginBottom: 10,
@@ -115,11 +114,9 @@ const MovieSearchList = () => {
 
     return (
         <React.Fragment>
-
             <div className={classes.rootSearch}> 
-           
+    
             </div>
-
         </React.Fragment>
     );
 
@@ -130,11 +127,9 @@ const MovieSectionSingle = () => {
 
     return (
         <React.Fragment>
-
             <div className={classes.rootSingle}>
                 <MockMovieSingle/>
             </div>
-
         </React.Fragment>
     );
 
@@ -145,14 +140,9 @@ const MovieSectionSingleMovieComments = () => {
 
     return (
         <React.Fragment>
-            
             <div className={classes.rootSingleComments}>
-
                <MockMovieSingleComments/>
-
-
             </div>
-
         </React.Fragment>
     );
 

@@ -10,9 +10,9 @@ import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      width: '100%',
+      width: '95%',
       height: '100%',
-      margin: 15,
+      margin: 5,
       fontSize: 12,
       borderRadius: 10,
       background: 'rgb(0,0,0, 0.1)',

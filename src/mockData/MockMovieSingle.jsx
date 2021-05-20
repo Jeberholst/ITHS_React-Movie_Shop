@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
       height: '100%',
     },
     containerContent: {
-        width: '100%',
+        width: '90%',
         height: '100%',
         margin: 15,
         fontSize: 12,
@@ -36,16 +36,17 @@ const useStyles = makeStyles((theme) => ({
     },
     mainContainer: {
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
         width: '100%',
         maxHeight: '100%',
         margin: 10,
     },
     imageContainer: {
-        width: '30%',
+        maxWidth: '95%',
+        maxHeight: '30%',
     },
     infoContainer: {
-        width: '65%',
+        width: '100%',
         marginLeft: 10,
         '& *': {
             marginTop: 5,
@@ -62,7 +63,8 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'left',
         justifyContent: 'left',
         background: 'rgb(0,0,0, 0.5)',
-        objectFit: 'fit-content',
+        borderRadius: 10,
+        objectFit: 'scale-down',
     },
     subBodies: {
         display: 'flex',
@@ -96,9 +98,11 @@ const useStyles = makeStyles((theme) => ({
     containerBottomButtons: {
         display: 'flex',
         flexDirection: 'row-reverse',
+        flexWrap: 'wrap',
         textAlign: 'center',
         alignContent: 'center',
         alignItems: 'center',
+
     },
     genres: {
         display: 'flex',
