@@ -66,7 +66,7 @@ const LoginPage = () => {
                 // User is signed out
             }
         });
-    })
+    }, [])
 
     const signInWithEmailPassword = () => {
         // let email = "test@test.test2";
