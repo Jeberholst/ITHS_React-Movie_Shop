@@ -1,0 +1,12 @@
+{
+  "billingInfo": 
+    {
+        "firstName": "Firstname",
+        "lastName": "Lastname",
+        "address": "Streetaddress 10A",
+        "postalCode": "123 45",
+        "county": "Stockholm",
+        "country": "Sweden"  
+    }
+
+}

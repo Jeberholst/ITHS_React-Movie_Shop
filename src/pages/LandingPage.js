@@ -1,21 +1,18 @@
 import MockDataHolder from "../mockData/MockDataHolder";
-import React,{useEffect, useRef} from "react";
-import {getSearchedTitlePaged, getTitleFull} from "../mockData/mock-data-fetcher.js";
 import MainSlider from "../components/slider/MainSlider.js";
 import GenreSlider from "../components/slider/GenreSlider";
+import { fetchers } from "../mockData/mock-data-fetcher";
+
+
+import React from "react";
+
+
+
 
 
 
 const LandingPage = () => {
-    const movies = useRef(null)
-    useEffect(()=>{
-        getTitleFull()
-       movies.current = getSearchedTitlePaged()
-    },[])
 
-
-    
-  
     const images = [
         'https://images.unsplash.com/photo-1449034446853-66c86144b0ad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80',
         'https://images.unsplash.com/photo-1470341223622-1019832be824?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2288&q=80',
@@ -43,11 +40,22 @@ const LandingPage = () => {
         "western",     
     ];
 
+    function fetchMockData(){
+        fetchers.fetchPopular()
+    }
+
+ 
+
     return(
 
     <div className="App-Content">
         <MainSlider imgList = {images} ></MainSlider>
         {GENRES.map((gener) => <GenreSlider key = {gener} id = {gener.toUpperCase()}  movies={posters}>{gener}</GenreSlider>)}
+        <div className="App-Content">
+        <p>LandingPage</p>
+        {fetchMockData()}
+        <MockDataHolder/>
+    </div>
     </div>
     )
 

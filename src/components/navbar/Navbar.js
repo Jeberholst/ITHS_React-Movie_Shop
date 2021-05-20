@@ -4,8 +4,7 @@ import dummyLogo from '../../img/Logo/dummy_ic.jpg'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggelMenu } from '../../redux/features/navbarSlice'
 import  { Link } from "react-router-dom";
-
-
+import ShoppingCartBadge from './../shopping-cart/ShoppingCartBadge'
 
 
 const CATEGORIES = {
@@ -33,7 +32,8 @@ const Bar = () => {
          <i className="fas fa-search searchbar__container_search-field_logo"></i>
      </div>
 
-     <Link to="/shopping-cart"><i className="fas fa-shopping-cart navbar__container_shop-cart"></i></Link>
+
+     <Link to="/shopping-cart"> <ShoppingCartBadge/> </Link>
      <i onClick={() => dispatch(toggelMenu())} className="fas fa-bars navbar__container_burger-menu"></i>
     
 

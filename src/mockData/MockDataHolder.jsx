@@ -1,9 +1,9 @@
 
 import React from 'react';
-import { arrayPlotFull, arraySearchPaged} from './mock-data-fetcher'
-import MockMovieSingle from './MockMovieSingle'
-import MockMoviePaged from './MockMoviePaged'
 import { makeStyles } from '@material-ui/core';
+import { fetchers } from './mock-data-fetcher'
+import MockMovieSection from './MockMovieSection';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,26 +17,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MockDataHolder = () => {
+// <MockMovieSection screen={'MovieSearch'}/> TODO: Add MovieSearch.jsx and create switch in MockDataHolder
 
-    const classes = useStyles();
-    
+const MockDataHolder = () => {
+  const classes = useStyles();
+  
+  getMockData()
+
+  const screen = useSelector(state => state.movieSection.screen)
+
     return(
-      <div className={classes.root}>
-          <h1>Single Item</h1>
-  
-          {arrayPlotFull.map((item) => (
-            <MockMovieSingle item={item}></MockMovieSingle>
-          ))}
-  
-          <h1>Paged search</h1>
-          
-          {arraySearchPaged.map((item) => (
-            <MockMoviePaged item={item}></MockMoviePaged>
-          ))}
-  
-      </div>
+      <React.Fragment>
+        <div className={classes.root}>
+
+            <MockMovieSection screen={screen}/>
+
+        </div>
+      </React.Fragment>
     );
+
 };
+
+function getMockData(){
+  fetchers.fetchPopular();
+  fetchers.fetchGenres();
+}
+
 
 export default MockDataHolder;

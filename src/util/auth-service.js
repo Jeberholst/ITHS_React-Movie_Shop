@@ -13,8 +13,8 @@ class AuthService {
                 // ...
             })
             .catch((error) => {
-                let errorCode = error.code;
-                let errorMessage = error.message;
+                // let errorCode = error.code;
+                // let errorMessage = error.message;
                 console.log(error)
             });
     }
@@ -32,7 +32,7 @@ class AuthService {
                 // ...
             })
             .catch((error) => {
-                let errorCode = error.code;
+                // let errorCode = error.code;
                 let errorMessage = error.message;
                 console.log(errorMessage)
                 // ..
