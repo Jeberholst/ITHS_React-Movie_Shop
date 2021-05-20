@@ -41,9 +41,9 @@ const LoginPage = () => {
     }));
 
     const classes = useStyles();
-    const [user, setUser]  = useState("no")
-    // const [logEmail, setEmail]  = useState("")
-    // const [logPassword, setPassword]  = useState("")
+    const [user, setUser]  = useState("")
+   const [logEmail, setEmail]  = useState("")
+    const [logPassword, setPassword]  = useState("")
 
     const createUser = () => {
         let email = "test@test.test2";
@@ -59,6 +59,7 @@ const LoginPage = () => {
             if (user) {
                 let uid = user.uid;
                 setUser(user)
+                console.log("user", user)
             } else {
                 console.log("no user is signed in", user)
                 setUser("Det konto finns inte")
@@ -68,17 +69,19 @@ const LoginPage = () => {
     })
 
     const signInWithEmailPassword = () => {
-        let email = "test@test.test2";
-        let password = "testtest2";
+        // let email = "test@test.test2";
+        // let password = "testtest2";
 
-        // let email = logEmail;
-        // let password = logPassword;
+        let email = logEmail;
+     let password = logPassword;
 
         AuthService.login(email, password)
     }
 
     const signOut = () => {
+        setUser("")
         AuthService.logout()
+        console.log(user)
     }
 
     return (
@@ -87,7 +90,8 @@ const LoginPage = () => {
                 <Typography variant="h5" component="h2">
                     Logga in
                 </Typography>
-                <form className={classes.form} noValidate>
+
+                <div className={classes.form} noValidate>
                     USER:   {user.email ? user.email : user}
                     <TextField
                         variant="outlined"
@@ -99,6 +103,7 @@ const LoginPage = () => {
                         name="email"
                         autoComplete="email"
                         autoFocus
+                        onChange={(v) => setEmail(v.target.value)}
                     />
                     <TextField
                         variant="outlined"
@@ -110,6 +115,7 @@ const LoginPage = () => {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        onChange={(v) => setPassword(v.target.value)}
                     />
 
                     <Button
@@ -119,39 +125,11 @@ const LoginPage = () => {
                         color="primary"
                         className={classes.submit}
                         data-testid="signin-anon"
-                        onClick={() => {
-                            signInWithEmailPassword()
-                        }}
+                        onClick={() =>  user.email ? signOut() :  signInWithEmailPassword()}
                     >
-                        Sign In
+                        {user.email ? "Log out" : "Log in"}
                     </Button>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        //disabled={!user.email}
-                        className={classes.submit}
-                        data-testid="signin-anon"
-                        onClick={() => {
-                            signOut()
-                        }}
-                    >
-                        LOG OUT
-                    </Button>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                        data-testid="signin-anon"
-                        onClick={() => {
-                            createUser()
-                        }}
-                    >
-                        CREATE USER
-                    </Button>
+
                     <Grid container>
                         <Grid item className={classes.footer}
                         >
@@ -160,8 +138,10 @@ const LoginPage = () => {
                             </Link>
                         </Grid>
                     </Grid>
-                </form>
+                </div>
+
             </AuthContext.Provider>
+
 
         </div>
     );
