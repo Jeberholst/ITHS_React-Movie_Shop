@@ -20,37 +20,22 @@ const useStyles = makeStyles((theme) => ({
 // <MockMovieSection screen={'MovieSearch'}/> TODO: Add MovieSearch.jsx and create switch in MockDataHolder
 
 const MockDataHolder = () => {
-    const classes = useStyles();
-    
-    getMockData()
-
-    const selectedMovie = useSelector(state => state.movieSection.selectedMovie)
-
-    if(selectedMovie === null){
-      return(
-        <React.Fragment>
-            <div className={classes.root}>
-
-                <MockMovieSection screen={'MovieGrid'}/>
-
-            </div>
-          </React.Fragment>
-        );
-    } else {
-      
-      return(
-        <React.Fragment>
-          <div className={classes.root}>
-
-              <MockMovieSection screen={'MovieSingle'}/>
+  const classes = useStyles();
   
-          </div>
-        </React.Fragment>
-      ); 
-   
-    };
-  
-  
+  getMockData()
+
+  const screen = useSelector(state => state.movieSection.screen)
+
+    return(
+      <React.Fragment>
+        <div className={classes.root}>
+
+            <MockMovieSection screen={screen}/>
+
+        </div>
+      </React.Fragment>
+    );
+
 };
 
 function getMockData(){

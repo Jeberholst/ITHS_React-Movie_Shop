@@ -5,7 +5,7 @@ import ImdbLOGO from './../img/Other/imdb-logo-square.svg'
 import { listGenres } from './mock-data-fetcher';
 import { createFakeIMDBRating, createPosterPathFull, matchGenreIdsToName, POSTER_SIZES } from './mockFunctions';
 import MockStarsComponent from './MockStarsComponent';
-import { actions as actionsMovieSection } from './../redux/features/movieSection'
+import { actions as actionsMovieSection, MovieSectionScreens } from './../redux/features/movieSection'
 import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
@@ -201,6 +201,7 @@ const ButtonMore = ({ mItem }) => {
                 className={classes.root}
                 onClick={
                     () => {
+                        dispatch(actionsMovieSection.setScreen(MovieSectionScreens.SINGLE_MOVIE))
                         dispatch(actionsMovieSection.setSelectedMovie(mItem))
                     }
                 }>More</Button>   
