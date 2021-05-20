@@ -106,7 +106,7 @@ let Menu = () => {
             </div>
           </Link>
 
-          <Link to="/" onClick={()=>dispatch(toggelMenu())}>
+          <Link to="/login" onClick={()=>dispatch(toggelMenu())}>
             <div className="bottom_cont_box">
             <i className="fas fa-question bottom_cont_icon_box"></i>
             <p>unknown</p>
