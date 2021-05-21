@@ -16,6 +16,7 @@ export const navbarSlice = createSlice({
       },
       toggelSearch: (state) => {
         state.searchbarOpen = !state.searchbarOpen
+        state.searchResult = [];
       },
     },
   })
