@@ -1,10 +1,11 @@
 import './Navbar.css';
-import React from 'react'
+import React,{useEffect} from 'react'
 import dummyLogo from '../../img/Logo/dummy_ic.jpg'
 import { useSelector, useDispatch } from 'react-redux'
-import { toggelMenu } from '../../redux/features/navbarSlice'
+import { toggelMenu, setSearchResults } from '../../redux/features/navbarSlice'
 import  { Link } from "react-router-dom";
 import ShoppingCartBadge from './../shopping-cart/ShoppingCartBadge'
+import {listPopular,fetchers} from '../../mockData/mock-data-fetcher'
 
 
 const CATEGORIES = {
@@ -21,15 +22,55 @@ const CATEGORIES = {
         thriller:"fas fa-flushed",
         western:"fas fa-hat-cowboy"
 }
+const ResultItem = ({title,poster}) => {
+  const posterPre = "https://image.tmdb.org/t/p/w300/"
+  return(
+    <div className="result-item__cont">
+      <img className="result-item__img" src={posterPre+poster} alt="movie poster" />
+      <h5>{title}</h5>
+    </div>
+  )
+}
+
+const SearchResult = ({result}) => {
+  const dispatch = useDispatch()
+  return(
+      <>
+      <div className="searchresult__overlay" onClick={() => dispatch(setSearchResults([]))}></div>
+      <div className="searchresult__cont">
+      {/* if list is not empty map over result list. */}
+      { result.map((movie) => {
+        return <ResultItem key={movie.title} title={movie.title} poster={movie.posterPath}></ResultItem>
+      })  }
+        
+      </div>
+      </>
+  )
+}
+
+
 
 const Bar = () => {
   const dispatch = useDispatch()
+  let searchResults = useSelector(state => state.navbar.searchResult)
+
+  function handleSearch(event){
+   
+    if(event.target.value.length > 3){
+      fetchers.fetchPopular().then(
+        dispatch(setSearchResults(listPopular)))
+    }
+  }
+ 
+
+  
   return (
     <div className="navbar__container">
      <Link to="/"><img src={dummyLogo} alt="" className="navbar_logo" /></Link>
      <div className="searchbar__container">
-         <input type="text" className="searchbar__container_search-field" />
+         <input type="text" className="searchbar__container_search-field" onChange={(e) => handleSearch(e)}/>
          <i className="fas fa-search searchbar__container_search-field_logo"></i>
+         {!searchResults.length? null : <SearchResult result={searchResults}></SearchResult>}
      </div>
 
 
