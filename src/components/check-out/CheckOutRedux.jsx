@@ -31,7 +31,9 @@ const useStyles = makeStyles((theme) => ({
       width: '100%'
     },  
     formControl: {
-      // margin: theme.spacing(1),
+      backgroundColor: 'rgba(0, 0, 0, 0.1)',
+      padding: theme.spacing(1),
+      marginBottom:  theme.spacing(2),
     }
 }));
 
@@ -57,12 +59,12 @@ const CheckOutRedux = () => {
                 <h2>Checkout</h2>
             </div>
 
-            <Divider className={classes.dividerSection}></Divider> 
+            {/* <Divider className={classes.dividerSection}></Divider>  */}
          
-
             <div className={classes.formControl}>
 
               <FormControlLabel
+                  className={classes.checkBox}
                   control={
                     <Checkbox
                       checked={checked}
@@ -73,12 +75,9 @@ const CheckOutRedux = () => {
                 label="I have read and accepted the delivery terms"
               />
 
-              <p style={{fontSize: 12}}>Leveransvilkor</p>
+              <p style={{fontSize: 12, fontStyle: 'italic'}}>{'*Delivery terms'}</p>
             </div>
          
-        
-            {/* <Divider className={classes.dividerSection}></Divider>  */}
-
             <div 
                 className={classes.checkOutContainer}>
 
@@ -96,8 +95,6 @@ const CheckOutRedux = () => {
 
             </div>
         
-            {/* <Divider className={classes.dividerSection}></Divider>  */}
-
 
         </div>
     )
