@@ -38,7 +38,6 @@ const SearchResult = ({result}) => {
       <>
       <div className="searchresult__overlay" onClick={() => dispatch(setSearchResults([]))}></div>
       <div className="searchresult__cont">
-      {/* if list is not empty map over result list. */}
       { result.map((movie) => {
         return <ResultItem key={movie.title} title={movie.title} poster={movie.posterPath}></ResultItem>
       })  }
@@ -59,11 +58,11 @@ const Bar = () => {
     if(event.target.value.length > 3){
       fetchers.fetchPopular().then(
         dispatch(setSearchResults(listPopular)))
+    }else if(event.target.value.length < 4 && !searchResults.length !== true){
+        dispatch(setSearchResults([]))
     }
   }
  
-
-  
   return (
     <div className="navbar__container">
      <Link to="/"><img src={dummyLogo} alt="" className="navbar_logo" /></Link>
