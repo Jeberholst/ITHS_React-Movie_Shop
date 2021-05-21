@@ -7,7 +7,7 @@ const ShoppingCartPage = () => {
         <React.Fragment>
             <p>ShoppingCartPage</p>
             <ShoppingCart/>
-            {/* <MockDataHolder/> */}
+            <MockDataHolder/>
         </React.Fragment>
     );
 

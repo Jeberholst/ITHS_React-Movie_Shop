@@ -20,12 +20,17 @@ const useStyles = makeStyles((theme) => ({
       gap: 5,
     },
     rootGrid: {
-        display: 'flex',
-        flexDirection: 'column',
+        // display: 'flex',
+        // flexDirection: 'column',
         width: '95%',
         height: '100%',
         marginTop: 10,
         marginBottom: 10,
+        //TESTING
+        display: 'grid',
+        flexWrap: 'row wrap',
+        gridTemplateColumns: "25% 25% 25%",
+        gap: 5,
     },
     rootSingle: {
         display: 'flex',

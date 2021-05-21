@@ -1,11 +1,12 @@
 import { ButtonGroup, Container, Divider, makeStyles, Slide } from "@material-ui/core";
-import React from "react";
-import { useSelector } from "react-redux"
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux"
 import CartItem from './CartItem'
 import CartTotal from './CartTotal'
 import CartBillingInfo from './CartBillingInfo'
 import ShoppingCartActionButtons, { BUTTON_TYPE } from "./ShoppingCartActionButtons";
 import { fetchers } from './../../mockData/mock-data-fetcher'
+import CheckOutRedux from '../check-out/CheckOutRedux';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -42,9 +43,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+
 const ShoppingCartRedux = () => {
 
     const classes = useStyles();
+
+    const displayCheckoutComp = useSelector(state => state.checkOut.visibility)
+
     fetchers.fetchBillingInfo()
 
     return (
@@ -82,17 +87,24 @@ const ShoppingCartRedux = () => {
         
             {/* <Divider className={classes.dividerSection}></Divider>  */}
 
-            <div className={classes.checkOutContainer}>
+            <div 
+                className={classes.checkOutContainer}>
 
                 <ShoppingCartActionButtons 
                   type={BUTTON_TYPE.CART_CHECKOUT}
+                  
                   />
+            
 
             </div>
+
+            <CheckOutRedux style={{display: displayCheckoutComp ? 'flex' : 'none' }}/>
+            
 
         </Container>
     )
 }
+
 
 const CartListItems = () => {
   

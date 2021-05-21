@@ -48,15 +48,16 @@ const LandingPage = () => {
 
     return(
 
-    <div className="App-Content">
-        <MainSlider imgList = {images} ></MainSlider>
-        {GENRES.map((gener) => <GenreSlider key = {gener} id = {gener.toUpperCase()}  movies={posters}>{gener}</GenreSlider>)}
         <div className="App-Content">
-        <p>LandingPage</p>
-        {fetchMockData()}
-        <MockDataHolder/>
-    </div>
-    </div>
+            {/* <MainSlider imgList = {images} ></MainSlider>
+            {GENRES.map((gener) => <GenreSlider key = {gener} id = {gener.toUpperCase()}  movies={posters}>{gener}</GenreSlider>)} */}
+
+            <div className="App-Content">
+            <p>LandingPage</p>
+                {fetchMockData()}
+                <MockDataHolder/>
+            </div>
+        </div>
     )
 
 
