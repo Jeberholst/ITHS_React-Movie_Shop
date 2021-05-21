@@ -4,6 +4,7 @@ export const navbarSlice = createSlice({
     name: 'navbar',
     initialState: {
       menuOpen: false,
+      searchbarOpen:false,
       searchResult: [],
     },
     reducers: {
@@ -13,10 +14,13 @@ export const navbarSlice = createSlice({
       setSearchResults: (state,actions) => {
         state.searchResult = actions.payload
       },
+      toggelSearch: (state) => {
+        state.searchbarOpen = !state.searchbarOpen
+      },
     },
   })
   
   // Action creators are generated for each case reducer function
-  export const { toggelMenu, setSearchResults } = navbarSlice.actions
+  export const { toggelMenu, setSearchResults,toggelSearch } = navbarSlice.actions
   
   export default navbarSlice.reducer

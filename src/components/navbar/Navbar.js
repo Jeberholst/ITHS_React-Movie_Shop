@@ -2,7 +2,7 @@ import './Navbar.css';
 import React,{useEffect} from 'react'
 import dummyLogo from '../../img/Logo/dummy_ic.jpg'
 import { useSelector, useDispatch } from 'react-redux'
-import { toggelMenu, setSearchResults } from '../../redux/features/navbarSlice'
+import { toggelMenu, setSearchResults, toggelSearch } from '../../redux/features/navbarSlice'
 import  { Link } from "react-router-dom";
 import ShoppingCartBadge from './../shopping-cart/ShoppingCartBadge'
 import {listPopular,fetchers} from '../../mockData/mock-data-fetcher'
@@ -22,6 +22,7 @@ const CATEGORIES = {
         thriller:"fas fa-flushed",
         western:"fas fa-hat-cowboy"
 }
+
 const ResultItem = ({title,poster}) => {
   const posterPre = "https://image.tmdb.org/t/p/w300/"
   return(
@@ -33,10 +34,8 @@ const ResultItem = ({title,poster}) => {
 }
 
 const SearchResult = ({result}) => {
-  const dispatch = useDispatch()
   return(
       <>
-      <div className="searchresult__overlay" onClick={() => dispatch(setSearchResults([]))}></div>
       <div className="searchresult__cont">
       { result.map((movie) => {
         return <ResultItem key={movie.title} title={movie.title} poster={movie.posterPath}></ResultItem>
@@ -52,6 +51,7 @@ const SearchResult = ({result}) => {
 const Bar = () => {
   const dispatch = useDispatch()
   let searchResults = useSelector(state => state.navbar.searchResult)
+  let searchbarOpen = useSelector(state => state.navbar.searchbarOpen)
 
   function handleSearch(event){
    
@@ -64,20 +64,29 @@ const Bar = () => {
   }
  
   return (
+    <>
     <div className="navbar__container">
-     <Link to="/"><img src={dummyLogo} alt="" className="navbar_logo" /></Link>
-     <div className="searchbar__container">
-         <input type="text" className="searchbar__container_search-field" onChange={(e) => handleSearch(e)}/>
-         <i className="fas fa-search searchbar__container_search-field_logo"></i>
-         {!searchResults.length? null : <SearchResult result={searchResults}></SearchResult>}
-     </div>
-
-
-     <Link to="/shopping-cart"> <ShoppingCartBadge/> </Link>
-     <i onClick={() => dispatch(toggelMenu())} className="fas fa-bars navbar__container_burger-menu"></i>
-    
-
+      <Link to="/"><img src={dummyLogo} alt="" className="navbar_logo" /></Link>
+      <div className="menu__icons">
+        <i className="fas fa-search" onClick={() => dispatch(toggelSearch())}></i>
+        <Link to="/shopping-cart"> <ShoppingCartBadge/> </Link>
+        <i onClick={() => dispatch(toggelMenu())} className="fas fa-bars navbar__container_burger-menu"></i>
+      </div>
+      
     </div>
+    {
+      searchbarOpen? 
+      <div className="searchbar__container">
+        <div className="search-field__container">
+          <input type="text" className="search-field" onChange={(e)=>handleSearch(e) }/>
+          <i className="fas fa-search searchbar__container_logo"></i>
+        </div>
+        
+        <i className="fas fa-times search_x_btn" onClick={() => dispatch(toggelSearch())}></i>  
+          {!searchResults.length? null : <SearchResult result={searchResults}></SearchResult>}
+      </div> : null  
+    }
+    </>
   );
 } 
 
