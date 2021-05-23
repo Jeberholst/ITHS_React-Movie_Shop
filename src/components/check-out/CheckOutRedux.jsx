@@ -1,5 +1,5 @@
-import { Button, Checkbox, Divider, FormControl, FormControlLabel, FormGroup, FormHelperText, FormLabel, makeStyles } from "@material-ui/core";
-import { CheckBox, Payment } from '@material-ui/icons';
+import { Button, Checkbox, FormControlLabel, makeStyles } from "@material-ui/core";
+import { Payment } from '@material-ui/icons';
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import TempPolicy from './shipping-policy-template.pdf'
@@ -33,18 +33,11 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       flexDirection: 'row',
       width: '100%',
-    },  
-    formControl: {
-      padding: theme.spacing(1),
-      marginBottom:  theme.spacing(2),
+      marginTop: '5%'
     },
     sectionHeader: {
       width: '100%',
       textIndent: 5,
-      "&:hover": {
-          background: 'rgb(68,68,68, 0.4)',
-
-      }
     }
 }));
 
@@ -52,16 +45,27 @@ const useStyles = makeStyles((theme) => ({
 const CheckOutRedux = () => {
 
     const classes = useStyles();
-
-    //REMOVE ! BOOLEAN
     const displayCheckoutComp = useSelector(state => !state.checkOut.visibility)
-    console.log('DisplayCheckOutComp?: ', displayCheckoutComp)
+    // console.log('DisplayCheckOutComp?: ', displayCheckoutComp)
     
-    const [checked, setChecked] = useState(true);
+    const [checked, setChecked] = useState(false);
+    
+    const [displayTerms, setDisplayTerms] = useState(({
+        hidden: true, 
+        text: 'Show Terms'
+    }));
 
     const handleChange = (event) => {
       setChecked(event.target.checked);
     };
+
+    const handleDisplayTerms = () => {
+        setDisplayTerms({
+          ...displayTerms,
+          hidden: !displayTerms.hidden,
+          text: !displayTerms.hidden ? 'Show Terms' : 'Hide Terms'
+        })
+    }
 
     return (
         <div className={classes.root} style={{ display: displayCheckoutComp ? 'flex' : 'none'}}>
@@ -74,46 +78,82 @@ const CheckOutRedux = () => {
                 className={classes.containerPolicy}> 
                   
                    <div className={classes.sectionHeader}>
-                         <h6>Shipping terms</h6>   
+                         <Button
+                          variant={'contained'}
+                          color={'default'}
+                          style={{marginBottom: 15}}
+                          onClick={() => {
+                             handleDisplayTerms();
+                          }}
+                         
+                         >{displayTerms.text}</Button>   
                   </div>
                          
-                  <iframe 
-                      title={'Shipping Policy'} 
-                      src={TempPolicy} 
-                      style={{border: 'none', width: '100%', height: '300px'}}
+                  <ShippingTermsIFrame hidden={displayTerms.hidden}/>
+                  
+                  <ShippingTerms 
+                      checked={checked} 
+                      handleChange={() => handleChange} 
                     />
-                              <div className={classes.formControl}>
-              
-
-                    <FormControlLabel
-                        className={classes.checkBox}
-                        control={
-                          <Checkbox
-                            checked={checked}
-                            onChange={handleChange}
-                            inputProps={{ 'aria-label': 'primary checkbox' }}
-                          />
-                        }   
-                      label="I have read and accepted the delivery terms"
-                    />
-
-                  </div>
+             
             </div>
          
-  
          
             <div 
                 className={classes.checkOutContainer}>
-
                   <PayButton enabled={checked} signedIn={true} hasItems={true}/>
-               
-
             </div>
         
 
         </div>
     )
 }
+
+const ShippingTermsIFrame = ({ hidden }) => {
+
+  return(
+
+      <iframe 
+        title={'Shipping Policy'} 
+        src={TempPolicy} 
+        hidden={hidden}
+        style={{border: 'none', width: '100%', minHeight: '300px'}}
+      />
+
+  );
+
+};
+
+
+const ShippingTerms = ({ checked, handleChange}) => {
+
+  const style = makeStyles((theme) => ({  
+      formControl: {
+        padding: theme.spacing(1),
+        marginBottom:  theme.spacing(2),
+      }
+  }));
+
+  return(
+
+        <div className={style.formControl}>
+                  
+          <FormControlLabel
+              control={
+                <Checkbox
+                  checked={checked}
+                  onChange={handleChange()}
+                  inputProps={{ 'aria-label': 'primary checkbox' }}
+                />
+              }   
+            label="I have read and accepted the Shipping terms"
+          />
+
+      </div>
+
+  );
+
+};
 
 const PayButton = (props) => {
 
@@ -122,12 +162,12 @@ const PayButton = (props) => {
       <React.Fragment>
 
             <div style={{
-                          display: 'flex', 
-                          width: '100%', 
-                          flexDirection: 'column', 
-                          textAlign: 'center',
-                          alignItems: 'center'
-                          }}>
+                      display: 'flex', 
+                      width: '100%', 
+                      flexDirection: 'column', 
+                      textAlign: 'center',
+                      alignItems: 'center'
+                      }}>
               <Button
                     style={{width: '75%'}}
                     variant={'contained'}
@@ -138,7 +178,7 @@ const PayButton = (props) => {
                           console.log('PAYMENT INITIATED')
                         }
                       }>
-                    {'Pay'}
+                    {'Make Payment'}
               </Button>
           </div>
 
@@ -157,7 +197,7 @@ const PayButton = (props) => {
               alignItems: 'center'
               }}>
 
-            <i style={{fontSize: 12, maxWidth: '75%'}}>You need to Accept Terms, Sign In or Add items to cart before we can process a payment.</i>
+            <i style={{fontSize: 12, maxWidth: '75%'}}>You need to accept the Shipping Terms before we can process a payment.</i>
             
             <Button
                 style={{width: '75%', marginTop: 15}}
