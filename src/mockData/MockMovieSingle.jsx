@@ -1,5 +1,5 @@
-import { Button, ButtonGroup, Divider, makeStyles } from '@material-ui/core';
-import React, { useState } from 'react'
+import { Button, Divider, makeStyles } from '@material-ui/core';
+import React from 'react'
 import ShoppingCartActionButtons, { BUTTON_TYPE } from '../components/shopping-cart/ShoppingCartActionButtons';
 import ImdbLOGO from './../img/Other/imdb-logo-square.svg'
 import { listGenres } from './mock-data-fetcher';

@@ -1,6 +1,6 @@
-import { ButtonGroup, Container, Divider, makeStyles, Slide } from "@material-ui/core";
+import { ButtonGroup, Container, Divider, makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import CartItem from './CartItem'
 import CartTotal from './CartTotal'
 import CartBillingInfo from './CartBillingInfo'
@@ -48,7 +48,27 @@ const ShoppingCartRedux = () => {
 
     const classes = useStyles();
 
-    const displayCheckoutComp = useSelector(state => state.checkOut.visibility)
+    // const displayCheckoutComp = useSelector(state => state.checkOut.visibility)
+    const [displayCheckout, setDisplayCheckout] = useState(false)
+    const hasCartItems = useSelector(state => state.shoppingCart.listOfMovies.length !== 0)
+
+    const handleDisplayCheckout = ( boolean ) => {
+        setDisplayCheckout(boolean)
+    }
+
+    //ADD user sign in
+    if(!displayCheckout){
+      if(hasCartItems){
+        handleDisplayCheckout(true)
+      }
+    } else {
+      if(!hasCartItems){
+        handleDisplayCheckout(false)
+      }
+    }
+ 
+    
+
 
     fetchers.fetchBillingInfo()
 
@@ -66,29 +86,28 @@ const ShoppingCartRedux = () => {
 
             <Divider className={classes.dividerSection}></Divider> 
 
-            <Slide direction="right" in={true} mountOnEnter>
+            {/* <Slide direction="right" in={true} mountOnEnter> */}
               <div className={classes.cartListItems}>
               
                   <CartListItems/>
                 
               </div>
-            </Slide>
+            {/* </Slide> */}
 
             <Divider className={classes.dividerSection}></Divider> 
 
-            <Slide direction="right" in={true} mountOnEnter>
+            {/* <Slide direction="right" in={true} mountOnEnter> */}
               <div className={classes.cartTotal}>
                   
                   <CartTotal/>
                   <CartBillingInfo/>
 
               </div>
-            </Slide>
+            {/* </Slide> */}
         
             {/* <Divider className={classes.dividerSection}></Divider>  */}
 
-            <div 
-                className={classes.checkOutContainer}>
+            <div className={classes.checkOutContainer}>
 
                 <ShoppingCartActionButtons 
                   type={BUTTON_TYPE.CART_CHECKOUT}
@@ -98,8 +117,9 @@ const ShoppingCartRedux = () => {
 
             </div>
 
-            <CheckOutRedux style={{display: displayCheckoutComp ? 'flex' : 'none' }}/>
-            
+            <div hidden={!displayCheckout}>
+                <CheckOutRedux/>
+            </div>
 
         </Container>
     )

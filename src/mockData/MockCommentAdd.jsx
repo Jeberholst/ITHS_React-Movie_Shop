@@ -1,4 +1,4 @@
-import { Button, Container, Divider, makeStyles, Paper, TextField } from '@material-ui/core';
+import { Button, Divider, makeStyles, TextField } from '@material-ui/core';
 import React from 'react'
 import MockUserProfile from './MockUserProfile';
 
