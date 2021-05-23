@@ -6,11 +6,11 @@ import TempPolicy from './shipping-policy-template.pdf'
 
 const useStyles = makeStyles((theme) => ({
     root: {
+      display: 'flex',
       flexDirection: 'column',
-      alignItems: 'left',
-      textAlign: 'left',
-      alignContent: 'left',
-      maxWidth: '100%',
+      textAlign: 'center',
+      alignItems: 'center',
+      alignContent: 'center',
       height: '100%',
     },
     dividerSection: {
@@ -32,12 +32,19 @@ const useStyles = makeStyles((theme) => ({
     checkOutContainer: {
       display: 'flex',
       flexDirection: 'row',
-      width: '100%'
+      width: '100%',
     },  
     formControl: {
-      backgroundColor: 'rgba(0, 0, 0, 0.1)',
       padding: theme.spacing(1),
       marginBottom:  theme.spacing(2),
+    },
+    sectionHeader: {
+      width: '100%',
+      textIndent: 5,
+      "&:hover": {
+          background: 'rgb(68,68,68, 0.4)',
+
+      }
     }
 }));
 
@@ -63,34 +70,37 @@ const CheckOutRedux = () => {
                 <h2>Checkout</h2>
             </div>
 
-            {/* <Divider className={classes.dividerSection}></Divider>  */}
-
             <div 
-                className={classes.containerPolicy}>               
+                className={classes.containerPolicy}> 
+                  
+                   <div className={classes.sectionHeader}>
+                         <h6>Shipping terms</h6>   
+                  </div>
+                         
                   <iframe 
                       title={'Shipping Policy'} 
                       src={TempPolicy} 
                       style={{border: 'none', width: '100%', height: '300px'}}
                     />
-            </div>
-         
-            <div className={classes.formControl}>
+                              <div className={classes.formControl}>
               
 
-              <FormControlLabel
-                  className={classes.checkBox}
-                  control={
-                    <Checkbox
-                      checked={checked}
-                      onChange={handleChange}
-                      inputProps={{ 'aria-label': 'primary checkbox' }}
+                    <FormControlLabel
+                        className={classes.checkBox}
+                        control={
+                          <Checkbox
+                            checked={checked}
+                            onChange={handleChange}
+                            inputProps={{ 'aria-label': 'primary checkbox' }}
+                          />
+                        }   
+                      label="I have read and accepted the delivery terms"
                     />
-                  }   
-                label="I have read and accepted the delivery terms"
-              />
 
-              <p style={{fontSize: 12, fontStyle: 'italic'}}>{'*Show/hide terms'}</p>
+                  </div>
             </div>
+         
+  
          
             <div 
                 className={classes.checkOutContainer}>
@@ -110,18 +120,27 @@ const PayButton = (props) => {
   if(props.enabled && props.signedIn && props.hasItems){
     return(
       <React.Fragment>
-          <Button
-                style={{width: '100%'}}
-                variant={'contained'}
-                color={'primary'}
-                // className={classes.button}
-                startIcon={<Payment/>}
-                  onClick={() => {
-                      console.log('PAYMENT INITIATED')
-                    }
-                  }>
-                {'Pay'}
-          </Button>
+
+            <div style={{
+                          display: 'flex', 
+                          width: '100%', 
+                          flexDirection: 'column', 
+                          textAlign: 'center',
+                          alignItems: 'center'
+                          }}>
+              <Button
+                    style={{width: '75%'}}
+                    variant={'contained'}
+                    color={'primary'}
+                    // className={classes.button}
+                    startIcon={<Payment/>}
+                      onClick={() => {
+                          console.log('PAYMENT INITIATED')
+                        }
+                      }>
+                    {'Pay'}
+              </Button>
+          </div>
 
       </React.Fragment>
     );
@@ -132,17 +151,16 @@ const PayButton = (props) => {
 
         <div style={{
               display: 'flex', 
-              alignItems: 'center', 
-              alignContent: 'center',
               width: '100%', 
               flexDirection: 'column', 
-              textAlign: 'center'
+              textAlign: 'center',
+              alignItems: 'center'
               }}>
 
-            <i style={{fontSize: 12, width: '50%'}}>You need to Accept Terms, Sign In or Add items to cart before we can process a payment.</i>
+            <i style={{fontSize: 12, maxWidth: '75%'}}>You need to Accept Terms, Sign In or Add items to cart before we can process a payment.</i>
             
             <Button
-                style={{width: '100%', marginTop: 15}}
+                style={{width: '75%', marginTop: 15}}
                 disabled
                 variant={'contained'}
                 color={'default'}
