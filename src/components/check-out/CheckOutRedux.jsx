@@ -3,6 +3,7 @@ import { Payment } from '@material-ui/icons';
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import TempPolicy from './shipping-policy-template.pdf'
+import PayButton from './PayButton'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -48,7 +49,7 @@ const CheckOutRedux = () => {
     const displayCheckoutComp = useSelector(state => !state.checkOut.visibility)
     // console.log('DisplayCheckOutComp?: ', displayCheckoutComp)
     
-    const [checked, setChecked] = useState(false);
+    const [checked, setChecked] = useState(true);
     
     const [displayTerms, setDisplayTerms] = useState(({
         hidden: true, 
@@ -101,7 +102,11 @@ const CheckOutRedux = () => {
          
             <div 
                 className={classes.checkOutContainer}>
-                  <PayButton enabled={checked} signedIn={true} hasItems={true}/>
+                  <PayButton 
+                    enabled={checked} 
+                    signedIn={true} 
+                    hasItems={true}
+                    />
             </div>
         
 
@@ -155,65 +160,65 @@ const ShippingTerms = ({ checked, handleChange}) => {
 
 };
 
-const PayButton = (props) => {
+// const PayButton = (props) => {
 
-  if(props.enabled && props.signedIn && props.hasItems){
-    return(
-      <React.Fragment>
+//   if(props.enabled && props.signedIn && props.hasItems){
+//     return(
+//       <React.Fragment>
 
-            <div style={{
-                      display: 'flex', 
-                      width: '100%', 
-                      flexDirection: 'column', 
-                      textAlign: 'center',
-                      alignItems: 'center'
-                      }}>
-              <Button
-                    style={{width: '75%'}}
-                    variant={'contained'}
-                    color={'primary'}
-                    // className={classes.button}
-                    startIcon={<Payment/>}
-                      onClick={() => {
-                          console.log('PAYMENT INITIATED')
-                        }
-                      }>
-                    {'Make Payment'}
-              </Button>
-          </div>
+//             <div style={{
+//                       display: 'flex', 
+//                       width: '100%', 
+//                       flexDirection: 'column', 
+//                       textAlign: 'center',
+//                       alignItems: 'center'
+//                       }}>
+//               <Button
+//                     style={{width: '75%'}}
+//                     variant={'contained'}
+//                     color={'primary'}
+//                     // className={classes.button}
+//                     startIcon={<Payment/>}
+//                       onClick={() => {
+//                           console.log('PAYMENT INITIATED')
+//                         }
+//                       }>
+//                     {'Make Payment'}
+//               </Button>
+//           </div>
 
-      </React.Fragment>
-    );
+//       </React.Fragment>
+//     );
 
-  } else {
-    return (
-      <React.Fragment>
+//   } else {
+//     return (
+//       <React.Fragment>
 
-        <div style={{
-              display: 'flex', 
-              width: '100%', 
-              flexDirection: 'column', 
-              textAlign: 'center',
-              alignItems: 'center'
-              }}>
+//         <div style={{
+//               display: 'flex', 
+//               width: '100%', 
+//               flexDirection: 'column', 
+//               textAlign: 'center',
+//               alignItems: 'center'
+//               }}>
 
-            <i style={{fontSize: 12, maxWidth: '75%'}}>You need to accept the Shipping Terms before we can process a payment.</i>
+//             <i style={{fontSize: 12, maxWidth: '75%'}}>You need to accept the Shipping Terms before we can process a payment.</i>
             
-            <Button
-                style={{width: '75%', marginTop: 15}}
-                disabled
-                variant={'contained'}
-                color={'default'}
-                startIcon={<Payment/>}>
-                  {'Pay'}
+//             <Button
+//                 style={{width: '75%', marginTop: 15}}
+//                 disabled
+//                 variant={'contained'}
+//                 color={'default'}
+//                 startIcon={<Payment/>}>
+//                   {'Pay'}
                   
-          </Button>
-        </div>
-      </React.Fragment>
+//           </Button>
+//         </div>
+//       </React.Fragment>
       
-    );
-  }
+//     );
+//   }
 
-}
+// }
 
 export default CheckOutRedux;
