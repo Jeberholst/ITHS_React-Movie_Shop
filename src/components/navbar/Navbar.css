@@ -96,6 +96,19 @@ textarea:focus, input:focus{
     width: 100px;
     justify-self: flex-start;
 }
+.result-item_info-cont{
+    display: flex;
+    flex-direction: column;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-left: 20px;
+    margin-right: 20px;
+    align-items: center;
+    width: 100%;
+}
+.result-item_info-cont h5{
+    margin: 5px;
+}
 
 .menu__icons{
     display: flex;

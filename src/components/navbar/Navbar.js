@@ -1,11 +1,12 @@
 import './Navbar.css';
-import React,{useEffect} from 'react'
+import React from 'react'
 import dummyLogo from '../../img/Logo/dummy_ic.jpg'
 import { useSelector, useDispatch } from 'react-redux'
-import { toggelMenu, setSearchResults, toggelSearch } from '../../redux/features/navbarSlice'
+import { toggelMenu, setSearchResults, toggelSearch, fetchSearchResult } from '../../redux/features/navbarSlice'
+import  { actions }  from '../../redux/features/movieSection'
 import  { Link } from "react-router-dom";
 import ShoppingCartBadge from './../shopping-cart/ShoppingCartBadge'
-import {listPopular,fetchers} from '../../mockData/mock-data-fetcher'
+
 
 
 const CATEGORIES = {
@@ -23,22 +24,34 @@ const CATEGORIES = {
         western:"fas fa-hat-cowboy"
 }
 
-const ResultItem = ({title,poster}) => {
+const ResultItem = ({movie}) => {
+  let dispatch = useDispatch()
+  function setSingelMovie(movie){
+    //set movieSection 
+    dispatch(actions.setSelectedMovie(movie))
+    //toggel menu on nav.
+    dispatch(toggelSearch())
+  }
   const posterPre = "https://image.tmdb.org/t/p/w300/"
   return(
-    <div className="result-item__cont">
-      <img className="result-item__img" src={posterPre+poster} alt="movie poster" />
-      <h5>{title}</h5>
-    </div>
+    <Link to={`/movie/${movie.id}`} onClick= {() => setSingelMovie(movie)} className="result-item__cont">
+      <img className="result-item__img" src={posterPre+movie.posterPath} alt="movie poster" />
+      <div className="result-item_info-cont">
+        <h5>{movie.title}</h5>
+        <h5>{movie.releaseDate}</h5>
+        <h5>{movie.voteAverage}</h5>
+      </div>
+   
+    </Link>
   )
 }
 
-const SearchResult = ({result}) => {
+const SearchResult = ({result}) =>{ 
   return(
       <>
       <div className="searchresult__cont">
       { result.map((movie) => {
-        return <ResultItem key={movie.title} title={movie.title} poster={movie.posterPath}></ResultItem>
+        return <ResultItem key={movie.title}  movie = {movie}></ResultItem>
       })  }
         
       </div>
@@ -53,11 +66,10 @@ const Bar = () => {
   let searchResults = useSelector(state => state.navbar.searchResult)
   let searchbarOpen = useSelector(state => state.navbar.searchbarOpen)
 
+  // Search Event.
   function handleSearch(event){
-   
     if(event.target.value.length > 3){
-      fetchers.fetchPopular().then(
-        dispatch(setSearchResults(listPopular)))
+      dispatch(fetchSearchResult(event.target.value))
     }else if(event.target.value.length < 4 && !searchResults.length !== true){
         dispatch(setSearchResults([]))
     }
@@ -66,6 +78,7 @@ const Bar = () => {
   return (
     <>
     <div className="navbar__container">
+      {/*Navigation bar*/}
       <Link to="/"><img src={dummyLogo} alt="" className="navbar_logo" /></Link>
       <div className="menu__icons">
         <i className="fas fa-search" onClick={() => dispatch(toggelSearch())}></i>
@@ -75,6 +88,7 @@ const Bar = () => {
       
     </div>
     {
+      //Search bar.
       searchbarOpen? 
       <div className="searchbar__container">
         <div className="search-field__container">
@@ -90,6 +104,8 @@ const Bar = () => {
   );
 } 
 
+
+//Menu Component.
 let Menu = () => {
   const dispatch = useDispatch()
   return(
@@ -176,6 +192,7 @@ let Menu = () => {
 }
 
 
+//Complete Navbar to be used in app.
 const Navbar= () => {
   let menuOpen = useSelector((state) => state.navbar.menuOpen)
   return (

@@ -14,6 +14,7 @@ import ShoppingCartPage from "./pages/ShoppingCartPage";
 import SearchPage from "./pages/SearchPage";
 import ProfilePage from "./pages/ProfilePage";
 import GenrePage from "./pages/GenrePage";
+import SingelMoviePage from "./pages/SingelMoviePage"
 import firebase from "firebase/app";
 import "firebase/firestore";
 import {firebaseConfig} from "./util/firebase";
@@ -42,6 +43,7 @@ function App() {
                         <Route exact path="/profile" component={ProfilePage} />
                         <Route exact path="/search" component={SearchPage} />
                         <Route exact path="/shopping-cart" component={ShoppingCartPage} />
+                        <Route exact path="/movie/:id" component={SingelMoviePage}/>
 
                     </Switch>
                 </div>
