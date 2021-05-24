@@ -4,7 +4,6 @@ import Navbar from './components/navbar/Navbar';
 import  {
     Route,
     Switch,
-    Link,
     BrowserRouter as Router
 } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
