@@ -2,9 +2,11 @@ import './Navbar.css';
 import React from 'react'
 import dummyLogo from '../../img/Logo/dummy_ic.jpg'
 import { useSelector, useDispatch } from 'react-redux'
-import { toggelMenu } from '../../redux/features/navbarSlice'
+import { toggelMenu, setSearchResults, toggelSearch, fetchSearchResult } from '../../redux/features/navbarSlice'
+import  { actions }  from '../../redux/features/movieSection'
 import  { Link } from "react-router-dom";
 import ShoppingCartBadge from './../shopping-cart/ShoppingCartBadge'
+
 
 
 const CATEGORIES = {
@@ -22,25 +24,88 @@ const CATEGORIES = {
         western:"fas fa-hat-cowboy"
 }
 
+const ResultItem = ({movie}) => {
+  let dispatch = useDispatch()
+  function setSingelMovie(movie){
+    //set movieSection 
+    dispatch(actions.setSelectedMovie(movie))
+    //toggel menu on nav.
+    dispatch(toggelSearch())
+  }
+  const posterPre = "https://image.tmdb.org/t/p/w300/"
+  return(
+    <Link to={`/movie/${movie.id}`} onClick= {() => setSingelMovie(movie)} className="result-item__cont">
+      <img className="result-item__img" src={posterPre+movie.posterPath} alt="movie poster" />
+      <div className="result-item_info-cont">
+        <h5>{movie.title}</h5>
+        <h5>{movie.releaseDate}</h5>
+        <h5>{movie.voteAverage}</h5>
+      </div>
+   
+    </Link>
+  )
+}
+
+const SearchResult = ({result}) =>{ 
+  return(
+      <>
+      <div className="searchresult__cont">
+      { result.map((movie) => {
+        return <ResultItem key={movie.title}  movie = {movie}></ResultItem>
+      })  }
+        
+      </div>
+      </>
+  )
+}
+
+
+
 const Bar = () => {
   const dispatch = useDispatch()
+  let searchResults = useSelector(state => state.navbar.searchResult)
+  let searchbarOpen = useSelector(state => state.navbar.searchbarOpen)
+
+  // Search Event.
+  function handleSearch(event){
+    if(event.target.value.length > 3){
+      dispatch(fetchSearchResult(event.target.value))
+    }else if(event.target.value.length < 4 && !searchResults.length !== true){
+        dispatch(setSearchResults([]))
+    }
+  }
+ 
   return (
+    <>
     <div className="navbar__container">
-     <Link to="/"><img src={dummyLogo} alt="" className="navbar_logo" /></Link>
-     <div className="searchbar__container">
-         <input type="text" className="searchbar__container_search-field" />
-         <i className="fas fa-search searchbar__container_search-field_logo"></i>
-     </div>
-
-
-     <Link to="/shopping-cart"> <ShoppingCartBadge/> </Link>
-     <i onClick={() => dispatch(toggelMenu())} className="fas fa-bars navbar__container_burger-menu"></i>
-    
-
+      {/*Navigation bar*/}
+      <Link to="/"><img src={dummyLogo} alt="" className="navbar_logo" /></Link>
+      <div className="menu__icons">
+        <i className="fas fa-search" onClick={() => dispatch(toggelSearch())}></i>
+        <Link to="/shopping-cart"> <ShoppingCartBadge/> </Link>
+        <i onClick={() => dispatch(toggelMenu())} className="fas fa-bars navbar__container_burger-menu"></i>
+      </div>
+      
     </div>
+    {
+      //Search bar.
+      searchbarOpen? 
+      <div className="searchbar__container">
+        <div className="search-field__container">
+          <input type="text" className="search-field" onChange={(e)=>handleSearch(e) }/>
+          <i className="fas fa-search searchbar__container_logo"></i>
+        </div>
+        
+        <i className="fas fa-times search_x_btn" onClick={() => dispatch(toggelSearch())}></i>  
+          {!searchResults.length? null : <SearchResult result={searchResults}></SearchResult>}
+      </div> : null  
+    }
+    </>
   );
 } 
 
+
+//Menu Component.
 let Menu = () => {
   const dispatch = useDispatch()
   return(
@@ -127,6 +192,7 @@ let Menu = () => {
 }
 
 
+//Complete Navbar to be used in app.
 const Navbar= () => {
   let menuOpen = useSelector((state) => state.navbar.menuOpen)
   return (
