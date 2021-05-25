@@ -49,7 +49,7 @@ const CheckOutRedux = () => {
     const displayCheckoutComp = useSelector(state => !state.checkOut.visibility)
     // console.log('DisplayCheckOutComp?: ', displayCheckoutComp)
     
-    const [checked, setChecked] = useState(true);
+    const [checked, setChecked] = useState(false);
     
     const [displayTerms, setDisplayTerms] = useState(({
         hidden: true, 

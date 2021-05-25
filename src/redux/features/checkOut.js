@@ -11,7 +11,7 @@ const initialState = {
 const reducer = createReducer(initialState, {
     [setVisibility] : (state, action) => { 
         const value = true
-        console.log(value)
+        // console.log(value)
         state.visible = value
     },
 }) 

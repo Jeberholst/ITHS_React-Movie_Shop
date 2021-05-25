@@ -67,9 +67,6 @@ const ShoppingCartRedux = () => {
       }
     }
  
-    
-
-
     fetchers.fetchBillingInfo()
 
     return (
@@ -83,8 +80,6 @@ const ShoppingCartRedux = () => {
                     type={BUTTON_TYPE.CART_CLEAR}/>
                 </ButtonGroup>
             </div>
-
-            <Divider className={classes.dividerSection}></Divider> 
 
             {/* <Slide direction="right" in={true} mountOnEnter> */}
               <div className={classes.cartListItems}>
@@ -113,7 +108,6 @@ const ShoppingCartRedux = () => {
                   type={BUTTON_TYPE.CART_CHECKOUT}
                   
                   />
-            
 
             </div>
 
@@ -149,6 +143,7 @@ const CartListItems = () => {
     return (
       <React.Fragment>
          {/*TODO: add styling to div*/}
+         {/*TODO: suggest user to go to "Section"?*/}
         <div>
           <p>No items added to cart :(</p>   
         </div>

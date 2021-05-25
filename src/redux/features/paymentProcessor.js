@@ -24,7 +24,12 @@ const PAYMENT_PROCESSING_STATE =
   COMPLETED: {
     status: 3,
     message: 'Payment completed, thank you!',
+  },
+  DISPLAY_COMPLETED_IN_FULL: {
+    status: 4,
+    message: 'Dame esa masa',
   }
+
 }
 
 const initialState = {
@@ -37,17 +42,6 @@ const reducer = createReducer(initialState, {
       const value = action.payload
       state.STATUS = value
   },  
-  [startValidation]: (state, action) => {
-      console.log("Start validation: ", action.payload)
-      const value = action.payload
-      state.STATUS = value
-  },
-  [setPaymentSuccess]: (state, action) => {
-    console.log("Start validation: ", action.payload)
-    const value = action.payload
-    state.STATUS = value
-  }
-
 })
 
 
