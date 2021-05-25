@@ -26,6 +26,11 @@ const useStyles = makeStyles((theme) => ({
         height: '100%',
         marginTop: 10,
         marginBottom: 10,
+        //TESTING
+        // display: 'grid',
+        // flexWrap: 'row wrap',
+        // gridTemplateColumns: "25% 25% 25%",
+        // gap: 5,
     },
     rootSingle: {
         display: 'flex',
@@ -51,6 +56,19 @@ const useStyles = makeStyles((theme) => ({
         marginTop: 10,
         marginBottom: 10,
         padding: 20,
+    },
+    rootQuickAdd: {
+        display: 'grid',
+        width: '95%',
+        height: '100%',
+        marginTop: 10,
+        marginBottom: 10,
+        //TESTING
+        gap: 5,
+
+        // flexWrap: 'row wrap',
+        // gridTemplateColumns: "25% 25% 25%",
+        // gap: 5,
     },
 }));
   
@@ -78,6 +96,10 @@ const MockMovieSection = () => {
             return (
                 <MovieSectionSingleMovieComments/>
             )
+        case MovieSectionScreens.QUICK_ADD: 
+            return (
+                <MovieSectionQuickAdd/>
+            )
         default:
             return(
                 <React.Fragment></React.Fragment>
@@ -89,6 +111,27 @@ const MockMovieSection = () => {
 export default MockMovieSection;
 
 const MovieSectionGrid = () => {
+    const classes = useStyles();
+    const useList = listPopular
+
+    return (
+        <React.Fragment>
+
+            <div className={classes.rootGrid}>
+
+                {useList.map((item) => (
+                    <MockMoviePopular key={'paged-' + item.id} item={item}/>
+                ))}
+
+            </div>
+
+        </React.Fragment>
+    );
+
+
+}
+
+const MovieSectionQuickAdd = () => {
     const classes = useStyles();
     const useList = listPopular
 

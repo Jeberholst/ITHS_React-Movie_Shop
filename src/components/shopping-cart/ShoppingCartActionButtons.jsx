@@ -2,7 +2,8 @@ import { Button, makeStyles} from "@material-ui/core";
 import { AddShoppingCartRounded, RemoveShoppingCartRounded, ShopRounded, RemoveCircleRounded } from "@material-ui/icons";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { actions as shopingCartActions, } from "../../redux/features/shoppingCart";
+import { actions as shoppingCartActions, } from "../../redux/features/shoppingCart";
+import { actions as checkOutActions, } from "../../redux/features/checkOut";
 import { 
     actions as snackBarActions,  
     cartNotifications
@@ -83,7 +84,7 @@ const ShoppingCartActionButtons = ({ mItem, type } ) => {
                 if(stateListOfMovies.length === 0){
 
                     // console.log('Adding FIRST item to CART...')
-                    dispatch(shopingCartActions.addListMovie(JSON.stringify(mItem)))
+                    dispatch(shoppingCartActions.addListMovie(JSON.stringify(mItem)))
                     dispatch(snackBarActions.displaySnackBar(cartNotifications.cartAddSuccess))
 
                 } else {
@@ -94,7 +95,7 @@ const ShoppingCartActionButtons = ({ mItem, type } ) => {
                         dispatch(snackBarActions.displaySnackBar(cartNotifications.cartAddFailed))
                         // console.log('Movie already added to CART...')
                     } else {
-                        dispatch(shopingCartActions.addListMovie(JSON.stringify(mItem)))
+                        dispatch(shoppingCartActions.addListMovie(JSON.stringify(mItem)))
                         // console.log('Adding item to CART...')
                         dispatch(snackBarActions.displaySnackBar(cartNotifications.cartAddSuccess))
                     }
@@ -112,7 +113,7 @@ const ShoppingCartActionButtons = ({ mItem, type } ) => {
 
             UseAction = () => { 
                 console.log('Remove item?: ' + mItem)
-                dispatch(shopingCartActions.removeCartItem(mItem)) 
+                dispatch(shoppingCartActions.removeCartItem(mItem)) 
                 dispatch(snackBarActions.displaySnackBar(cartNotifications.cartRemovedSuccess))
             };
 
@@ -125,7 +126,7 @@ const ShoppingCartActionButtons = ({ mItem, type } ) => {
             friendlyName = BUTTON_TYPE.CART_CLEAR.friendlyName
 
             UseAction = () => { 
-                dispatch(shopingCartActions.clearCart()) 
+                dispatch(shoppingCartActions.clearCart()) 
                 dispatch(snackBarActions.displaySnackBar(cartNotifications.cartCleared))
             };
 
@@ -138,7 +139,11 @@ const ShoppingCartActionButtons = ({ mItem, type } ) => {
             startIcon = BUTTON_TYPE.CART_CHECKOUT.startIcon
             friendlyName = BUTTON_TYPE.CART_CHECKOUT.friendlyName
 
-            UseAction =  () => {};
+            UseAction =  () => {
+                //DISPATCH DISPLAY USER MODAL OR SIGN IN
+                
+                dispatch(checkOutActions.setVisibility()) 
+            };
 
             break;
 

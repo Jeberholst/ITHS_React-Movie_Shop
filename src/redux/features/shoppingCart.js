@@ -3,12 +3,14 @@ import { createAction, createReducer } from "@reduxjs/toolkit";
 const addListMovie = createAction('add list movie item');
 const removeCartItem = createAction('remove list movie item');
 const clearCart = createAction('clear cart');
+const setDisplayCheckout = createAction('set display checkout');
 
-const actions = { addListMovie, removeCartItem, clearCart };
+const actions = { addListMovie, removeCartItem, clearCart, setDisplayCheckout };
 
 const initialState = {
     listOfMovies : [],
     listCount : 0,
+    displayCheckoutComp: false,
 }
 
 const reducer = createReducer(initialState, {
@@ -18,7 +20,6 @@ const reducer = createReducer(initialState, {
         state.listOfMovies.push(value)
     },
     [removeCartItem] : (state, action) => { 
-        // console.log('Remove this object... ' + action.payload)
         const list = state.listOfMovies.filter(function(item) {
             return item !== action.payload
         })
@@ -26,10 +27,13 @@ const reducer = createReducer(initialState, {
         state.listOfMovies = list
     },
     [clearCart] : (state, action) => { 
-        // console.log('Clearing cart...')
         const list = [];
         state.listCount = (0)
         state.listOfMovies = list
+    },
+    [setDisplayCheckout] : (state, action) => { 
+        const bool = action.payload
+        state.displayCheckoutComp = bool
     },
 }) 
 

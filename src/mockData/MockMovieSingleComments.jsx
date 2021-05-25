@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Container, makeStyles } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { actions as actionsMovieSection, MovieSectionScreens } from '../redux/features/movieSection'
 import MockCommentAdd from './MockCommentAdd';
 import MockCommentSingle from './MockCommentSingle';
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 const MockMovieSingleComments = () => {
     const classes = useStyles();
 
-    const item = useSelector(state => state.movieSection.selectedMovie)
+    // const item = useSelector(state => state.movieSection.selectedMovie)
     // const comments = fetch comments by uniqueId (TMDB-id from item.id)?
 
     return (

@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { Container, Divider, Grid, makeStyles, Paper } from '@material-ui/core';
+import { Divider, makeStyles } from '@material-ui/core';
 import MockStarsComponent from './MockStarsComponent';
 import MockUserProfile from './MockUserProfile';
 

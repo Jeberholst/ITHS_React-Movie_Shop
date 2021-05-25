@@ -1,11 +1,12 @@
-import { ButtonGroup, Container, Divider, makeStyles, Slide } from "@material-ui/core";
-import React from "react";
+import { ButtonGroup, Container, Divider, makeStyles } from "@material-ui/core";
+import React, { useState } from "react";
 import { useSelector } from "react-redux"
 import CartItem from './CartItem'
 import CartTotal from './CartTotal'
 import CartBillingInfo from './CartBillingInfo'
 import ShoppingCartActionButtons, { BUTTON_TYPE } from "./ShoppingCartActionButtons";
 import { fetchers } from './../../mockData/mock-data-fetcher'
+import CheckOutRedux from '../check-out/CheckOutRedux';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -42,9 +43,30 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+
 const ShoppingCartRedux = () => {
 
     const classes = useStyles();
+
+    // const displayCheckoutComp = useSelector(state => state.checkOut.visibility)
+    const [displayCheckout, setDisplayCheckout] = useState(false)
+    const hasCartItems = useSelector(state => state.shoppingCart.listOfMovies.length !== 0)
+
+    const handleDisplayCheckout = ( boolean ) => {
+        setDisplayCheckout(boolean)
+    }
+
+    //ADD user sign in
+    if(!displayCheckout){
+      if(hasCartItems){
+        handleDisplayCheckout(true)
+      }
+    } else {
+      if(!hasCartItems){
+        handleDisplayCheckout(false)
+      }
+    }
+ 
     fetchers.fetchBillingInfo()
 
     return (
@@ -59,26 +81,24 @@ const ShoppingCartRedux = () => {
                 </ButtonGroup>
             </div>
 
-            <Divider className={classes.dividerSection}></Divider> 
-
-            <Slide direction="right" in={true} mountOnEnter>
+            {/* <Slide direction="right" in={true} mountOnEnter> */}
               <div className={classes.cartListItems}>
               
                   <CartListItems/>
                 
               </div>
-            </Slide>
+            {/* </Slide> */}
 
             <Divider className={classes.dividerSection}></Divider> 
 
-            <Slide direction="right" in={true} mountOnEnter>
+            {/* <Slide direction="right" in={true} mountOnEnter> */}
               <div className={classes.cartTotal}>
                   
                   <CartTotal/>
                   <CartBillingInfo/>
 
               </div>
-            </Slide>
+            {/* </Slide> */}
         
             {/* <Divider className={classes.dividerSection}></Divider>  */}
 
@@ -86,13 +106,19 @@ const ShoppingCartRedux = () => {
 
                 <ShoppingCartActionButtons 
                   type={BUTTON_TYPE.CART_CHECKOUT}
+                  
                   />
 
+            </div>
+
+            <div hidden={!displayCheckout}>
+                <CheckOutRedux/>
             </div>
 
         </Container>
     )
 }
+
 
 const CartListItems = () => {
   
@@ -117,6 +143,7 @@ const CartListItems = () => {
     return (
       <React.Fragment>
          {/*TODO: add styling to div*/}
+         {/*TODO: suggest user to go to "Section"?*/}
         <div>
           <p>No items added to cart :(</p>   
         </div>
