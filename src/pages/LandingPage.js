@@ -2,14 +2,8 @@ import MockDataHolder from "../mockData/MockDataHolder";
 import MainSlider from "../components/slider/MainSlider.js";
 import GenreSlider from "../components/slider/GenreSlider";
 import { fetchers } from "../mockData/mock-data-fetcher";
-
-
 import React from "react";
-
-
-
-
-
+import FetcherAPI from '../util/FetcherAPI';
 
 const LandingPage = () => {
 
@@ -49,13 +43,14 @@ const LandingPage = () => {
     return(
 
         <div className="App-Content">
-            <MainSlider imgList = {images} ></MainSlider>
-            {GENRES.map((gener) => <GenreSlider key = {gener} id = {gener.toUpperCase()}  movies={posters}>{gener}</GenreSlider>)}
+            {/* <MainSlider imgList = {images} ></MainSlider>
+            {GENRES.map((gener) => <GenreSlider key = {gener} id = {gener.toUpperCase()}  movies={posters}>{gener}</GenreSlider>)} */}
 
             <div className="App-Content">
-            <p>LandingPage</p>
-                {fetchMockData()}
-                <MockDataHolder/>
+                <p>LandingPage</p>
+                    <FetcherAPI {...{ type: 'ListPopular'}}/>
+                    {fetchMockData()}
+                {/* <MockDataHolder/> */}
             </div>
         </div>
     )
