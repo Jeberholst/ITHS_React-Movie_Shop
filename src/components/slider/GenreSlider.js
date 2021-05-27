@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {Link} from 'react-router-dom'
 import './GenreSlider.css'
 import { useSelector, useDispatch } from 'react-redux'
-import {swipeGenre,addSlider} from '../../redux/features/genreSliderSlice'
+import {swipeGenre,addSlider,fetchGenerSlides} from '../../redux/features/genreSliderSlice'
+import  { actions }  from '../../redux/features/movieSection'
 
 const SlideContainer = ({children,width,translate,id}) => {
     
@@ -57,26 +58,32 @@ const SlideContainer = ({children,width,translate,id}) => {
 
 }
 
-const Slide = ({img}) => {
-    return <div style={{backgroundImage:`url(${img})`}} className="gener__slide"></div>
+const Slide = ({movie}) => {
+    let dispatch = useDispatch()
+    const posterBaseUrl = "https://image.tmdb.org/t/p/w300/"
+    
+    return <Link to={`/movie/${movie.id}`} onClick={() => dispatch(actions.setSelectedMovie(movie))}  style={{backgroundImage:`url(${posterBaseUrl+movie.posterPath})`}} className="gener__slide"></Link>
 }
 
 
 const GenreSlider = ({children,movies,id}) => {
     let dispatch = useDispatch()
- 
- 
+    useEffect(() => {
+        dispatch(fetchGenerSlides(id))
+    },[])
+
+    //add slider for controll over slideffect.
     dispatch(addSlider(id))
+ 
 
     let slider = useSelector( (state) => { return state.genreSlider.sliders.find( obj => obj.slider === id )}  )
-   
 
     return(
         <div className="genre-slider__cont">
             <div className="genre-slider__header">
                 <h2><Link to = {`/genre/${children}`}>{children}</Link></h2>
             </div>
-            <SlideContainer id ={id} translate = {slider.translateX} width = {(window.innerWidth * 0.3 + 14) * movies.length} >{movies.map((movie,i) => <Slide key = {i+12} img = {movie} ></Slide>)}</SlideContainer>
+           {!slider.movieList.length? null : <SlideContainer id ={id} translate = {slider.translateX} width = {(window.innerWidth * 0.3 + 14) * slider.movieList.length} >{slider.movieList.map((movie,i) => <Slide key = {i+12} movie = {movie} ></Slide>)}</SlideContainer>} 
         </div>
       
     )

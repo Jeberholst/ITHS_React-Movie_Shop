@@ -1,7 +1,11 @@
 import './MainSlider.css';
-import React, {useRef} from 'react'
+import React, {useEffect, useRef} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import {toggelSlider} from '../../redux/features/mainSliderSlice'
+import {toggelSlider,fetchTopMovies, resetSlider} from '../../redux/features/mainSliderSlice'
+import { Link } from 'react-router-dom';
+import  { actions }  from '../../redux/features/movieSection'
+
+
 
 
 //slidecontainer element
@@ -20,24 +24,49 @@ const MainSliderContainer = ({width,children,tran}) =>{
 } 
 
 //slide element 
-const Slide = ({img}) => {
+const Slide = ({movie}) => {
+    let dispatch = useDispatch()
+    
+    function setMovie(film){
+        dispatch(actions.setSelectedMovie(movie));
+    }
+
+    const posterBaseUrl = "https://image.tmdb.org/t/p/w500/"
     return (
-        <div style={{backgroundImage:`url(${img})`}} className="mainslider__slide"></div>
+        <Link onClick={() => setMovie(movie)} to={`/movie/${movie.id}`} style={{backgroundImage:`url(${posterBaseUrl}${movie.backdropPath})`}} className="mainslider__slide">
+        </Link>
+     
     )
 }
 
 
-const MainSlider = ({imgList}) => {
+const MainSlider = () => {
+    let dispatch = useDispatch()
+    //keep track of slide for navigation dots.
+    let currentSlide = useRef(0)
+    //reset slider.
+    function reset(){
+        currentSlide.current = 0;
+        dispatch(resetSlider())
+    } 
+    
+
+
+    useEffect(()=> {
+        dispatch(fetchTopMovies())
+        return () =>  reset()
+    },[])
+
+    let movieList = useSelector(state => state.mainslider.slides)
+
     const left = "LEFT",
           right ="RIGHT"
-    //keep track of slide for navigation dots.
-    let currentSlide = useRef(0) 
-
-    let dispatch = useDispatch()
     
+
+
     //get full width of slider.
     const getWidth = () => {
-        return window.innerWidth * imgList.length
+        return window.innerWidth * movieList.length
     }
     //sets current slide and calls reducer for state handeling. 
     const navigateSlider = (direction) => {
@@ -45,7 +74,7 @@ const MainSlider = ({imgList}) => {
             currentSlide.current--
             dispatch(toggelSlider(direction))
             
-        }else if (direction === right && currentSlide.current < imgList.length -1){
+        }else if (direction === right && currentSlide.current < movieList.length -1){
             currentSlide.current++
             dispatch(toggelSlider(direction))
         }else{
@@ -54,18 +83,16 @@ const MainSlider = ({imgList}) => {
     }
 
     var translate = useSelector( (state) =>  state.mainslider.translateX)
-  
-
     return(
         <div className="main-slider__container">
         <div onClick={() => navigateSlider(left)} className="arrow-box-left"><i className="arrow left"></i></div>
         <div onClick={() => navigateSlider(right)} className="arrow-box-right"><i className="arrow right"></i></div>
         {/*container with width = 100vw * num of slides */}
             <MainSliderContainer width={getWidth()} tran={translate}>
-                {imgList.map((img,i) => ( <Slide key={`${i}`} img={img}/> ))}
+                {!movieList.length? null : movieList.map((movie,i) => ( <Slide key={`${i}${movie.id}`} movie={movie} /> ))}
             </MainSliderContainer>
             <div className="main-slider__dot-indicator-container">
-                {imgList.map((img,i) => <div key={`dot:${i}`} className={`dots ${i === currentSlide.current ? "white" : "" }`}></div> )}
+                {!movieList.length? null : movieList.map((movie,i) => <div key={`dot:${i}`} className={`dots ${i === currentSlide.current ? "white" : "" }`}></div> )}
             </div>
 
         </div>
