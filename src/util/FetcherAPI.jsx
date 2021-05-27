@@ -1,38 +1,10 @@
-
-import { makeStyles } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import MovieGridLoader from '../components/fetcher-components/MovieGridLoader';
 import { API_FETCHER_STATUSES } from './../redux/features/fetcherApi';
 import { fetchListGenres, fetchListPopular } from './fetcherFunctions'
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      display: 'column',
-      width: '100%',
-      height: '100%',
-      marginTop: 10,
-      marginBottom: 10,
-      color: 'white',
-      justifyContent: 'center',
-      justifyItems: 'center',
-      alignContent: 'center'
-    },
-    containerText: {
-        display: 'flex',
-        flexDirection: 'column',
-        width: '100%',
-    },
-    containerProgress: {
-        display: 'flex',
-        flexDirection: 'column',
-        width: '100%',
-        height: '100%',
-        marginTop: 5,
-    }
-
-}))
-
+//MORE CASES
 export const FETCH_API_TYPE = {
     LIST_POPULAR: "LIST_POPULAR", 
     LIST_GENRE: "LIST_GENRE", 
@@ -48,14 +20,14 @@ const FetcherAPI = ({...props}) => {
     let fetchedResult = [];
 
     if (STATUS.status ===  API_FETCHER_STATUSES.FETCHING.status) {
-        console.log('STATUS 1', STATUS.status)
+        // console.log('STATUS 1', STATUS.status)
     } 
     else if ( STATUS.status ===  API_FETCHER_STATUSES.SUCCESS.status) {
-        console.log('STATUS 2', STATUS.status)
+        // console.log('STATUS 2', STATUS.status)
         fetchedResult = RESULT
     }
     else {
-        console.log('STATUS 3', STATUS.status)
+        // console.log('STATUS 3', STATUS.status)
         fetchedResult = [];
     }
 
@@ -76,10 +48,6 @@ const FetcherAPI = ({...props}) => {
             useFunction = () => fetchListGenres(dispatch, String(props.extras.id).toUpperCase())
             break;
 
-       case 'Paged':
-           
-            break;
-
         default:
     
             useComponent = null
@@ -92,18 +60,22 @@ const FetcherAPI = ({...props}) => {
         StartFetching(useFunction)
     }, [])
 
-    if(fetchedResult !== null){
+    if( fetchedResult !== null ){
+
         return (
-                <React.Fragment>
-                    {useComponent}
-                </React.Fragment>
-          );
+            <React.Fragment>
+                {useComponent}
+            </React.Fragment>
+        );
+
     } else {
+
         return (
             <React.Fragment>
                 {'null'}
             </React.Fragment>
-          );
+        );
+
     }
    
  }
@@ -112,8 +84,8 @@ const FetcherAPI = ({...props}) => {
 export default FetcherAPI;
 
 const StartFetching = async (useFunction) => {
-    console.log('StartFetching')
-    console.log('USEFUNCTION-', useFunction)
+    // console.log('StartFetching')
+    // console.log('USEFUNCTION-', useFunction)
     useFunction();
 }
 
