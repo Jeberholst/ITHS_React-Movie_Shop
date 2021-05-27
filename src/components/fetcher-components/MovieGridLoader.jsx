@@ -1,7 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core';
 import MockMoviePopular from '../../mockData/MockMoviePopular';
-import FetcherAPI from '../../util/FetcherAPI';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const MoviePopular = ({...props}) => {
+const MovieGridLoader = ({...props}) => {
 
     const classes = useStyles();
 
@@ -44,4 +43,4 @@ const MoviePopular = ({...props}) => {
     }
 }
 
-export default MoviePopular;
+export default MovieGridLoader;
