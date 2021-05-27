@@ -2,7 +2,7 @@
 import React from 'react'
 import { Divider, makeStyles } from '@material-ui/core';
 import StarsComponent from '../shared-components/StarsComponent';
-import UserProfileMini from './UserProfileMini';
+import UserProfileMini from '../shared-components/UserProfileMini';
 
 const tempStrComment = "This is a comment made by someone"
 

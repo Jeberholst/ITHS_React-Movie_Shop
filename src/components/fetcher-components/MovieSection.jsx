@@ -4,6 +4,7 @@ import MovieMulti from './MovieMulti';
 import { useSelector } from 'react-redux';
 import { MOVIE_SECTION_SCREENS } from '../../redux/features/movieSection';
 import MovieSingle from './MovieSingle';
+import CommentSection from '../comment/CommentSection';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,6 +28,15 @@ const useStyles = makeStyles((theme) => ({
         // flexWrap: 'row wrap',
         // gridTemplateColumns: "32% 32% 32%",
         // gap: 5,
+    },
+    rootCommentSection: {
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
+        height: '100%',
+        marginTop: 10,
+        marginBottom: 10,
+        alignItems: 'center',
     },
 }));
 
@@ -70,8 +80,8 @@ const MovieSection = ({...props}) => {
                )
            case MOVIE_SECTION_SCREENS.SINGLE_MOVIE_COMMENTS: 
                return (
-                    <div className={classes.rootSingleComments}>
-                        {/* <MovieSingle/> */}
+                    <div className={classes.rootCommentSection}>
+                        <CommentSection/>
                     </div>
                 )
            case MOVIE_SECTION_SCREENS.QUICK_ADD: 
