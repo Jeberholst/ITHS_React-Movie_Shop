@@ -38,19 +38,17 @@ const LandingPage = () => {
         fetchers.fetchPopular()
     }
 
- 
-
     return(
 
         <div className="App-Content">
-            {/* <MainSlider imgList = {images} ></MainSlider>
-            {GENRES.map((gener) => <GenreSlider key = {gener} id = {gener.toUpperCase()}  movies={posters}>{gener}</GenreSlider>)} */}
+            <MainSlider imgList = {images} ></MainSlider>
+            {GENRES.map((gener) => <GenreSlider key = {gener} id = {gener.toUpperCase()}  movies={posters}>{gener}</GenreSlider>)}
 
             <div className="App-Content">
                 <p>LandingPage</p>
-                    <FetcherAPI {...{ type: 'ListPopular', text: 'NO_TEXT_SEARCH_TEXT_ETC'}}/>
+                    {/* <FetcherAPI {...{ type: 'ListPopular', text: 'NO_TEXT_SEARCH_TEXT_ETC'}}/> */}
                     {fetchMockData()}
-                {/* <MockDataHolder/> */}
+                <MockDataHolder/>
             </div>
         </div>
     )

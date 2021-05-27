@@ -1,6 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core';
 import MockMoviePopular from '../../mockData/MockMoviePopular';
+import FetcherAPI from '../../util/FetcherAPI';
 
 const useStyles = makeStyles((theme) => ({
     root: {

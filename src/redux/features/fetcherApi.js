@@ -35,18 +35,13 @@ const reducer = createReducer(initialState, {
       ...state,
       STATUS: API_FETCHER_STATUSES.FETCHING
   }),
-  // [fetchSuccess]: (state, action) => (
-    
-  //    console.log('PAYLOAD SUCCESS', actions.payload)
-
-  // ),
   [fetchSuccess]: (state, action) => {
    
       console.log('PAYLOAD SUCCESS', actions.payload)
       state.STATUS = API_FETCHER_STATUSES.SUCCESS
       state.RESULT = action.payload
 
-   },
+  },
   [fetchFailed]: (state, action) =>({
     ...state,
       STATUS: API_FETCHER_STATUSES.FAILED
