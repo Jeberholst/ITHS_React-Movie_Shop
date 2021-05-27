@@ -6,21 +6,24 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
-        width: '95%',
+        width: '100%',
         height: '100%',
+        alignContent: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     rootGrid: {
-        // display: 'flex',
-        // flexDirection: 'column',
-        // width: '95%',
+        display: 'flex',
+        flexDirection: 'column',
+        width: '95%',
         // height: '100%',
         marginTop: 10,
         marginBottom: 10,
         //TESTING
-        display: 'grid',
-        flexWrap: 'row wrap',
-        gridTemplateColumns: "33% 33% 33%",
-        gap: 5,
+        // display: 'grid',
+        // flexWrap: 'row wrap',
+        // gridTemplateColumns: "32% 32% 32%",
+        // gap: 5,
     },
 }));
 
