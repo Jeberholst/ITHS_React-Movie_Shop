@@ -16,8 +16,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-
-const MockStarsComponent = () => {
+//FORMER MOCK-STARS-COMPONENT
+const StarsComponent = () => {
     const classes = useStyles();
     
     return (
@@ -33,7 +33,7 @@ const MockStarsComponent = () => {
     );
 
 }
-export default MockStarsComponent
+export default StarsComponent
 
 const AddFiveStars = () => {
     const classes = useStyles();

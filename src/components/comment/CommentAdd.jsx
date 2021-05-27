@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const MockCommentAdd = () => {
+const CommentAdd = () => {
     const classes = useStyles();
 
     return (
@@ -87,4 +87,4 @@ const MockCommentAdd = () => {
 
 }
 
-export default MockCommentAdd;
+export default CommentAdd;

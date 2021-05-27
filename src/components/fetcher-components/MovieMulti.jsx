@@ -1,11 +1,11 @@
 import { Button, Divider, makeStyles } from '@material-ui/core';
 import React from 'react'
-import ShoppingCartActionButtons, { BUTTON_TYPE } from '../components/shopping-cart/ShoppingCartActionButtons';
-import ImdbLOGO from './../img/Other/imdb-logo-square.svg'
-import { listGenres } from './mock-data-fetcher';
-import { createFakeIMDBRating, createPosterPathFull, matchGenreIdsToName, POSTER_SIZES } from './mockFunctions';
-import MockStarsComponent from './MockStarsComponent';
-import { actions as actionsMovieSection, MovieSectionScreens } from './../redux/features/movieSection'
+import ShoppingCartActionButtons, { BUTTON_TYPE } from '../shopping-cart/ShoppingCartActionButtons';
+import ImdbLOGO from './../../img/Other/imdb-logo-square.svg'
+// import { matchGenreIdsToName } from './../helper-functions/genres';
+import { createPosterPathFull, POSTER_SIZES } from "../../helper-functions/poster";
+import StarsComponent from '../shared-components/StarsComponent';
+import { actions as actionsMovieSection, MOVIE_SECTION_SCREENS } from '../../redux/features/movieSection'
 import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
@@ -106,14 +106,14 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const MockMoviePopular = ( { item } ) => {
+const MovieMulti = ({ item }) => {
   
   const classes = useStyles();
 
   const title = item.title
   const releaseDate = item.releaseDate
 
-  const movieGenresNamed = matchGenreIdsToName(item.genreIds, listGenres)
+//   const movieGenresNamed = matchGenreIdsToName(item.genreIds, ['listGenres', 'FIX'])
   const posterPath = createPosterPathFull(POSTER_SIZES.w300, item.posterPath)
   const imdbRating = createFakeIMDBRating()//TODO: Change to variable
 
@@ -121,7 +121,7 @@ const MockMoviePopular = ( { item } ) => {
         <div id='hover-container' className={classes.root}>
 
         <div className={classes.topRow}>
-            <MockStarsComponent/>
+            <StarsComponent/>
             <ImdbRating rating={imdbRating}/>
         </div>
 
@@ -143,9 +143,9 @@ const MockMoviePopular = ( { item } ) => {
 
                 <div className={classes.subBodies}>
                     <div className={classes.genres}>
-                        {movieGenresNamed.map((genre) => {
+                        {/* {movieGenresNamed.map((genre) => {
                             return <div>{genre}</div>
-                        })}
+                        })} */}
                     </div>
                 </div>
             
@@ -201,7 +201,7 @@ const ButtonMore = ({ mItem }) => {
                 className={classes.root}
                 onClick={
                     () => {
-                        dispatch(actionsMovieSection.setScreen(MovieSectionScreens.SINGLE_MOVIE))
+                        dispatch(actionsMovieSection.setScreen(MOVIE_SECTION_SCREENS.SINGLE_MOVIE))
                         dispatch(actionsMovieSection.setSelectedMovie(mItem))
                     }
                 }>More</Button>   
@@ -209,4 +209,8 @@ const ButtonMore = ({ mItem }) => {
     );
 }
 
-export default MockMoviePopular;
+export default MovieMulti;
+
+export function createFakeIMDBRating(){
+    return (Math.random() * 10).toFixed(2); 
+}

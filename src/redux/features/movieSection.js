@@ -6,7 +6,7 @@ const resetSelectedMovie = createAction('set selected movie null');
 
 const actions = { setScreen, setSelectedMovie, resetSelectedMovie };
 
-export const MovieSectionScreens = {
+export const MOVIE_SECTION_SCREENS = {
     GRID_MOVIES: 'grid_movies',
     LIST_SEARCHES: 'list_searches',
     SINGLE_MOVIE: 'single_movie',
@@ -15,7 +15,7 @@ export const MovieSectionScreens = {
 }
 
 const initialState = {
-    screen: MovieSectionScreens.GRID_MOVIES,
+    screen: MOVIE_SECTION_SCREENS.GRID_MOVIES,
     selectedMovie : null,
 }
 

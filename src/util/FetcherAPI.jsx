@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import MovieGridLoader from '../components/fetcher-components/MovieGridLoader';
 import { API_FETCHER_STATUSES } from './../redux/features/fetcherApi';
 import { fetchListGenres, fetchListPopular } from './fetcherFunctions'
+import { actions, MOVIE_SECTION_SCREENS } from './../redux/features/movieSection';
+import MovieSection from '../components/fetcher-components/MovieSection';
 
 //MORE CASES
 export const FETCH_API_TYPE = {
@@ -31,27 +32,29 @@ const FetcherAPI = ({...props}) => {
         fetchedResult = [];
     }
 
-    let useComponent = null;
+    // let useComponent = null;
+    let useScreen = null;
     let useFunction = null;
     
     switch(props.type){
         case "LIST_POPULAR":
 
-            useComponent = <MovieGridLoader {...{RESULT: RESULT}}/>
+            useScreen = MOVIE_SECTION_SCREENS.GRID_MOVIES
             useFunction = () => fetchListPopular(dispatch)
             break;
 
         case "LIST_GENRE":
         
-            useComponent = <MovieGridLoader {...{RESULT: RESULT}}/>
+            useScreen = MOVIE_SECTION_SCREENS.GRID_MOVIES
             // console.log('TYPE:', String(props.extras.id).toUpperCase())
             useFunction = () => fetchListGenres(dispatch, String(props.extras.id).toUpperCase())
             break;
 
         default:
     
-            useComponent = null
+            useScreen = MOVIE_SECTION_SCREENS.QUICK_ADD
             useFunction = () => {}
+
             break;
 
     }
@@ -62,9 +65,11 @@ const FetcherAPI = ({...props}) => {
 
     if( fetchedResult !== null ){
 
+        dispatch(actions.setScreen(useScreen))
+
         return (
             <React.Fragment>
-                {useComponent}
+                <MovieSection {...{RESULT: RESULT}}/>
             </React.Fragment>
         );
 

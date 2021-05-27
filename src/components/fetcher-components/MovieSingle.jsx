@@ -1,12 +1,12 @@
 import { Button, Divider, makeStyles } from '@material-ui/core';
 import React from 'react'
-import ShoppingCartActionButtons, { BUTTON_TYPE } from '../components/shopping-cart/ShoppingCartActionButtons';
-import ImdbLOGO from './../img/Other/imdb-logo-square.svg'
-import { listGenres } from './mock-data-fetcher';
-import MockStarsComponent from './MockStarsComponent';
-import { createFakeIMDBRating, createPosterPathFull, matchGenreIdsToName, POSTER_SIZES } from './mockFunctions'
+import ShoppingCartActionButtons, { BUTTON_TYPE } from '../shopping-cart/ShoppingCartActionButtons';
+import ImdbLOGO from './../../img/Other/imdb-logo-square.svg'
+import StarsComponent from '../shared-components/StarsComponent';
+// import { matchGenreIdsToName } from './../helper-functions/genres'
+import { createPosterPathFull, POSTER_SIZES } from "../../helper-functions/poster";
 import { useDispatch, useSelector } from 'react-redux';
-import { actions as actionsMovieSection, MovieSectionScreens } from './../redux/features/movieSection'
+import { actions as actionsMovieSection, MOVIE_SECTION_SCREENS } from '../../redux/features/movieSection'
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 const useStyles = makeStyles((theme) => ({
@@ -119,7 +119,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const MockMovieSingle = () => {
+const MovieSingle = () => {
   
   const classes = useStyles();
 
@@ -128,7 +128,7 @@ const MockMovieSingle = () => {
   const title = item.title
   const releaseDate = item.releaseDate
   const itemOverView = item.overview
-  const movieGenresNamed = matchGenreIdsToName(item.genreIds, listGenres);
+//   const movieGenresNamed = matchGenreIdsToName(item.genreIds, ['listGenres', 'FIX']);
   const posterPath = createPosterPathFull(POSTER_SIZES.w500, item.posterPath)
   const imdbRating = createFakeIMDBRating()//TODO: Change to variable
  
@@ -140,7 +140,7 @@ const MockMovieSingle = () => {
         <div className={classes.containerContent}>      
             
             <div className={classes.topRow}>
-                <MockStarsComponent/>
+                <StarsComponent/>
                 <ImdbRating rating={imdbRating}/>
             </div>
 
@@ -160,9 +160,9 @@ const MockMovieSingle = () => {
                         <div>{releaseDate}</div>
                         <div>{itemOverView}</div>
                         <div className={classes.genres}>
-                            {movieGenresNamed.map((genre) => {
+                            {/* {movieGenresNamed.map((genre) => {
                                 return <div>{genre}</div>
-                            })}
+                            })} */}
                         </div>
                     
                         <div>{'Popularity---->' + item.popularity}</div>
@@ -215,7 +215,7 @@ const ButtonNavigateComments = () => {
                 // className={classes.root}
                 onClick={
                     () => {
-                        dispatch(actionsMovieSection.setScreen(MovieSectionScreens.SINGLE_MOVIE_COMMENTS))
+                        dispatch(actionsMovieSection.setScreen(MOVIE_SECTION_SCREENS.SINGLE_MOVIE_COMMENTS))
                     }
                 }>{'COMMENTS'}</Button>   
         </div>
@@ -235,11 +235,15 @@ const ButtonNavigateBack  = () => {
                 // className={classes.root}
                 onClick={
                     () => {
-                        dispatch(actionsMovieSection.setScreen(MovieSectionScreens.GRID_MOVIES))
+                        dispatch(actionsMovieSection.setScreen(MOVIE_SECTION_SCREENS.GRID_MOVIES))
                     }
                 }>{'<<<<'}</Button>   
         </div>
     )
 };
 
-export default MockMovieSingle;
+export default MovieSingle;
+
+export function createFakeIMDBRating(){
+    return (Math.random() * 10).toFixed(2); 
+}

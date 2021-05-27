@@ -1,8 +1,8 @@
 
 import React from 'react'
 import { Divider, makeStyles } from '@material-ui/core';
-import MockStarsComponent from './MockStarsComponent';
-import MockUserProfile from './MockUserProfile';
+import StarsComponent from '../shared-components/StarsComponent';
+import UserProfileMini from './UserProfileMini';
 
 const tempStrComment = "This is a comment made by someone"
 
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 }));
   
 
-const MockCommentSingle = ({ item }) => {
+const CommentSingle = ({ item }) => {
     const classes = useStyles();
 
     return (
@@ -55,11 +55,11 @@ const MockCommentSingle = ({ item }) => {
                 <div className={classes.containerTop}>
 
                         <div className={classes.gridUser}>
-                            <MockUserProfile/>
+                            <UserProfileMini/>
                         </div>
 
                         <div className={classes.gridRight}>
-                            <MockStarsComponent/>
+                            <StarsComponent/>
                         </div> 
 
                 </div>
@@ -80,4 +80,4 @@ const MockCommentSingle = ({ item }) => {
 
 }
 
-export default MockCommentSingle
+export default CommentSingle;
