@@ -19,6 +19,7 @@ import "firebase/firestore";
 import {firebaseConfig} from "./util/firebase";
 import "firebase/auth";
 import SnackBarsRedux from './util/SnackBarsRedux';
+import FetcherAPI from './util/FetcherAPI';
 
 firebase.initializeApp(firebaseConfig);
 
@@ -51,6 +52,7 @@ function App() {
         </div>
         
       </Router>
+
 
       <SnackBarsRedux/>
 

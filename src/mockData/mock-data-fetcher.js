@@ -14,7 +14,7 @@ const fetchGenres = async () => {
   listGenres = arr;
   const stringifyResponse = JSON.stringify(mockGenres.genres)
 
-  JSON.parse(stringifyResponse).forEach(props => {
+    JSON.parse(stringifyResponse).forEach(props => {
 
       listGenres.push(createGenre(
         props.id, 
