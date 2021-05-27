@@ -2,7 +2,7 @@
 import { makeStyles } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import MoviePopular from '../components/fetcher-components/MovieGridLoader';
+import MovieGridLoader from '../components/fetcher-components/MovieGridLoader';
 import { API_FETCHER_STATUSES } from './../redux/features/fetcherApi';
 import { fetchListGenres, fetchListPopular } from './fetcherFunctions'
 
@@ -45,45 +45,35 @@ const FetcherAPI = ({...props}) => {
     const STATUS = useSelector(state => state.fetcherApi.STATUS);
     const RESULT = useSelector(state => state.fetcherApi.RESULT);
    
-    // let fetchedMessage = null;
     let fetchedResult = [];
 
     if (STATUS.status ===  API_FETCHER_STATUSES.FETCHING.status) {
         console.log('STATUS 1', STATUS.status)
-        // fetchedMessage = API_FETCHER_STATUSES.FETCHING.message
     } 
     else if ( STATUS.status ===  API_FETCHER_STATUSES.SUCCESS.status) {
         console.log('STATUS 2', STATUS.status)
-        // fetchedMessage = API_FETCHER_STATUSES.SUCCESS.message
         fetchedResult = RESULT
-        // console.log('Result in FetcherAPI.jsx', RESULT)
     }
     else {
         console.log('STATUS 3', STATUS.status)
-        // fetchedMessage = API_FETCHER_STATUSES.FAILED.message
         fetchedResult = [];
     }
 
     let useComponent = null;
     let useFunction = null;
     
-
-    // console.log('Extras: ', 'ID:' + props.extras.id, 'Search:' + props.extras.search)
-
     switch(props.type){
         case "LIST_POPULAR":
 
-            useComponent = <MoviePopular {...{RESULT: RESULT}}/>
+            useComponent = <MovieGridLoader {...{RESULT: RESULT}}/>
             useFunction = () => fetchListPopular(dispatch)
-            console.log('USING ', 'FETCH list popular')
             break;
 
         case "LIST_GENRE":
-            
-            useComponent = <MoviePopular {...{RESULT: RESULT}}/>
-            console.log('TYPE:', String(props.extras.id).toUpperCase())
+        
+            useComponent = <MovieGridLoader {...{RESULT: RESULT}}/>
+            // console.log('TYPE:', String(props.extras.id).toUpperCase())
             useFunction = () => fetchListGenres(dispatch, String(props.extras.id).toUpperCase())
-            console.log('USING ', 'FETCH list genres')
             break;
 
        case 'Paged':
@@ -97,9 +87,6 @@ const FetcherAPI = ({...props}) => {
             break;
 
     }
-
-    console.log('USE THIS FUNCTION: ', useFunction)
-    // StartFetching(() => useFunction)
 
     useEffect(() => {
         StartFetching(useFunction)
