@@ -1,10 +1,19 @@
 import { createGenre, createMovieItem} from './fetcherCreateData'
 import { actions } from './../redux/features/fetcherApi';
 
-export function fetchListGenres(dispatch, fullApiUrl){
-    
-    console.log(dispatch)
-    console.log(fullApiUrl)
+const BASE_API_URL_V3 = "https://api.themoviedb.org/3/"
+const API_KEY = "9f9816e8ad3f4241eaf738efa1c54328"
+const API_KEY_CALL = `api_key=${API_KEY}`
+
+const EXTENDED_PATHS = {
+    POPULAR: 'movie/popular',
+    GENRE: 'genre/movie/list'
+}
+
+export function fetchListGenres(dispatch){
+
+    let fullApiUrl = `${BASE_API_URL_V3}${EXTENDED_PATHS.GENRE}?${API_KEY_CALL}`
+    console.log('Genres fetch URL: ', fullApiUrl)
 
     fetch(fullApiUrl)
       .then(async response => {
@@ -18,7 +27,7 @@ export function fetchListGenres(dispatch, fullApiUrl){
         
         var tempArr = [];
 
-        console.log('DATA!!: ', JSON.stringify(data.genres));
+       // console.log('DATA!!: ', JSON.stringify(data.genres));
         const stringifyResponse = JSON.stringify(data.genres)
 
         JSON.parse(stringifyResponse).forEach(props => {
@@ -30,11 +39,7 @@ export function fetchListGenres(dispatch, fullApiUrl){
       
         });
 
-        console.log('TEMP ARR GENRE:',  tempArr)
-
         dispatch(actions.fetchSuccess(tempArr))
-     
-    
 
     })
     .catch(error => {
@@ -43,9 +48,11 @@ export function fetchListGenres(dispatch, fullApiUrl){
     });
 }
 
-export function fetchListPopular(dispatch, fullApiUrl){
+export function fetchListPopular(dispatch){
     
     console.log('Popular fetch DISPATCHER: ', dispatch)
+
+    let fullApiUrl = `${BASE_API_URL_V3}${EXTENDED_PATHS.POPULAR}?${API_KEY_CALL}`
     console.log('Popular fetch URL: ', fullApiUrl)
 
     fetch(fullApiUrl)
@@ -61,7 +68,7 @@ export function fetchListPopular(dispatch, fullApiUrl){
         
         var tempArr = [];
 
-        console.log('DATA!!: ', JSON.stringify(data.results));
+        //console.log('DATA!!: ', JSON.stringify(data.results));
         const stringifyResponse = JSON.stringify(data.results)
 
         JSON.parse(stringifyResponse).forEach(props => {
@@ -84,8 +91,7 @@ export function fetchListPopular(dispatch, fullApiUrl){
               ));
       
         });
-
-        console.log('tempArr' + tempArr)
+        
         dispatch(actions.fetchSuccess(tempArr));
 
     })

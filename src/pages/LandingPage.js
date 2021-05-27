@@ -48,7 +48,7 @@ const LandingPage = () => {
 
             <div className="App-Content">
                 <p>LandingPage</p>
-                    <FetcherAPI {...{ type: 'ListPopular'}}/>
+                    <FetcherAPI {...{ type: 'ListPopular', text: 'NO_TEXT_SEARCH_TEXT_ETC'}}/>
                     {fetchMockData()}
                 {/* <MockDataHolder/> */}
             </div>
