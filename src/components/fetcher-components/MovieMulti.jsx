@@ -1,22 +1,25 @@
-import { Button, Divider, makeStyles } from '@material-ui/core';
+import { Button, Divider, IconButton, makeStyles } from '@material-ui/core';
 import React from 'react'
 import ShoppingCartActionButtons, { BUTTON_TYPE } from '../shopping-cart/ShoppingCartActionButtons';
 import ImdbLOGO from './../../img/Other/imdb-logo-square.svg'
-// import { matchGenreIdsToName } from './../helper-functions/genres';
 import { createPosterPathFull, POSTER_SIZES } from "../../helper-functions/poster";
 import StarsComponent from '../shared-components/StarsComponent';
 import { actions as actionsMovieSection, MOVIE_SECTION_SCREENS } from '../../redux/features/movieSection'
 import { useDispatch } from 'react-redux';
+import { matchGenreIdsToName } from '../../helper-functions/genres';
+import MockGenres from '../../mockData/mock-data-genre.json';
+import { MoreHorizRounded } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      width: '95%',
+      width: '90%',
       height: '100%',
       margin: 5,
       fontSize: 12,
       borderRadius: 10,
       background: 'rgb(0,0,0, 0.1)',
       flexWrap: 'column-reverse',
+      textShadow: '1px 1px #000'
     },
     topRow: {
         display: 'flex',
@@ -36,9 +39,11 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         maxHeight: '100%',
         margin: 10,
+        minHeight: '40vh',
     },
     imageContainer: {
         width: '30%',
+        height: '40%'
     },
     infoContainer: {
         width: '65%',
@@ -61,9 +66,17 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
         alignContent: 'center',
         alignItems: 'center',
+        textShadow: '1px 1px #000'
+    },
+    containerOverView: {
+        textAlign: 'left',
+        maxWidth: '70%',
+        maxHeight: '100%',
+        textShadow: '1px 1px #000'
     },
     title: {
         display: 'flex',
+        flexDirection: 'column',
         fontSize: '1em',
         fontWeight: 'bold',
         wordWrap: 'break-word',
@@ -72,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
     divider: {
         marginTop: 10,
         marginBottom: 10,
-        background: 'rgb(68,68,68, 0.5)',
+        background: 'rgb(175,175,175, 0.5)',
     },
     containerImdb: {
         display: 'flex',
@@ -86,7 +99,8 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexWrap: 'wrap-reverse',
         flexDirection: 'row-reverse',
-        alignItems: 'center',
+        height: 'fit-content',
+        alignItems: 'bottom',
         '& *': {
             marginRight: 5,
         },
@@ -112,53 +126,65 @@ const MovieMulti = ({ item }) => {
 
   const title = item.title
   const releaseDate = item.releaseDate
-
-//   const movieGenresNamed = matchGenreIdsToName(item.genreIds, ['listGenres', 'FIX'])
+  const itemOverView = String(item.overview).slice(0, 200) + ' ...'
+  const movieGenresNamed = matchGenreIdsToName(item.genreIds, MockGenres.genres)
   const posterPath = createPosterPathFull(POSTER_SIZES.w300, item.posterPath)
   const imdbRating = createFakeIMDBRating()//TODO: Change to variable
 
   return(
-        <div id='hover-container' className={classes.root}>
+        <div id='hover-container' className={classes.root} 
+            style={{backgroundImage: `url(${posterPath})`, 
+            backgroundRepeat: 'repeat-x', 
+            boxShadow: '0 0 2px 2px rgb(175,175,175, 0.2) inset'}} >
 
-        <div className={classes.topRow}>
-            <StarsComponent/>
-            <ImdbRating rating={imdbRating}/>
-        </div>
-
-        <div className={classes.mainContainer}>
-            
-            <div className={classes.imageContainer}>
-                <img className={classes.image} src={posterPath} alt="Movie-poster"></img>
+            <div className={classes.topRow}>
+                {/* <ImdbRating rating={imdbRating}/> */}
+                <ButtonMore mItem={item}/>
+                <ShoppingCartActionButtons mItem={item} type={BUTTON_TYPE.CART_ADD}/>
             </div>
-        
-            <div className={classes.infoContainer}>
 
-                <div className={classes.title}>
-                    {title}
-                </div>
+            <div className={classes.mainContainer}>
                 
-                <div className={classes.subBodies}>
-                    {releaseDate}
+                {/* <div className={classes.imageContainer}>
+                    <img className={classes.image} src={posterPath} alt="Movie-poster"></img>
+                </div> */}
+            
+                <div className={classes.infoContainer}>
+
+                    <div className={classes.title}>
+                        <i style={{fontSize: 12}}>{title}</i>
+                    </div>
+
+                    <div className={classes.year}>
+                        <i style={{fontSize: 12}}>{releaseDate}</i>
+                    </div>
+                    
+                    <div className={classes.subBodies}>
+                    <StarsComponent/>
+                    </div>
+
+                    <div className={classes.subBodies}>
+                        <div className={classes.genres}>
+                            {movieGenresNamed.map((genre) => {
+                                return <div>{genre}</div>
+                            })}
+                        </div>
+                
+                    </div>
+
+                    <div className={classes.containerOverView}>
+                        <p>{itemOverView}</p>
+                        <i>{'...read more'}</i>
+                    </div>
+                    
                 </div>
 
-                <div className={classes.subBodies}>
-                    <div className={classes.genres}>
-                        {/* {movieGenresNamed.map((genre) => {
-                            return <div>{genre}</div>
-                        })} */}
-                    </div>
-                </div>
-            
+                <Divider className={classes.divider}></Divider>
+
+
             </div>
 
-        </div>
 
-        <Divider className={classes.divider}></Divider>
-
-        <div className={classes.containerBottomButtons}>
-            <ShoppingCartActionButtons mItem={item} type={BUTTON_TYPE.CART_ADD}/>
-            <ButtonMore mItem={item}/>
-        </div>
 
     </div>
   );
@@ -195,16 +221,20 @@ const ButtonMore = ({ mItem }) => {
 
     return (
         <div>
-            <Button
-                variant={'contained'}
-                color={'default'}
-                className={classes.root}
+            <IconButton
+                aria-label="more"
+                fontSize="medium"
+                color={'secondary'}
                 onClick={
                     () => {
                         dispatch(actionsMovieSection.setScreen(MOVIE_SECTION_SCREENS.SINGLE_MOVIE))
                         dispatch(actionsMovieSection.setSelectedMovie(mItem))
-                    }
-                }>More</Button>   
+                    }}
+                >
+                    <MoreHorizRounded/>
+            </IconButton>
+
+         
         </div>
     );
 }

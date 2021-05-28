@@ -85,12 +85,9 @@ const FetcherAPI = ({...props}) => {
    
  }
 
-
 export default FetcherAPI;
 
 const StartFetching = async (useFunction) => {
-    // console.log('StartFetching')
-    // console.log('USEFUNCTION-', useFunction)
     useFunction();
 }
 

@@ -4,8 +4,8 @@ export function matchGenreIdsToName(movieItemGenres, availableGenres) {
 
     movieItemGenres.forEach(genreNum => {
         availableGenres.forEach(listItem => {
-            if (listItem.genreId === genreNum) {
-                movieGenresNamed.push(String(listItem.genreName));
+            if (listItem.id === genreNum) {
+                movieGenresNamed.push(String(listItem.name));
             }
         });
     });

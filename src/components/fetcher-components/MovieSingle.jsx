@@ -8,6 +8,8 @@ import { createPosterPathFull, POSTER_SIZES } from "../../helper-functions/poste
 import { useDispatch, useSelector } from 'react-redux';
 import { actions as actionsMovieSection, MOVIE_SECTION_SCREENS } from '../../redux/features/movieSection'
 import StarBorderIcon from '@material-ui/icons/StarBorder';
+import { matchGenreIdsToName } from '../../helper-functions/genres';
+import MockGenres from '../../mockData/mock-data-genre.json';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -128,7 +130,7 @@ const MovieSingle = () => {
   const title = item.title
   const releaseDate = item.releaseDate
   const itemOverView = item.overview
-//   const movieGenresNamed = matchGenreIdsToName(item.genreIds, ['listGenres', 'FIX']);
+  const movieGenresNamed = matchGenreIdsToName(item.genreIds, MockGenres.genres)
   const posterPath = createPosterPathFull(POSTER_SIZES.w500, item.posterPath)
   const imdbRating = createFakeIMDBRating()//TODO: Change to variable
  
@@ -160,10 +162,11 @@ const MovieSingle = () => {
                         <div>{releaseDate}</div>
                         <div>{itemOverView}</div>
                         <div className={classes.genres}>
-                            {/* {movieGenresNamed.map((genre) => {
+                            {movieGenresNamed.map((genre) => {
                                 return <div>{genre}</div>
-                            })} */}
+                            })}
                         </div>
+                                                
                     
                         <div>{'Popularity---->' + item.popularity}</div>
                         <div>{'Vote Avarage:-->' + item.voteAverage}</div>
