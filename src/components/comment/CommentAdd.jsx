@@ -1,22 +1,21 @@
 import { Button, Divider, makeStyles, TextField } from '@material-ui/core';
 import React from 'react'
-import MockUserProfile from './MockUserProfile';
+import UserProfileMini from '../shared-components/UserProfileMini';
 
 const strAddComment = "Add a comment"
 const strButtonText = "Comment"
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        width: '95%',
         height: '100%',
-        padding: 10,
         fontSize: 12,
+        padding: 10,
         borderRadius: 10,
         background: 'rgb(0,0,0, 0.1)',
         flexWrap: 'column-reverse',
-        "& *": {
-            marginLeft: 5,
-        }
     },
     header: {
         display: 'flex',
@@ -43,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const MockCommentAdd = () => {
+const CommentAdd = () => {
     const classes = useStyles();
 
     return (
@@ -56,7 +55,7 @@ const MockCommentAdd = () => {
 
                 <div className={classes.subContainer}>
 
-                    <MockUserProfile/>
+                    <UserProfileMini/>
                     
                     <TextField
                         className={classes.textField}
@@ -87,4 +86,4 @@ const MockCommentAdd = () => {
 
 }
 
-export default MockCommentAdd;
+export default CommentAdd;
