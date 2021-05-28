@@ -1,8 +1,21 @@
 
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
+import {fetchGenre} from '../../util/ApiFetcher'
+import { actions } from "./movieSection";
 
 
+export const fetchGenerSlides = createAsyncThunk(
+  `genre/status`,
+ async (genere,thunkAPI) => {
+    try{
+      let response = await fetchGenre(genere)
+      return {movies:response,id:genere}
+    }catch(error){
+      throw Error(error)
+    }
+  }
 
+)
 
 function updateSlider(oldObject, newValues){
     let newObj = Object.assign({},oldObject,newValues)
@@ -20,9 +33,6 @@ function updateItemInArray(array,itemId,updateCallbackItem){
             return updatedPositionItem
 
         }
-        
-     
-
     })
     
     return updatedArray
@@ -32,6 +42,7 @@ function updateItemInArray(array,itemId,updateCallbackItem){
 export const genreSliderSlice = createSlice({
     name: 'genreSlider',
     initialState: {
+      // truns in to sliders[{slider:"action", translateX:-3,movieList:[list of movies]}]
       sliders:[],
       translateX:-3,
     },
@@ -47,10 +58,21 @@ export const genreSliderSlice = createSlice({
       },
       addSlider: (state,actions) => {
         //add slider with id and translateX tracker.
-        state.sliders = state.sliders.concat({slider:actions.payload,translateX:-3})
+        state.sliders = state.sliders.concat({slider:actions.payload,translateX:-3,movieList:[]})
       },
     
     },
+    extraReducers:{
+      [fetchGenerSlides.fulfilled]: (state,action) =>{ console.log(action.payload.movies)
+        let newArray = updateItemInArray(current(state.sliders),action.payload.id, item => {
+          return updateSlider(item,{movieList:action.payload.movies})
+      })
+   
+       state.sliders = newArray
+      
+      },
+      [fetchGenerSlides.rejected]:(state,action) => { console.log(action.payload) }
+    }
   })
   
   // Action creators are generated for each case reducer function

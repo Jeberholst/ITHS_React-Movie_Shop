@@ -13,8 +13,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
-const MockUserProfile = () => {
+const UserProfileMini = () => {
     const classes = useStyles();
     
     return (
@@ -34,4 +33,4 @@ const MockUserProfile = () => {
     );
 
 }
-export default MockUserProfile
+export default UserProfileMini

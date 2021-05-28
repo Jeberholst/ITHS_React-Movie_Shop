@@ -1,21 +1,22 @@
 import React from 'react'
 import { Button, Container, makeStyles } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { actions as actionsMovieSection, MovieSectionScreens } from '../redux/features/movieSection'
-import MockCommentAdd from './MockCommentAdd';
-import MockCommentSingle from './MockCommentSingle';
+import { actions as actionsMovieSection, MOVIE_SECTION_SCREENS } from '../../redux/features/movieSection'
+import CommentAdd from './CommentAdd';
+import CommentSingle from './CommentSingle';
 
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
       flexDirection: 'column',
-      flexWrap: 'row',
-      width: '100%',
+      width: '95%',
       height: '100%',
+      paddingBottom: 50,
+      alignItems: 'center'
     },
 }));
 
-const MockMovieSingleComments = () => {
+const CommentSection = () => {
     const classes = useStyles();
 
     // const item = useSelector(state => state.movieSection.selectedMovie)
@@ -25,16 +26,15 @@ const MockMovieSingleComments = () => {
         <React.Fragment>
             
             <ButtonBack/>
-            <Container className={classes.root}>
+            <div className={classes.root}>
+    
+                    <CommentSingle/>
+                    <CommentSingle/>
+                    <CommentSingle/>
+                    <CommentSingle/>
+                    <CommentAdd/>
 
-                <MockCommentSingle item={'item 1'}/>
-                <MockCommentSingle item={'item 2'}/>
-                <MockCommentSingle item={'item 3'}/>
-                <MockCommentSingle item={'item 4'}/>
-
-                <MockCommentAdd/>
-
-            </Container>
+            </div>
 
         </React.Fragment>
     );
@@ -53,11 +53,11 @@ const ButtonBack  = () => {
                 // className={classes.root}
                 onClick={
                     () => {
-                        dispatch(actionsMovieSection.setScreen(MovieSectionScreens.SINGLE_MOVIE))
+                        dispatch(actionsMovieSection.setScreen(MOVIE_SECTION_SCREENS.SINGLE_MOVIE))
                     }
                 }>{'<<<<'}</Button>   
         </div>
     )
 };
 
-export default MockMovieSingleComments;
+export default CommentSection;

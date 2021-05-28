@@ -1,5 +1,4 @@
 import { Button, Checkbox, FormControlLabel, makeStyles } from "@material-ui/core";
-import { Payment } from '@material-ui/icons';
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import TempPolicy from './shipping-policy-template.pdf'

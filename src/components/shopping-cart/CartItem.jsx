@@ -2,7 +2,6 @@
 import { makeStyles } from "@material-ui/core";
 import React from "react";
 import ShoppingCartActionButtons, { BUTTON_TYPE } from "./ShoppingCartActionButtons";
-import { listGenres } from './../../mockData/mock-data-fetcher'
 
 const useStyle = makeStyles((theme) => ({
     root: {
@@ -96,13 +95,13 @@ const CartItem = ({ item }) => {
     const movieGenres = pItem.genreIds
     let movieGenresNamed = []
 
-    movieGenres.forEach(genreNum => {
-      listGenres.forEach(listItem => {
-        if(listItem.genreId === genreNum){
-            movieGenresNamed.push(listItem.genreName)
-        }
-      }); 
-    });
+    // movieGenres.forEach(genreNum => {
+    //   listGenres.forEach(listItem => {
+    //     if(listItem.genreId === genreNum){
+    //         movieGenresNamed.push(listItem.genreName)
+    //     }
+    //   }); 
+    // });
 
     const posterMainPath = 'https://image.tmdb.org/t/p/'
     const posterSize = 'w200'

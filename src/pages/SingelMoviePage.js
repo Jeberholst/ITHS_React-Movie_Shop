@@ -1,10 +1,11 @@
 import React from 'react'
-import MockMovieSingle from "../mockData/MockMovieSingle"
+import MovieSingle from '../components/fetcher-components/MovieSingle'
+
 
 const SingelMoviePage = () => {
 
 //return mockmoviesingel... 
-    return <MockMovieSingle></MockMovieSingle>
+    return <MovieSingle/>
 
 
 }

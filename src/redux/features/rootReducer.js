@@ -4,6 +4,7 @@ import { reducer as snackBarsReducer } from './snackbars'
 import { reducer as movieSectionReducer } from './movieSection'
 import { reducer as checkOutReducer } from './checkOut'
 import { reducer as paymentProcessorReducer } from './paymentProcessor'
+import { reducer as fetcherApiReducer } from './fetcherApi'
 import navbarReducer from './navbarSlice'
 import mainSliderReducer from './mainSliderSlice' 
 import genreSliderReducer from './genreSliderSlice'
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
     genreSlider: genreSliderReducer,
     checkOut: checkOutReducer,
     paymentProcessor: paymentProcessorReducer,
+    fetcherApi: fetcherApiReducer,
 })
 
 export { rootReducer };

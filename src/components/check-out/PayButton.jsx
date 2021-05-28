@@ -1,6 +1,6 @@
-import { Button, LinearProgress, makeStyles } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { Payment } from '@material-ui/icons';
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import {  actions, PAYMENT_PROCESSING_STATE } from '../../redux/features/paymentProcessor';
 import PaymentSimulator from './PaymentSimulator'
