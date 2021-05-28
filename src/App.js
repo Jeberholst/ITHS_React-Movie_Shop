@@ -19,6 +19,7 @@ import "firebase/firestore";
 import {firebaseConfig} from "./util/firebase";
 import "firebase/auth";
 import SnackBarsRedux from './util/SnackBarsRedux';
+import Loading from './components/Loading/LoadingIcon';
 
 firebase.initializeApp(firebaseConfig);
 
@@ -31,7 +32,7 @@ function App() {
         <header className="App-NavBar">
           <Navbar/>
         </header>
-
+        <Loading/>
         <div className='App-Main'>
                 <div>
                     <Switch>

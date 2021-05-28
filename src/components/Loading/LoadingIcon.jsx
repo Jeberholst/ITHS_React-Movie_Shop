@@ -1,18 +1,35 @@
-import React, {useState} from 'react';
+
+import React, {useEffect, useState} from 'react';
+import * as ReactBootStrap from 'react-bootstrap';
+import Modal from './Modal'
 
 const Loading = () =>{
 
-    const fakeFetch = () =>{
-        console.log("Fetching......");
+    const [loading,setLoading] = useState(false);
+
+    const LoadingSpinner = () =>{
+        setLoading(true);
     }
 
+    useEffect(() =>{
+
+        LoadingSpinner(); 
+
+    },[]);
 
     return(
        <div>
-          <div className="input-group">
-              <input type="checkbox" name="overlay">
-          </div>
-          <button onClick={fakeFetch}>Fake Fetch</button>
+
+ <Modal open={loading}>
+ {<ReactBootStrap.Spinner animation="border" size="100" variant="danger" />}
+ </Modal>
+  
+
+       
+   
+      
+
+         
        </div>
     );
 }
