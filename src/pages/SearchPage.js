@@ -1,7 +1,12 @@
+import React from 'react'
+
 const SearchPage = () => {
 
-    return <p>SearchPage</p>
-
+    return (
+        <React.Fragment>
+            <p>SearchPage</p>
+        </React.Fragment>
+    )
 
 }
 

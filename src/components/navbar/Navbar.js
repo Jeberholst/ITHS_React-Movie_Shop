@@ -48,14 +48,17 @@ const ResultItem = ({movie}) => {
 
 const SearchResult = ({result}) =>{ 
   return(
-      <>
-      <div className="searchresult__cont">
-      { result.map((movie) => {
-        return <ResultItem key={movie.title}  movie = {movie}></ResultItem>
-      })  }
-        
-      </div>
-      </>
+
+      <React.Fragment>
+
+        <div className="searchresult__cont">
+        { result.map((movie) => {
+          return <ResultItem key={movie.title}  movie = {movie}></ResultItem>
+        })  }
+          
+        </div>
+
+      </React.Fragment>
   )
 }
 
@@ -76,7 +79,7 @@ const Bar = () => {
   }
  
   return (
-    <>
+    <React.Fragment>
     <div className="navbar__container">
       {/*Navigation bar*/}
       <Link to="/"><img src={dummyLogo} alt="" className="navbar_logo" /></Link>
@@ -100,7 +103,7 @@ const Bar = () => {
           {!searchResults.length? null : <SearchResult result={searchResults}></SearchResult>}
       </div> : null  
     }
-    </>
+     </React.Fragment>
   );
 } 
 
@@ -196,9 +199,9 @@ let Menu = () => {
 const Navbar= () => {
   let menuOpen = useSelector((state) => state.navbar.menuOpen)
   return (
-    <>
-    {menuOpen? <Menu></Menu> : <Bar></Bar>}
-    </>
+    <React.Fragment>
+      {menuOpen? <Menu></Menu> : <Bar></Bar>}
+    </React.Fragment>
   );
 }
 

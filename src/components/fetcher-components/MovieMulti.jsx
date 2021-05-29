@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
     root: {
       width: '90%',
       height: '100%',
-      margin: 5,
       fontSize: 12,
       borderRadius: 10,
       background: 'rgb(0,0,0, 0.1)',
@@ -29,9 +28,17 @@ const useStyles = makeStyles((theme) => ({
         alignContent: 'end',
         alignItems: 'center',
         justifyContent: 'end',
-        '& *': {
-            marginRight: 5,
-        },
+    },
+    bottomRow: {
+        display: 'flex',
+        width: '100%',
+        flexDirection: 'row',
+        alignContent: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'linear-gradient(to top, rgb(0, 0, 0, 0.8), rgb(0, 0, 0, 0.2))',
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10
     },
     mainContainer: {
         display: 'flex',
@@ -63,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'row',
         fontSize: '1.0em',
-        textAlign: 'center',
+        textAlign: 'left',
         alignContent: 'center',
         alignItems: 'center',
         textShadow: '1px 1px #000'
@@ -80,12 +87,16 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '1em',
         fontWeight: 'bold',
         wordWrap: 'break-word',
-        maxWidth: '90%'
+        maxWidth: '90%',
+        textAlign: 'left',
+    },
+    year: {
+        textAlign: 'left'
     },
     divider: {
-        marginTop: 10,
+        marginTop: 2,
         marginBottom: 10,
-        background: 'rgb(175,175,175, 0.5)',
+        background: 'rgb(175,175,175, 0.2)',
     },
     containerImdb: {
         display: 'flex',
@@ -111,7 +122,6 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: 'wrap',
         '& *': {
             marginTop: 5,
-            marginLeft: 5,
             marginRight: 5,
             padding: 5,
             borderRadius: 5,
@@ -132,16 +142,23 @@ const MovieMulti = ({ item }) => {
   const imdbRating = createFakeIMDBRating()//TODO: Change to variable
 
   return(
-        <div id='hover-container' className={classes.root} 
-            style={{backgroundImage: `url(${posterPath})`, 
-            backgroundRepeat: 'repeat-x', 
-            boxShadow: '0 0 2px 2px rgb(175,175,175, 0.2) inset'}} >
+        <div 
+            id='hover-container' 
+            className={classes.root} 
+            style={{
+                backgroundImage: `linear-gradient(to top, rgb(0, 0, 0, 0.4), rgb(0, 0, 0, 0.8)), url(${posterPath})`, 
+                backgroundRepeat: 'no-repeat',
+                objectFit: 'scale-down'
+            }
+        }>
+             {/* boxShadow: '0 15px 2px 2px rgb(175,175,175, 0.2) inset'}} > */}
 
-            <div className={classes.topRow}>
+             <div className={classes.topRow}>
                 {/* <ImdbRating rating={imdbRating}/> */}
                 <ButtonMore mItem={item}/>
-                <ShoppingCartActionButtons mItem={item} type={BUTTON_TYPE.CART_ADD}/>
             </div>
+            
+            <Divider className={classes.divider}></Divider>
 
             <div className={classes.mainContainer}>
                 
@@ -160,7 +177,12 @@ const MovieMulti = ({ item }) => {
                     </div>
                     
                     <div className={classes.subBodies}>
-                    <StarsComponent/>
+                        <StarsComponent/>
+                    </div>
+
+                    <div className={classes.containerOverView}>
+                        {/* <p>{itemOverView}</p> */}
+                        {/* <i>{'...read more'}</i> */}
                     </div>
 
                     <div className={classes.subBodies}>
@@ -169,24 +191,18 @@ const MovieMulti = ({ item }) => {
                                 return <div>{genre}</div>
                             })}
                         </div>
-                
-                    </div>
-
-                    <div className={classes.containerOverView}>
-                        <p>{itemOverView}</p>
-                        <i>{'...read more'}</i>
                     </div>
                     
                 </div>
 
-                <Divider className={classes.divider}></Divider>
-
-
+           
+            </div>
+                
+            <div className={classes.bottomRow}>
+                <ShoppingCartActionButtons mItem={item} type={BUTTON_TYPE.CART_ADD}/>
             </div>
 
-
-
-    </div>
+        </div>
   );
 
 }

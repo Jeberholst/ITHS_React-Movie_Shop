@@ -1,6 +1,12 @@
+import React from 'react'
+
 const CommentPage = () => {
 
-    return <p>CommentPage</p>
+    return (
+        <React.Fragment>
+            <p>CommentPage</p>
+        </React.Fragment>
+    );  
 
 
 }

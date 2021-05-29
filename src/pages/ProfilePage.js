@@ -1,7 +1,12 @@
+import React from 'react'
+
 const ProfilePage = () => {
 
-    return <p>ProfilePage</p>
-
+    return (
+        <React.Fragment>
+            <p>ProfilePage</p>
+        </React.Fragment>
+    )
 
 }
 

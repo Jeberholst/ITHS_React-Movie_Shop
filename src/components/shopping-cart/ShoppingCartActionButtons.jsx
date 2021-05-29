@@ -30,7 +30,7 @@ const BTN_COLORS = {
 export const BUTTON_TYPE = {
     CART_ADD: {
         btnVariant: BTN_VARIANTS.contained,
-        btnColor: BTN_COLORS.secondary,
+        btnColor: BTN_COLORS.primary,
         startIcon: <AddShoppingCartRounded/>,
         friendlyName: "Add",
     },

@@ -32,8 +32,8 @@ const LandingPage = () => {
     return(
 
         <div className="App-Content">
-            <MainSlider></MainSlider>
-             {GENRES.map((gener) => <GenreSlider key = {gener} id = {gener.toUpperCase()}  movies={posters}>{gener}</GenreSlider>)}
+            {/* <MainSlider></MainSlider>
+             {GENRES.map((gener) => <GenreSlider key = {gener} id = {gener.toUpperCase()}  movies={posters}>{gener}</GenreSlider>)} */}
 
 
             <div className="App-Content">

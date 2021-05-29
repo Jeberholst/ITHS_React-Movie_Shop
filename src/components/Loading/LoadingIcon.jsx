@@ -1,28 +1,28 @@
 
-import React, {useEffect, useState} from 'react';
-import * as ReactBootStrap from 'react-bootstrap';
-import Modal from './Modal'
+// import React, {useEffect, useState} from 'react';
+// //import * as ReactBootStrap from 'react-bootstrap';
+// import Modal from './Modal'
 
-const Loading = () =>{
+// const Loading = () =>{
 
-    const [loading,setLoading] = useState(false);
+//     const [loading,setLoading] = useState(false);
 
-    const LoadingSpinner = () =>{
-        setLoading(true);
-    }
+//     const LoadingSpinner = () =>{
+//         setLoading(true);
+//     }
 
-    useEffect(() =>{
+//     useEffect(() =>{
 
-        LoadingSpinner(); 
+//         LoadingSpinner(); 
 
-    },[]);
+//     },[]);
 
-    return(
-       <div>
+//     return(
+//        <div>
 
- <Modal open={loading}>
- {<ReactBootStrap.Spinner animation="border" size="100" variant="danger" />}
- </Modal>
+//  <Modal open={loading}>
+//  {<ReactBootStrap.Spinner animation="border" size="100" variant="danger" />}
+//  </Modal>
   
 
        
@@ -30,8 +30,8 @@ const Loading = () =>{
       
 
          
-       </div>
-    );
-}
+//        </div>
+//     );
+// }
 
-export default Loading;
+// export default Loading;

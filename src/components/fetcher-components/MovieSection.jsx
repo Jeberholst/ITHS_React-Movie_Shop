@@ -17,17 +17,18 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
     },
     rootGrid: {
-        display: 'flex',
-        flexDirection: 'column',
+        // display: 'flex',
+        // flexDirection: 'column',
         width: '95%',
         // height: '100%',
         marginTop: 10,
         marginBottom: 10,
         //TESTING
-        // display: 'grid',
-        // flexWrap: 'row wrap',
-        // gridTemplateColumns: "32% 32% 32%",
-        // gap: 5,
+        display: 'grid',
+        flexWrap: 'row wrap',
+        gridTemplateColumns: "32% 32% 32%",
+        gap: 5,
+        justifyContent: 'center'
     },
     rootCommentSection: {
         display: 'flex',
