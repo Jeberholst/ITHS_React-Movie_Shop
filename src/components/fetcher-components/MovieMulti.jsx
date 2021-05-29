@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
       height: '100%',
       fontSize: 12,
       borderRadius: 10,
-      background: 'rgb(0,0,0, 0.1)',
+    //   background: 'rgb(0,0,0, 0.1)',
       flexWrap: 'column-reverse',
       textShadow: '1px 1px #000'
     },
@@ -173,7 +173,7 @@ const MovieMulti = ({ item }) => {
                     </div>
 
                     <div className={classes.year}>
-                        <i style={{fontSize: 12}}>{releaseDate}</i>
+                        <i style={{fontSize: 12}}>{String(releaseDate).slice(0, 4)}</i>
                     </div>
                     
                     <div className={classes.subBodies}>

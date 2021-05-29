@@ -28,7 +28,8 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: 'row wrap',
         gridTemplateColumns: "32% 32% 32%",
         gap: 5,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        background: '#1f1f1f'
     },
     rootCommentSection: {
         display: 'flex',
