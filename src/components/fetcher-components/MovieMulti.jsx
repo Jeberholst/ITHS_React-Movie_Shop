@@ -18,25 +18,6 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: 'column',
       textShadow: '1px 1px #000',
     },
-    topRow: {
-        display: 'flex',
-        width: '100%',
-        flexDirection: 'row-reverse',
-        alignContent: 'end',
-        alignItems: 'center',
-        justifyContent: 'end',
-    },
-    bottomRow: {
-        display: 'flex',
-        width: '100%',
-        flexDirection: 'row-reverse',
-        alignContent: 'end',
-        alignItems: 'end',
-        justifyContent: 'end',
-        background: 'linear-gradient(to top, rgb(0, 0, 0, 0.8), rgb(38, 38, 38, 0.6))',
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10
-    },
     mainContainer: {
         display: 'flex',
         flexDirection: 'column',
@@ -45,12 +26,26 @@ const useStyles = makeStyles((theme) => ({
         objectFit: 'cover',
         backgroundRepeat: 'no-repeat'
     },
+    topRow: {
+        display: 'flex',
+        width: '100%',
+        flexDirection: 'row-reverse',
+        alignContent: 'end',
+        alignItems: 'center',
+        justifyContent: 'end',
+    },
     infoContainer: {
         width: '90%',
         height: '100%',
         marginLeft: '5%',
         // background: 'red',
         minHeight: '30vh',
+    },
+    divider: {
+        marginTop: 2,
+        marginBottom: 10,
+        background: 'rgb(175,175,175, 0.2)',
+        maxWidth: '100%',
     },
     title: {
         display: 'flex',
@@ -65,12 +60,6 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'left',
         maxWidth: '90%',
     },
-    divider: {
-        marginTop: 2,
-        marginBottom: 10,
-        background: 'rgb(175,175,175, 0.2)',
-        maxWidth: '100%',
-    },
     genres: {
         display: 'flex',
         flexDirection: 'row',
@@ -82,13 +71,25 @@ const useStyles = makeStyles((theme) => ({
             borderRadius: 5,
             background: 'rgb(68,68,68, 0.5)',
         },
-    }
+    },
+    bottomRow: {
+        display: 'flex',
+        width: '100%',
+        flexDirection: 'row-reverse',
+        alignContent: 'end',
+        alignItems: 'end',
+        justifyContent: 'end',
+        background: 'linear-gradient(to top, rgb(0, 0, 0, 0.8), rgb(38, 38, 38, 0.6))',
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10
+    },
 }));
 
-const MovieMulti = ({ item }) => {
+const MovieMulti = ({ item, useId }) => {
   
   const classes = useStyles();
 
+  const useID = useId
   const title = item.title
   const releaseDate = item.releaseDate
   const itemOverView = String(item.overview).slice(0, 200) + ' ...'
@@ -97,8 +98,7 @@ const MovieMulti = ({ item }) => {
   const imdbRating = createFakeIMDBRating()//TODO: Change to variable
 
   return(
-        <div 
-            id={`${'hover-container-'} ${item.id}`}
+        <div id={`${useID} ${item.id}`}
             className={classes.root}>
 
             <div className={classes.mainContainer} 
@@ -111,7 +111,7 @@ const MovieMulti = ({ item }) => {
                     <ButtonMore mItem={item}/>
                 </div>
             
-                <Divider className={classes.divider}></Divider>
+                <Divider className={classes.divider}/>
                 {/* <img className={classes.image} src={`${posterPath}`}></img> */}
 
                 <div className={classes.infoContainer}>

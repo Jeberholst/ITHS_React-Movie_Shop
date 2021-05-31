@@ -26,6 +26,15 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: 10,
         paddingBottom: 30,
     },
+    rootGrid: {
+        display: 'grid',
+        maxWidth: '100%',
+        minWidth: '95%',
+        gridTemplateColumns: '50% 50%',
+        marginTop: 10,
+        marginBottom: 10,
+        paddingBottom: 30,
+    },
     rootCommentSection: {
         display: 'flex',
         flexDirection: 'column',
@@ -53,21 +62,31 @@ const MovieSection = ({...props}) => {
                return (
                     <div className={classes.rootMulti}>
 
-                     {RESULT.map((item) => (
-                        <MovieMulti key={'paged-' + item.id} item={item}/>
-                     ))}
+                        {RESULT.map((item) => (
+                            <MovieMulti key={'paged-' + item.id} item={item} useId={'hover-container-slider'}/>
+                        ))}
 
                     </div>
                )
            case MOVIE_SECTION_SCREENS.LIST_SEARCHES: 
                return (
 
-                <div className={classes.rootMulti}>
-                    {RESULT.map((item) => (
-                        <MovieMulti key={'paged-' + item.id} item={item}/>
-                    ))}
-                </div>
+                    <div className={classes.rootMulti}>
+                        {RESULT.map((item) => (
+                            <MovieMulti key={'paged-' + item.id} item={item} useId={'hover-container-search'}/>
+                        ))}
+                    </div>
 
+               )
+           case MOVIE_SECTION_SCREENS.LIST_GENRES: 
+               return (
+                    <div className={classes.rootGrid}>
+
+                        {RESULT.map((item) => (
+                            <MovieMulti key={'genre-' + item.id} useId={'hover-container-genre'} />
+                        ))}
+
+                    </div>
                )
            case MOVIE_SECTION_SCREENS.SINGLE_MOVIE: 
                return (

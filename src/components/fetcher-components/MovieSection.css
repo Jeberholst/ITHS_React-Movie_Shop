@@ -1,20 +1,40 @@
 @media screen and (min-width: 980px) {
-    [id*="hover-container"] {
+    
+    [id*="hover-container-slider"] {
         /* background: blue; */
         margin-right: 1vh;
         margin-left: 1vh;
     }
+
+    [id*="hover-container-genre"] {
+        /* background: blue; */
+        display: 'grid';
+        margin-right: 1vh;
+        margin-left: 1vh;
+        grid-template-columns: '32% 32% 32%';
+    }
+
     [class*="mainContainer"] {
         min-width: 25vh;
     }
 }
   
 @media screen and (min-width: 635px) and (max-width: 979px) {
-    [id*="hover-container"] {
+
+    [id*="hover-container-slider"] {
         /* background: green; */
         margin-right: 1vh;
         margin-left: 1vh;
     }
+
+    [id*="hover-container-genre"] {
+        /* background: blue; */
+        display: 'grid';
+        margin-right: 1vh;
+        margin-left: 1vh;
+        grid-template-columns: '50% 50%%';
+    }
+
     [class*="mainContainer"] {
         min-width: 25vh;
     }
@@ -22,11 +42,19 @@
 
 @media screen and (min-width: 0px) and (max-width: 634px) {
 
-    [id*="hover-container"] {
+    [id*="hover-container-slider"] {
         /* background: red; */
         margin-right: 1vh;
         margin-left: 1vh;
     }
+
+    [id*="hover-container-genre"] {
+        /* background: blue; */
+        display: 'flex';
+        margin-right: 1vh;
+        margin-left: 1vh;
+    }
+
     [class*="mainContainer"] {
         
         min-width: 30vh;

@@ -24,6 +24,7 @@ import FetcherAPI from './util/FetcherAPI';
 firebase.initializeApp(firebaseConfig);
 
 function App() {
+
   return (
       <div className="App">
 
