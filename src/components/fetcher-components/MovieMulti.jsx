@@ -171,11 +171,6 @@ const MovieMulti = ({ item }) => {
                         </div>
                 
                     </div>
-
-                    <div className={classes.containerOverView}>
-                        <p>{itemOverView}</p>
-                        <i>{'...read more'}</i>
-                    </div>
                     
                 </div>
 
