@@ -25,7 +25,6 @@ const CommentSection = () => {
     return (
         <React.Fragment>
             
-            <ButtonBack/>
             <div className={classes.root}>
     
                     <CommentSingle/>
@@ -41,23 +40,5 @@ const CommentSection = () => {
 
 }
 
-const ButtonBack  = () => {
-
-    const dispatch = useDispatch();
-
-    return (
-        <div>
-            <Button
-                variant={'outlined'}
-                color={'primary'}
-                // className={classes.root}
-                onClick={
-                    () => {
-                        dispatch(actionsMovieSection.setScreen(MOVIE_SECTION_SCREENS.SINGLE_MOVIE))
-                    }
-                }>{'<<<<'}</Button>   
-        </div>
-    )
-};
 
 export default CommentSection;

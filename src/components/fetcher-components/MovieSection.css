@@ -1,0 +1,35 @@
+@media screen and (min-width: 980px) {
+    [id*="hover-container"] {
+        /* background: blue; */
+        margin-right: 1vh;
+        margin-left: 1vh;
+    }
+    [class*="mainContainer"] {
+        min-width: 25vh;
+    }
+}
+  
+@media screen and (min-width: 635px) and (max-width: 979px) {
+    [id*="hover-container"] {
+        /* background: green; */
+        margin-right: 1vh;
+        margin-left: 1vh;
+    }
+    [class*="mainContainer"] {
+        min-width: 25vh;
+    }
+}
+
+@media screen and (min-width: 0px) and (max-width: 634px) {
+
+    [id*="hover-container"] {
+        /* background: red; */
+        margin-right: 1vh;
+        margin-left: 1vh;
+    }
+    [class*="mainContainer"] {
+        
+        min-width: 30vh;
+     
+    }
+}

@@ -10,6 +10,7 @@ import { actions as actionsMovieSection, MOVIE_SECTION_SCREENS } from '../../red
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import { matchGenreIdsToName } from '../../helper-functions/genres';
 import MockGenres from '../../mockData/mock-data-genre.json';
+import CommentSection from '../comment/CommentSection';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -132,18 +133,16 @@ const MovieSingle = () => {
   const itemOverView = item.overview
   const movieGenresNamed = matchGenreIdsToName(item.genreIds, MockGenres.genres)
   const posterPath = createPosterPathFull(POSTER_SIZES.w500, item.posterPath)
-  const imdbRating = createFakeIMDBRating()//TODO: Change to variable
  
   return(
         <div id='hover-container' className={classes.root}>
 
-        <ButtonNavigateBack/>
+        {/* <ButtonNavigateBack/> */}
                 
         <div className={classes.containerContent}>      
             
             <div className={classes.topRow}>
-                <StarsComponent/>
-                <ImdbRating rating={imdbRating}/>
+                {'xx'}
             </div>
 
             <div className={classes.mainContainer}>
@@ -179,14 +178,17 @@ const MovieSingle = () => {
 
             </div>
 
-            <Divider className={classes.divider}></Divider>
 
             <div className={classes.containerBottomButtons}>
   
                     <ShoppingCartActionButtons mItem={item} type={BUTTON_TYPE.CART_ADD}/>    
-                    <ButtonNavigateComments/>
              
             </div>
+
+            <Divider className={classes.divider}></Divider>
+
+            <CommentSection/>
+
         </div>  
     </div>
   );
@@ -205,48 +207,4 @@ const ImdbRating = ({ rating }) => {
 
 };
 
-const ButtonNavigateComments = () => {
-
-    const dispatch = useDispatch();
-
-    return (
-        <div>
-            <Button
-                variant={'contained'}
-                color={'default'}
-                startIcon={<StarBorderIcon/>}
-                // className={classes.root}
-                onClick={
-                    () => {
-                        dispatch(actionsMovieSection.setScreen(MOVIE_SECTION_SCREENS.SINGLE_MOVIE_COMMENTS))
-                    }
-                }>{'COMMENTS'}</Button>   
-        </div>
-    )
-};
-
-//SHOULD USE GLOBAL NAV BUTTON WITH SWITCH
-const ButtonNavigateBack  = () => {
-
-    const dispatch = useDispatch();
-
-    return (
-        <div>
-            <Button
-                variant={'outlined'}
-                color={'primary'}
-                // className={classes.root}
-                onClick={
-                    () => {
-                        dispatch(actionsMovieSection.setScreen(MOVIE_SECTION_SCREENS.GRID_MOVIES))
-                    }
-                }>{'<<<<'}</Button>   
-        </div>
-    )
-};
-
 export default MovieSingle;
-
-export function createFakeIMDBRating(){
-    return (Math.random() * 10).toFixed(2); 
-}

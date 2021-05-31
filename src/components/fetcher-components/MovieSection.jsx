@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { MOVIE_SECTION_SCREENS } from '../../redux/features/movieSection';
 import MovieSingle from './MovieSingle';
 import CommentSection from '../comment/CommentSection';
+import './MovieSection.css'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,18 +17,14 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    rootGrid: {
+    rootMulti: {
         display: 'flex',
-        flexDirection: 'column',
-        width: '95%',
-        // height: '100%',
+        overflowX: 'scroll',
+        maxWidth: '100%',
+        minWidth: '95%',
         marginTop: 10,
         marginBottom: 10,
-        //TESTING
-        // display: 'grid',
-        // flexWrap: 'row wrap',
-        // gridTemplateColumns: "32% 32% 32%",
-        // gap: 5,
+        paddingBottom: 30,
     },
     rootCommentSection: {
         display: 'flex',
@@ -54,7 +51,7 @@ const MovieSection = ({...props}) => {
         switch(String(screen)){
            case MOVIE_SECTION_SCREENS.GRID_MOVIES:
                return (
-                    <div className={classes.rootGrid}>
+                    <div className={classes.rootMulti}>
 
                      {RESULT.map((item) => (
                         <MovieMulti key={'paged-' + item.id} item={item}/>
@@ -65,7 +62,7 @@ const MovieSection = ({...props}) => {
            case MOVIE_SECTION_SCREENS.LIST_SEARCHES: 
                return (
 
-                <div className={classes.rootGrid}>
+                <div className={classes.rootMulti}>
                     {RESULT.map((item) => (
                         <MovieMulti key={'paged-' + item.id} item={item}/>
                     ))}
@@ -87,7 +84,7 @@ const MovieSection = ({...props}) => {
            case MOVIE_SECTION_SCREENS.QUICK_ADD: 
                return (
               
-                 <div className={classes.rootGrid}>
+                 <div className={classes.rootMulti}>
 
                     {RESULT.map((item) => (
                         <MovieMulti key={'paged-' + item.id} item={item}/>

@@ -1,6 +1,6 @@
 import './Navbar.css';
 import React from 'react'
-import dummyLogo from '../../img/Logo/dummy_ic.jpg'
+import dummyLogo from '../../img/Logo/logo_planet_movie.webp'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggelMenu, setSearchResults, toggelSearch, fetchSearchResult } from '../../redux/features/navbarSlice'
 import  { actions }  from '../../redux/features/movieSection'
