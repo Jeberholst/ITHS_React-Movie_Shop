@@ -1,8 +1,11 @@
-import {Button, Grid, Link, makeStyles, TextField, Typography} from "@material-ui/core";
+import {Button, createMuiTheme, CssBaseline, Grid, Link, makeStyles, TextField, Typography} from "@material-ui/core";
 import React, {useEffect, useState} from "react";
 import firebase from "firebase/app";
 import "firebase/auth";
 import AuthService from "../util/auth-service"
+import PageLableWithIcon from "./PageLabelWithIcon";
+import {Lock} from "@material-ui/icons";
+import { ThemeProvider } from "@material-ui/styles";
 
 export const AuthContext = React.createContext()
 
@@ -16,7 +19,9 @@ const LoginPage = () => {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: "center",
+
         },
+
         avatar: {
             margin: theme.spacing(1),
             backgroundColor: theme.palette.secondary.main,
@@ -27,9 +32,9 @@ const LoginPage = () => {
             marginTop: theme.spacing(2),
             rowGap: '20px',
             justifyContent: "center",
-            backgroundColor: 'grey',
+            //backgroundColor: 'grey',
             padding: '30px',
-            },
+        },
         submit: {
             marginTop: theme.spacing(2),
             marginBottom: theme.spacing(5),
@@ -39,6 +44,13 @@ const LoginPage = () => {
             margin: 'auto'
         }
     }));
+
+    const theme = createMuiTheme({
+        palette: {
+            type: "dark"
+        }
+    });
+
 
     const classes = useStyles();
     const [user, setUser]  = useState("")
@@ -62,7 +74,7 @@ const LoginPage = () => {
                 console.log("user", user)
             } else {
                 console.log("no user is signed in", user)
-                setUser("Det konto finns inte")
+                setUser("")
                 // User is signed out
             }
         });
@@ -87,12 +99,13 @@ const LoginPage = () => {
     return (
         <div className={classes.paper}>
             <AuthContext.Provider value={{user}}>
-                <Typography variant="h5" component="h2">
-                    Logga in
-                </Typography>
+                <PageLableWithIcon {...{ text: 'Logga in', icon: <Lock/>}}/>
 
+
+            <ThemeProvider theme={theme}>
+                <CssBaseline/>
                 <div className={classes.form} noValidate>
-                    USER:   {user.email ? user.email : user}
+                  {user.email ? 'Hej ' + user.displayName + "!" : user}
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -127,18 +140,19 @@ const LoginPage = () => {
                         data-testid="signin-anon"
                         onClick={() =>  user.email ? signOut() :  signInWithEmailPassword()}
                     >
-                        {user.email ? "Log out" : "Log in"}
+                        {user.email ? "Logga ut" : "Logga in"}
                     </Button>
 
                     <Grid container>
                         <Grid item className={classes.footer}
                         >
-                            <Link href="#" variant="body2">
+                            <Link href="register" variant="body2">
                                 {"Inget konto? Skapa ett här"}
                             </Link>
                         </Grid>
                     </Grid>
                 </div>
+            </ThemeProvider>
 
             </AuthContext.Provider>
 
