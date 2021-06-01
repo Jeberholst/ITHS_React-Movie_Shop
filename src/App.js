@@ -21,6 +21,8 @@ import "firebase/auth";
 import SnackBarsRedux from './util/SnackBarsRedux';
 import FetcherAPI from './util/FetcherAPI';
 import Loading from './components/Loading/LoadingIcon';
+import ErrorPopUp from './components/ErrorHandling/ErrorPopUp'
+import LoadEhandling from './components/ErrorHandling/ErrorPopUp';
 
 firebase.initializeApp(firebaseConfig);
 
@@ -34,7 +36,7 @@ function App() {
         <header className="App-NavBar">
           <Navbar/>
         </header>
-        <Loading/>
+        <LoadEhandling/>
         <div className='App-Main'>
                 <div>
                     <Switch>
