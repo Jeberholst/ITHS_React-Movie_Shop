@@ -8,6 +8,7 @@ import { reducer as fetcherApiReducer } from './fetcherApi'
 import navbarReducer from './navbarSlice'
 import mainSliderReducer from './mainSliderSlice' 
 import genreSliderReducer from './genreSliderSlice'
+import genrePageReducer from './genrePageSlice'
 
 const rootReducer = combineReducers({
     shoppingCart: shoppingCartReducer,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
     checkOut: checkOutReducer,
     paymentProcessor: paymentProcessorReducer,
     fetcherApi: fetcherApiReducer,
+    genrePage: genrePageReducer,
 })
 
 export { rootReducer };

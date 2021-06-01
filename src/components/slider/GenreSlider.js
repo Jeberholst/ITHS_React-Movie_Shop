@@ -69,7 +69,7 @@ const Slide = ({movie}) => {
 const GenreSlider = ({children,movies,id}) => {
     let dispatch = useDispatch()
     useEffect(() => {
-        dispatch(fetchGenerSlides(id))
+        dispatch(fetchGenerSlides({genere:id,amount:10}))
     },[])
 
     //add slider for controll over slideffect.

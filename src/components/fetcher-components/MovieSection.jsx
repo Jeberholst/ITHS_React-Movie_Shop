@@ -47,6 +47,7 @@ const MovieSection = ({...props}) => {
     const screen = useSelector(state => state.movieSection.screen)
     const RESULT = props.RESULT
 
+
     if(RESULT !== null){
 
         console.log('CurrentScreen:', screen)
