@@ -69,6 +69,10 @@ const CommentSingle = ({...props}) => {
 
     const item = props.item
 
+    console.log(props.item)
+
+    //TODO: DISPLAY RATING
+
     return (
         <React.Fragment>
             
@@ -78,7 +82,7 @@ const CommentSingle = ({...props}) => {
 
                     <div className={classes.containerProfileInfo}>
 
-                            <UserProfileMini userName={item.user.userName} userPhotoUrl={item.user.userPhotoUrl}/>
+                            <UserProfileMini userName={item.displayName} userPhotoUrl={item.photoUrl}/>
                     
                     </div>
 
@@ -88,7 +92,7 @@ const CommentSingle = ({...props}) => {
 
                 <div className={classes.containerComment}>
                     <p style={{fontSize: 12}}>
-                        {item.comment}
+                        {item.comment} 
                     </p>
                 </div>
 

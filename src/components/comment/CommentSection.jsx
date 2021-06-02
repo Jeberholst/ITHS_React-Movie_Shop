@@ -4,6 +4,7 @@ import { actions as actionsMovieSection, MOVIE_SECTION_SCREENS } from '../../red
 import CommentAdd from './CommentAdd';
 import CommentSingle from './CommentSingle';
 import { fsDB as db } from './../../util/firebase'
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,24 +28,20 @@ const useStyles = makeStyles((theme) => ({
 const CommentSection = () => {
     const classes = useStyles();
 
-    // const item = useSelector(state => state.movieSection.selectedMovie)
+    const item = useSelector(state => state.movieSection.selectedMovie)
     const [comments, setComments]  = useState([]) //RENAME TO commentsAndRating
     //TODO: use RATING AND CONVERT TO x AMOUNT OF STARS
-    //TODO: send comment to firestore
 
+    const fetchComments = () => {
 
-    const checkDb = () => {
-           //TODO: change doc to variable
-              //TODO: move to separate file?
-        const movieRef = db.collection("movies").doc('movieIDHereFromTMDB')
-
+        //MOVE TO SEPARATE .js
+        const movieRef = db.collection("movies").doc(`${item.id}`)
+        
         movieRef.get()
             .then((doc) => {
                 if (doc.exists) {
                     
                     const data = doc.data()
-                    console.log('DATA FOUND:', data)
-
                     const tempArr = [];
 
                     data.comments.map((item) => (
@@ -67,7 +64,7 @@ const CommentSection = () => {
     }
 
     useEffect(() => {
-        checkDb()
+        fetchComments()
     }, [])
 
     return (
