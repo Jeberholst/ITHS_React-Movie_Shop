@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
         overflowX: 'scroll',
         maxWidth: '100%',
         minWidth: '95%',
-        marginTop: 10,
+        marginTop: 25,
         marginBottom: 10,
         paddingBottom: 30,
     },
