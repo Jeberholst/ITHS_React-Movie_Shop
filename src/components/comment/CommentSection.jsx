@@ -1,6 +1,5 @@
 import React from 'react'
-import { Button, Container, makeStyles } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
+import { makeStyles } from '@material-ui/core';
 import { actions as actionsMovieSection, MOVIE_SECTION_SCREENS } from '../../redux/features/movieSection'
 import CommentAdd from './CommentAdd';
 import CommentSingle from './CommentSingle';
@@ -27,6 +26,7 @@ const CommentSection = () => {
             
             <div className={classes.root}>
     
+                    {/* TODO: LOAD COMMMENTS  */}
                     <CommentSingle/>
                     <CommentSingle/>
                     <CommentSingle/>

@@ -111,7 +111,7 @@ const CommentAdd = () => {
                     src={user.photoUrl ? user.photoUrl: backUpProfilePhoto}/>
             
 
-                <b 
+                <b
                     className={classes.profileName}>
                     {user.displayName ? user.displayName : 'Not signed in'}
                 </b>
@@ -120,7 +120,6 @@ const CommentAdd = () => {
 
             <div className={classes.containerComment}>
 
-        
                 <TextField
                     className={classes.textField}
                     not-required
@@ -130,7 +129,6 @@ const CommentAdd = () => {
                     variant="filled"
                     />
 
-                
                     <Button
                         variant={'contained'}
                         color={'secondary'}
