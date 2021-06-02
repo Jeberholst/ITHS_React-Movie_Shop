@@ -29,18 +29,18 @@ import './FilterBar.css'
         <>
         <div className="filterbar_cont">
             <div className="filterbar_slider-cont">
-                <input value={year} type="range" min="1950" max="2021" className="filterbar_slider" onChange={e => dispatch(setYear(e.target.value)) } onTouchEnd={e => setFilter()}/>
                 <h3>{year}</h3>
+                <input value={year} type="range" min="1950" max="2021" className="filterbar_slider" onChange={e => dispatch(setYear(e.target.value)) } onTouchEnd={e => setFilter()}/>
             </div>
-            <div className="filterbar_sort-cont">
+        </div>
+        <div className="filterbar_sort-cont">
                 <select name="sort" id="sort" onChange={e => updateSorting(e.target.value)} value={sorting}>
+                    <option value="popularity.desc">Popularity</option>
                     <option value="original_title.asc">A-Z</option>
                     <option value="original_title.desc">Z-A</option>
-                    <option value="popularity.desc">Popularity</option>
+                    
                 </select>
             </div>
-
-        </div>
         </>
     )
 }
