@@ -11,6 +11,7 @@ const actions = { setScreen, setSelectedMovie, resetSelectedMovie, setMovieList,
 export const MOVIE_SECTION_SCREENS = {
     GRID_MOVIES: 'grid_movies',
     LIST_SEARCHES: 'list_searches',
+    LIST_GENRES: 'list_genres',
     SINGLE_MOVIE: 'single_movie',
     SINGLE_MOVIE_COMMENTS: 'single_movie_comments',
     QUICK_ADD: 'grid_movies',

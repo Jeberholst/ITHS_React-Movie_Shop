@@ -12,67 +12,40 @@ import { MoreHorizRounded } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      width: '90%',
-      height: '100%',
-      margin: 5,
+      display: 'flex',
+      width: '100%',
       fontSize: 12,
-      borderRadius: 10,
-      background: 'rgb(0,0,0, 0.1)',
-      flexWrap: 'column-reverse',
-      textShadow: '1px 1px #000'
+      flexDirection: 'column',
+      textShadow: '1px 1px #000',
+    },
+    mainContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
+        borderRadius: 10,
+        objectFit: 'cover',
+        backgroundRepeat: 'no-repeat'
     },
     topRow: {
         display: 'flex',
         width: '100%',
         flexDirection: 'row-reverse',
-        textAlign: 'end',
         alignContent: 'end',
         alignItems: 'center',
         justifyContent: 'end',
-        '& *': {
-            marginRight: 5,
-        },
-    },
-    mainContainer: {
-        display: 'flex',
-        flexDirection: 'row',
-        width: '100%',
-        maxHeight: '100%',
-        margin: 10,
-        minHeight: '40vh',
-    },
-    imageContainer: {
-        width: '30%',
-        height: '40%'
     },
     infoContainer: {
-        width: '65%',
-        marginLeft: 10,
-    },
-    image: {
-        width: '100%',
+        width: '90%',
         height: '100%',
-        textAlign: 'left',
-        alignContent: 'left',
-        alignItems: 'left',
-        justifyContent: 'left',
-        background: 'rgb(0,0,0, 0.5)',
-        objectFit: 'fit-content',
+        marginLeft: '5%',
+        // background: 'red',
+        minHeight: '30vh',
     },
-    subBodies: {
-        display: 'flex',
-        flexDirection: 'row',
-        fontSize: '1.0em',
-        textAlign: 'center',
-        alignContent: 'center',
-        alignItems: 'center',
-        textShadow: '1px 1px #000'
-    },
-    containerOverView: {
-        textAlign: 'left',
-        maxWidth: '70%',
-        maxHeight: '100%',
-        textShadow: '1px 1px #000'
+    divider: {
+        marginTop: 2,
+        marginBottom: 10,
+        background: 'rgb(175,175,175, 0.2)',
+        maxWidth: '100%',
     },
     title: {
         display: 'flex',
@@ -80,30 +53,12 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '1em',
         fontWeight: 'bold',
         wordWrap: 'break-word',
-        maxWidth: '90%'
+        maxWidth: '90%',
+        textAlign: 'left',
     },
-    divider: {
-        marginTop: 10,
-        marginBottom: 10,
-        background: 'rgb(175,175,175, 0.5)',
-    },
-    containerImdb: {
-        display: 'flex',
-        flexDirection: 'row',
-        textAlign: 'center',
-        alignContent: 'center',
-        alignItems: 'center',
-        height: '100%',
-    },
-    containerBottomButtons: {
-        display: 'flex',
-        flexWrap: 'wrap-reverse',
-        flexDirection: 'row-reverse',
-        height: 'fit-content',
-        alignItems: 'bottom',
-        '& *': {
-            marginRight: 5,
-        },
+    year: {
+        textAlign: 'left',
+        maxWidth: '90%',
     },
     genres: {
         display: 'flex',
@@ -111,19 +66,30 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: 'wrap',
         '& *': {
             marginTop: 5,
-            marginLeft: 5,
             marginRight: 5,
             padding: 5,
             borderRadius: 5,
             background: 'rgb(68,68,68, 0.5)',
         },
-    }
+    },
+    bottomRow: {
+        display: 'flex',
+        width: '100%',
+        flexDirection: 'row-reverse',
+        alignContent: 'end',
+        alignItems: 'end',
+        justifyContent: 'end',
+        background: 'linear-gradient(to top, rgb(0, 0, 0, 0.8), rgb(38, 38, 38, 0.6))',
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10
+    },
 }));
 
-const MovieMulti = ({ item }) => {
+const MovieMulti = ({ item, useId }) => {
   
   const classes = useStyles();
 
+  const useID = useId
   const title = item.title
   const releaseDate = item.releaseDate
   const itemOverView = String(item.overview).slice(0, 200) + ' ...'
@@ -132,23 +98,22 @@ const MovieMulti = ({ item }) => {
   const imdbRating = createFakeIMDBRating()//TODO: Change to variable
 
   return(
-        <div id='hover-container' className={classes.root} 
-            style={{backgroundImage: `url(${posterPath})`, 
-            backgroundRepeat: 'repeat-x', 
-            boxShadow: '0 0 2px 2px rgb(175,175,175, 0.2) inset'}} >
+        <div id={`${useID} ${item.id}`}
+            className={classes.root}>
 
-            <div className={classes.topRow}>
-                {/* <ImdbRating rating={imdbRating}/> */}
-                <ButtonMore mItem={item}/>
-                <ShoppingCartActionButtons mItem={item} type={BUTTON_TYPE.CART_ADD}/>
-            </div>
-
-            <div className={classes.mainContainer}>
-                
-                {/* <div className={classes.imageContainer}>
-                    <img className={classes.image} src={posterPath} alt="Movie-poster"></img>
-                </div> */}
+            <div className={classes.mainContainer} 
+                style={{backgroundImage: `linear-gradient(to top, rgb(36, 36, 36, 0.3), rgb(15, 15, 15, 0.6)), url(${posterPath})`}}
+                >
+        
+               
+                <div className={classes.topRow}>
+                    {/* <ImdbRating rating={imdbRating}/> */}
+                    <ButtonMore mItem={item}/>
+                </div>
             
+                <Divider className={classes.divider}/>
+                {/* <img className={classes.image} src={`${posterPath}`}></img> */}
+
                 <div className={classes.infoContainer}>
 
                     <div className={classes.title}>
@@ -156,32 +121,34 @@ const MovieMulti = ({ item }) => {
                     </div>
 
                     <div className={classes.year}>
-                        <i style={{fontSize: 12}}>{releaseDate}</i>
+                        <i style={{fontSize: 12}}>{String(releaseDate).slice(0, 4)}</i>
                     </div>
                     
-                    <div className={classes.subBodies}>
-                    <StarsComponent/>
+                    <div className={classes.title}>
+                        <StarsComponent/>
                     </div>
 
-                    <div className={classes.subBodies}>
-                        <div className={classes.genres}>
-                            {movieGenresNamed.map((genre) => {
-                                return <div key={genre}>{genre}</div>
-                            })}
-                        </div>
-                
+         
+                    <div className={classes.genres}>
+                        {movieGenresNamed.map((genre) => {
+                            return <div key={genre}>{genre}</div>
+                        })}
+
                     </div>
+              
                     
                 </div>
 
-                <Divider className={classes.divider}></Divider>
+                <div className={classes.bottomRow}>
+                    <ShoppingCartActionButtons mItem={item} type={BUTTON_TYPE.CART_ADD}/>
+                 </div>
 
-
+               
             </div>
+                
+    
 
-
-
-    </div>
+        </div>
   );
 
 }

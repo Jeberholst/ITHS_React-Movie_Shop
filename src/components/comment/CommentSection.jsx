@@ -1,6 +1,5 @@
 import React from 'react'
-import { Button, Container, makeStyles } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
+import { makeStyles } from '@material-ui/core';
 import { actions as actionsMovieSection, MOVIE_SECTION_SCREENS } from '../../redux/features/movieSection'
 import CommentAdd from './CommentAdd';
 import CommentSingle from './CommentSingle';
@@ -25,9 +24,9 @@ const CommentSection = () => {
     return (
         <React.Fragment>
             
-            <ButtonBack/>
             <div className={classes.root}>
     
+                    {/* TODO: LOAD COMMMENTS  */}
                     <CommentSingle/>
                     <CommentSingle/>
                     <CommentSingle/>
@@ -41,23 +40,5 @@ const CommentSection = () => {
 
 }
 
-const ButtonBack  = () => {
-
-    const dispatch = useDispatch();
-
-    return (
-        <div>
-            <Button
-                variant={'outlined'}
-                color={'primary'}
-                // className={classes.root}
-                onClick={
-                    () => {
-                        dispatch(actionsMovieSection.setScreen(MOVIE_SECTION_SCREENS.SINGLE_MOVIE))
-                    }
-                }>{'<<<<'}</Button>   
-        </div>
-    )
-};
 
 export default CommentSection;

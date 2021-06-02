@@ -21,7 +21,7 @@ class AuthService {
 
     logout() {
         localStorage.removeItem("user");
-        firebase.auth().signOut()
+        firebase.auth().signOut().then( r =>  console.log("Signed out"))
     }
 
     register(email, password) {
@@ -29,6 +29,10 @@ class AuthService {
             .then((userCredential) => {
                 // Signed in
                 console.log("created")
+                let user = userCredential.user;
+                localStorage.setItem("user", JSON.stringify(user));
+                window.location = 'profile'
+
                 // ...
             })
             .catch((error) => {
@@ -39,9 +43,33 @@ class AuthService {
             });
     }
 
+    updateUserProfile(displayName) {
+        let user = firebase.auth().currentUser;
+
+        user.updateProfile({
+            displayName: displayName,
+            photoURL: "https://example.com/jane-q-user/profile.jpg"
+        }).then(function() {
+            // Update successful.
+        }).catch(function(error) {
+            // An error happened.
+        });
+    }
+
     getCurrentUser() {
         return JSON.parse(localStorage.getItem('user'));
     }
+
+    deleteUser() {
+        let user = firebase.auth().currentUser;
+
+        user.delete().then(function() {
+            // User deleted.
+            console.log("User deleted")
+            localStorage.removeItem("user");
+        }).catch(function(error) {
+            // An error happened.
+        });    }
 
 
 
