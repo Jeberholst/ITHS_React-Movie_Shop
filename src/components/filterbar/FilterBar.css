@@ -5,11 +5,11 @@ h3{
 }
 .filterbar_cont{
     display: flex;
+    overflow: hidden;
     flex-direction: row;
     justify-content: center;
     background-color: white;
     color: black;
-    
 }
 .filterbar_slider-cont{
     padding: 10px;
@@ -53,6 +53,7 @@ h3{
     align-items: flex-end;
     justify-items: flex-end;
     margin-top: 3px;
+    margin-right: 2px;
 }
 select {
     font-family: inherit;
@@ -61,11 +62,10 @@ select {
     color: #535353;
     box-sizing: border-box;
     padding: 3px;
-    padding-right: 10px;
     border: 1px solid #aaa;
     box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
      background-color: #fff;
 }
 option{
-    padding: 10px;
+
 }

@@ -74,6 +74,12 @@ const Bar = () => {
         dispatch(setSearchResults([]))
     }
   }
+  function handelMenuClick(){
+    dispatch(toggelMenu())
+    if(searchbarOpen){
+      dispatch(toggelSearch())
+    }
+  }
  
   return (
     <>
@@ -83,7 +89,7 @@ const Bar = () => {
       <div className="menu__icons">
         <i className="fas fa-search" onClick={() => dispatch(toggelSearch())}></i>
         <Link to="/shopping-cart"> <ShoppingCartBadge/> </Link>
-        <i onClick={() => dispatch(toggelMenu())} className="fas fa-bars navbar__container_burger-menu"></i>
+        <i onClick={() => handelMenuClick()} className="fas fa-bars navbar__container_burger-menu"></i>
       </div>
       
     </div>
