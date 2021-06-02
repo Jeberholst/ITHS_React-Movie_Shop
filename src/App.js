@@ -22,8 +22,6 @@ import SnackBarsRedux from './util/SnackBarsRedux';
 import FetcherAPI from './util/FetcherAPI';
 import RegisterPage from "./pages/RegisterPage";
 
-firebase.initializeApp(firebaseConfig);
-
 function App() {
 
   return (

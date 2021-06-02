@@ -12,10 +12,9 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
-        width: '95%',
+        width: '100%',
         height: '100%',
         fontSize: 12,
-        padding: 20,
         borderRadius: 10,
         background: 'rgb(32,32,32, 0.6)',
         flexWrap: 'column-reverse',
@@ -23,17 +22,21 @@ const useStyles = makeStyles((theme) => ({
     header: {
         display: 'flex',
         fontSize: 16,
+        marginTop: 10,
+        marginBottom: 10,
+        textIndent: 15
     },
     divider: {
         background: 'rgb(255,255,255, 0.1)',
         marginTop: 10,
-        marginBottom: 30,
+        marginBottom: 10,
     },
     containerComment: {
         display: 'flex',
         flexDirection: 'column',
         marginLeft: 25,
         marginRight: 25,
+        marginBottom: 20,
     },
     textField: {
         display: 'flex',
@@ -50,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'row',
         width: '100%',
-        textAlign: 'center',
+        textAlign: 'left',
         alignContent: 'center',
         alignItems: 'center',
         marginLeft: 15
