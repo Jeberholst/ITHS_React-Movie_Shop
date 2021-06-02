@@ -5,7 +5,7 @@ import React, { useEffect, useRef } from 'react'
 import MovieSection from '../components/fetcher-components/MovieSection.jsx'
 import { actions, MOVIE_SECTION_SCREENS } from './../redux/features/movieSection';
 import { useDispatch, useSelector } from 'react-redux'
-import {fetchGenreMovies,setGenre} from '../redux/features/genrePageSlice'
+import {fetchGenreMovies,setGenre,movieResults} from '../redux/features/genrePageSlice'
 import FilterBar from '../components/filterbar/FilterBar'
 
 
@@ -14,7 +14,9 @@ const GenrePage = () => {
     const params = useParams()
     let dispatch = useDispatch()
     let id = useRef("")
-    let results = useSelector(state => state.genrePage.result)
+    let ready = useSelector(state => state.genrePage.ready)
+    let movies = useSelector(movieResults)
+    
    
     
      
@@ -24,18 +26,31 @@ const GenrePage = () => {
                 id.current = params.id.toLowerCase()
                 dispatch( fetchGenreMovies( {genre:params.id.toUpperCase() ,amount: 50}))
         }
-        return () => dispatch(setGenre([]))
+        
+        dispatch(actions.setMovieList(movies))
+        
+        return () => {
+            dispatch(setGenre([]))
+        }
     })
-    console.log(results)
+
+    useEffect(() => {
+        return () => dispatch(actions.resetMovieList()) 
+    },[])
+
     console.log("RERENDEr")
     return(  
         <div className="App-Content">
-            {!results.length? null :
-            <>
-            <Header page={`${id.current}`}>{id.current}</Header> 
+           
+            
+            <Header page={`${id.current}`}>{id.current}</Header>
             <FilterBar/>
-            <MovieSection {...{RESULT: results}}/> 
+            {ready?
+            <>
+            <MovieSection /> 
             </>
+            :
+            <h1>LOADING</h1>
             }
         </div>
     ) 

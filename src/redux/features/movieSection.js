@@ -3,8 +3,10 @@ import { createAction, createReducer } from "@reduxjs/toolkit";
 const setScreen = createAction('set screen');
 const setSelectedMovie = createAction('set selected movie');
 const resetSelectedMovie = createAction('set selected movie null');
+const setMovieList = createAction('set movie list')
+const resetMovieList = createAction('reset movie list')
 
-const actions = { setScreen, setSelectedMovie, resetSelectedMovie };
+const actions = { setScreen, setSelectedMovie, resetSelectedMovie, setMovieList, resetMovieList };
 
 export const MOVIE_SECTION_SCREENS = {
     GRID_MOVIES: 'grid_movies',
@@ -17,6 +19,7 @@ export const MOVIE_SECTION_SCREENS = {
 const initialState = {
     screen: MOVIE_SECTION_SCREENS.GRID_MOVIES,
     selectedMovie : null,
+    movieList : null,
 }
 
 const reducer = createReducer(initialState, {
@@ -37,6 +40,13 @@ const reducer = createReducer(initialState, {
         const value = action.payload
         console.log('Should set to screen: ', value)
         state.screen = value
+    },
+    [resetMovieList] : (state, action) => { 
+        state.screen = null
+    },
+    [setMovieList] : (state, action) => { 
+        const value = action.payload
+        state.movieList = value
     },
 }) 
 

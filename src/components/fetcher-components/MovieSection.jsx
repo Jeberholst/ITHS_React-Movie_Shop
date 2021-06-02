@@ -40,12 +40,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const MovieSection = ({...props}) => {
+const MovieSection = () => {
 
     const classes = useStyles();
 
     const screen = useSelector(state => state.movieSection.screen)
-    const RESULT = props.RESULT
+    const RESULT = useSelector(state => state.movieSection.movieList)
 
 
     if(RESULT !== null){
