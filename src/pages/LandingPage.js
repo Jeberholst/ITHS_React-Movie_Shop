@@ -34,12 +34,6 @@ const LandingPage = () => {
         <div className="App-Content">
             <MainSlider></MainSlider>
              {GENRES.map((gener) => <GenreSlider key = {gener} id = {gener.toUpperCase()}  movies={posters}>{gener}</GenreSlider>)}
-
-
-            <div className="App-Content">
-                <p>LandingPage</p> 
-                <FetcherAPI {...{ type: "LIST_POPULAR", extras: { id: '', search: ''}}}/>
-            </div>
         </div>
     )
 

@@ -19,8 +19,8 @@ import "firebase/firestore";
 import {firebaseConfig} from "./util/firebase";
 import "firebase/auth";
 import SnackBarsRedux from './util/SnackBarsRedux';
-import FetcherAPI from './util/FetcherAPI';
 import RegisterPage from "./pages/RegisterPage";
+
 
 firebase.initializeApp(firebaseConfig);
 

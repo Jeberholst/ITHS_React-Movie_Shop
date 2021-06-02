@@ -1,15 +1,15 @@
 
 import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import {fetchGenre} from '../../util/ApiFetcher'
-import { actions } from "./movieSection";
+
 
 
 export const fetchGenerSlides = createAsyncThunk(
   `genre/status`,
- async (genere,thunkAPI) => {
+ async (action,thunkAPI) => {
     try{
-      let response = await fetchGenre(genere)
-      return {movies:response,id:genere}
+      let response = await fetchGenre(action.genere,action.amount)
+      return {movies:response,id:action.genere}
     }catch(error){
       throw Error(error)
     }
@@ -63,7 +63,7 @@ export const genreSliderSlice = createSlice({
     
     },
     extraReducers:{
-      [fetchGenerSlides.fulfilled]: (state,action) =>{ console.log(action.payload.movies)
+      [fetchGenerSlides.fulfilled]: (state,action) =>{ 
         let newArray = updateItemInArray(current(state.sliders),action.payload.id, item => {
           return updateSlider(item,{movieList:action.payload.movies})
       })

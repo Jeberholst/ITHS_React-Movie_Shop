@@ -127,11 +127,13 @@ const MovieMulti = ({ item, useId }) => {
                     <div className={classes.title}>
                         <StarsComponent/>
                     </div>
+
          
                     <div className={classes.genres}>
                         {movieGenresNamed.map((genre) => {
-                            return <div>{genre}</div>
+                            return <div key={genre}>{genre}</div>
                         })}
+
                     </div>
               
                     
