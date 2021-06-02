@@ -73,7 +73,7 @@ textarea:focus, input:focus{
     background-color: #4e4e4e;
     color: black;
     position: absolute;
-    top:110px;
+    top:136px;
     width:100%;
     z-index: 4;
     border-radius: 0 0 10px 10px;
