@@ -166,7 +166,7 @@ const MovieMulti = ({ item }) => {
                     <div className={classes.subBodies}>
                         <div className={classes.genres}>
                             {movieGenresNamed.map((genre) => {
-                                return <div>{genre}</div>
+                                return <div key={genre}>{genre}</div>
                             })}
                         </div>
                 

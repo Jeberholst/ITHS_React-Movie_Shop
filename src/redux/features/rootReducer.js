@@ -9,6 +9,7 @@ import navbarReducer from './navbarSlice'
 import mainSliderReducer from './mainSliderSlice' 
 import genreSliderReducer from './genreSliderSlice'
 import genrePageReducer from './genrePageSlice'
+import filterBarReducer from './filterBarSlice'
 
 const rootReducer = combineReducers({
     shoppingCart: shoppingCartReducer,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
     paymentProcessor: paymentProcessorReducer,
     fetcherApi: fetcherApiReducer,
     genrePage: genrePageReducer,
+    filterBar: filterBarReducer,
 })
 
 export { rootReducer };

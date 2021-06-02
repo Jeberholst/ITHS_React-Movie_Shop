@@ -131,7 +131,7 @@ async function fetchTopFive(){
             break;
         }      
     }
-
+    console.log(sort)
     function createFetchUrl(year = 2021,sort="popularity.desc",voteAverage = 7, genre,page=1){
         //returns fetch url, check TMDB for options.
         return `${baseUrl}discover/movie${apiKey}&with_genres=${genre}&primary_release_year=${year}&vote_average.gte=${voteAverage}&sort_by=${sort}&page=${page}`
