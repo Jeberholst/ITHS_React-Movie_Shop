@@ -92,10 +92,9 @@ const MovieMulti = ({ item, useId }) => {
   const useID = useId
   const title = item.title
   const releaseDate = item.releaseDate
-  const itemOverView = String(item.overview).slice(0, 200) + ' ...'
   const movieGenresNamed = matchGenreIdsToName(item.genreIds, MockGenres.genres)
   const posterPath = createPosterPathFull(POSTER_SIZES.w300, item.posterPath)
-  const imdbRating = createFakeIMDBRating()//TODO: Change to variable
+
 
   return(
         <div id={`${useID} ${item.id}`}
@@ -105,14 +104,11 @@ const MovieMulti = ({ item, useId }) => {
                 style={{backgroundImage: `linear-gradient(to top, rgb(36, 36, 36, 0.3), rgb(15, 15, 15, 0.6)), url(${posterPath})`}}
                 >
         
-               
                 <div className={classes.topRow}>
-                    {/* <ImdbRating rating={imdbRating}/> */}
                     <ButtonMore mItem={item}/>
                 </div>
             
                 <Divider className={classes.divider}/>
-                {/* <img className={classes.image} src={`${posterPath}`}></img> */}
 
                 <div className={classes.infoContainer}>
 
@@ -128,14 +124,12 @@ const MovieMulti = ({ item, useId }) => {
                         <StarsComponent/>
                     </div>
 
-         
                     <div className={classes.genres}>
                         {movieGenresNamed.map((genre) => {
                             return <div key={genre}>{genre}</div>
                         })}
 
                     </div>
-              
                     
                 </div>
 
@@ -143,42 +137,15 @@ const MovieMulti = ({ item, useId }) => {
                     <ShoppingCartActionButtons mItem={item} type={BUTTON_TYPE.CART_ADD}/>
                  </div>
 
-               
             </div>
-                
-    
-
+ 
         </div>
   );
 
 }
 
-
-//TODO: Move to single-file component for re-usage
-const ImdbRating = ({ rating }) => {
-    const classes = useStyles();
-
-    return(
-        <div className={classes.containerImdb}>
-            <img src={ImdbLOGO} style={{width: '2em', height: '2em', marginRight: '0.6em'}} alt='poster'/>
-            <h5>{rating}</h5>     
-        </div>
-    );
-
-};
-
-
-//TODO: Move to single-file component for re-usage
-const bMoreUseStyle = makeStyles((theme) => ({
-    root: {
-      '& *': {
-   
-      },
-    },
-}));
-
 const ButtonMore = ({ mItem }) => {
-    const classes = bMoreUseStyle();
+   
     const dispatch = useDispatch();
 
     return (
@@ -202,7 +169,3 @@ const ButtonMore = ({ mItem }) => {
 }
 
 export default MovieMulti;
-
-export function createFakeIMDBRating(){
-    return (Math.random() * 10).toFixed(2); 
-}

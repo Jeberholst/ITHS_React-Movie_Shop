@@ -24,13 +24,13 @@
 // const Modal = ({open,children}) =>{
 //     if(!open) return null
 //     return ReactDom.createPortal(
-//         <>
+//        <React.Fragment>
 //         <div style={OVERLAY_STYLES}/>
 //         <div style={MODAL_STYLES}>
 //            {children}
 //         </div>
              
-//         </>,
+//        </React.Fragment>,
 //         document.getElementById('portal')
 //     );
 // }

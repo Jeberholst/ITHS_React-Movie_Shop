@@ -1,10 +1,4 @@
-
-
 import { createSlice } from "@reduxjs/toolkit";
-
-
-
-
 
 export const filterBarSlice = createSlice({
     name: 'filterBar',
@@ -32,7 +26,6 @@ export const filterBarSlice = createSlice({
     }
 
   })
-  
   
   // Action creators are generated for each case reducer function
   export const { setYear, setSort, setVoteAvg, resetFilter } = filterBarSlice.actions
