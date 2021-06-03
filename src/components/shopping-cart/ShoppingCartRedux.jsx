@@ -120,7 +120,7 @@ const ShoppingCartRedux = () => {
 }
 
 
-const CartListItems = () => {
+export const CartListItems = () => {
   
   const classes = useStyles();
   const shoppingCartItems = useSelector(state => state.shoppingCart.listOfMovies);

@@ -10,6 +10,7 @@ class AuthService {
                 let user = userCredential.user;
                 localStorage.setItem("user", JSON.stringify(user));
                 console.log(user)
+                window.location = 'profile'
                 // ...
             })
             .catch((error) => {

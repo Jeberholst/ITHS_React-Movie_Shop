@@ -1,5 +1,7 @@
 import PageLableWithIcon from "./PageLabelWithIcon";
 import {AccountCircle} from "@material-ui/icons";
+import ShoppingCart, {CartListItems} from '../components/shopping-cart/ShoppingCartRedux';
+
 import React, {useEffect, useState} from "react";
 import {Button, createMuiTheme, CssBaseline, Divider, makeStyles, TextField, Typography} from "@material-ui/core";
 import ShoppingCartActionButtons, {BUTTON_TYPE} from "../components/shopping-cart/ShoppingCartActionButtons";
@@ -8,11 +10,12 @@ import { ThemeProvider } from "@material-ui/styles";
 import AuthService from "../util/auth-service";
 import firebase from "firebase";
 import { Redirect } from 'react-router';
+import CartTotal from "../components/shopping-cart/CartTotal";
 
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
-        height: '80vh',
+
         margin: 'auto',
         borderColor: 'white',
         color: 'white',
@@ -24,6 +27,11 @@ const useStyles = makeStyles((theme) => ({
     palette: {
         type: "dark"
     },
+    profile: {
+      display: 'flex',
+      flexDirection: 'row',
+        flexWrap: 'wrap',
+    },
     textField: {
         width: '80%',
         marginLeft: 'auto',
@@ -31,18 +39,20 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom: 0,
         marginTop: 0,
         fontWeight: 500,
-        alignSelf: 'center',
+        alignSelf: 'top',
     },
     topRow: {
         display: 'flex',
         flexDirection: 'column',
         width: '100%',
+        maxWidth: 600,
         height: '100%',
         gap: '30px',
-        margin: 'auto',
+        marginLeft: 'auto',
+        marginRight: 'auto',
         textAlign: 'center',
-        alignContent: 'center',
-        alignSelf: 'center',
+        alignContent: 'top',
+        alignSelf: 'top',
         justifyContent: 'center',
 
     },
@@ -133,7 +143,13 @@ const ProfilePage = () => {
             {user ?
                 <ThemeProvider theme={theme}>
                     <CssBaseline/>
+                    <div className={classes.profile}>
+
                     <div className={classes.topRow}>
+                        <Typography variant="h5" component="h2">
+                            Konto
+                        </Typography>
+
                         <TextField onChange={(e) => handleInput(e.target.name, e.target.value)} className={classes.textField}
                                   defaultValue={user.displayName} name="username" label="Användarnamn" variant="outlined"/>
                         <TextField onChange={(e) => handleInput(e.target.name, e.target.value)} className={classes.textField}
@@ -153,6 +169,15 @@ const ProfilePage = () => {
                         </Button>
                         <a className={classes.link} onClick={removeAccount}>Remove account</a>
                     </div>
+
+                    <div className={classes.topRow}>
+
+                        <ShowUsersHistory user={user} />
+                    </div>
+
+                    </div>
+
+
                 </ThemeProvider>
 
             :
@@ -165,7 +190,7 @@ const ProfilePage = () => {
                 color="primary"
                 className={classes.logInButton}
                 data-testid="signin-anon"
-                onClick={() => window.location = 'register'}
+                onClick={() => window.location = 'login'}
                 >
                 Logga in
                 </Button>
@@ -179,4 +204,40 @@ const ProfilePage = () => {
 
 }
 
+const ShowUsersHistory = (props) => {
+
+    return(
+        <>
+            <Typography variant="h5" component="h2">
+                Dina köp
+            </Typography>
+
+            <div >
+
+                <CartListItems />
+
+            </div>
+
+        </>
+    )
+
+}
+
 export default ProfilePage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
