@@ -118,6 +118,9 @@ const CommentAdd = () => {
 
     const item = useSelector(state => state.movieSection.selectedMovie)
     const [currentUser, setCurrentUser] = useState(userInitialState);
+    const [comment, setComment] = useState(null);
+    const [disableCommentBtn, setDisableCommentBtn] = useState(true);
+    const [rating, setRating] = useState(true);
 
     useEffect(() => {
       let cUser = firebase.auth().currentUser;
@@ -128,7 +131,18 @@ const CommentAdd = () => {
       }
     }, [])
 
-     //TODO: USE COMMENT FROM FIELD
+
+    const handleCommentInput = (value) => {
+        if(value.length >= 10){
+            //console.log(value)
+            setComment(value)
+            setDisableCommentBtn(false)
+        } else {
+            setComment(null)
+            setDisableCommentBtn(true)
+        }
+    }
+
      //TODO: SET RATING
 
     //MOVE TO SEPARATE .js
@@ -147,18 +161,15 @@ const CommentAdd = () => {
                     // "No doc exists!";
                 }
 
-                console.log(newTotalRating)
-
-
+//                console.log(newTotalRating)
                 newTotalRating = (sfDoc.data() !== undefined) ? (sfDoc.data().totalRating + 3 ): userRating
                 newVoteCount = (sfDoc.data() !== undefined) ? (sfDoc.data().voteCount + 1 ): 1
 
                 var newAverageRating = newTotalRating / newVoteCount
                 
-                const user = new FirebaseUser(currentUser.displayName, currentUser.photoURL, currentUser.uid, 'En kommentar', userRating)
-                console.log('curr user info', user.toFirestore(user))
+                const user = new FirebaseUser(currentUser.displayName, currentUser.photoURL, currentUser.uid, `${comment}`, userRating)
+//               console.log('curr user info', user.toFirestore(user))
 
-             
                 let newDocProps = {
                     averageRating: newAverageRating,
                     totalRating: newTotalRating,
@@ -166,7 +177,7 @@ const CommentAdd = () => {
                     comments: firebase.firestore.FieldValue.arrayUnion(user.toFirestore(user))
                 }
        
-                transaction.update(movieRef, newDocProps);
+                transaction.set(movieRef, newDocProps);
                      
 
             });
@@ -201,8 +212,6 @@ const CommentAdd = () => {
                     className={classes.profileImg}
                     alt={'profile'} 
                     src={currentUser.photoUrl ? currentUser.photoUrl: backUpProfilePhoto}/>
-            
-
                 <b
                     className={classes.profileName}>
                     {currentUser.displayName ? currentUser.displayName : 'Not signed in'}
@@ -218,12 +227,14 @@ const CommentAdd = () => {
                     id="filled-required"
                     label="Comment"
                     defaultValue=""
+                    onChange={(event) => handleCommentInput(event.target.value)}
                     variant="filled"
                     />
 
                     <Button
                         variant={'contained'}
                         color={'secondary'}
+                        disabled={disableCommentBtn}
                         onClick={
                                 () => { addComment(5) }
                             }
