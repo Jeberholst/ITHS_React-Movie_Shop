@@ -1,4 +1,4 @@
-import { Switch } from "react-router";
+import axios from 'axios'
 
 
 const baseUrl = "https://api.themoviedb.org/3/"
@@ -85,8 +85,7 @@ async function fetchTopFive(){
     return topFive
 }
 
-
-async function fetchGenre(genre){
+ async function fetchGenre(genre,amount,year,sort,voteAverage){
     let genreList = []
     let GENRE = null 
     
@@ -132,36 +131,58 @@ async function fetchGenre(genre){
             break;
         }      
     }
-    //can make one large request and sort films manually. 
-    await fetch(`${baseUrl}discover/movie${apiKey}&with_genres=${GENRE}&primary_release_year=2021&sort_by=popularity.desc&vote_average.gte=7`).then(res => res.json()).then(res => { 
-        if (!res.results.length){
-            return genreList
-        }else{
-            res.results.forEach(props => {
-                genreList.push(createMovieItem(
-                    props.adult,
-                    props.backdrop_path,
-                    props.genre_ids,
-                    props.id,
-                    props.original_language,
-                    props.original_title,
-                    props.overview,
-                    props.popularity,
-                    props.poster_path,
-                    props.release_date,
-                    props.title,
-                    props.video,
-                    props.vote_average,
-                    props.vote_count,
-                  ));
-            } )
-            
-          
-        }
-    } )
+    console.log(sort)
+    function createFetchUrl(year = 2021,sort="popularity.desc",voteAverage = 7, genre,page=1){
+        //returns fetch url, check TMDB for options.
+        return `${baseUrl}discover/movie${apiKey}&with_genres=${genre}&primary_release_year=${year}&vote_average.gte=${voteAverage}&sort_by=${sort}&page=${page}`
+    }
     
-   return genreList.slice(0,10)
-}
+    //get responses.
+     await axios.get(createFetchUrl(year,sort,voteAverage,GENRE)).then(
+        res =>{
+        let promises = []
+        //max num movies per page = 20
+        if (res.data.total_pages > 1 && amount > 20){
+            //if requested num movies is lager than 20, get all pages.
+            for(var i = 1; i<res.data.total_pages+1;i++){
+                promises.push(axios.get(createFetchUrl(year,sort,voteAverage,GENRE,i)))
+           }
+           return Promise.all(promises)
+        }else{
+            promises.push(res)
+            return Promise.all(promises)
+        }
+    }
+    ).then(d => {
+        //reduce array of movies to one array.
+        let response = d.map(data => data.data.results).reduce((a,b) => [...a,...b],[])
+        //handel movie data and push to array
+        response.forEach(props => {
+            genreList.push(createMovieItem(
+                props.adult,
+                props.backdrop_path,
+                props.genre_ids,
+                props.id,
+                props.original_language,
+                props.original_title,
+                props.overview,
+                props.popularity,
+                props.poster_path,
+                props.release_date,
+                props.title,
+                props.video,
+                props.vote_average,
+                props.vote_count,
+              ));
+        } )
+    })
+           
+        
 
+    //return array based on amount wanted.
+   return genreList.slice(0,amount)
+
+ 
+}
 export {fetchSearch, fetchTopFive, fetchGenre}
 

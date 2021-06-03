@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
         overflowX: 'scroll',
         maxWidth: '100%',
         minWidth: '95%',
-        marginTop: 10,
+        marginTop: 25,
         marginBottom: 10,
         paddingBottom: 30,
     },
@@ -55,12 +55,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const MovieSection = ({...props}) => {
+const MovieSection = () => {
 
     const classes = useStyles();
 
     const screen = useSelector(state => state.movieSection.screen)
-    const RESULT = props.RESULT
+    const RESULT = useSelector(state => state.movieSection.movieList)
+
 
     if(RESULT !== null){
 

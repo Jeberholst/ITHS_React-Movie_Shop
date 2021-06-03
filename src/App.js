@@ -14,12 +14,9 @@ import SearchPage from "./pages/SearchPage";
 import ProfilePage from "./pages/ProfilePage";
 import GenrePage from "./pages/GenrePage";
 import SingelMoviePage from "./pages/SingelMoviePage"
-import firebase from "firebase/app";
 import "firebase/firestore";
-import {firebaseConfig} from "./util/firebase";
 import "firebase/auth";
 import SnackBarsRedux from './util/SnackBarsRedux';
-import FetcherAPI from './util/FetcherAPI';
 import RegisterPage from "./pages/RegisterPage";
 
 function App() {
