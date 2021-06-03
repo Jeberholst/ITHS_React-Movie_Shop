@@ -82,7 +82,7 @@ const CommentSingle = ({...props}) => {
 
                     <div className={classes.containerProfileInfo}>
 
-                            <UserProfileMini userName={item.displayName} userPhotoUrl={item.photoUrl}/>
+                            <UserProfileMini userName={item.displayName} userPhotoUrl={item.photoUrl} rating={item.rating}/>
                     
                     </div>
 
@@ -104,7 +104,7 @@ const CommentSingle = ({...props}) => {
 
 }
 
-const UserProfileMini = ({ userName, userPhotoUrl }) => {
+const UserProfileMini = ({ userName, userPhotoUrl, rating }) => {
     
     const classes = useStyles();
     const backUpProfilePhoto = 'https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/142819271/original/09dafa4104fa6aeca4e62f33326be4933ae7ccac/create-cartoon-profile-picture-abd7.jpg'
@@ -121,7 +121,8 @@ const UserProfileMini = ({ userName, userPhotoUrl }) => {
                         {userName ? userName: 'Unknown'}
                     </b>
                     <div className={classes.starsRating}>
-                         <StarsComponent/>
+                        <i>Rated {rating} out of 5</i>
+                         {/* <StarsComponent/> */}
                     </div> 
                 </div>
                

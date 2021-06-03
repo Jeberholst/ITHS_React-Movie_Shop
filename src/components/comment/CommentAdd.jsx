@@ -1,4 +1,4 @@
-import { Button, Divider, makeStyles, TextField } from '@material-ui/core';
+import { Button, Divider, FormControl, FormControlLabel, FormHelperText, FormLabel, makeStyles, Radio, RadioGroup, TextField } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import authService from '../../util/auth-service';
@@ -74,6 +74,12 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         width: '95%',
+    },
+    ratingGroup: {
+        display: 'flex',
+        flexDirection: 'row',
+        width: '95%',
+        // background: 'rgb(255,255,255, 0.2)'
     }
 }));
 
@@ -81,7 +87,6 @@ const userInitialState = {
     displayName: null,
     photoUrl: null
 }
-
 
 //MOVE TO SEPARATE?
 class FirebaseUser {
@@ -109,44 +114,47 @@ class FirebaseUser {
     }
 }
 
-
-
-
 const CommentAdd = () => {
 
     const classes = useStyles();
 
     const item = useSelector(state => state.movieSection.selectedMovie)
     const [currentUser, setCurrentUser] = useState(userInitialState);
-    const [comment, setComment] = useState(null);
+    const [comment, setComment] = useState('');
     const [disableCommentBtn, setDisableCommentBtn] = useState(true);
-    const [rating, setRating] = useState(true);
+    const [rating, setRating] = useState(0);
 
     useEffect(() => {
       let cUser = firebase.auth().currentUser;
      
       if(cUser !== null){
         setCurrentUser(cUser)
-        // console.log('Current user set:', cUser)
       }
     }, [])
 
-
     const handleCommentInput = (value) => {
-        if(value.length >= 10){
-            //console.log(value)
-            setComment(value)
-            setDisableCommentBtn(false)
-        } else {
-            setComment(null)
-            setDisableCommentBtn(true)
-        }
+        setComment(value)
+        handleRatingAndComment(rating, comment)
     }
 
-     //TODO: SET RATING
+    const handleRatingAndComment = (rating, comment) => {
+       
+        if(String(comment).trimEnd().length >= 10 && rating !== 0){
+            setDisableCommentBtn(false)
+        } else {
+            setDisableCommentBtn(true)
+        }
+        console.log(rating, comment)
+    };
+
+    const handleRatingChange = (event) => {
+        setRating(event.target.value);
+        console.log(event.target.value)
+        handleRatingAndComment(rating, comment)
+    };
 
     //MOVE TO SEPARATE .js
-    const addComment = async(userRating) => {
+    const addComment = async() => {
 
         const movieRef = db.collection("movies").doc(`${item.id}`)
 
@@ -154,7 +162,7 @@ const CommentAdd = () => {
 
             return transaction.get(movieRef).then((sfDoc) => {
                 
-                var newTotalRating = userRating
+                var newTotalRating = rating
                 var newVoteCount = 1
 
                 if (!sfDoc.exists) {
@@ -162,12 +170,12 @@ const CommentAdd = () => {
                 }
 
 //                console.log(newTotalRating)
-                newTotalRating = (sfDoc.data() !== undefined) ? (sfDoc.data().totalRating + 3 ): userRating
+                newTotalRating = (sfDoc.data() !== undefined) ? (sfDoc.data().totalRating + 3 ): 0
                 newVoteCount = (sfDoc.data() !== undefined) ? (sfDoc.data().voteCount + 1 ): 1
 
                 var newAverageRating = newTotalRating / newVoteCount
                 
-                const user = new FirebaseUser(currentUser.displayName, currentUser.photoURL, currentUser.uid, `${comment}`, userRating)
+                const user = new FirebaseUser(currentUser.displayName, currentUser.photoURL, currentUser.uid, `${comment}`, rating)
 //               console.log('curr user info', user.toFirestore(user))
 
                 let newDocProps = {
@@ -200,52 +208,69 @@ const CommentAdd = () => {
     return currentUser.displayName ? (
         <div className={classes.root}>
 
-            <div className={classes.header}>
-                {strAddComment}
-            </div>
-               
-            <Divider className={classes.divider}/>
 
-            <div className={classes.containerProfileInfo}>
-                        
-                <img 
-                    className={classes.profileImg}
-                    alt={'profile'} 
-                    src={currentUser.photoUrl ? currentUser.photoUrl: backUpProfilePhoto}/>
-                <b
-                    className={classes.profileName}>
-                    {currentUser.displayName ? currentUser.displayName : 'Not signed in'}
-                </b>
+                <div className={classes.header}>
+                    {strAddComment}
+                </div>
+                
+                <Divider className={classes.divider}/>
 
-            </div>
+                <div className={classes.containerProfileInfo}>
+                            
+                    <img 
+                        className={classes.profileImg}
+                        alt={'profile'} 
+                        src={currentUser.photoUrl ? currentUser.photoUrl: backUpProfilePhoto}/>
+                    <b
+                        className={classes.profileName}>
+                        {currentUser.displayName ? currentUser.displayName : 'Not signed in'}
+                    </b>
 
-            <div className={classes.containerComment}>
+                </div>
 
-                <TextField
-                    className={classes.textField}
-                    not-required
-                    id="filled-required"
-                    label="Comment"
-                    defaultValue=""
-                    onChange={(event) => handleCommentInput(event.target.value)}
-                    variant="filled"
-                    />
+                <div className={classes.formRating}>
 
-                    <Button
-                        variant={'contained'}
-                        color={'secondary'}
-                        disabled={disableCommentBtn}
-                        onClick={
-                                () => { addComment(5) }
-                            }
-                        >
-                        {strButtonText}
-                        
-                    </Button>
+                        <RadioGroup style={{display: 'flex', flexDirection: 'row', padding: 15}} 
+                                aria-label="rating" name="rating" value={rating} onChange={handleRatingChange}>
+                       
+                            <FormControlLabel value="1"  label="1" control={<Radio color="secondary"/>} />
+                            <FormControlLabel value="2"  label="2" control={<Radio color="secondary"/>} />
+                            <FormControlLabel value="3"  label="3" control={<Radio color="secondary"/>} />
+                            <FormControlLabel value="4"  label="4" control={<Radio color="secondary"/>} />
+                            <FormControlLabel value="5"  label="5" control={<Radio color="secondary"/>} />
 
-            
-            </div>
+                        </RadioGroup>
 
+                </div>
+
+                <div className={classes.containerComment}>
+
+                    <TextField
+                        className={classes.textField}
+                        not-required
+                        id="filled-required"
+                        label="Comment"
+                        defaultValue=""
+                        onChange={(event) => handleCommentInput(event.target.value)}
+                        variant="filled"
+                        />
+
+                        <Button
+                            type="submit"
+                            variant={'contained'}
+                            color={'secondary'}
+                            disabled={disableCommentBtn}
+                            onClick={
+                                    () => { addComment() }
+                                }
+                            >
+                            {strButtonText}
+                            
+                        </Button>
+
+                
+                </div>
+        
         </div>
 
     )
@@ -270,7 +295,7 @@ const NotSignedIn = () => {
                     variant={'contained'}
                     color={'secondary'}
                     onClick={
-                        () => { console.log('Move to sign-in... popup?')}
+                        () => { alert('Move to sign-in... popup?')}
                     }>
                     Sign in
                     </Button>

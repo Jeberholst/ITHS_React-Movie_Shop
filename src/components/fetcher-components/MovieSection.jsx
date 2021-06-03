@@ -35,6 +35,15 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: 10,
         paddingBottom: 30,
     },
+    rootSlider: {
+        display: 'flex',
+        overflowX: 'scroll',
+        maxWidth: '100%',
+        minWidth: '95%',
+        marginTop: 10,
+        marginBottom: 10,
+        paddingBottom: 30,
+    },
     rootCommentSection: {
         display: 'flex',
         flexDirection: 'column',
@@ -60,10 +69,10 @@ const MovieSection = ({...props}) => {
         switch(String(screen)){
            case MOVIE_SECTION_SCREENS.GRID_MOVIES:
                return (
-                    <div className={classes.rootMulti}>
+                    <div className={classes.rootSlider}>
 
                         {RESULT.map((item) => (
-                            <MovieMulti key={'paged-' + item.id} item={item} useId={'hover-container-slider'}/>
+                            <MovieMulti key={'sliding-' + item.id} item={item} useId={'hover-container-slider'}/>
                         ))}
 
                     </div>
