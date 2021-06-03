@@ -63,6 +63,7 @@ const FetcherAPI = ({...props}) => {
         StartFetching(useFunction)
     }, [])
 
+    //CHANGE TO RETURN DIRECTLY ?: elvis op.
     if( fetchedResult !== null ){
 
         dispatch(actions.setScreen(useScreen))

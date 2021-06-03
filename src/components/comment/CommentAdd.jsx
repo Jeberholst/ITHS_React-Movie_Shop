@@ -1,7 +1,5 @@
-import { Button, Divider, FormControl, FormControlLabel, FormHelperText, FormLabel, makeStyles, Radio, RadioGroup, TextField } from '@material-ui/core';
+import { Button, Divider, FormControlLabel, makeStyles, Radio, RadioGroup, TextField } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import authService from '../../util/auth-service';
 import firebase from "firebase/app";
 import { useSelector } from 'react-redux';
 import { fsDB as db } from './../../util/firebase'
@@ -169,14 +167,12 @@ const CommentAdd = () => {
                     // "No doc exists!";
                 }
 
-//                console.log(newTotalRating)
                 newTotalRating = (sfDoc.data() !== undefined) ? (sfDoc.data().totalRating + 3 ): 0
                 newVoteCount = (sfDoc.data() !== undefined) ? (sfDoc.data().voteCount + 1 ): 1
 
                 var newAverageRating = newTotalRating / newVoteCount
                 
                 const user = new FirebaseUser(currentUser.displayName, currentUser.photoURL, currentUser.uid, `${comment}`, rating)
-//               console.log('curr user info', user.toFirestore(user))
 
                 let newDocProps = {
                     averageRating: newAverageRating,
@@ -187,17 +183,12 @@ const CommentAdd = () => {
        
                 transaction.set(movieRef, newDocProps);
                      
-
             });
         
         }).then(() => {
-
             console.log("Transaction successfully committed!");
-
         }).catch((error) => {
-
             console.log("Transaction failed: ", error);
-
         });
         
 
@@ -268,7 +259,6 @@ const CommentAdd = () => {
                             
                         </Button>
 
-                
                 </div>
         
         </div>

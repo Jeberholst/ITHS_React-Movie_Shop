@@ -34,8 +34,7 @@ const cartTotalStyle = makeStyles((theme) => ({
 const CartBillingInfo = () => {
 
     const classes = cartTotalStyle();
-
-    // console.log(userBillingInfo)
+    // console.log(userBillingInfo) useSelector on fb-user
 
     return(
       <React.Fragment>
@@ -56,6 +55,7 @@ const CartBillingInfo = () => {
                     <Label text={userBillingInfo.postalCode}/>
                     <Label text={userBillingInfo.county}/>
                     <Label text={userBillingInfo.country}/>
+                    
                 </div>
 
           </div>

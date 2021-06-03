@@ -1,6 +1,7 @@
 import { createGenre, createMovieItem} from './fetcherCreateData'
 import { actions } from './../redux/features/fetcherApi';
 import mockDataGenre from './../mockData/mock-data-genre.json'
+import { hydrate } from 'react-dom';
 
 const BASE_API_URL_V3 = "https://api.themoviedb.org/3/"
 const API_KEY = "9f9816e8ad3f4241eaf738efa1c54328"
@@ -13,7 +14,6 @@ const EXTENDED_PATHS = {
 }
 
 //CAN BE SENT THROUGH extras or another variable
-
 
 export function fetchListGenres(dispatch, id){
 
@@ -30,7 +30,6 @@ export function fetchListGenres(dispatch, id){
     console.log('FOUND GENRE: ', genreOBJ.id, ' ', genreOBJ.name)
     const GENRE_API_URL = `${BASE_API_URL_V3}${EXTENDED_PATHS.DISCOVER_WITH_GENRE}${genreOBJ.id}&${PRIMARY_RELEASE_YEAR}&sort_by=${SORT_BY_DESC}&vote_average.gte=${VOTE_AVARAGE}`
     
-
         fetch(GENRE_API_URL)
 
             .then(async response => {
@@ -67,8 +66,6 @@ export function fetchListGenres(dispatch, id){
             
                 });
                 
-                console.log(tempArr)
-                console.log(tempArr)
                 dispatch(actions.fetchSuccess(tempArr));
 
             })
@@ -96,7 +93,6 @@ export function fetchListPopular(dispatch){
         
         var tempArr = [];
 
-        //console.log('DATA!!: ', JSON.stringify(data.results));
         const stringifyResponse = JSON.stringify(data.results)
 
         JSON.parse(stringifyResponse).forEach(props => {
@@ -128,3 +124,5 @@ export function fetchListPopular(dispatch){
         dispatch(actions.fetchFailed());
     });
 }
+
+      
