@@ -50,9 +50,9 @@ const GenrePage = () => {
             <Header page={`${id.current}`}>{id.current}</Header>
             <FilterBar currentID = {id} />
             {ready?
-            <>
+            <React.Fragment>
             <MovieSection /> 
-            </>
+            </React.Fragment>
             :
             <h1>LOADING</h1>
             }

@@ -26,7 +26,7 @@ import './FilterBar.css'
   
     
     return (
-        <>
+        <React.Fragment>
         <div className="filterbar_cont">
             <div className="filterbar_slider-cont">
                 <h3>{year}</h3>
@@ -41,7 +41,7 @@ import './FilterBar.css'
                     
                 </select>
             </div>
-        </>
+        </React.Fragment>
     )
 }
 
