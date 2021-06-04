@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import firebase from "firebase/app";
 import { useSelector } from 'react-redux';
 import { fsDB as db } from './../../util/firebase'
+import NotSignedIn from '../shared-components/NotSignedIn';
+
 
 const strAddComment = "Add a comment"
 const strButtonText = "Comment"
@@ -264,37 +266,37 @@ const CommentAdd = () => {
         </div>
 
     )
-    : <NotSignedIn/>
+    : <NotSignedIn {...{ message: 'You need to sign in in order to comment!'}}/>
 
 
 }
 
-const NotSignedIn = () => {
+// const NotSignedIn = () => {
     
-    const classes = useStyles();
+//     const classes = useStyles();
 
-    return(
-        <React.Fragment>
+//     return(
+//         <React.Fragment>
 
-            <div className={classes.rootNotSignedIn}>
+//             <div className={classes.rootNotSignedIn}>
                
-                <b>You need to sign in in order to add a comment.</b>
+//                 <b>You need to sign in in order to add a comment.</b>
 
-                <Button
-                    style={{width: '30%'}}
-                    variant={'contained'}
-                    color={'secondary'}
-                    onClick={
-                        () => { alert('Move to sign-in... popup?')}
-                    }>
-                    Sign in
-                    </Button>
-            </div>
+//                 <Button
+//                     style={{width: '30%'}}
+//                     variant={'contained'}
+//                     color={'secondary'}
+//                     onClick={
+//                         () => { alert('Move to sign-in... popup?')}
+//                     }>
+//                     Sign in
+//                     </Button>
+//             </div>
  
 
-        </React.Fragment>
-    )
+//         </React.Fragment>
+//     )
 
-}
+// }
 
 export default CommentAdd;

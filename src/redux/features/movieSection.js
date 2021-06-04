@@ -9,6 +9,7 @@ const resetMovieList = createAction('reset movie list')
 const actions = { setScreen, setSelectedMovie, resetSelectedMovie, setMovieList, resetMovieList };
 
 export const MOVIE_SECTION_SCREENS = {
+    SLIDER_MOVIES: 'slider_movies',
     GRID_MOVIES: 'grid_movies',
     LIST_SEARCHES: 'list_searches',
     LIST_GENRES: 'list_genres',
@@ -18,7 +19,7 @@ export const MOVIE_SECTION_SCREENS = {
 }
 
 const initialState = {
-    screen: MOVIE_SECTION_SCREENS.GRID_MOVIES,
+    screen: MOVIE_SECTION_SCREENS.SLIDER_MOVIES,
     selectedMovie : null,
     movieList : null,
 }

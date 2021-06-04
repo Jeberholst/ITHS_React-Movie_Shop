@@ -95,7 +95,6 @@ const MovieMulti = ({ item, useId }) => {
   const movieGenresNamed = matchGenreIdsToName(item.genreIds, MockGenres.genres)
   const posterPath = createPosterPathFull(POSTER_SIZES.w300, item.posterPath)
 
-
   return(
         <div id={`${useID} ${item.id}`}
             className={classes.root}>

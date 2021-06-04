@@ -62,13 +62,12 @@ const MovieSection = () => {
     const screen = useSelector(state => state.movieSection.screen)
     const RESULT = useSelector(state => state.movieSection.movieList)
 
-
     if(RESULT !== null){
 
         console.log('CurrentScreen:', screen)
        
         switch(String(screen)){
-           case MOVIE_SECTION_SCREENS.GRID_MOVIES:
+           case MOVIE_SECTION_SCREENS.SLIDER_MOVIES:
                return (
                     <div className={classes.rootSlider}>
 
@@ -78,16 +77,16 @@ const MovieSection = () => {
 
                     </div>
                )
-           case MOVIE_SECTION_SCREENS.LIST_SEARCHES: 
-               return (
-
-                    <div className={classes.rootMulti}>
-                        {RESULT.map((item) => (
-                            <MovieMulti key={'paged-' + item.id} item={item} useId={'hover-container-search'}/>
-                        ))}
-                    </div>
-
-               )
+          case MOVIE_SECTION_SCREENS.GRID_MOVIES:
+                return (
+                     <div className={classes.rootSlider}>
+ 
+                         {RESULT.map((item) => (
+                             <MovieMulti key={'grid-' + item.id} item={item} useId={'hover-container-slider'}/>
+                         ))}
+ 
+                     </div>
+                )
            case MOVIE_SECTION_SCREENS.LIST_GENRES: 
                return (
                     <div className={classes.rootGrid}>
@@ -116,7 +115,7 @@ const MovieSection = () => {
                  <div className={classes.rootMulti}>
 
                     {RESULT.map((item) => (
-                        <MovieMulti key={'paged-' + item.id} item={item}/>
+                        <MovieMulti key={'q-add-' + item.id} item={item}/>
                     ))}
 
                 </div>

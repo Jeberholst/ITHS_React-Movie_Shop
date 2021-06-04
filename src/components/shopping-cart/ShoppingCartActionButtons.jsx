@@ -140,9 +140,7 @@ const ShoppingCartActionButtons = ({ mItem, type } ) => {
             friendlyName = BUTTON_TYPE.CART_CHECKOUT.friendlyName
 
             UseAction =  () => {
-                //DISPATCH DISPLAY USER MODAL OR SIGN IN
-                
-                dispatch(checkOutActions.setVisibility()) 
+                dispatch(checkOutActions.setVisibility('')) 
             };
 
             break;
