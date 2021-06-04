@@ -1,7 +1,7 @@
 import './MainSlider.css';
 import React, {useEffect, useRef} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import {toggelSlider,fetchTopMovies, resetSlider} from '../../redux/features/mainSliderSlice'
+import {toggelSlider,fetchTopMovies, resetSlider, setWidth} from '../../redux/features/mainSliderSlice'
 import { Link } from 'react-router-dom';
 import  { actions }  from '../../redux/features/movieSection'
 
@@ -54,6 +54,7 @@ const MainSlider = () => {
 
     useEffect(()=> {
         dispatch(fetchTopMovies())
+        window.addEventListener('resize', () => dispatch(setWidth(window.innerWidth)))
         return () =>  reset()
     },[])
 
@@ -65,9 +66,8 @@ const MainSlider = () => {
 
 
     //get full width of slider.
-    const getWidth = () => {
-        return window.innerWidth * movieList.length
-    }
+    let width = useSelector(state => state.mainslider.width)
+  
     //sets current slide and calls reducer for state handeling. 
     const navigateSlider = (direction) => {
         if(direction === left && currentSlide.current>0){
@@ -81,14 +81,16 @@ const MainSlider = () => {
             return
         }
     }
+    
 
     var translate = useSelector( (state) =>  state.mainslider.translateX)
+    
     return(
         <div className="main-slider__container">
         <div onClick={() => navigateSlider(left)} className="arrow-box-left"><i className="arrow left"></i></div>
         <div onClick={() => navigateSlider(right)} className="arrow-box-right"><i className="arrow right"></i></div>
         {/*container with width = 100vw * num of slides */}
-            <MainSliderContainer width={getWidth()} tran={translate}>
+            <MainSliderContainer width={width} tran={translate}>
                 {!movieList.length? null : movieList.map((movie,i) => ( <Slide key={`${i}${movie.id}`} movie={movie} /> ))}
             </MainSliderContainer>
             <div className="main-slider__dot-indicator-container">

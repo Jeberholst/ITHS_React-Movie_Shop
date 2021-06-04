@@ -19,6 +19,7 @@ export const mainSliderSlice = createSlice({
     initialState: {
       translateX: 0,
       slides: [],
+      width:0,
     },
     reducers: {
       toggelSlider: (state,direction) => {
@@ -27,13 +28,18 @@ export const mainSliderSlice = createSlice({
       resetSlider: (state) => {
         state.translateX = 0
       },
+      setWidth:(state,action) =>{
+        state.width = state.slides.length * action.payload
+      }
     },
     extraReducers: {
       [fetchTopMovies.fulfilled]:(state,action) => {
+        console.log("hello")
         state.slides = action.payload.slice(0,5)
+        state.width = state.slides.length * window.innerWidth
       },
       [fetchTopMovies.rejected]:(state,action) => {
-
+        console.log(action.payload)
       },
       [fetchTopMovies.pending]:(state,action) => {
 
@@ -42,6 +48,6 @@ export const mainSliderSlice = createSlice({
   })
   
   // Action creators are generated for each case reducer function
-  export const { toggelSlider, resetSlider } = mainSliderSlice.actions
+  export const { toggelSlider, resetSlider, setWidth } = mainSliderSlice.actions
   
   export default mainSliderSlice.reducer
