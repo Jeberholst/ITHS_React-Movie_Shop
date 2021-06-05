@@ -1,10 +1,9 @@
 import { Button, Divider, FormControlLabel, makeStyles, Radio, RadioGroup, TextField } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
-import firebase from "firebase/app";
-import { useSelector } from 'react-redux';
-import { fsDB as db } from './../../util/firebase'
+import { useSelector, useDispatch } from 'react-redux';
+import authService from '../../util/auth-service';
 import NotSignedIn from '../shared-components/NotSignedIn';
-
+import { addComment } from './comment-functions'
 
 const strAddComment = "Add a comment"
 const strButtonText = "Comment"
@@ -88,35 +87,10 @@ const userInitialState = {
     photoUrl: null
 }
 
-//MOVE TO SEPARATE?
-class FirebaseUser {
-    
-    constructor (displayName, photoUrl, uid, comment, rating) {
-        this.displayName = displayName;
-        this.photoUrl = photoUrl;
-        this.uid = uid;
-        this.comment = comment;
-        this.rating = rating;
-    }
-
-    toString() {
-        return this.displayName + ', ' + this.photoUrl + ', ' + this.uid;
-    }
-
-    toFirestore(data) {
-        return {
-            displayName: data.displayName,
-            photoUrl: data.photoUrl,
-            uid: data.uid,
-            comment: data.comment,
-            rating: data.rating,
-        };
-    }
-}
-
 const CommentAdd = () => {
 
     const classes = useStyles();
+    const dispatch = useDispatch();
 
     const item = useSelector(state => state.movieSection.selectedMovie)
     const [currentUser, setCurrentUser] = useState(userInitialState);
@@ -125,7 +99,7 @@ const CommentAdd = () => {
     const [rating, setRating] = useState(0);
 
     useEffect(() => {
-      let cUser = firebase.auth().currentUser;
+      let cUser = authService.getCurrentUser()
      
       if(cUser !== null){
         setCurrentUser(cUser)
@@ -144,7 +118,7 @@ const CommentAdd = () => {
         } else {
             setDisableCommentBtn(true)
         }
-        console.log(rating, comment)
+        // console.log(rating, comment)
     };
 
     const handleRatingChange = (event) => {
@@ -152,49 +126,6 @@ const CommentAdd = () => {
         console.log(event.target.value)
         handleRatingAndComment(rating, comment)
     };
-
-    //MOVE TO SEPARATE .js
-    const addComment = async() => {
-
-        const movieRef = db.collection("movies").doc(`${item.id}`)
-
-        return db.runTransaction((transaction) => {
-
-            return transaction.get(movieRef).then((sfDoc) => {
-                
-                var newTotalRating = rating
-                var newVoteCount = 1
-
-                if (!sfDoc.exists) {
-                    // "No doc exists!";
-                }
-
-                newTotalRating = (sfDoc.data() !== undefined) ? (sfDoc.data().totalRating + 3 ): 0
-                newVoteCount = (sfDoc.data() !== undefined) ? (sfDoc.data().voteCount + 1 ): 1
-
-                var newAverageRating = newTotalRating / newVoteCount
-                
-                const user = new FirebaseUser(currentUser.displayName, currentUser.photoURL, currentUser.uid, `${comment}`, rating)
-
-                let newDocProps = {
-                    averageRating: newAverageRating,
-                    totalRating: newTotalRating,
-                    voteCount: newVoteCount,
-                    comments: firebase.firestore.FieldValue.arrayUnion(user.toFirestore(user))
-                }
-       
-                transaction.set(movieRef, newDocProps);
-                     
-            });
-        
-        }).then(() => {
-            console.log("Transaction successfully committed!");
-        }).catch((error) => {
-            console.log("Transaction failed: ", error);
-        });
-        
-
-    }
 
     const backUpProfilePhoto = 'https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/142819271/original/09dafa4104fa6aeca4e62f33326be4933ae7ccac/create-cartoon-profile-picture-abd7.jpg'
 
@@ -254,7 +185,7 @@ const CommentAdd = () => {
                             color={'secondary'}
                             disabled={disableCommentBtn}
                             onClick={
-                                    () => { addComment() }
+                                    () => { addComment(item.id, comment, rating, currentUser, dispatch) }
                                 }
                             >
                             {strButtonText}
@@ -270,33 +201,5 @@ const CommentAdd = () => {
 
 
 }
-
-// const NotSignedIn = () => {
-    
-//     const classes = useStyles();
-
-//     return(
-//         <React.Fragment>
-
-//             <div className={classes.rootNotSignedIn}>
-               
-//                 <b>You need to sign in in order to add a comment.</b>
-
-//                 <Button
-//                     style={{width: '30%'}}
-//                     variant={'contained'}
-//                     color={'secondary'}
-//                     onClick={
-//                         () => { alert('Move to sign-in... popup?')}
-//                     }>
-//                     Sign in
-//                     </Button>
-//             </div>
- 
-
-//         </React.Fragment>
-//     )
-
-// }
 
 export default CommentAdd;

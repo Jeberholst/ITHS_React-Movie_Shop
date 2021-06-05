@@ -18,6 +18,7 @@ export const SNACK_TEXT = {
     cartRemoved: 'Item removed from cart',
     cartCleared: 'Cart has been cleared',
     cartItemExists: 'Already in cart',
+    commentAdded: 'Comment has been added!',
 };
 
 const initialState = {
@@ -45,6 +46,7 @@ const cartAddSuccess = {
     severity: SEVERITY_TYPE.success, 
     text: SNACK_TEXT.cartAdded
 }
+
 const cartAddFailed = {
     isOpen: true, 
     severity: SEVERITY_TYPE.warning, 
@@ -63,6 +65,13 @@ const cartCleared = {
     text: SNACK_TEXT.cartCleared
 }
 
+const commentAdded = {
+    isOpen: true, 
+    severity: SEVERITY_TYPE.success, 
+    text: SNACK_TEXT.commentAdded
+}
+
 
 export const cartNotifications = { cartAddSuccess, cartAddFailed, cartRemovedSuccess, cartCleared }
+export const commentNotifications = { commentAdded }
 export { actions, reducer };

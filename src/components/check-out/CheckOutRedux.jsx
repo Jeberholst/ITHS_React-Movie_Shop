@@ -112,11 +112,8 @@ const ShippingTermsText = ({ hidden }) => {
 
   const shipPolicy = ShippingPolicy.policy
  
-  console.log('ShippingTermsText:', hidden)
   return(
       <div style={{border: 'none', width: '75%'}} hidden={hidden}>
-        
-
         {
           shipPolicy.map((item) => (
             <React.Fragment>
@@ -126,15 +123,6 @@ const ShippingTermsText = ({ hidden }) => {
           ))
           
         }
-
-          {/* <iframe 
-                title={'Shipping Policy'} 
-                src={TempPolicy} 
-                hidden={hidden}
-                style={{border: 'none', width: '100%', minHeight: '300px'}}
-              /> */}
-
-
       </div>
    
   );
