@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
     rootNotSignedIn: {
         display: 'flex',
         flexDirection: 'column',
-        width: '95%',
+        width: '100%',
         marginTop: 50,
         marginBottom: 15,
     },

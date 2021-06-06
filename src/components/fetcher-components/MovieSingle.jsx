@@ -1,9 +1,10 @@
-import { makeStyles } from '@material-ui/core';
+import { Button, makeStyles } from '@material-ui/core';
 import React from 'react'
 import ShoppingCartActionButtons, { BUTTON_TYPE } from '../shopping-cart/ShoppingCartActionButtons';
 import { createPosterPathFull, POSTER_SIZES } from "../../helper-functions/poster";
-import {  useSelector } from 'react-redux';
+import {  useDispatch, useSelector } from 'react-redux';
 import { matchGenreIdsToName } from '../../helper-functions/genres';
+import { actions as actionsMovieSection, MOVIE_SECTION_SCREENS } from '../../redux/features/movieSection'
 import MockGenres from '../../mockData/mock-data-genre.json';
 import CommentSection from '../comment/CommentSection';
 import './MovieSection.css'
@@ -35,8 +36,8 @@ const useStyles = makeStyles((theme) => ({
     mainContainer: {
         display: 'flex',
         flexDirection: 'column',
-        width: '100%',
-        maxWidth: '70vh',
+        width: '70vh',
+        maxWidth: '95%',
         borderTopLeftRadius: 15,
         borderTopRightRadius: 15,
         padding: 15,
@@ -60,13 +61,15 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '1.5em',
         fontWeight: 'bold',
         wordWrap: 'break-word',
-        maxWidth: '90%'
+        maxWidth: '90%',
+        textShadow: '1px 1px #000',
     },
     year: {
         display: 'flex',
         fontSize: '1em',
         wordWrap: 'break-word',
-        maxWidth: '90%'
+        maxWidth: '90%',
+        textShadow: '1px 1px #000',
     },
     ratings: {
         display: 'flex',
@@ -118,7 +121,7 @@ const MovieSingle = () => {
   return(
         <div id='movie-single-container-root' className={classes.root}>
 
-        {/* <ButtonNavigateBack/> */}
+        <ButtonNavigateBack/> 
                 
         <div id='movie-single-container' className={classes.containerContent}>      
             
@@ -164,13 +167,11 @@ const MovieSingle = () => {
                    {itemOverView}
                </div>
 
-
            </div>
-
 
             <div className={classes.containerBottomButtons}>
   
-                    <ShoppingCartActionButtons mItem={item} type={BUTTON_TYPE.CART_ADD}/>    
+                <ShoppingCartActionButtons mItem={item} type={BUTTON_TYPE.CART_ADD}/>    
              
             </div>
 
@@ -187,6 +188,25 @@ const MovieSingle = () => {
   );
 
 }
+
+const ButtonNavigateBack  = () => {
+
+    const dispatch = useDispatch();
+
+    return (
+        <div>
+            <Button
+                variant={'outlined'}
+                color={'primary'}
+                style={{marginTop: 10, marginBottom: 10}}
+                onClick={
+                    () => {
+                        dispatch(actionsMovieSection.setScreen(MOVIE_SECTION_SCREENS.SLIDER_MOVIES))
+                    }
+                }>{'Back'}</Button>   
+        </div>
+    )
+};
 
 
 export default MovieSingle;

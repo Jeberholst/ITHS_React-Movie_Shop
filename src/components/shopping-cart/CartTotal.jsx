@@ -33,6 +33,9 @@ const useStyle = makeStyles((theme) => ({
     },
     labelLeft: {
         width: '50%',
+        alignContent: 'left',
+        alignItems: 'left',
+        textAlign: 'left',
     },
     labelRight: {
         width: '50%',

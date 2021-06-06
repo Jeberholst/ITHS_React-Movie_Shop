@@ -1,6 +1,6 @@
 import React from "react";
 import ShoppingCart from '../components/shopping-cart/ShoppingCartRedux';
-import { Divider, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import { ShoppingCartRounded } from '@material-ui/icons';
 import PageLableWithIcon from './PageLabelWithIcon';
 import FetcherAPI, { FETCH_API_TYPE } from './../util/FetcherAPI'
@@ -43,7 +43,8 @@ const ShoppingCartPage = () => {
 
    
              <div className={classes.containerSuggestion}>
-                 <h5>QUICK ADD</h5>
+                 <h5>Popular Movies</h5>
+                 
                  <div className={classes.containerQuickAdd}>
                     <FetcherAPI {...{ type: FETCH_API_TYPE.LIST_POPULAR }}/>
                  </div>

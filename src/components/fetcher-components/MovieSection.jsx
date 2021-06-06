@@ -134,17 +134,6 @@ const MovieSection = ( {...props } ) => {
                         <CommentSection/>
                     </div>
                 )
-           case MOVIE_SECTION_SCREENS.QUICK_ADD: 
-               return (
-              
-                 <div className={classes.rootMulti}>
-
-                    {RESULT.map((item) => (
-                        <MovieMulti key={'q-add-' + item.id} item={item}/>
-                    ))}
-
-                </div>
-               )
            default:
                return(
                    <React.Fragment></React.Fragment>

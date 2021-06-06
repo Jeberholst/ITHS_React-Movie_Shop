@@ -21,6 +21,9 @@ const cartTotalStyle = makeStyles((theme) => ({
     },
     left: {
         width: '50%',
+        alignContent: 'left',
+        alignItems: 'left',
+        textAlign: 'left',
     },
     right: {
         width: '50%',

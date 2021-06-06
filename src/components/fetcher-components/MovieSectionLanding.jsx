@@ -1,5 +1,5 @@
 import { Button, Divider, IconButton, makeStyles } from '@material-ui/core';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ShoppingCartActionButtons, { BUTTON_TYPE } from '../shopping-cart/ShoppingCartActionButtons';
 import ImdbLOGO from './../../img/Other/imdb-logo-square.svg'
 import { createPosterPathFull, POSTER_SIZES } from "../../helper-functions/poster";
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
       height: '100%',
       textShadow: '1px 1px #000',
     },
-    mainContainer: {
+    movieContainer: {
         display: 'flex',
         flexDirection: 'column',
         width: '100%',
@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: 10,
         objectFit: 'cover',
         backgroundRepeat: 'no-repeat',
+        minWidth: '20vh',
         marginLeft: '2%',
         marginRight: '2%',
     },
@@ -78,8 +79,13 @@ const useStyles = makeStyles((theme) => ({
 const MovieSectionLanding = ({ result }) => {
   
   const classes = useStyles();
+  const [finished, setFinished] = useState(false)
 
-  return(
+   useEffect(() => {
+       setFinished(result !== null)
+   }, [])
+
+  return !finished ? null : (
                                
         <React.Fragment>
                         
@@ -95,7 +101,7 @@ const MovieSectionLanding = ({ result }) => {
                         {
                             item.movies.map((movie) => (
                             
-                                <div className={classes.mainContainer} 
+                                <div className={classes.movieContainer} 
                                     style={{
                                         backgroundImage: `linear-gradient(to top, rgb(36, 36, 36, 0.3), rgb(15, 15, 15, 0.6)), url(${createPosterPathFull(POSTER_SIZES.w400, movie.backdrop_path)})`
                                     }}>

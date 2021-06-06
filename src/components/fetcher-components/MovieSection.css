@@ -4,6 +4,7 @@
         /* background: blue; */
         margin-right: 1vh;
         margin-left: 1vh;
+        min-width: 30vh;
     }
 
     [id*="hover-container-genre"] {
@@ -28,6 +29,7 @@
         /* background: green; */
         margin-right: 1vh;
         margin-left: 1vh;
+        min-width: 25vh;
     }
 
     [id*="hover-container-genre"] {
@@ -50,6 +52,7 @@
         /* background: red; */
         margin-right: 1vh;
         margin-left: 1vh;
+        min-width: 30vh;
     }
 
     [id*="hover-container-genre"] {

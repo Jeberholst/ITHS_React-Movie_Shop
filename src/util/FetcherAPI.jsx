@@ -36,7 +36,7 @@ const FetcherAPI = ({...props}) => {
     switch(props.type){
         case FETCH_API_TYPE.LIST_POPULAR:
 
-            useScreen = MOVIE_SECTION_SCREENS.GRID_MOVIES
+            useScreen = MOVIE_SECTION_SCREENS.SLIDER_MOVIES
             useFunction = () => fetchListPopular(dispatch)
             break;
 
@@ -55,8 +55,8 @@ const FetcherAPI = ({...props}) => {
 
         default:
     
-            useScreen = MOVIE_SECTION_SCREENS.QUICK_ADD
-            useFunction = () => {}
+            useScreen = MOVIE_SECTION_SCREENS.LIST_POPULAR
+            useFunction = () => fetchAllForLandingPage(dispatch)
 
             break;
 

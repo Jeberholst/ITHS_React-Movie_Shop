@@ -9,20 +9,20 @@ import { fetchers } from './../../mockData/mock-data-fetcher'
 import CheckOutRedux from '../check-out/CheckOutRedux';
 import authService from '../../util/auth-service';
 import NotSignedIn from '../shared-components/NotSignedIn';
+import './ShoppingCart.css'
 
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'left',
-      textAlign: 'left',
-      alignContent: 'left',
+      alignItems: 'center',
+      textAlign: 'center',
+      alignContent: 'center',
       maxWidth: '100%',
       height: '100%',
     },
     header: {
       padding: 5,
-      margin: 5,
     },
     dividerSection: {
       marginTop: 15,
@@ -32,15 +32,21 @@ const useStyles = makeStyles((theme) => ({
     cartListItems: {
       width: '100%',
     },
-    cartItemContainer: {
+    cartTotal: {
       display: 'flex',
-      flexDirection: 'column',
+      width: '100%',
+    },
+    cartItemContainer: {
       width: '100%',
     },
     containerCheckOutButton: {
       display: 'flex',
       width: '100%',
-      flexDirection: 'row-reverse',
+      marginTop: 15,
+      marginBottom: 15,
+      alignContent: 'center',
+      justifyItems: 'center',
+      justifyContent: 'center'
     },
     containerCheckOutComp: {
       display: 'flex',
@@ -144,7 +150,7 @@ const CartListItems = () => {
   if(shoppingCartItems.length !== 0){
     return (
       <React.Fragment>
-            <div className={classes.cartItemContainer}>
+            <div id={'container-cart-items'} className={classes.cartItemContainer}>
       
                 {shoppingCartItems.map((element) => (
                       <CartItem 

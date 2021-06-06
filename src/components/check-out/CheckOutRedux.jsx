@@ -79,7 +79,7 @@ const CheckOutRedux = () => {
                               handleDisplayTerms()
                           }}
                          
-                         >{checked ? 'Hide Terms' : 'Show Terms'}</Button>   
+                         >{termsDisplay ? 'Show Terms' : 'Hide Terms'}</Button>   
                   </div>
 
                   <ShippingTermsText
