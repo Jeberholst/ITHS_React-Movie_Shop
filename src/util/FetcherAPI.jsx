@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { API_FETCHER_STATUSES } from './../redux/features/fetcherApi';
-import { fetchListGenres, fetchListPopular } from './fetcherFunctions'
+import { actions as actionsFetch, API_FETCHER_STATUSES } from './../redux/features/fetcherApi';
+import { fetchAllForLandingPage, fetchListGenres, fetchListPopular } from './fetcherFunctions'
 import { actions, MOVIE_SECTION_SCREENS } from './../redux/features/movieSection';
 import MovieSection from '../components/fetcher-components/MovieSection';
 
@@ -9,11 +9,13 @@ import MovieSection from '../components/fetcher-components/MovieSection';
 export const FETCH_API_TYPE = {
     LIST_POPULAR: "LIST_POPULAR", 
     LIST_GENRE: "LIST_GENRE", 
+    LIST_LANDING: 'LIST_LANDING',
 }
 
 const FetcherAPI = ({...props}) => {
     
     const dispatch = useDispatch();
+    // dispatch(actionsFetch.resetState(''))
 
     const STATUS = useSelector(state => state.fetcherApi.STATUS);
     const RESULT = useSelector(state => state.fetcherApi.RESULT);
@@ -45,9 +47,16 @@ const FetcherAPI = ({...props}) => {
 
         case "LIST_GENRE":
         
-            useScreen = MOVIE_SECTION_SCREENS.GRID_MOVIES
+            useScreen = MOVIE_SECTION_SCREENS.LIST_GENRE
             // console.log('TYPE:', String(props.extras.id).toUpperCase())
             useFunction = () => fetchListGenres(dispatch, String(props.extras.id).toUpperCase())
+            break;
+
+        case "LIST_LANDING":
+        
+            useScreen = MOVIE_SECTION_SCREENS.LIST_LANDING
+            // console.log('TYPE:', String(props.extras.id).toUpperCase())
+            useFunction = () => fetchAllForLandingPage(dispatch)
             break;
 
         default:
@@ -62,6 +71,7 @@ const FetcherAPI = ({...props}) => {
     useEffect(() => {
         StartFetching(useFunction)
     }, [])
+    
 
     //CHANGE TO RETURN DIRECTLY ?: elvis op.
     if( fetchedResult !== null ){

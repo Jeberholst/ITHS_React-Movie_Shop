@@ -2,7 +2,7 @@
 import MainSlider from "../components/slider/MainSlider.js";
 import GenreSlider from "../components/slider/GenreSlider";
 import React from "react";
-import FetcherAPI, {  } from '../util/FetcherAPI.jsx';
+import FetcherAPI, { FETCH_API_TYPE } from '../util/FetcherAPI.jsx';
 
 const LandingPage = () => {
 
@@ -29,12 +29,21 @@ const LandingPage = () => {
 
     
 
+    // return(
+
+    //     <div className="App-Content">
+    //         <MainSlider></MainSlider>
+    //          {GENRES.map((gener) => <GenreSlider key = {gener} id = {gener.toUpperCase()}  movies={posters}>{gener}</GenreSlider>)}
+    //     </div>
+    // )
+
     return(
 
-        <div className="App-Content">
-            <MainSlider></MainSlider>
-             {GENRES.map((gener) => <GenreSlider key = {gener} id = {gener.toUpperCase()}  movies={posters}>{gener}</GenreSlider>)}
-        </div>
+        <React.Fragment>
+
+                <FetcherAPI {...{ type: FETCH_API_TYPE.LIST_LANDING}}/>
+            
+        </React.Fragment>
     )
 
 

@@ -6,6 +6,7 @@ import { MOVIE_SECTION_SCREENS } from '../../redux/features/movieSection';
 import MovieSingle from './MovieSingle';
 import CommentSection from '../comment/CommentSection';
 import './MovieSection.css'
+import MovieSectionLanding from './MovieSectionLanding';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -53,14 +54,22 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: 10,
         alignItems: 'center',
     },
+    rootColumns: {
+        display: 'flex',
+        flexDirection: 'column', 
+        width: '100%',
+        height: '100%',
+        marginTop: 10,
+        marginBottom: 10,
+    }
 }));
 
-const MovieSection = () => {
+const MovieSection = ( {...props } ) => {
 
     const classes = useStyles();
 
     const screen = useSelector(state => state.movieSection.screen)
-    const RESULT = useSelector(state => state.movieSection.movieList)
+    const RESULT = props.RESULT
 
     if(RESULT !== null){
 
@@ -95,6 +104,12 @@ const MovieSection = () => {
                             <MovieMulti key={'genre-' + item.id} useId={'hover-container-genre'} />
                         ))}
 
+                    </div>
+               )
+            case MOVIE_SECTION_SCREENS.LIST_LANDING: 
+               return (
+                    <div className={classes.rootColumns}>
+                        <MovieSectionLanding result={RESULT}/>
                     </div>
                )
            case MOVIE_SECTION_SCREENS.SINGLE_MOVIE: 

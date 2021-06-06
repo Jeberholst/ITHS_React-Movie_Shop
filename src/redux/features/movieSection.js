@@ -13,6 +13,7 @@ export const MOVIE_SECTION_SCREENS = {
     GRID_MOVIES: 'grid_movies',
     LIST_SEARCHES: 'list_searches',
     LIST_GENRES: 'list_genres',
+    LIST_LANDING: 'list_landing',
     SINGLE_MOVIE: 'single_movie',
     SINGLE_MOVIE_COMMENTS: 'single_movie_comments',
     QUICK_ADD: 'grid_movies',
@@ -26,17 +27,14 @@ const initialState = {
 
 const reducer = createReducer(initialState, {
     [setSelectedMovie] : (state, action) => { 
-
         const movieItem = action.payload
         console.log('Selected movie set to: ', movieItem)
         state.selectedMovie = movieItem
-
     },
     [resetSelectedMovie] : (state, action) => { 
 
         console.log('Set selectedMovie null')
         state.selectedMovie = null
-
     },
     [setScreen] : (state, action) => { 
         const value = action.payload
