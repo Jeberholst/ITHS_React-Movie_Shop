@@ -18,14 +18,12 @@ const LoadEhandling = () =>{
     return(
        <div>
 
- <ErrorModal open={loading}>
+ <ErrorModal open={loading} onClose={() => setLoading(false) }>
   <div>  
       <h2 id="modal-title">
-    My Title
+     Something Happened!       
   </h2>
-  <p id="modal-description">
-    My Description
-  </p></div>
+  </div>
  </ErrorModal>
 
          
