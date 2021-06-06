@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core';
-import { actions as actionsMovieSection, MOVIE_SECTION_SCREENS } from '../../redux/features/movieSection'
 import CommentAdd from './CommentAdd';
 import CommentSingle from './CommentSingle';
 import { fsDB as db } from './../../util/firebase'
 import { useSelector } from 'react-redux';
+import SnackBarsRedux from './../../util/SnackBarsRedux'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,43 +24,38 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-
 const CommentSection = () => {
     const classes = useStyles();
 
     const item = useSelector(state => state.movieSection.selectedMovie)
-    const [comments, setComments]  = useState([]) //RENAME TO commentsAndRating
-    //TODO: use RATING AND CONVERT TO x AMOUNT OF STARS
+    const [comments, setComments]  = useState([]) 
 
     const fetchComments = () => {
 
-        //MOVE TO SEPARATE .js
-        const movieRef = db.collection("movies").doc(`${item.id}`)
-        
-        movieRef.get()
-            .then((doc) => {
+        db.collection("movies").doc(`${item.id}`)
+            .onSnapshot((doc) => {
+                // console.log("Current data: ", doc.data());
+    
                 if (doc.exists) {
                     
                     const data = doc.data()
                     const tempArr = [];
-
+    
                     data.comments.map((item) => (
                         tempArr.push(item)
                     ))
-
+    
                     setComments(tempArr)
-                    
-
+    
                 } else {
-                 
+                
                     setComments([])
                     
                 }
-
-        }).catch((error) => {
-            console.log("Error getting document:", error);
+ 
+        }, (error) => {
+            console.log("Error getting document, comments:", error);
         });
-
     }
 
     useEffect(() => {
@@ -91,6 +86,8 @@ const CommentSection = () => {
 
             </div>
 
+            <SnackBarsRedux/>
+
         </React.Fragment>
     );
 
@@ -98,3 +95,53 @@ const CommentSection = () => {
 
 
 export default CommentSection;
+
+
+        //  db.collection("movies").doc(`${item.id}`)
+        //     .onSnapshot((doc) => {
+        //         // console.log("Current data: ", doc.data());
+
+        //         if (doc.exists) {
+                    
+        //             const data = doc.data()
+        //             const tempArr = [];
+
+        //             data.comments.map((item) => (
+        //                 tempArr.push(item)
+        //             ))
+
+        //             setComments(tempArr)
+
+        //         } else {
+                 
+        //             setComments([])
+                    
+        //         }
+
+        //     }, (error) => {
+        //         console.log("Error getting document, comments:", error);
+        //     });
+        
+        //     movieRef.get()
+        //         .then((doc) => {
+        //             if (doc.exists) {
+                        
+        //                 const data = doc.data()
+        //                 const tempArr = [];
+
+        //                 data.comments.map((item) => (
+        //                     tempArr.push(item)
+        //                 ))
+
+        //                 setComments(tempArr)
+                        
+
+        //             } else {
+                    
+        //                 setComments([])
+                        
+        //             }
+
+        // }).catch((error) => {
+        //     console.log("Error getting document:", error);
+        // });

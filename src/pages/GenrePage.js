@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {fetchGenreMovies,setGenre,movieResults} from '../redux/features/genrePageSlice'
 import FilterBar from '../components/filterbar/FilterBar'
 import { resetFilter } from '../redux/features/filterBarSlice'
+import MovieSectionPontus from '../components/fetcher-components/MovieSectionPontus.jsx';
 
 
 
@@ -21,7 +22,7 @@ const GenrePage = () => {
     
    
     
-     
+
     useEffect(() => {
         dispatch(actions.setScreen(MOVIE_SECTION_SCREENS.GRID_MOVIES))
         if (params.id !== id.current){
@@ -51,7 +52,8 @@ const GenrePage = () => {
             <FilterBar currentID = {id} />
             {ready?
             <React.Fragment>
-            <MovieSection /> 
+            <MovieSectionPontus/>
+            {/* <MovieSection />  */}
             </React.Fragment>
             :
             <h1>LOADING</h1>
