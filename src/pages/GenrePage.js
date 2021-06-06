@@ -19,6 +19,9 @@ const GenrePage = () => {
     let ready = useSelector(state => state.genrePage.ready)
     let movies = useSelector(movieResults)
     
+   
+    
+
     useEffect(() => {
         dispatch(actions.setScreen(MOVIE_SECTION_SCREENS.GRID_MOVIES))
         if (params.id !== id.current){

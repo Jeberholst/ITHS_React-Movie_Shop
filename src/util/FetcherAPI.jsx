@@ -30,24 +30,23 @@ const FetcherAPI = ({...props}) => {
         fetchedResult = [];
     }
 
-    // let useComponent = null;
     let useScreen = null;
     let useFunction = null;
     
     switch(props.type){
-        case "LIST_POPULAR":
+        case FETCH_API_TYPE.LIST_POPULAR:
 
             useScreen = MOVIE_SECTION_SCREENS.GRID_MOVIES
             useFunction = () => fetchListPopular(dispatch)
             break;
 
-        case "LIST_GENRE":
+        case FETCH_API_TYPE.LIST_GENRE:
         
             useScreen = MOVIE_SECTION_SCREENS.LIST_GENRE
             useFunction = () => fetchListGenres(dispatch, String(props.extras.id).toUpperCase())
             break;
 
-        case "LIST_LANDING":
+        case FETCH_API_TYPE.LIST_LANDING:
         
             useScreen = MOVIE_SECTION_SCREENS.LIST_LANDING
             useFunction = () => fetchAllForLandingPage(dispatch)
