@@ -3,6 +3,7 @@ import ShoppingCart from '../components/shopping-cart/ShoppingCartRedux';
 import { Divider, makeStyles } from '@material-ui/core';
 import { ShoppingCartRounded } from '@material-ui/icons';
 import PageLableWithIcon from './PageLabelWithIcon';
+import FetcherAPI, { FETCH_API_TYPE } from './../util/FetcherAPI'
 
 const useStyles = makeStyles((theme) => ({
     containerSuggestion: {
@@ -40,14 +41,14 @@ const ShoppingCartPage = () => {
             <ShoppingCart/>
             {/* <Divider className={classes.divider}/> */}
 
-             {/* Suggestion ? :) */}
-             {/* <div className={classes.containerSuggestion}>
+   
+             <div className={classes.containerSuggestion}>
                  <h5>QUICK ADD</h5>
                  <div className={classes.containerQuickAdd}>
                     <FetcherAPI {...{ type: FETCH_API_TYPE.LIST_POPULAR }}/>
                  </div>
                 
-             </div> */}
+             </div>
     
 
 

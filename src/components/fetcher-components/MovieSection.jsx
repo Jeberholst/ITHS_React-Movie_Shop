@@ -54,6 +54,16 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: 10,
         alignItems: 'center',
     },
+    rootSingle: {
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
+        height: '100%',
+        marginTop: 10,
+        marginBottom: 10,
+        alignItems: 'center',
+        alignContent: 'center',
+    },
     rootColumns: {
         display: 'flex',
         flexDirection: 'column', 
