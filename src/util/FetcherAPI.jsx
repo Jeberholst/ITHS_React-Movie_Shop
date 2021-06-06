@@ -15,7 +15,6 @@ export const FETCH_API_TYPE = {
 const FetcherAPI = ({...props}) => {
     
     const dispatch = useDispatch();
-    // dispatch(actionsFetch.resetState(''))
 
     const STATUS = useSelector(state => state.fetcherApi.STATUS);
     const RESULT = useSelector(state => state.fetcherApi.RESULT);
@@ -23,14 +22,11 @@ const FetcherAPI = ({...props}) => {
     let fetchedResult = [];
 
     if (STATUS.status ===  API_FETCHER_STATUSES.FETCHING.status) {
-        // console.log('STATUS 1', STATUS.status)
     } 
     else if ( STATUS.status ===  API_FETCHER_STATUSES.SUCCESS.status) {
-        // console.log('STATUS 2', STATUS.status)
         fetchedResult = RESULT
     }
     else {
-        // console.log('STATUS 3', STATUS.status)
         fetchedResult = [];
     }
 
@@ -48,16 +44,15 @@ const FetcherAPI = ({...props}) => {
         case "LIST_GENRE":
         
             useScreen = MOVIE_SECTION_SCREENS.LIST_GENRE
-            // console.log('TYPE:', String(props.extras.id).toUpperCase())
             useFunction = () => fetchListGenres(dispatch, String(props.extras.id).toUpperCase())
             break;
 
         case "LIST_LANDING":
         
             useScreen = MOVIE_SECTION_SCREENS.LIST_LANDING
-            // console.log('TYPE:', String(props.extras.id).toUpperCase())
             useFunction = () => fetchAllForLandingPage(dispatch)
             break;
+
 
         default:
     
