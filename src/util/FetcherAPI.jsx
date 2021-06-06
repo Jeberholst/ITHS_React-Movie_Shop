@@ -21,9 +21,9 @@ const FetcherAPI = ({...props}) => {
    
     let fetchedResult = [];
 
-    if (STATUS.status ===  API_FETCHER_STATUSES.FETCHING.status) {
+    if (STATUS.status === API_FETCHER_STATUSES.FETCHING.status) {
     } 
-    else if ( STATUS.status ===  API_FETCHER_STATUSES.SUCCESS.status) {
+    else if ( STATUS.status === API_FETCHER_STATUSES.SUCCESS.status) {
         fetchedResult = RESULT
     }
     else {

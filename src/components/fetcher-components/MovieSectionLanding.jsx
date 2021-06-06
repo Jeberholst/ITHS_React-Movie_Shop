@@ -114,18 +114,14 @@ const MovieSectionLanding = ({ result }) => {
 
 
                                     </div>
-                           
-
-                                
-                                
+                        
                             
                                 </div>
                         ))}
 
                     </div>
 
-                    {/* <p>{'SOME ITEM'} {item.movies} </p> */}
-                    </div>
+                </div>
 
             ))}
             

@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {fetchGenreMovies,setGenre,movieResults} from '../redux/features/genrePageSlice'
 import FilterBar from '../components/filterbar/FilterBar'
 import { resetFilter } from '../redux/features/filterBarSlice'
+import MovieSectionPontus from '../components/fetcher-components/MovieSectionPontus.jsx';
 
 
 
@@ -51,6 +52,7 @@ const GenrePage = () => {
             <FilterBar currentID = {id} />
             {ready?
             <React.Fragment>
+            <MovieSectionPontus/>
             {/* <MovieSection />  */}
             </React.Fragment>
             :
