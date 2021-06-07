@@ -43,6 +43,7 @@ const useStyle = makeStyles((theme) => ({
       maxWidth: '100%',
       textShadow: '1px 1px #000',
       marginTop: 10,
+      textAlign: 'left'
     },
     year: {
       display: 'flex',
@@ -50,6 +51,7 @@ const useStyle = makeStyles((theme) => ({
       wordWrap: 'break-word',
       maxWidth: '100%',
       textShadow: '1px 1px #000',
+      textAlign: 'left'
     },
     containerButton: {
       display: 'flex',

@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
       alignContent: 'center',
       paddingTop: 30,
       paddingBottom: 30,
-      textAlign: 'left'
     },
     containerPolicy: {
       display: 'flex',
