@@ -30,7 +30,7 @@ import './FilterBar.css'
         <div className="filterbar_cont">
             <div className="filterbar_slider-cont">
                 <h3>{year}</h3>
-                <input value={year} type="range" min="1950" max="2021" className="filterbar_slider" onChange={e => dispatch(setYear(e.target.value)) } onTouchEnd={e => setFilter()}/>
+                <input value={year} type="range" min="1950" max="2021" className="filterbar_slider" onChange={e => dispatch(setYear(e.target.value)) } onMouseUp={e => setFilter()} onTouchEnd={e => setFilter()}/>
             </div>
         </div>
         <div className="filterbar_sort-cont">
