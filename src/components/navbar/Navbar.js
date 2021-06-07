@@ -184,13 +184,13 @@ let Menu = () => {
 
           {activeUser != null?
                 <div className="bottom_cont_box" onClick={() => logout()}>
-                <i className="fas fa-question bottom_cont_icon_box"></i>
+                <i className="fas fa-sign-out-alt  bottom_cont_icon_box"></i>
                 <p>logout</p>
               </div>
             :
             <Link to="/login" onClick={()=>dispatch(toggelMenu())}>
                 <div className="bottom_cont_box">
-                <i className="fas fa-question bottom_cont_icon_box"></i>
+                <i className="fas fa-sign-in-alt  bottom_cont_icon_box"></i>
                 <p>login</p>
               </div>
             </Link>
@@ -208,6 +208,7 @@ let Menu = () => {
           </Link>
 
         </div>
+        
       </div>
       <SnackBarsRedux></SnackBarsRedux>
     </div>
