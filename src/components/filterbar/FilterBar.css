@@ -69,3 +69,14 @@ select {
 option{
 
 }
+
+@media(min-width:1100px){
+    .filterbar_slider-cont{
+        width:20%;
+    }
+
+    .filterbar_sort-cont{
+        margin-right: 30px;
+        margin-bottom: 20px;
+    }
+}
