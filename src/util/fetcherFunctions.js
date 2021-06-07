@@ -136,7 +136,4 @@ export function fetchAllForLandingPage(dispatch){
             console.error('There was an error!', error);
         });
 
-     
-        // dispatch(actions.fetchSuccess(allMoviesBygenre));
-  
   }

@@ -28,21 +28,21 @@ const LandingPage = () => {
     ];
 
 
-    // return(
-
-    //     <div className="App-Content">
-    //         <MainSlider></MainSlider>
-    //          {GENRES.map((gener) => <GenreSlider key = {gener} id = {gener.toUpperCase()}  movies={posters}>{gener}</GenreSlider>)}
-    //     </div>
-    // )
-
     return(
 
-        <React.Fragment>
+        <div className="App-Content">
             <MainSlider></MainSlider>
-                <FetcherAPI {...{ type: FETCH_API_TYPE.LIST_LANDING}}/>
-        </React.Fragment>
+             {GENRES.map((gener) => <GenreSlider key = {gener} id = {gener.toUpperCase()}  movies={posters}>{gener}</GenreSlider>)}
+        </div>
     )
+
+    // return(
+
+    //     <React.Fragment>
+    //         <MainSlider></MainSlider>
+    //             <FetcherAPI {...{ type: FETCH_API_TYPE.LIST_LANDING}}/>
+    //     </React.Fragment>
+    // )
 
 
 }

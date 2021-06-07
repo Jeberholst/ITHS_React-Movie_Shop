@@ -127,7 +127,6 @@ console.log(item)
                 
         <div id='movie-single-container' className={classes.containerContent}>      
             
-    
             <div className={classes.mainContainer} 
                     style={{
                         objectFit: 'scale-down',

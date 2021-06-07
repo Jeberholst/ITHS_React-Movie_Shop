@@ -1,6 +1,7 @@
 
 import { makeStyles } from "@material-ui/core";
 import React from "react";
+import { createPosterPathFull, POSTER_SIZES } from '../../helper-functions/poster';
 import ShoppingCartActionButtons, { BUTTON_TYPE } from "./ShoppingCartActionButtons";
 
 const useStyle = makeStyles((theme) => ({
@@ -78,13 +79,10 @@ const CartItem = ({ item }) => {
     const classes = useStyle();
     const pItem = JSON.parse(item)
   
-    const title = pItem.title
-    const releaseDate = pItem.releaseDate
+    const title = pItem.original_title
+    const releaseDate = pItem.release_date
    
-    const posterMainPath = 'https://image.tmdb.org/t/p/'
-    const posterSize = 'w500'
-    const itemPosterPath = pItem.posterPath
-    const posterPathFull = `${posterMainPath}/${posterSize}/${itemPosterPath}`
+    const posterPathFull = createPosterPathFull(POSTER_SIZES.w500, pItem.poster_path)
   
     return(
     
