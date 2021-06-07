@@ -1,39 +1,34 @@
 import { Button, Checkbox, FormControlLabel, makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import TempPolicy from './shipping-policy-template.pdf'
 import PayButton from './PayButton'
+import ShippingPolicy from './../../docs/shipping-policy.json'
+import PageLableWithIcon from '../../pages/PageLabelWithIcon';
+import { AccountBalance } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
       flexDirection: 'column',
-      textAlign: 'center',
+      height: '100%',
+      width: '100%',
+      // background: 'blue',
       alignItems: 'center',
       alignContent: 'center',
-      height: '100%',
-    },
-    dividerSection: {
-      marginTop: theme.spacing(1),
-      marginBottom: theme.spacing(1),
-      backgroundColor: 'rgba(255, 255, 255, 0.2)'
-    },
-    cartListItems: {
-      width: '100%',
+      paddingTop: 30,
+      paddingBottom: 30
     },
     containerPolicy: {
-      width: '100%',
-    },
-    cartItemContainer: {
       display: 'flex',
       flexDirection: 'column',
       width: '100%',
+      alignItems: 'center',
     },
     checkOutContainer: {
       display: 'flex',
       flexDirection: 'row',
       width: '100%',
-      marginTop: '5%'
+      marginTop: '5%',
     },
     sectionHeader: {
       width: '100%',
@@ -49,50 +44,50 @@ const CheckOutRedux = () => {
     // console.log('DisplayCheckOutComp?: ', displayCheckoutComp)
     
     const [checked, setChecked] = useState(false);
+    const [termsDisplay, setTermsDisplay] = useState(true);
     
-    const [displayTerms, setDisplayTerms] = useState(({
-        hidden: true, 
-        text: 'Show Terms'
-    }));
-
     const handleChange = (event) => {
-      setChecked(event.target.checked);
+       setChecked(event.target.checked);
     };
 
     const handleDisplayTerms = () => {
-        setDisplayTerms({
-          ...displayTerms,
-          hidden: !displayTerms.hidden,
-          text: !displayTerms.hidden ? 'Show Terms' : 'Hide Terms'
-        })
+        setTermsDisplay(!termsDisplay)
+
+        return termsDisplay ? (
+          <ShippingTermsText/>
+
+        ): null
     }
 
     return (
         <div className={classes.root} style={{ display: displayCheckoutComp ? 'flex' : 'none'}}>
 
             <div className={classes.header}>
-                <h2>Checkout</h2>
+                <PageLableWithIcon {...{ text: 'Checkout', icon: <AccountBalance/>}}/>
             </div>
 
             <div 
                 className={classes.containerPolicy}> 
                   
                    <div className={classes.sectionHeader}>
+                        
                          <Button
                           variant={'contained'}
                           color={'default'}
                           style={{marginBottom: 15}}
                           onClick={() => {
-                             handleDisplayTerms();
+                              handleDisplayTerms()
                           }}
                          
-                         >{displayTerms.text}</Button>   
+                         >{checked ? 'Hide Terms' : 'Show Terms'}</Button>   
                   </div>
-                         
-                  <ShippingTermsIFrame hidden={displayTerms.hidden}/>
+
+                  <ShippingTermsText
+                      hidden={termsDisplay} 
+                    />
                   
-                  <ShippingTerms 
-                      checked={checked} 
+                  <ShippingTerms
+                      hidden={termsDisplay} 
                       handleChange={() => handleChange} 
                     />
              
@@ -113,21 +108,26 @@ const CheckOutRedux = () => {
     )
 }
 
-const ShippingTermsIFrame = ({ hidden }) => {
+const ShippingTermsText = ({ hidden }) => {
 
+  const shipPolicy = ShippingPolicy.policy
+ 
   return(
-
-      <iframe 
-        title={'Shipping Policy'} 
-        src={TempPolicy} 
-        hidden={hidden}
-        style={{border: 'none', width: '100%', minHeight: '300px'}}
-      />
-
+      <div style={{border: 'none', width: '75%'}} hidden={hidden}>
+        {
+          shipPolicy.map((item) => (
+            <React.Fragment>
+              <b style={{fontSize: 14}}>{item.title}</b>
+              <p style={{fontSize: 12}}>{item.text}</p>
+            </React.Fragment>
+          ))
+          
+        }
+      </div>
+   
   );
 
 };
-
 
 const ShippingTerms = ({ checked, handleChange}) => {
 
@@ -158,66 +158,5 @@ const ShippingTerms = ({ checked, handleChange}) => {
   );
 
 };
-
-// const PayButton = (props) => {
-
-//   if(props.enabled && props.signedIn && props.hasItems){
-//     return(
-//       <React.Fragment>
-
-//             <div style={{
-//                       display: 'flex', 
-//                       width: '100%', 
-//                       flexDirection: 'column', 
-//                       textAlign: 'center',
-//                       alignItems: 'center'
-//                       }}>
-//               <Button
-//                     style={{width: '75%'}}
-//                     variant={'contained'}
-//                     color={'primary'}
-//                     // className={classes.button}
-//                     startIcon={<Payment/>}
-//                       onClick={() => {
-//                           console.log('PAYMENT INITIATED')
-//                         }
-//                       }>
-//                     {'Make Payment'}
-//               </Button>
-//           </div>
-
-//       </React.Fragment>
-//     );
-
-//   } else {
-//     return (
-//       <React.Fragment>
-
-//         <div style={{
-//               display: 'flex', 
-//               width: '100%', 
-//               flexDirection: 'column', 
-//               textAlign: 'center',
-//               alignItems: 'center'
-//               }}>
-
-//             <i style={{fontSize: 12, maxWidth: '75%'}}>You need to accept the Shipping Terms before we can process a payment.</i>
-            
-//             <Button
-//                 style={{width: '75%', marginTop: 15}}
-//                 disabled
-//                 variant={'contained'}
-//                 color={'default'}
-//                 startIcon={<Payment/>}>
-//                   {'Pay'}
-                  
-//           </Button>
-//         </div>
-//       </React.Fragment>
-      
-//     );
-//   }
-
-// }
 
 export default CheckOutRedux;
