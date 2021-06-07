@@ -12,34 +12,37 @@ const SlideContainer = ({children,width,translate,id}) => {
     let clientX = null 
     
     function handelSwipe(endPosX){
-        
-        if(clientX < endPosX){
-            //swipe right
-            if(translate<0 && translate + (endPosX - clientX) * 2 < 0){
-                
-                dispatch(swipeGenre( {translateX:(endPosX - clientX)*2,id:id}))
-            }else{
-              dispatch(swipeGenre( {translateX:(translate * -1) + (10),id:id} )  )
-            
-            }
-            
-        }
-        else{
-            let maxRigth = width - window.innerWidth;
-          
-            //swipe left
-              if(translate + (endPosX - clientX) * 2 > (-maxRigth) ){
-                dispatch(swipeGenre( {translateX:(endPosX - clientX)*2,id:id}))
-            }else{
-                //set to start pos when swipe is bigger than whats left of swipe.
-                if(translate<maxRigth){
-                    dispatch(swipeGenre({translateX:(maxRigth + translate) * -1,id:id}))
+        if (clientX - endPosX > 30 || clientX - endPosX < -30){
+            if(clientX < endPosX){
+                //swipe right
+                if(translate<0 && translate + (endPosX - clientX) * 4 < 0){
+                    
+                    dispatch(swipeGenre( {translateX:(endPosX - clientX)*4,id:id}))
                 }else{
-                    return
+                  dispatch(swipeGenre( {translateX:(translate * -1) + (10),id:id} )  )
+                
                 }
                 
             }
+            else{
+                let maxRigth = width - window.innerWidth;
+              
+                //swipe left
+                  if(translate + (endPosX - clientX) * 4 > (-maxRigth) ){
+                    dispatch(swipeGenre( {translateX:(endPosX - clientX)*4,id:id}))
+                }else{
+                    //set to start pos when swipe is bigger than whats left of swipe.
+                    if(translate<maxRigth){
+                        dispatch(swipeGenre({translateX:(maxRigth + translate) * -1,id:id}))
+                    }else{
+                        return
+                    }
+                    
+                }
+            }
+
         }
+ 
             
         
     
