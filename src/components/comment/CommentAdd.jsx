@@ -1,4 +1,4 @@
-import { Button, createMuiTheme, CssBaseline, Divider, FormControlLabel, makeStyles, Radio, RadioGroup, styled, TextField, useTheme } from '@material-ui/core';
+import { Button, createMuiTheme, FormControlLabel, makeStyles, Radio, RadioGroup, styled, TextField } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import { ThemeProvider } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
@@ -6,7 +6,6 @@ import authService from '../../util/auth-service';
 import NotSignedIn from '../shared-components/NotSignedIn';
 import { addComment } from './comment-functions'
 
-const strAddComment = "Add a comment"
 const strButtonText = "Comment"
 
 const CustomRadioB = styled(({ color, ...other }) => <Radio {...other} />)({
@@ -19,17 +18,6 @@ const CustomRadioB = styled(({ color, ...other }) => <Radio {...other} />)({
     padding: '0 10px',
     margin: 8,
 });
-
-const CustomTextField = styled(({ color, ...other }) => <TextField {...other} />)({
-    background: (props) =>
-      props.color === 'white',
-    variant: 'filed',
-    borderRadius: 3,
-    color: 'white',
-    height: '100%',
-    margin: 8,
-});
-  
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -174,9 +162,6 @@ const CommentAdd = () => {
                     </b>
 
                 </div>
-
-          
-      
 
                         <div className={classes.formRating}>
 

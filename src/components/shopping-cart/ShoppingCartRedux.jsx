@@ -18,8 +18,9 @@ const useStyles = makeStyles((theme) => ({
       alignItems: 'center',
       textAlign: 'center',
       alignContent: 'center',
-      maxWidth: '100%',
+      width: '95%',
       height: '100%',
+      overflow: 'hidden'
     },
     header: {
       padding: 5,
@@ -30,18 +31,18 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: 'rgba(255, 255, 255, 0.2)'
     },
     cartListItems: {
-      width: '100%',
+      width: '90%',
     },
     cartTotal: {
       display: 'flex',
-      width: '100%',
+      width: '90%',
     },
     cartItemContainer: {
       width: '100%',
     },
     containerCheckOutButton: {
       display: 'flex',
-      width: '100%',
+      width: '90%',
       marginTop: 15,
       marginBottom: 15,
       alignContent: 'center',
@@ -51,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     containerCheckOutComp: {
       display: 'flex',
       flexDirection: 'column',
-      width: '100%',
+      width: '90%',
       alignItems: 'center',
       textAlign: 'center',
       alignContent: 'center',
@@ -62,16 +63,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
 const ShoppingCartRedux = () => {
 
     const classes = useStyles();
 
     const [user] = useState(authService.getCurrentUser())
-    const displayCheckout = useSelector(state => state.checkOut.visibility)
+    // const displayCheckout = useSelector(state => state.checkOut.visibility)
     const hasCartItems = useSelector(state => state.shoppingCart.listOfMovies.length !== 0)
-
-    console.log('DISP CH. -', displayCheckout)
 
     const handleSignedIn = () => {
 

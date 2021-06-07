@@ -9,7 +9,7 @@
     }
     [class*="cartTotal"]{
         /* background-color: lightcoral; */
-        width: 80%;
+        /* width: 80%; */
         flex-direction: row;
     }
 
@@ -26,7 +26,7 @@
     }
     [class*="cartTotal"]{
         /* background-color: lightcoral; */
-        width: 90%;
+        /* width: 100%; */
         flex-direction: row;
     }
 }
@@ -34,8 +34,9 @@
 @media screen and (min-width: 0px) and (max-width: 634px) {
 
     [class*="cartItemContainer"]{
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        gap: 5px;
+        grid-template-columns: 100%;
     }
 
     [class*="cartTotal"]{
