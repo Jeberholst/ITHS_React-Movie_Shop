@@ -18,6 +18,7 @@ export const SNACK_TEXT = {
     cartRemoved: 'Item removed from cart',
     cartCleared: 'Cart has been cleared',
     cartItemExists: 'Already in cart',
+    loggedOut: 'Logged out',
     commentAdded: 'Comment has been added!',
 };
 
@@ -65,6 +66,12 @@ const cartCleared = {
     text: SNACK_TEXT.cartCleared
 }
 
+const loggedOutSuccess = {
+    isOpen: true,
+    severity: SEVERITY_TYPE.success,
+    text:SNACK_TEXT.loggedOut,
+}
+
 const commentAdded = {
     isOpen: true, 
     severity: SEVERITY_TYPE.success, 
@@ -72,6 +79,6 @@ const commentAdded = {
 }
 
 
-export const cartNotifications = { cartAddSuccess, cartAddFailed, cartRemovedSuccess, cartCleared }
+export const cartNotifications = { cartAddSuccess, cartAddFailed, cartRemovedSuccess, cartCleared,loggedOutSuccess }
 export const commentNotifications = { commentAdded }
 export { actions, reducer };

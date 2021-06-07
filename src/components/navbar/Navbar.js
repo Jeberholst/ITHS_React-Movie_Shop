@@ -1,11 +1,15 @@
 import './Navbar.css';
-import React from 'react'
+import React, { useState } from 'react'
 import dummyLogo from '../../img/Logo/logo_planet_movie.webp'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggelMenu, setSearchResults, toggelSearch, fetchSearchResult } from '../../redux/features/navbarSlice'
 import  { actions }  from '../../redux/features/movieSection'
 import  { Link } from "react-router-dom";
 import ShoppingCartBadge from './../shopping-cart/ShoppingCartBadge'
+import AuthService from "../../util/auth-service"
+import authService from '../../util/auth-service';
+import SnackBarsRedux from '../../util/SnackBarsRedux'
+import {actions as snackbar,cartNotifications}    from '../../redux/features/snackbars'
 
 
 
@@ -65,6 +69,7 @@ const Bar = () => {
   const dispatch = useDispatch()
   let searchResults = useSelector(state => state.navbar.searchResult)
   let searchbarOpen = useSelector(state => state.navbar.searchbarOpen)
+  let menuOpen = useSelector(state => state.navbar.menuOpen)
 
   // Search Event.
   function handleSearch(event){
@@ -80,18 +85,19 @@ const Bar = () => {
       dispatch(toggelSearch())
     }
   }
+  let iconsStyle = menuOpen? "menu__icons_open" : "menu__icons"
  
   return (
    <React.Fragment>
     <div className="navbar__container">
       {/*Navigation bar*/}
       <Link to="/"><img src={dummyLogo} alt="" className="navbar_logo" /></Link>
-      <div className="menu__icons">
-        <i className="fas fa-search" onClick={() => dispatch(toggelSearch())}></i>
-        <Link to="/shopping-cart"> <ShoppingCartBadge/> </Link>
-        <i onClick={() => handelMenuClick()} className="fas fa-bars navbar__container_burger-menu"></i>
-      </div>
+      <div className={iconsStyle}>
+        {menuOpen? null :  <i className="fas fa-search" onClick={() => dispatch(toggelSearch())}></i> }
+        {menuOpen? null :  <Link to="/shopping-cart"> <ShoppingCartBadge/> </Link> }
+        {menuOpen? <i onClick={() => handelMenuClick()} className="fas fa-times navbar__container_burger-menu"></i> :   <i onClick={() => handelMenuClick()} className="fas fa-bars navbar__container_burger-menu"></i> }
       
+      </div>
     </div>
     {
       //Search bar.
@@ -114,18 +120,17 @@ const Bar = () => {
 //Menu Component.
 let Menu = () => {
   const dispatch = useDispatch()
+  let user = authService.getCurrentUser()
+  const [activeUser,setUser] = useState(user)
+  function logout(){
+    authService.logout()
+    setUser(authService.getCurrentUser)
+    dispatch(snackbar.displaySnackBar(cartNotifications.loggedOutSuccess))
+  }
+  console.log(user)
   return(
     <div className="menu__overlay">
     
-    {/*top bar*/}
-      <div className="navbar__container">
-     <Link to="/" onClick={() => dispatch(toggelMenu())}><img src={dummyLogo} alt="" className="navbar_logo" /></Link>
-     <div className="navbar_company_title">
-        <h3> SUPER MOVIE PAGE </h3>    
-     </div>
-     <i className="fas fa-times menu_x_btn" onClick={() => dispatch(toggelMenu())}></i>
-    </div>
-
     {/*menu*/}
       <div className="menu__container">
         <div className="menu_title_cont">
@@ -177,12 +182,23 @@ let Menu = () => {
             </div>
           </Link>
 
-          <Link to="/login" onClick={()=>dispatch(toggelMenu())}>
-            <div className="bottom_cont_box">
-            <i className="fas fa-question bottom_cont_icon_box"></i>
-            <p>unknown</p>
-            </div>
-          </Link>
+          {activeUser != null?
+                <div className="bottom_cont_box" onClick={() => logout()}>
+                <i className="fas fa-sign-out-alt  bottom_cont_icon_box"></i>
+                <p>logout</p>
+              </div>
+            :
+            <Link to="/login" onClick={()=>dispatch(toggelMenu())}>
+                <div className="bottom_cont_box">
+                <i className="fas fa-sign-in-alt  bottom_cont_icon_box"></i>
+                <p>login</p>
+              </div>
+            </Link>
+
+          
+          
+          }
+         
 
           <Link to="/profile" onClick={()=>dispatch(toggelMenu())}>
             <div className="bottom_cont_box">
@@ -192,7 +208,9 @@ let Menu = () => {
           </Link>
 
         </div>
+        
       </div>
+      <SnackBarsRedux></SnackBarsRedux>
     </div>
   );
 }
@@ -203,7 +221,8 @@ const Navbar= () => {
   let menuOpen = useSelector((state) => state.navbar.menuOpen)
   return (
    <React.Fragment>
-    {menuOpen? <Menu></Menu> : <Bar></Bar>}
+    <Bar></Bar>
+    {menuOpen? <Menu></Menu> : null}
    </React.Fragment>
   );
 }

@@ -20,7 +20,7 @@ import SnackBarsRedux from './util/SnackBarsRedux';
 import RegisterPage from "./pages/RegisterPage";
 
 function App() {
-
+    
   return (
       <div className="App">
 

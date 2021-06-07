@@ -1,7 +1,7 @@
 .main-slider__container{
     /* background-color: gray; */
     width: 100%;
-    height: 45vh;
+    height: 25em;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -99,6 +99,24 @@
     cursor: pointer;
   
    
+}
+
+@media (min-width: 600px) {
+    .main-slider__container{
+        height: 35em;
+      
+    }
+
+    .mainslider__slide{
+        background-size:contain;
+    }
+    
+    
+    .dots{
+        width: 0.7em;
+        height: 0.7em;
+    }
+
 }
 
   
