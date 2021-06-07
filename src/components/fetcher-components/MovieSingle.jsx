@@ -112,11 +112,13 @@ const MovieSingle = () => {
 
   const item = useSelector(state => state.movieSection.selectedMovie)
 
-  const title = item.title
-  const releaseDate = item.releaseDate
+console.log(item)
+
+  const title = item.original_title
+  const releaseDate = item.release_date
   const itemOverView = item.overview
-  const movieGenresNamed = matchGenreIdsToName(item.genreIds, MockGenres.genres)
-  const posterPath = createPosterPathFull('w500', item.posterPath)
+  const movieGenresNamed = matchGenreIdsToName(item.genre_ids, MockGenres.genres)
+  const posterPath = createPosterPathFull('w500', item.poster_path)
  
   return(
         <div id='movie-single-container-root' className={classes.root}>
@@ -127,10 +129,10 @@ const MovieSingle = () => {
             
     
             <div className={classes.mainContainer} 
-                                    style={{
-                                        objectFit: 'scale-down',
-                                        backgroundImage: `linear-gradient(to top, rgb(36, 36, 36, 0.3), rgb(15, 15, 15, 0.6)), url(${posterPath})`
-                                    }}>
+                    style={{
+                        objectFit: 'scale-down',
+                        backgroundImage: `linear-gradient(to top, rgb(36, 36, 36, 0.3), rgb(15, 15, 15, 0.6)), url(${posterPath})`
+                    }}>
             
   
                     <div className={classes.title}>
@@ -140,8 +142,6 @@ const MovieSingle = () => {
                     <div className={classes.year}>
                         {String(releaseDate).slice(0, 4)}
                     </div>
-
-              
 
             </div>
 

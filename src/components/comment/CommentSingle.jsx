@@ -14,11 +14,7 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: 15,
         fontSize: 12,
         borderRadius: 10,
-        // background: 'rgb(32,32,32, 0.5)',
         flexWrap: 'column-reverse',
-        // "&:hover": {
-        //     background: 'rgb(255,255,255, 0.5)',
-        // }
     },
     containerTop: {
         display: 'flex',
@@ -56,7 +52,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
   
-
 const CommentSingle = ({...props}) => {
     const classes = useStyles();
 
@@ -114,7 +109,6 @@ const UserProfileMini = ({ userName, userPhotoUrl, rating }) => {
                     </div> 
                 </div>
                
-         
         </React.Fragment>
     );
 

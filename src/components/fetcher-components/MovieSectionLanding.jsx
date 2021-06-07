@@ -1,11 +1,9 @@
-import { Button, Divider, IconButton, makeStyles } from '@material-ui/core';
+import { IconButton, makeStyles } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import ShoppingCartActionButtons, { BUTTON_TYPE } from '../shopping-cart/ShoppingCartActionButtons';
-import ImdbLOGO from './../../img/Other/imdb-logo-square.svg'
 import { createPosterPathFull, POSTER_SIZES } from "../../helper-functions/poster";
-import StarsComponent from '../shared-components/StarsComponent';
 import { actions as actionsMovieSection, MOVIE_SECTION_SCREENS } from '../../redux/features/movieSection'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { MoreHorizRounded } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
@@ -79,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
 const MovieSectionLanding = ({ result }) => {
   
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [finished, setFinished] = useState(false)
 
    useEffect(() => {
@@ -102,11 +101,15 @@ const MovieSectionLanding = ({ result }) => {
                             item.movies.map((movie) => (
                             
                                 <div className={classes.movieContainer} 
+                                    onClick={
+                                    () => {
+                                        dispatch(actionsMovieSection.setScreen(MOVIE_SECTION_SCREENS.SINGLE_MOVIE))
+                                        dispatch(actionsMovieSection.setSelectedMovie(movie))
+                                    }}
                                     style={{
                                         backgroundImage: `linear-gradient(to top, rgb(36, 36, 36, 0.3), rgb(15, 15, 15, 0.6)), url(${createPosterPathFull(POSTER_SIZES.w400, movie.backdrop_path)})`
                                     }}>
                                     
-
                                     <div className={classes.infoContainer}>
                                        
                                         <div className={classes.title}> 

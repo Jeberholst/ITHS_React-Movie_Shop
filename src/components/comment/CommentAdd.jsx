@@ -1,6 +1,13 @@
-import { Button, createMuiTheme, FormControlLabel, makeStyles, Radio, RadioGroup, styled, TextField } from '@material-ui/core';
+import { 
+    Button, 
+    createMuiTheme, 
+    FormControlLabel, 
+    makeStyles, 
+    Radio, 
+    RadioGroup, 
+    styled, 
+    TextField } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
-import { ThemeProvider } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import authService from '../../util/auth-service';
 import NotSignedIn from '../shared-components/NotSignedIn';
@@ -135,7 +142,6 @@ const CommentAdd = () => {
         } else {
             setDisableCommentBtn(true)
         }
-        // console.log(rating, comment)
     };
 
     const handleRatingChange = (event) => {
@@ -149,72 +155,68 @@ const CommentAdd = () => {
     return currentUser.displayName ? (
         <div className={classes.root}>
   
+            <div className={classes.containerProfileInfo}>
+                        
+                <img 
+                    className={classes.profileImg}
+                    alt={'profile'} 
+                    src={currentUser.photoUrl ? currentUser.photoUrl: backUpProfilePhoto}/>
+                <b
+                    className={classes.profileName}>
+                    {currentUser.displayName ? currentUser.displayName : 'Not signed in'}
+                </b>
 
-                <div className={classes.containerProfileInfo}>
-                            
-                    <img 
-                        className={classes.profileImg}
-                        alt={'profile'} 
-                        src={currentUser.photoUrl ? currentUser.photoUrl: backUpProfilePhoto}/>
-                    <b
-                        className={classes.profileName}>
-                        {currentUser.displayName ? currentUser.displayName : 'Not signed in'}
-                    </b>
+            </div>
 
-                </div>
+            <div className={classes.formRating}>
 
-                        <div className={classes.formRating}>
+                    <RadioGroup style={{display: 'flex', flexDirection: 'row', padding: 15}} 
+                            aria-label="rating" name="rating" value={rating} onChange={handleRatingChange}>
+                
+                        <FormControlLabel value="1"  label="1" control={<CustomRadioB/>} />
+                        <FormControlLabel value="2"  label="2" control={<CustomRadioB/>} />
+                        <FormControlLabel value="3"  label="3" control={<CustomRadioB/>} />
+                        <FormControlLabel value="4"  label="4" control={<CustomRadioB/>} />
+                        <FormControlLabel value="5"  label="5" control={<CustomRadioB/>} />
 
-                            <ThemeProvider theme={theme}>
+                    </RadioGroup>
 
-                                <RadioGroup style={{display: 'flex', flexDirection: 'row', padding: 15}} 
-                                        aria-label="rating" name="rating" value={rating} onChange={handleRatingChange}>
-                           
-                                    <FormControlLabel value="1"  label="1" control={<CustomRadioB/>} />
-                                    <FormControlLabel value="2"  label="2" control={<CustomRadioB/>} />
-                                    <FormControlLabel value="3"  label="3" control={<CustomRadioB/>} />
-                                    <FormControlLabel value="4"  label="4" control={<CustomRadioB/>} />
-                                    <FormControlLabel value="5"  label="5" control={<CustomRadioB/>} />
+            </div>
+        
+            <div className={classes.containerComment}>
 
-                                </RadioGroup>
+                <TextField
+                    not-required
+                    id="filled-required"
+                    defaultValue=""
+                    onChange={(event) => handleCommentInput(event.target.value)}
+                    variant="filled"
+                    InputProps={{
+                        style: {
+                            color: "white",
+                            marginTop: 15,
+                            marginBottom: 15,
+                        },
+                        input: {
+                            color: 'red'
+                        }
+                    }}
+                    />
 
-                            </ThemeProvider>
-                        </div>
-                   
-                        <div className={classes.containerComment}>
+                    <Button
+                        type="submit"
+                        variant={'contained'}
+                        color={'secondary'}
+                        disabled={disableCommentBtn}
+                        onClick={
+                                () => { addComment(item.id, comment, rating, currentUser, dispatch) }
+                            }
+                        >
+                        {strButtonText}
+                        
+                    </Button>
 
-                            <TextField
-                                not-required
-                                id="filled-required"
-                                defaultValue=""
-                                onChange={(event) => handleCommentInput(event.target.value)}
-                                variant="filled"
-                                InputProps={{
-                                    style: {
-                                        color: "white",
-                                        marginTop: 15,
-                                        marginBottom: 15,
-                                    },
-                                    input: {
-                                        color: 'red'
-                                    }
-                                }}
-                                />
-
-                                <Button
-                                    type="submit"
-                                    variant={'contained'}
-                                    color={'secondary'}
-                                    disabled={disableCommentBtn}
-                                    onClick={
-                                            () => { addComment(item.id, comment, rating, currentUser, dispatch) }
-                                        }
-                                    >
-                                    {strButtonText}
-                                    
-                                </Button>
-
-                        </div>
+            </div>
                  
         </div>
 

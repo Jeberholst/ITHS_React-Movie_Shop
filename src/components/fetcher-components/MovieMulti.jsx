@@ -89,10 +89,10 @@ const MovieMulti = ({ item, useId }) => {
   const classes = useStyles();
 
   const useID = useId
-  const title = item.title
-  const releaseDate = item.releaseDate
+  const title = item.original_title
+  const releaseDate = item.release_date
 //  const movieGenresNamed = matchGenreIdsToName(item.genreIds, MockGenres.genres)
-  const posterPath = createPosterPathFull(POSTER_SIZES.w300, item.posterPath)
+  const posterPath = createPosterPathFull(POSTER_SIZES.w300, item.poster_path)
 
   return(
         <div id={`${useID} ${item.id}`}
@@ -114,7 +114,7 @@ const MovieMulti = ({ item, useId }) => {
                         <i style={{fontSize: 12}}>{title}</i>
                     </div>
 
-                    <div className={classes.year}>
+                    <div className={classes.releaseDate}>
                         <i style={{fontSize: 12}}>{String(releaseDate).slice(0, 4)}</i>
                     </div>
                     

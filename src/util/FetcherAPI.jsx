@@ -22,6 +22,7 @@ const FetcherAPI = ({...props}) => {
     let fetchedResult = [];
 
     if (STATUS.status === API_FETCHER_STATUSES.FETCHING.status) {
+    
     } 
     else if ( STATUS.status === API_FETCHER_STATUSES.SUCCESS.status) {
         fetchedResult = RESULT
@@ -52,7 +53,6 @@ const FetcherAPI = ({...props}) => {
             useFunction = () => fetchAllForLandingPage(dispatch)
             break;
 
-
         default:
     
             useScreen = MOVIE_SECTION_SCREENS.LIST_POPULAR
@@ -67,7 +67,6 @@ const FetcherAPI = ({...props}) => {
     }, [])
     
 
-    //CHANGE TO RETURN DIRECTLY ?: elvis op.
     if( fetchedResult !== null ){
 
         dispatch(actions.setScreen(useScreen))
@@ -79,13 +78,7 @@ const FetcherAPI = ({...props}) => {
         );
 
     } else {
-
-        return (
-            <React.Fragment>
-                {'null'}
-            </React.Fragment>
-        );
-
+        return null
     }
    
  }

@@ -46,8 +46,7 @@ const CommentSection = () => {
 
         db.collection("movies").doc(`${item.id}`)
             .onSnapshot((doc) => {
-                // console.log("Current data: ", doc.data());
-    
+                
                 if (doc.exists) {
                     
                     const data = doc.data()
@@ -61,8 +60,7 @@ const CommentSection = () => {
     
                 } else {
                 
-                    setComments([])
-                    
+                    setComments([])     
                 }
  
         }, (error) => {
@@ -94,10 +92,8 @@ const CommentSection = () => {
                                 <CommentSingle item={item}/>
 
                             </React.Fragment>
-
-                           
-                            
                         ))}
+
                     </div>
 
                     <div className={classes.title}>
@@ -108,7 +104,6 @@ const CommentSection = () => {
                 
                     </div>
                    
-
             </div>
 
             <SnackBarsRedux/>
