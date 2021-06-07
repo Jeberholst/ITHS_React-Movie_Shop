@@ -31,7 +31,7 @@ const Slide = ({movie}) => {
         dispatch(actions.setSelectedMovie(movie));
     }
 
-    const posterBaseUrl = "https://image.tmdb.org/t/p/w500/"
+    const posterBaseUrl = "https://image.tmdb.org/t/p/w500"
     return (
         <Link onClick={() => setMovie(movie)} to={`/movie/${movie.id}`} style={{backgroundImage:`url(${posterBaseUrl}${movie.backdropPath})`}} className="mainslider__slide">
         </Link>
@@ -54,7 +54,7 @@ const MainSlider = () => {
 
     useEffect(()=> {
         dispatch(fetchTopMovies())
-        window.addEventListener('resize', () => dispatch(setWidth(window.innerWidth)))
+        window.addEventListener('resize', () => dispatch(setWidth({width:window.innerWidth,current:currentSlide.current})))
         return () =>  reset()
     },[])
 
@@ -84,21 +84,35 @@ const MainSlider = () => {
     
 
     var translate = useSelector( (state) =>  state.mainslider.translateX)
-    
-    return(
-        <div className="main-slider__container">
-        <div onClick={() => navigateSlider(left)} className="arrow-box-left"><i className="arrow left"></i></div>
-        <div onClick={() => navigateSlider(right)} className="arrow-box-right"><i className="arrow right"></i></div>
-        {/*container with width = 100vw * num of slides */}
-            <MainSliderContainer width={width} tran={translate}>
-                {!movieList.length? null : movieList.map((movie,i) => ( <Slide key={`${i}${movie.id}`} movie={movie} /> ))}
-            </MainSliderContainer>
-            <div className="main-slider__dot-indicator-container">
-                {!movieList.length? null : movieList.map((movie,i) => <div key={`dot:${i}`} className={`dots ${i === currentSlide.current ? "white" : "" }`}></div> )}
-            </div>
+    var status = useSelector((state) => state.mainslider.status)
 
-        </div>
-    )
+        if(status === "READY"){
+         return(
+            <div className="main-slider__container">
+            <div onClick={() => navigateSlider(left)} className="arrow-box-left"><i className="arrow left"></i></div>
+            <div onClick={() => navigateSlider(right)} className="arrow-box-right"><i className="arrow right"></i></div>
+            {/*container with width = 100vw * num of slides */}
+                <MainSliderContainer width={width} tran={translate}>
+                    {!movieList.length? null : movieList.map((movie,i) => ( <Slide key={`${i}${movie.id}`} movie={movie} /> ))}
+                </MainSliderContainer>
+                <div className="main-slider__dot-indicator-container">
+                    {!movieList.length? null : movieList.map((movie,i) => <div key={`dot:${i}`} className={`dots ${i === currentSlide.current ? "white" : "" }`}></div> )}
+                </div>
+    
+            </div>
+         )    
+        }else if (status === "LOADING"){
+            return(
+                <div className="main-slider__container">
+                    <h1>LOADING</h1>
+                </div>
+                
+            )
+        }else{
+            return(<h1>ERROR</h1>)
+        }
+
+    
 
 }
 

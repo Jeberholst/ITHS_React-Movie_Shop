@@ -20,6 +20,7 @@ export const mainSliderSlice = createSlice({
       translateX: 0,
       slides: [],
       width:0,
+      status:"LOADING"
     },
     reducers: {
       toggelSlider: (state,direction) => {
@@ -29,20 +30,23 @@ export const mainSliderSlice = createSlice({
         state.translateX = 0
       },
       setWidth:(state,action) =>{
-        state.width = state.slides.length * action.payload
+        state.width = state.slides.length * action.payload.width
+        state.translateX = (window.innerWidth * action.payload.current)*-1 
+       
       }
     },
     extraReducers: {
       [fetchTopMovies.fulfilled]:(state,action) => {
-        console.log("hello")
         state.slides = action.payload.slice(0,5)
         state.width = state.slides.length * window.innerWidth
+        state.status = "READY"
       },
       [fetchTopMovies.rejected]:(state,action) => {
         console.log(action.payload)
+        state.status = "ERROR"
       },
       [fetchTopMovies.pending]:(state,action) => {
-
+        state.status = "LOADING"
       }
     }
   })
