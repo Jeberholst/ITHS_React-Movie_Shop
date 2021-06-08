@@ -39,11 +39,11 @@ const ResultItem = ({movie}) => {
   const posterPre = "https://image.tmdb.org/t/p/w300/"
   return(
     <Link to={`/movie/${movie.id}`} onClick= {() => setSingelMovie(movie)} className="result-item__cont">
-      <img className="result-item__img" src={posterPre+movie.posterPath} alt="movie poster" />
+      <img className="result-item__img" src={posterPre+movie.poster_path} alt="movie poster" />
       <div className="result-item_info-cont">
         <h5>{movie.title}</h5>
-        <h5>{movie.releaseDate}</h5>
-        <h5>{movie.voteAverage}</h5>
+        <h5>{movie.release_date}</h5>
+        <h5>{movie.vote_average}</h5>
       </div>
    
     </Link>
@@ -53,12 +53,14 @@ const ResultItem = ({movie}) => {
 const SearchResult = ({result}) =>{ 
   return(
      <React.Fragment>
+     <div className="searchresult__overlay">
       <div className="searchresult__cont">
-      { result.map((movie) => {
-        return <ResultItem key={movie.title}  movie = {movie}></ResultItem>
-      })  }
-        
-      </div>
+        { result.map((movie) => {
+          return <ResultItem key={movie.title}  movie = {movie}></ResultItem>
+        })  }
+          
+        </div>
+     </div>
      </React.Fragment>
   )
 }
