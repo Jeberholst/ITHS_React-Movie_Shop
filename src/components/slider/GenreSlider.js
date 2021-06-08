@@ -41,10 +41,7 @@ const SlideContainer = ({children,width,translate,id}) => {
                 }
             }
 
-        }
- 
-            
-        
+        } 
     
     }
     const sliderStyle = {
@@ -66,7 +63,7 @@ const Slide = ({movie}) => {
     let dispatch = useDispatch()
     const posterBaseUrl = "https://image.tmdb.org/t/p/w300/"
     
-    return <Link to={`/movie/${movie.id}`} onClick={() => dispatch(actions.setSelectedMovie(movie))}  style={{backgroundImage:`url(${posterBaseUrl+movie.posterPath})`}} className="gener__slide"></Link>
+    return <Link to={`/movie/${movie.id}`} onClick={() => dispatch(actions.setSelectedMovie(movie))}  style={{backgroundImage:`url(${posterBaseUrl+movie.poster_path})`}} className="gener__slide"></Link>
 }
 
 

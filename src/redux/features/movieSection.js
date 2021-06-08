@@ -16,7 +16,6 @@ export const MOVIE_SECTION_SCREENS = {
     LIST_LANDING: 'list_landing',
     SINGLE_MOVIE: 'single_movie',
     SINGLE_MOVIE_COMMENTS: 'single_movie_comments',
-    QUICK_ADD: 'grid_movies',
 }
 
 const initialState = {

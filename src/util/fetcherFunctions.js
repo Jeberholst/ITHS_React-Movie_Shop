@@ -1,4 +1,3 @@
-import { createMovieItem} from './fetcherCreateData'
 import { actions } from './../redux/features/fetcherApi';
 import mockDataGenre from './../mockData/mock-data-genre.json'
 
@@ -37,33 +36,8 @@ export function fetchListGenres(dispatch, id){
                     const error = (data && data.message) || response.statusText;
                     return Promise.reject(error);
                 }
-                
-                var tempArr = [];
-
-                const stringifyResponse = JSON.stringify(data.results)
-
-                JSON.parse(stringifyResponse).forEach(props => {
-            
-                    tempArr.push(createMovieItem(
-                        props.adult,
-                        props.backdrop_path,
-                        props.genre_ids,
-                        props.id,
-                        props.original_language,
-                        props.original_title,
-                        props.overview,
-                        props.popularity,
-                        props.poster_path,
-                        props.release_date,
-                        props.title,
-                        props.video,
-                        props.vote_average,
-                        props.vote_count,
-                    ));
-            
-                });
-                
-                dispatch(actions.fetchSuccess(tempArr));
+              
+                dispatch(actions.fetchSuccess(data.results));
 
             })
             .catch(error => {
@@ -88,32 +62,7 @@ export function fetchListPopular(dispatch){
             return Promise.reject(error);
         }
         
-        var tempArr = [];
-
-        const stringifyResponse = JSON.stringify(data.results)
-
-        JSON.parse(stringifyResponse).forEach(props => {
-      
-            tempArr.push(createMovieItem(
-                props.adult,
-                props.backdrop_path,
-                props.genre_ids,
-                props.id,
-                props.original_language,
-                props.original_title,
-                props.overview,
-                props.popularity,
-                props.poster_path,
-                props.release_date,
-                props.title,
-                props.video,
-                props.vote_average,
-                props.vote_count,
-              ));
-      
-        });
-        
-        dispatch(actions.fetchSuccess(tempArr));
+        dispatch(actions.fetchSuccess(data.results));
 
     })
     .catch(error => {
@@ -187,7 +136,4 @@ export function fetchAllForLandingPage(dispatch){
             console.error('There was an error!', error);
         });
 
-     
-        // dispatch(actions.fetchSuccess(allMoviesBygenre));
-  
   }

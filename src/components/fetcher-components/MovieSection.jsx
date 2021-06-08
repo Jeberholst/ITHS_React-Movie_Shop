@@ -54,6 +54,16 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: 10,
         alignItems: 'center',
     },
+    rootSingle: {
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
+        height: '100%',
+        marginTop: 10,
+        marginBottom: 10,
+        alignItems: 'center',
+        alignContent: 'center',
+    },
     rootColumns: {
         display: 'flex',
         flexDirection: 'column', 
@@ -115,7 +125,7 @@ const MovieSection = ( {...props } ) => {
            case MOVIE_SECTION_SCREENS.SINGLE_MOVIE: 
                return (
                     <div className={classes.rootSingle}>
-                        <MovieSingle/>
+                          <MovieSingle {...{bshow: 'show'}}/>
                     </div>
                )
            case MOVIE_SECTION_SCREENS.SINGLE_MOVIE_COMMENTS: 
@@ -124,17 +134,6 @@ const MovieSection = ( {...props } ) => {
                         <CommentSection/>
                     </div>
                 )
-           case MOVIE_SECTION_SCREENS.QUICK_ADD: 
-               return (
-              
-                 <div className={classes.rootMulti}>
-
-                    {RESULT.map((item) => (
-                        <MovieMulti key={'q-add-' + item.id} item={item}/>
-                    ))}
-
-                </div>
-               )
            default:
                return(
                    <React.Fragment></React.Fragment>

@@ -1,25 +1,23 @@
 import axios from 'axios'
-
-
 const baseUrl = "https://api.themoviedb.org/3/"
 const apiKey = "?api_key=5a3613e5d83a68124a38ea398536e34b"
 
-function createMovieItem(adult, backdropPath, genreIds, id, originalLanguage,	originalTitle, overview, popularity,	posterPath,	releaseDate, title, video, voteAverage, voteCount){
+function createMovieItem(adult, backdrop_path, genre_ids, id, original_language,	original_title, overview, popularity, poster_path, release_date, title, video, vote_average, vote_count){
     return {
       adult,
-      backdropPath,
-      genreIds,
+      backdrop_path,
+      genre_ids,
       id,
-      originalLanguage,
-      originalTitle,
+      original_language,
+      original_title,
       overview,
       popularity,
-      posterPath,
-      releaseDate,
+      poster_path,
+      release_date,
       title,
       video,
-      voteAverage,
-      voteCount,
+      vote_average,
+      vote_count,
     };
   }
 

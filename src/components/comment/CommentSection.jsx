@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { makeStyles } from '@material-ui/core';
+import { Divider, makeStyles } from '@material-ui/core';
 import CommentAdd from './CommentAdd';
 import CommentSingle from './CommentSingle';
 import { fsDB as db } from './../../util/firebase'
@@ -13,7 +13,14 @@ const useStyles = makeStyles((theme) => ({
       width: '100%',
       height: '100%',
       paddingBottom: 50,
-      alignItems: 'center'
+      alignItems: 'left'
+    },
+    title: {
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
+        marginBottom: 15,
+        textAlign: 'left'
     },
     containerComments: {
         display: 'flex',
@@ -21,7 +28,12 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         height: '100%',
         marginBottom: 15,
-    }
+    },
+    divider: {
+        background: 'rgb(63,63,63, 0.2)',
+        marginTop: 15,
+        marginBottom: 15,
+    },
 }));
 
 const CommentSection = () => {
@@ -34,8 +46,7 @@ const CommentSection = () => {
 
         db.collection("movies").doc(`${item.id}`)
             .onSnapshot((doc) => {
-                // console.log("Current data: ", doc.data());
-    
+                
                 if (doc.exists) {
                     
                     const data = doc.data()
@@ -49,8 +60,7 @@ const CommentSection = () => {
     
                 } else {
                 
-                    setComments([])
-                    
+                    setComments([])     
                 }
  
         }, (error) => {
@@ -66,6 +76,13 @@ const CommentSection = () => {
         <React.Fragment>
             
             <div className={classes.root}>
+
+                    <div className={classes.title}>
+                        
+                        <b>{'Comments'}</b>
+                        <Divider className={classes.divider}/>
+                    
+                    </div>
     
                     <div className={classes.containerComments}>
                         
@@ -75,15 +92,18 @@ const CommentSection = () => {
                                 <CommentSingle item={item}/>
 
                             </React.Fragment>
-
-                           
-                            
                         ))}
+
                     </div>
 
-  
-                    <CommentAdd/>
-
+                    <div className={classes.title}>
+                    
+                        <b>{'Add a comment'}</b>
+                        <Divider className={classes.divider}/>
+                        <CommentAdd/>
+                
+                    </div>
+                   
             </div>
 
             <SnackBarsRedux/>
@@ -93,55 +113,4 @@ const CommentSection = () => {
 
 }
 
-
 export default CommentSection;
-
-
-        //  db.collection("movies").doc(`${item.id}`)
-        //     .onSnapshot((doc) => {
-        //         // console.log("Current data: ", doc.data());
-
-        //         if (doc.exists) {
-                    
-        //             const data = doc.data()
-        //             const tempArr = [];
-
-        //             data.comments.map((item) => (
-        //                 tempArr.push(item)
-        //             ))
-
-        //             setComments(tempArr)
-
-        //         } else {
-                 
-        //             setComments([])
-                    
-        //         }
-
-        //     }, (error) => {
-        //         console.log("Error getting document, comments:", error);
-        //     });
-        
-        //     movieRef.get()
-        //         .then((doc) => {
-        //             if (doc.exists) {
-                        
-        //                 const data = doc.data()
-        //                 const tempArr = [];
-
-        //                 data.comments.map((item) => (
-        //                     tempArr.push(item)
-        //                 ))
-
-        //                 setComments(tempArr)
-                        
-
-        //             } else {
-                    
-        //                 setComments([])
-                        
-        //             }
-
-        // }).catch((error) => {
-        //     console.log("Error getting document:", error);
-        // });
