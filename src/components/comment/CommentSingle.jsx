@@ -14,11 +14,7 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: 15,
         fontSize: 12,
         borderRadius: 10,
-        // background: 'rgb(32,32,32, 0.6)',
         flexWrap: 'column-reverse',
-        "&:hover": {
-            background: 'rgb(255,255,255, 0.1)',
-        }
     },
     containerTop: {
         display: 'flex',
@@ -26,11 +22,6 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'flex-start',
         marginLeft: 5,
         marginTop: 10,
-    },
-    divider: {
-        marginTop: 10,
-        marginBottom: 10,
-        background: 'rgb(255,255,255, 0.1)',
     },
     profileImg: {
         width: '50px',
@@ -48,8 +39,8 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: 25,
     },
     containerComment: {
-        padding:15,
-        
+        padding: 15,
+        textAlign: 'left',
     },
     containerProfileInfo: {
         display: 'flex',
@@ -61,17 +52,10 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
   
-
 const CommentSingle = ({...props}) => {
     const classes = useStyles();
 
-    console.log('Comment single item: ', props.item)
-
     const item = props.item
-
-    console.log(props.item)
-
-    //TODO: DISPLAY RATING
 
     return (
         <React.Fragment>
@@ -88,12 +72,12 @@ const CommentSingle = ({...props}) => {
 
                 </div>
 
-                <Divider className={classes.divider}/>
-
                 <div className={classes.containerComment}>
+
                     <p style={{fontSize: 12}}>
                         {item.comment} 
                     </p>
+
                 </div>
 
 
@@ -122,11 +106,9 @@ const UserProfileMini = ({ userName, userPhotoUrl, rating }) => {
                     </b>
                     <div className={classes.starsRating}>
                         <i>Rated {rating} out of 5</i>
-                         {/* <StarsComponent/> */}
                     </div> 
                 </div>
                
-         
         </React.Fragment>
     );
 

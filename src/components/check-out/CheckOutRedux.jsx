@@ -1,4 +1,4 @@
-import { Button, Checkbox, FormControlLabel, makeStyles } from "@material-ui/core";
+import { Button, Checkbox, FormControlLabel, makeStyles, Radio, styled } from "@material-ui/core";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import PayButton from './PayButton'
@@ -6,17 +6,26 @@ import ShippingPolicy from './../../docs/shipping-policy.json'
 import PageLableWithIcon from '../../pages/PageLabelWithIcon';
 import { AccountBalance } from '@material-ui/icons';
 
+const CustomCheckB = styled(({ color, ...other }) => <Checkbox {...other} />)({
+  background: (props) =>
+    props.color === 'white',
+  border: 0,
+  borderRadius: 3,
+  color: 'white',
+  height: '100%',
+  padding: '0 10px',
+});
+
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
       flexDirection: 'column',
       height: '100%',
       width: '100%',
-      // background: 'blue',
       alignItems: 'center',
       alignContent: 'center',
       paddingTop: 30,
-      paddingBottom: 30
+      paddingBottom: 30,
     },
     containerPolicy: {
       display: 'flex',
@@ -79,7 +88,7 @@ const CheckOutRedux = () => {
                               handleDisplayTerms()
                           }}
                          
-                         >{checked ? 'Hide Terms' : 'Show Terms'}</Button>   
+                         >{termsDisplay ? 'Show Terms' : 'Hide Terms'}</Button>   
                   </div>
 
                   <ShippingTermsText
@@ -144,7 +153,7 @@ const ShippingTerms = ({ checked, handleChange}) => {
                   
           <FormControlLabel
               control={
-                <Checkbox
+                <CustomCheckB
                   checked={checked}
                   onChange={handleChange()}
                   inputProps={{ 'aria-label': 'primary checkbox' }}

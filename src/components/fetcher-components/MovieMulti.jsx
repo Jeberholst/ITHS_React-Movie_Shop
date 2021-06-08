@@ -6,9 +6,9 @@ import { createPosterPathFull, POSTER_SIZES } from "../../helper-functions/poste
 import StarsComponent from '../shared-components/StarsComponent';
 import { actions as actionsMovieSection, MOVIE_SECTION_SCREENS } from '../../redux/features/movieSection'
 import { useDispatch } from 'react-redux';
-import { matchGenreIdsToName } from '../../helper-functions/genres';
 import MockGenres from '../../mockData/mock-data-genre.json';
 import { MoreHorizRounded } from '@material-ui/icons';
+import { matchGenreIdsToName } from '../../helper-functions/genres';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -90,10 +90,10 @@ const MovieMulti = ({ item, useId }) => {
   const classes = useStyles();
 
   const useID = useId
-  const title = item.title
-  const releaseDate = item.releaseDate
-  const movieGenresNamed = matchGenreIdsToName(item.genreIds, MockGenres.genres)
-  const posterPath = createPosterPathFull(POSTER_SIZES.w300, item.posterPath)
+  const title = item.original_title
+  const releaseDate = item.release_date
+  const movieGenresNamed = matchGenreIdsToName(item.genre_ids, MockGenres.genres)
+  const posterPath = createPosterPathFull(POSTER_SIZES.w300, item.poster_path)
 
   return(
         <div id={`${useID} ${item.id}`}
@@ -115,13 +115,10 @@ const MovieMulti = ({ item, useId }) => {
                         <i style={{fontSize: 12}}>{title}</i>
                     </div>
 
-                    <div className={classes.year}>
+                    <div className={classes.releaseDate}>
                         <i style={{fontSize: 12}}>{String(releaseDate).slice(0, 4)}</i>
                     </div>
                     
-                    <div className={classes.title}>
-                        <StarsComponent/>
-                    </div>
 
                     <div className={classes.genres}>
                         {movieGenresNamed.map((genre) => {

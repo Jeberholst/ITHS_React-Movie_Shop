@@ -1,12 +1,30 @@
-import { Button, Divider, FormControlLabel, makeStyles, Radio, RadioGroup, TextField } from '@material-ui/core';
+import { 
+    Button, 
+    createMuiTheme, 
+    FormControlLabel, 
+    makeStyles, 
+    Radio, 
+    RadioGroup, 
+    styled, 
+    TextField } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import authService from '../../util/auth-service';
 import NotSignedIn from '../shared-components/NotSignedIn';
 import { addComment } from './comment-functions'
 
-const strAddComment = "Add a comment"
 const strButtonText = "Comment"
+
+const CustomRadioB = styled(({ color, ...other }) => <Radio {...other} />)({
+    background: (props) =>
+      props.color === 'white',
+    border: 0,
+    borderRadius: 3,
+    color: 'white',
+    height: '100%',
+    padding: '0 10px',
+    margin: 8,
+});
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
         height: '100%',
         fontSize: 12,
         borderRadius: 10,
-        background: 'rgb(32,32,32, 0.6)',
+        // background: 'rgb(32,32,32, 0.6)',
         flexWrap: 'column-reverse',
     },
     header: {
@@ -39,11 +57,7 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: 20,
     },
     textField: {
-        display: 'flex',
-        alignContent: 'left',
-        marginTop: 30,
-        marginBottom: 10,
-        background: 'white'
+        color: 'white',
     },
     containerButton: {
         display: 'flex',
@@ -82,6 +96,16 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+const theme = createMuiTheme({
+    overrides: {
+      MuiInputBase: {
+        input: {
+          background: "#fff",
+        },
+      },
+    },
+});
+
 const userInitialState = {
     displayName: null,
     photoUrl: null
@@ -118,7 +142,6 @@ const CommentAdd = () => {
         } else {
             setDisableCommentBtn(true)
         }
-        // console.log(rating, comment)
     };
 
     const handleRatingChange = (event) => {
@@ -131,69 +154,70 @@ const CommentAdd = () => {
 
     return currentUser.displayName ? (
         <div className={classes.root}>
+  
+            <div className={classes.containerProfileInfo}>
+                        
+                <img 
+                    className={classes.profileImg}
+                    alt={'profile'} 
+                    src={currentUser.photoUrl ? currentUser.photoUrl: backUpProfilePhoto}/>
+                <b
+                    className={classes.profileName}>
+                    {currentUser.displayName ? currentUser.displayName : 'Not signed in'}
+                </b>
 
+            </div>
 
-                <div className={classes.header}>
-                    {strAddComment}
-                </div>
+            <div className={classes.formRating}>
+
+                    <RadioGroup style={{display: 'flex', flexDirection: 'row', padding: 15}} 
+                            aria-label="rating" name="rating" value={rating} onChange={handleRatingChange}>
                 
-                <Divider className={classes.divider}/>
+                        <FormControlLabel value="1"  label="1" control={<CustomRadioB/>} />
+                        <FormControlLabel value="2"  label="2" control={<CustomRadioB/>} />
+                        <FormControlLabel value="3"  label="3" control={<CustomRadioB/>} />
+                        <FormControlLabel value="4"  label="4" control={<CustomRadioB/>} />
+                        <FormControlLabel value="5"  label="5" control={<CustomRadioB/>} />
 
-                <div className={classes.containerProfileInfo}>
-                            
-                    <img 
-                        className={classes.profileImg}
-                        alt={'profile'} 
-                        src={currentUser.photoUrl ? currentUser.photoUrl: backUpProfilePhoto}/>
-                    <b
-                        className={classes.profileName}>
-                        {currentUser.displayName ? currentUser.displayName : 'Not signed in'}
-                    </b>
+                    </RadioGroup>
 
-                </div>
-
-                <div className={classes.formRating}>
-
-                        <RadioGroup style={{display: 'flex', flexDirection: 'row', padding: 15}} 
-                                aria-label="rating" name="rating" value={rating} onChange={handleRatingChange}>
-                       
-                            <FormControlLabel value="1"  label="1" control={<Radio color="secondary"/>} />
-                            <FormControlLabel value="2"  label="2" control={<Radio color="secondary"/>} />
-                            <FormControlLabel value="3"  label="3" control={<Radio color="secondary"/>} />
-                            <FormControlLabel value="4"  label="4" control={<Radio color="secondary"/>} />
-                            <FormControlLabel value="5"  label="5" control={<Radio color="secondary"/>} />
-
-                        </RadioGroup>
-
-                </div>
-
-                <div className={classes.containerComment}>
-
-                    <TextField
-                        className={classes.textField}
-                        not-required
-                        id="filled-required"
-                        label="Comment"
-                        defaultValue=""
-                        onChange={(event) => handleCommentInput(event.target.value)}
-                        variant="filled"
-                        />
-
-                        <Button
-                            type="submit"
-                            variant={'contained'}
-                            color={'secondary'}
-                            disabled={disableCommentBtn}
-                            onClick={
-                                    () => { addComment(item.id, comment, rating, currentUser, dispatch) }
-                                }
-                            >
-                            {strButtonText}
-                            
-                        </Button>
-
-                </div>
+            </div>
         
+            <div className={classes.containerComment}>
+
+                <TextField
+                    not-required
+                    id="filled-required"
+                    defaultValue=""
+                    onChange={(event) => handleCommentInput(event.target.value)}
+                    variant="filled"
+                    InputProps={{
+                        style: {
+                            color: "white",
+                            marginTop: 15,
+                            marginBottom: 15,
+                        },
+                        input: {
+                            color: 'red'
+                        }
+                    }}
+                    />
+
+                    <Button
+                        type="submit"
+                        variant={'contained'}
+                        color={'secondary'}
+                        disabled={disableCommentBtn}
+                        onClick={
+                                () => { addComment(item.id, comment, rating, currentUser, dispatch) }
+                            }
+                        >
+                        {strButtonText}
+                        
+                    </Button>
+
+            </div>
+                 
         </div>
 
     )
@@ -201,5 +225,8 @@ const CommentAdd = () => {
 
 
 }
+
+
+
 
 export default CommentAdd;

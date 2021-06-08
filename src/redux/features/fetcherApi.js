@@ -40,7 +40,6 @@ const reducer = createReducer(initialState, {
       STATUS: API_FETCHER_STATUSES.FETCHING
   }),
   [fetchSuccess]: (state, action) => {
-      console.log('PAYLOAD SUCCESS', actions.payload)
       state.STATUS = API_FETCHER_STATUSES.SUCCESS
       state.RESULT = action.payload
   },
@@ -64,7 +63,5 @@ const reducer = createReducer(initialState, {
   },
   
 })
-
-
 
 export { actions, reducer, API_FETCHER_STATUSES };

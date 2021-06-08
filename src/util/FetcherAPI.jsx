@@ -22,6 +22,7 @@ const FetcherAPI = ({...props}) => {
     let fetchedResult = [];
 
     if (STATUS.status === API_FETCHER_STATUSES.FETCHING.status) {
+    
     } 
     else if ( STATUS.status === API_FETCHER_STATUSES.SUCCESS.status) {
         fetchedResult = RESULT
@@ -36,7 +37,7 @@ const FetcherAPI = ({...props}) => {
     switch(props.type){
         case FETCH_API_TYPE.LIST_POPULAR:
 
-            useScreen = MOVIE_SECTION_SCREENS.GRID_MOVIES
+            useScreen = MOVIE_SECTION_SCREENS.SLIDER_MOVIES
             useFunction = () => fetchListPopular(dispatch)
             break;
 
@@ -52,11 +53,10 @@ const FetcherAPI = ({...props}) => {
             useFunction = () => fetchAllForLandingPage(dispatch)
             break;
 
-
         default:
     
-            useScreen = MOVIE_SECTION_SCREENS.QUICK_ADD
-            useFunction = () => {}
+            useScreen = MOVIE_SECTION_SCREENS.LIST_POPULAR
+            useFunction = () => fetchAllForLandingPage(dispatch)
 
             break;
 
@@ -67,7 +67,6 @@ const FetcherAPI = ({...props}) => {
     }, [])
     
 
-    //CHANGE TO RETURN DIRECTLY ?: elvis op.
     if( fetchedResult !== null ){
 
         dispatch(actions.setScreen(useScreen))
@@ -79,13 +78,7 @@ const FetcherAPI = ({...props}) => {
         );
 
     } else {
-
-        return (
-            <React.Fragment>
-                {'null'}
-            </React.Fragment>
-        );
-
+        return null
     }
    
  }
