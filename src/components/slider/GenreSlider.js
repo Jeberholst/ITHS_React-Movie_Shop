@@ -126,7 +126,7 @@ const GenreSlider = ({children,movies,id}) => {
         <div onClick={() => handelSlide("RIGHT")} className="arrow-box-right_genre"><i className="arrow_genre right" ></i></div>
                <div className="genre-slider__cont">
             <Link to = {`/genre/${children}`} className="genre-slider__header">
-                <h2>{children}</h2>
+                <h2>{children.toUpperCase()}</h2>
             </Link>
            {!sliders.length? null : <SlideContainer id ={id} translate = {slider.translateX} width = {slider.width} >{slider.movieList.map((movie,i) => <Slide key = {i+12} movie = {movie} ></Slide>)}</SlideContainer>} 
             </div>
