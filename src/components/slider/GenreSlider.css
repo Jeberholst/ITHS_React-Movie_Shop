@@ -1,6 +1,6 @@
 .genre-slider__cont{
     margin-top: 10px;
-    background-color: rgb(189, 189, 189);
+    background-color: rgb(19, 19, 19);
     width: 100%;
    
     display: flex;
@@ -10,8 +10,8 @@
     
 }
 .genre-slider__header{
-    color: black;
-    background-color: rgb(233, 233, 233);
+    color: rgb(192, 192, 192);
+    background-image: linear-gradient(rgb(62, 62, 62), rgb(50, 50, 50), rgb(38, 38, 38));
    
     display: flex;
     width: 50%;
@@ -77,8 +77,10 @@
       cursor: pointer;
       overflow: hidden;
       display: none;
-  
-     
+  }
+  .arrow-box-left_genre:focus{
+      outline: none;
+      box-shadow: none;
   }
   .arrow-box-right_genre{
     position: absolute;
@@ -93,6 +95,10 @@
     overflow: hidden;
     cursor: pointer;
     display: none;
+}
+.arrow-box-right_genre:focus{
+    outline: none;
+    box-shadow: none;
 }
 
 @media (min-width: 600px) {
@@ -132,10 +138,10 @@
         flex-direction: row;
         justify-content: center;
         margin-bottom: 20px;
-        background-color: rgb(189, 189, 189);
+        background-color:rgb(19, 19, 19);
         padding-top: 10px;
         padding-bottom: 10px;
-        box-shadow: 2px 5px 16px 0px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+        box-shadow: 2px 5px 16px 2px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
     }
 
     .arrow-box-left_genre{

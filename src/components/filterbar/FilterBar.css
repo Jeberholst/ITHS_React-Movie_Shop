@@ -8,8 +8,8 @@ h3{
     overflow: hidden;
     flex-direction: row;
     justify-content: center;
-    background-color: white;
-    color: black;
+    background-image: linear-gradient(rgb(62, 62, 62), rgb(50, 50, 50), rgb(38, 38, 38));
+    color: rgb(255, 255, 255);
 }
 .filterbar_slider-cont{
     padding: 10px;
@@ -30,7 +30,7 @@ h3{
     height: 3px;
     cursor: pointer;
     box-shadow: none;
-    background: #2d2d2d;
+    background: #b8b8b8;
     
     border-radius: 50px;
 
@@ -42,7 +42,7 @@ h3{
     height: 22px;
     width: 11px;
     border-radius: 11px;
-    background: rgb(255, 255, 255);
+    background: rgb(177, 177, 177);
     cursor: pointer;
     -webkit-appearance: none;
     margin-top: -10px;
@@ -59,16 +59,14 @@ select {
     font-family: inherit;
     font-size: 16px;
     font-weight:bold;
-    color: #535353;
+    color: #e4e4e4;
     box-sizing: border-box;
     padding: 3px;
-    border: 1px solid #aaa;
-    box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
-     background-color: #fff;
+    border: 1px solid rgb(146, 145, 145);
+    box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.548);
+     background-color: rgb(24, 24, 24);
 }
-option{
 
-}
 
 @media(min-width:1100px){
     .filterbar_slider-cont{
