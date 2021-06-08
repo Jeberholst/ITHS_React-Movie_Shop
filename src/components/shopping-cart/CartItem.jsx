@@ -82,7 +82,7 @@ const CartItem = ({ item }) => {
     const title = pItem.original_title
     const releaseDate = pItem.release_date
    
-    const posterPathFull = createPosterPathFull(POSTER_SIZES.w500, pItem.poster_path)
+    const posterPathFull = createPosterPathFull(POSTER_SIZES.w500, pItem.backdrop_path)
   
     return(
     

@@ -1,5 +1,5 @@
 import { Button, makeStyles } from '@material-ui/core';
-import React from 'react'
+import React, { useState } from 'react'
 import ShoppingCartActionButtons, { BUTTON_TYPE } from '../shopping-cart/ShoppingCartActionButtons';
 import { createPosterPathFull, POSTER_SIZES } from "../../helper-functions/poster";
 import {  useDispatch, useSelector } from 'react-redux';
@@ -36,15 +36,16 @@ const useStyles = makeStyles((theme) => ({
     mainContainer: {
         display: 'flex',
         flexDirection: 'column',
-        width: '70vh',
+        width: '90',
         maxWidth: '95%',
         borderTopLeftRadius: 15,
         borderTopRightRadius: 15,
-        padding: 15,
         minHeight: '50vh',
         textAlign: 'center',
         alignContent: 'center',
         alignItems: 'center',
+        objectFit: 'scale-down',
+        background: 'red',
     },
     infoContainer: {
         width: '100%',
@@ -63,6 +64,7 @@ const useStyles = makeStyles((theme) => ({
         wordWrap: 'break-word',
         maxWidth: '90%',
         textShadow: '1px 1px #000',
+        marginTop: 15,
     },
     year: {
         display: 'flex',
@@ -106,24 +108,29 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const MovieSingle = () => {
+const MovieSingle = ({ bshow }) => {
   
   const classes = useStyles();
 
   const item = useSelector(state => state.movieSection.selectedMovie)
 
-console.log(item)
 
   const title = item.original_title
   const releaseDate = item.release_date
   const itemOverView = item.overview
   const movieGenresNamed = matchGenreIdsToName(item.genre_ids, MockGenres.genres)
   const posterPath = createPosterPathFull('w500', item.poster_path)
- 
+
+  console.log(bshow)
+
+  const renderBackButton = () => {
+    return bshow === "show" ? (<ButtonNavigateBack/>) : null
+  }
+
   return(
         <div id='movie-single-container-root' className={classes.root}>
 
-        <ButtonNavigateBack/> 
+        {renderBackButton()}
                 
         <div id='movie-single-container' className={classes.containerContent}>      
             

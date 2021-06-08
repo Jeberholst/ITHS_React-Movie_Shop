@@ -6,7 +6,7 @@ import {
 } from "../../redux/features/snackbars";
 
 
-class FirebaseUser {
+class FirebaseUserWithCommentAndRating {
     
     constructor (displayName, photoUrl, uid, comment, rating) {
         this.displayName = displayName;
@@ -43,7 +43,7 @@ export const addComment = async(docRef, comment, rating, currentUser, dispatch) 
             var newVoteCount = 1
 
             if (!sfDoc.exists) {
-                // "No doc exists!";
+
             }
 
             newTotalRating = (sfDoc.data() !== undefined) ? (sfDoc.data().totalRating + 3 ): 0
@@ -51,7 +51,7 @@ export const addComment = async(docRef, comment, rating, currentUser, dispatch) 
 
             var newAverageRating = newTotalRating / newVoteCount
             
-            const user = new FirebaseUser(currentUser.displayName, currentUser.photoURL, currentUser.uid, `${comment}`, parseInt(rating))
+            const user = new FirebaseUserWithCommentAndRating(currentUser.displayName, currentUser.photoURL, currentUser.uid, `${comment}`, parseInt(rating))
 
             let newDocProps = {
                 averageRating: newAverageRating,
@@ -65,7 +65,6 @@ export const addComment = async(docRef, comment, rating, currentUser, dispatch) 
         });
     
     }).then(() => {
-        // console.log("Transaction successfully committed!");
         dispatch(snackBarActions.displaySnackBar(commentNotifications.commentAdded))
     }).catch((error) => {
         console.log("Transaction failed: ", error);

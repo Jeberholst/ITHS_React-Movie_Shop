@@ -8,6 +8,7 @@ import { actions as actionsMovieSection, MOVIE_SECTION_SCREENS } from '../../red
 import { useDispatch } from 'react-redux';
 import MockGenres from '../../mockData/mock-data-genre.json';
 import { MoreHorizRounded } from '@material-ui/icons';
+import { matchGenreIdsToName } from '../../helper-functions/genres';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -91,7 +92,7 @@ const MovieMulti = ({ item, useId }) => {
   const useID = useId
   const title = item.original_title
   const releaseDate = item.release_date
-//  const movieGenresNamed = matchGenreIdsToName(item.genreIds, MockGenres.genres)
+  const movieGenresNamed = matchGenreIdsToName(item.genre_ids, MockGenres.genres)
   const posterPath = createPosterPathFull(POSTER_SIZES.w300, item.poster_path)
 
   return(
@@ -119,12 +120,12 @@ const MovieMulti = ({ item, useId }) => {
                     </div>
                     
 
-                    {/* <div className={classes.genres}>
+                    <div className={classes.genres}>
                         {movieGenresNamed.map((genre) => {
                             return <div key={genre}>{genre}</div>
                         })}
 
-                    </div> */}
+                    </div>
                     
                 </div>
 

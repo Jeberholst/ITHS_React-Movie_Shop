@@ -33,7 +33,7 @@ const Slide = ({movie}) => {
 
     const posterBaseUrl = "https://image.tmdb.org/t/p/w500"
     return (
-        <Link onClick={() => setMovie(movie)} to={`/movie/${movie.id}`} style={{backgroundImage:`url(${posterBaseUrl}${movie.backdropPath})`}} className="mainslider__slide">
+        <Link onClick={() => setMovie(movie)} to={`/movie/${movie.id}`} style={{backgroundImage:`url(${posterBaseUrl}${movie.backdrop_path})`}} className="mainslider__slide">
         </Link>
      
     )

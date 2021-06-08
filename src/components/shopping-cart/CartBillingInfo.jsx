@@ -9,8 +9,6 @@ const cartTotalStyle = makeStyles((theme) => ({
         width: '100%',
         marginTop: 10,
         marginBottom: 10,
-        background: 'rgb(0,0,0, 0.1)',
-        borderRadius: 5,
     },
     label: {
         marginLeft: 10,

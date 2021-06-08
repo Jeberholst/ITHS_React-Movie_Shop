@@ -10,7 +10,9 @@
     [class*="cartTotal"]{
         /* background-color: lightcoral; */
         /* width: 80%; */
-        flex-direction: row;
+        display: grid;
+        gap: 5px;
+        grid-template-columns: 50% 50%;
     }
 
     
@@ -27,7 +29,9 @@
     [class*="cartTotal"]{
         /* background-color: lightcoral; */
         /* width: 100%; */
-        flex-direction: row;
+        display: grid;
+        gap: 5px;
+        grid-template-columns: 50% 50%;
     }
 }
 

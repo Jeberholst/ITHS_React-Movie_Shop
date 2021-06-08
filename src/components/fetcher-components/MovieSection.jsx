@@ -125,7 +125,7 @@ const MovieSection = ( {...props } ) => {
            case MOVIE_SECTION_SCREENS.SINGLE_MOVIE: 
                return (
                     <div className={classes.rootSingle}>
-                        <MovieSingle/>
+                          <MovieSingle {...{bshow: 'show'}}/>
                     </div>
                )
            case MOVIE_SECTION_SCREENS.SINGLE_MOVIE_COMMENTS: 
