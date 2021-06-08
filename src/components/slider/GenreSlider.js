@@ -41,7 +41,10 @@ const SlideContainer = ({children,width,translate,id}) => {
                 }
             }
 
-        } 
+        }
+ 
+            
+        
     
     }
     const sliderStyle = {
