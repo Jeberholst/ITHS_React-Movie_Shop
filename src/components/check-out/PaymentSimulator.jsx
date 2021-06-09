@@ -1,7 +1,7 @@
 
-import { LinearProgress, makeStyles } from "@material-ui/core";
+import { LinearProgress, makeStyles, Slide } from "@material-ui/core";
 import { AttachMoneyRounded } from '@material-ui/icons';
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
 import {  actions, PAYMENT_PROCESSING_STATE } from '../../redux/features/paymentProcessor';
 
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 }))
 
-const PaymentSimulator = ({status}) => {
+const PaymentSimulator = ({ status }) => {
     
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -54,10 +54,10 @@ const PaymentSimulator = ({status}) => {
 
         console.log('STATUS 1', status)
         content = PAYMENT_PROCESSING_STATE.START
- 
+
         setTimeout(function(){
                 dispatch(actions.startPaymentProcess(PAYMENT_PROCESSING_STATE.VALIDATING_INFO))
-    
+
             }, 3000
         );
 
@@ -69,7 +69,6 @@ const PaymentSimulator = ({status}) => {
 
         setTimeout(function(){
                 dispatch(actions.startPaymentProcess(PAYMENT_PROCESSING_STATE.COMPLETED))
-    
             }, 3000
         );
 
@@ -78,10 +77,8 @@ const PaymentSimulator = ({status}) => {
         
         console.log('STATUS 3', status)
         content =  PAYMENT_PROCESSING_STATE.COMPLETED
-
             setTimeout(function(){
                 dispatch(actions.startPaymentProcess(PAYMENT_PROCESSING_STATE.DISPLAY_COMPLETED_IN_FULL))
-
             }, 3000
         );
     } 
@@ -90,7 +87,6 @@ const PaymentSimulator = ({status}) => {
         console.log('STATUS 4', status)
         displayIcon = <AttachMoneyRounded/> 
         content =  PAYMENT_PROCESSING_STATE.DISPLAY_COMPLETED_IN_FULL
- 
 
     }
     else {
@@ -99,28 +95,30 @@ const PaymentSimulator = ({status}) => {
 
     if(content !== null){
         return (
-             <div className={classes.root}>
+         
+            <div className={classes.root}>
 
-                 <div className={classes.containerIcon} style={{ display: displayIcon ? 'flex' : 'none'}}>
-                     {displayIcon}{displayIcon}{displayIcon}
-                 </div>
-                 
-                 <div className={classes.containerText}>
-                     <div>
+                <div className={classes.containerIcon} style={{ display: displayIcon ? 'flex' : 'none'}}>
+                    {displayIcon}{displayIcon}{displayIcon}
+                </div>
+                
+                <div className={classes.containerText}>
+                    <div>
                         <h3>{content.message}</h3>
-                     </div>
-                 </div>
+                    </div>
+                </div>
     
                 <div className={classes.containerProgress} style={{ display: displayIcon ? 'none' : 'flex'}}>
-                     <div style={{marginBottom: 15}}>
+                    <div style={{marginBottom: 15}}>
                         <i>{content.status}</i>
                         <i>{' / '}</i>
                         <i>{4}</i>
                     </div>
-                     <LinearProgress color="secondary" />
-                 </div>
-      
+                    <LinearProgress color="secondary" />
+                </div>
+    
             </div>
+      
           );
 
     } else {

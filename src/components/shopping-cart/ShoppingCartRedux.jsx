@@ -1,4 +1,4 @@
-import { ButtonGroup, Container, Divider, makeStyles } from "@material-ui/core";
+import { ButtonGroup, Container, Divider, makeStyles, Slide, Zoom } from "@material-ui/core";
 import React, { useState } from "react";
 import { useSelector } from "react-redux"
 import CartItem from './CartItem'
@@ -85,7 +85,9 @@ const ShoppingCartRedux = () => {
       
       return (hasCartItems && user !== null) ? 
           (
-            <CheckOutRedux/>
+            <Zoom in={true} mountOnEnter unmountOnExit>
+              <CheckOutRedux/>
+            </Zoom>
           ) : null
     }
 
@@ -104,24 +106,25 @@ const ShoppingCartRedux = () => {
                 </ButtonGroup>
             </div>
 
-            {/* <Slide direction="right" in={true} mountOnEnter> */}
+            <Zoom in={true} mountOnEnter unmountOnExit>
               <div className={classes.cartListItems}>
               
                   <CartListItems/>
                 
               </div>
-            {/* </Slide> */}
+            </Zoom>
+
 
             <Divider className={classes.dividerSection}></Divider> 
 
-            {/* <Slide direction="right" in={true} mountOnEnter> */}
+            <Zoom in={true} mountOnEnter unmountOnExit>
               <div className={classes.cartTotal}>
                   
                   <CartTotal/>
                   <CartBillingInfo/>
 
               </div>
-            {/* </Slide> */}
+            </Zoom>
         
             {/* <Divider className={classes.dividerSection}></Divider>  */}
 

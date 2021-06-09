@@ -1,5 +1,5 @@
 
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Zoom } from "@material-ui/core";
 import React from "react";
 import { createPosterPathFull, POSTER_SIZES } from '../../helper-functions/poster';
 import ShoppingCartActionButtons, { BUTTON_TYPE } from "./ShoppingCartActionButtons";
@@ -87,40 +87,38 @@ const CartItem = ({ item }) => {
     return(
     
       <React.Fragment>
-           
-            <div id={'cart-item'} className={classes.root}>
+             <Zoom in={true} mountOnEnter unmountOnExit>
+              <div id={'cart-item'} className={classes.root}>
 
-              <div className={classes.mainContainer} 
-                    style={{backgroundImage: `linear-gradient(to top, rgb(36, 36, 36, 0.3), rgb(15, 15, 15, 0.6)), url(${posterPathFull})`}}
-                    >
+                <div className={classes.mainContainer} 
+                      style={{backgroundImage: `linear-gradient(to top, rgb(36, 36, 36, 0.3), rgb(15, 15, 15, 0.6)), url(${posterPathFull})`}}
+                      >
 
-                    <div className={classes.containerInfo}>
-                     
-                        <div className={classes.title}>
-                            {title}
-                        </div>
-
-                        <div className={classes.year}>
-                            {String(releaseDate).slice(0, 4)}
-                        </div>
-
-                    </div>
-   
-                    <div className={classes.containerButton}>
+                      <div className={classes.containerInfo}>
                       
-                      <ShoppingCartActionButtons
-                          mItem={item} 
-                          type={BUTTON_TYPE.CART_REMOVE}
-                        />
-                      <LabelCost text={'20.00'}/>
+                          <div className={classes.title}>
+                              {title}
+                          </div>
 
-                    </div>
+                          <div className={classes.year}>
+                              {String(releaseDate).slice(0, 4)}
+                          </div>
 
-              </div>
+                      </div>
+    
+                      <div className={classes.containerButton}>
+                        
+                        <ShoppingCartActionButtons
+                            mItem={item} 
+                            type={BUTTON_TYPE.CART_REMOVE}
+                          />
+                        <LabelCost text={'20.00'}/>
 
- 
-              
-          </div>
+                      </div>
+
+                </div>
+             </div>
+          </Zoom>
       </React.Fragment>
 
     );
