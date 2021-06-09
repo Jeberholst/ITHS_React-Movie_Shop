@@ -1,5 +1,6 @@
 
 import './Header.css';
+import React from 'react'
 
 function Header({children,page}) {
     
@@ -25,13 +26,13 @@ function Header({children,page}) {
 
 
   return (
-    <>
+   <React.Fragment>
     
     <div className="header__container">
         <div className="header__container-logo"><i className={icon}></i></div>
-        <div className="header__container-txt">{children}</div>
+        <div className="header__container-txt">{children.toUpperCase()}</div>
     </div>
-    </>
+   </React.Fragment>
   );
 }
 

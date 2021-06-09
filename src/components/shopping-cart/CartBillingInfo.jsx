@@ -9,8 +9,6 @@ const cartTotalStyle = makeStyles((theme) => ({
         width: '100%',
         marginTop: 10,
         marginBottom: 10,
-        background: 'rgb(0,0,0, 0.1)',
-        borderRadius: 5,
     },
     label: {
         marginLeft: 10,
@@ -21,6 +19,9 @@ const cartTotalStyle = makeStyles((theme) => ({
     },
     left: {
         width: '50%',
+        alignContent: 'left',
+        alignItems: 'left',
+        textAlign: 'left',
     },
     right: {
         width: '50%',
@@ -34,8 +35,7 @@ const cartTotalStyle = makeStyles((theme) => ({
 const CartBillingInfo = () => {
 
     const classes = cartTotalStyle();
-
-    // console.log(userBillingInfo)
+    // console.log(userBillingInfo) useSelector on fb-user
 
     return(
       <React.Fragment>
@@ -56,6 +56,7 @@ const CartBillingInfo = () => {
                     <Label text={userBillingInfo.postalCode}/>
                     <Label text={userBillingInfo.county}/>
                     <Label text={userBillingInfo.country}/>
+                    
                 </div>
 
           </div>

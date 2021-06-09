@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { API_FETCHER_STATUSES } from './../redux/features/fetcherApi';
-import { fetchListGenres, fetchListPopular } from './fetcherFunctions'
+import { actions as actionsFetch, API_FETCHER_STATUSES } from './../redux/features/fetcherApi';
+import { fetchAllForLandingPage, fetchListGenres, fetchListPopular } from './fetcherFunctions'
 import { actions, MOVIE_SECTION_SCREENS } from './../redux/features/movieSection';
 import MovieSection from '../components/fetcher-components/MovieSection';
 
@@ -9,6 +9,7 @@ import MovieSection from '../components/fetcher-components/MovieSection';
 export const FETCH_API_TYPE = {
     LIST_POPULAR: "LIST_POPULAR", 
     LIST_GENRE: "LIST_GENRE", 
+    LIST_LANDING: 'LIST_LANDING',
 }
 
 const FetcherAPI = ({...props}) => {
@@ -20,40 +21,42 @@ const FetcherAPI = ({...props}) => {
    
     let fetchedResult = [];
 
-    if (STATUS.status ===  API_FETCHER_STATUSES.FETCHING.status) {
-        // console.log('STATUS 1', STATUS.status)
+    if (STATUS.status === API_FETCHER_STATUSES.FETCHING.status) {
+    
     } 
-    else if ( STATUS.status ===  API_FETCHER_STATUSES.SUCCESS.status) {
-        // console.log('STATUS 2', STATUS.status)
+    else if ( STATUS.status === API_FETCHER_STATUSES.SUCCESS.status) {
         fetchedResult = RESULT
     }
     else {
-        // console.log('STATUS 3', STATUS.status)
         fetchedResult = [];
     }
 
-    // let useComponent = null;
     let useScreen = null;
     let useFunction = null;
     
     switch(props.type){
-        case "LIST_POPULAR":
+        case FETCH_API_TYPE.LIST_POPULAR:
 
-            useScreen = MOVIE_SECTION_SCREENS.GRID_MOVIES
+            useScreen = MOVIE_SECTION_SCREENS.SLIDER_MOVIES
             useFunction = () => fetchListPopular(dispatch)
             break;
 
-        case "LIST_GENRE":
+        case FETCH_API_TYPE.LIST_GENRE:
         
-            useScreen = MOVIE_SECTION_SCREENS.GRID_MOVIES
-            // console.log('TYPE:', String(props.extras.id).toUpperCase())
+            useScreen = MOVIE_SECTION_SCREENS.LIST_GENRE
             useFunction = () => fetchListGenres(dispatch, String(props.extras.id).toUpperCase())
+            break;
+
+        case FETCH_API_TYPE.LIST_LANDING:
+        
+            useScreen = MOVIE_SECTION_SCREENS.LIST_LANDING
+            useFunction = () => fetchAllForLandingPage(dispatch)
             break;
 
         default:
     
-            useScreen = MOVIE_SECTION_SCREENS.QUICK_ADD
-            useFunction = () => {}
+            useScreen = MOVIE_SECTION_SCREENS.LIST_POPULAR
+            useFunction = () => fetchAllForLandingPage(dispatch)
 
             break;
 
@@ -62,6 +65,7 @@ const FetcherAPI = ({...props}) => {
     useEffect(() => {
         StartFetching(useFunction)
     }, [])
+    
 
     if( fetchedResult !== null ){
 
@@ -74,13 +78,7 @@ const FetcherAPI = ({...props}) => {
         );
 
     } else {
-
-        return (
-            <React.Fragment>
-                {'null'}
-            </React.Fragment>
-        );
-
+        return null
     }
    
  }

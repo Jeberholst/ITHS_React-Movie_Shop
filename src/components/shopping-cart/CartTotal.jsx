@@ -9,8 +9,8 @@ const useStyle = makeStyles((theme) => ({
         width: '100%',
         marginTop: 10,
         marginBottom: 10,
-        background: 'rgb(0,0,0, 0.1)',
-        borderRadius: 5,
+        // background: 'rgb(0,0,0, 0.1)',
+        // borderRadius: 5,
     },
     label: {
         display: 'flex',
@@ -33,6 +33,9 @@ const useStyle = makeStyles((theme) => ({
     },
     labelLeft: {
         width: '50%',
+        alignContent: 'left',
+        alignItems: 'left',
+        textAlign: 'left',
     },
     labelRight: {
         width: '50%',
@@ -52,7 +55,9 @@ const useStyle = makeStyles((theme) => ({
         fontWeight: 'bold'
     },
     divider: {
-        background: 'rgb(0,0,0, 0.1)'
+        background: 'rgb(32,32,32, 0.8)',
+        marginTop: 5,
+        marginBottom: 5,
     }
 }));
 
@@ -75,9 +80,9 @@ const CartTotal = () => {
 
             </div>
             
+            <Divider className={classes.divider}/>
 
             <div className={classes.containerTotal}>
-                <Divider/>
                 <LabelTotal text={'Total'} num={cost.total}/>
             </div>
                   

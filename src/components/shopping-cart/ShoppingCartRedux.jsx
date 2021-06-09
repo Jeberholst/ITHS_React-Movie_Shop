@@ -7,20 +7,23 @@ import CartBillingInfo from './CartBillingInfo'
 import ShoppingCartActionButtons, { BUTTON_TYPE } from "./ShoppingCartActionButtons";
 import { fetchers } from './../../mockData/mock-data-fetcher'
 import CheckOutRedux from '../check-out/CheckOutRedux';
+import authService from '../../util/auth-service';
+import NotSignedIn from '../shared-components/NotSignedIn';
+import './ShoppingCart.css'
 
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'left',
-      textAlign: 'left',
-      alignContent: 'left',
-      maxWidth: '100%',
+      alignItems: 'center',
+      textAlign: 'center',
+      alignContent: 'center',
+      width: '95%',
       height: '100%',
+      overflow: 'hidden'
     },
     header: {
       padding: 5,
-      margin: 5,
     },
     dividerSection: {
       marginTop: 15,
@@ -28,45 +31,65 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: 'rgba(255, 255, 255, 0.2)'
     },
     cartListItems: {
-      width: '100%',
+      width: '90%',
+    },
+    cartTotal: {
+      display: 'flex',
+      width: '90%',
     },
     cartItemContainer: {
-      display: 'flex',
-      flexDirection: 'column',
       width: '100%',
     },
-    checkOutContainer: {
+    containerCheckOutButton: {
       display: 'flex',
-      flexDirection: 'row-reverse',
-      width: '100%'
+      width: '90%',
+      marginTop: 15,
+      marginBottom: 15,
+      alignContent: 'center',
+      justifyItems: 'center',
+      justifyContent: 'center'
+    },
+    containerCheckOutComp: {
+      display: 'flex',
+      flexDirection: 'column',
+      width: '90%',
+      alignItems: 'center',
+      textAlign: 'center',
+      alignContent: 'center',
+      justifyItems: 'center',
+      justifyContent: 'center'
     }
-}));
 
+}));
 
 
 const ShoppingCartRedux = () => {
 
     const classes = useStyles();
 
-    // const displayCheckoutComp = useSelector(state => state.checkOut.visibility)
-    const [displayCheckout, setDisplayCheckout] = useState(false)
+    const [user] = useState(authService.getCurrentUser())
+    // const displayCheckout = useSelector(state => state.checkOut.visibility)
     const hasCartItems = useSelector(state => state.shoppingCart.listOfMovies.length !== 0)
 
-    const handleDisplayCheckout = ( boolean ) => {
-        setDisplayCheckout(boolean)
+    const handleSignedIn = () => {
+
+      return (user !== null) ? (
+          <ShoppingCartActionButtons 
+            type={BUTTON_TYPE.CART_CHECKOUT}
+          />
+      ) : (<NotSignedIn {...{ message: 'You need to Sign In in order to proceed to checkout!'}}/>)
+
     }
 
-    //ADD user sign in
-    if(!displayCheckout){
-      if(hasCartItems){
-        handleDisplayCheckout(true)
-      }
-    } else {
-      if(!hasCartItems){
-        handleDisplayCheckout(false)
-      }
+    const handleCheckoutVisibility = () => {
+      
+      return (hasCartItems && user !== null) ? 
+          (
+            <CheckOutRedux/>
+          ) : null
     }
- 
+
+
     fetchers.fetchBillingInfo()
 
     return (
@@ -102,17 +125,14 @@ const ShoppingCartRedux = () => {
         
             {/* <Divider className={classes.dividerSection}></Divider>  */}
 
-            <div className={classes.checkOutContainer}>
+            <div className={classes.containerCheckOutButton}>
 
-                <ShoppingCartActionButtons 
-                  type={BUTTON_TYPE.CART_CHECKOUT}
-                  
-                  />
-
+                {handleSignedIn()}
+         
             </div>
 
-            <div hidden={!displayCheckout}>
-                <CheckOutRedux/>
+            <div className={classes.containerCheckOutComp}>
+                {handleCheckoutVisibility()}
             </div>
 
         </Container>
@@ -128,7 +148,7 @@ const CartListItems = () => {
   if(shoppingCartItems.length !== 0){
     return (
       <React.Fragment>
-            <div className={classes.cartItemContainer}>
+            <div id={'container-cart-items'} className={classes.cartItemContainer}>
       
                 {shoppingCartItems.map((element) => (
                       <CartItem 

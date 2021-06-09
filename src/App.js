@@ -14,9 +14,7 @@ import SearchPage from "./pages/SearchPage";
 import ProfilePage from "./pages/ProfilePage";
 import GenrePage from "./pages/GenrePage";
 import SingelMoviePage from "./pages/SingelMoviePage"
-import firebase from "firebase/app";
 import "firebase/firestore";
-import {firebaseConfig} from "./util/firebase";
 import "firebase/auth";
 import SnackBarsRedux from './util/SnackBarsRedux';
 import FetcherAPI from './util/FetcherAPI';
@@ -25,9 +23,10 @@ import ErrorPopUp from './components/ErrorHandling/ErrorPopUp'
 import LoadEhandling from './components/ErrorHandling/ErrorPopUp';
 
 firebase.initializeApp(firebaseConfig);
+import RegisterPage from "./pages/RegisterPage";
 
 function App() {
-
+    
   return (
       <div className="App">
 
@@ -44,6 +43,7 @@ function App() {
                         <Route exact path="/genre/:id" component={GenrePage} />
                         <Route exact path="/comment" component={CommentPage} />
                         <Route exact path="/login" component={LoginPage} />
+                        <Route exact path="/register" component={RegisterPage} />
                         <Route exact path="/profile" component={ProfilePage} />
                         <Route exact path="/search" component={SearchPage} />
                         <Route exact path="/shopping-cart" component={ShoppingCartPage} />

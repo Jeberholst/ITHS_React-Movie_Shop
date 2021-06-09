@@ -74,12 +74,12 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const MovieSection = ( {...props } ) => {
+const MovieSectionPontus = () => {
 
     const classes = useStyles();
 
     const screen = useSelector(state => state.movieSection.screen)
-    const RESULT = props.RESULT
+    const RESULT = useSelector(state => state.movieSection.movieList)
 
     if(RESULT !== null){
 
@@ -111,7 +111,7 @@ const MovieSection = ( {...props } ) => {
                     <div className={classes.rootGrid}>
 
                         {RESULT.map((item) => (
-                            <MovieMulti key={'genre-' + item.id} useId={'hover-container-genre'} />
+                            <MovieMulti key={'genre-' + item.id} item={item} useId={'hover-container-genre'} />
                         ))}
 
                     </div>
@@ -148,4 +148,4 @@ const MovieSection = ( {...props } ) => {
     }
 }
 
-export default MovieSection;
+export default MovieSectionPontus;

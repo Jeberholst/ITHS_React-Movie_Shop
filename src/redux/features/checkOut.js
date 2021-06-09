@@ -1,6 +1,6 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 
-const setVisibility = createAction('show');
+const setVisibility = createAction('set vis');
 
 const actions = { setVisibility };
 
@@ -9,11 +9,11 @@ const initialState = {
 }
 
 const reducer = createReducer(initialState, {
-    [setVisibility] : (state, action) => { 
-        const value = true
-        // console.log(value)
-        state.visible = value
-    },
+    [setVisibility] : (state, action) => ({ 
+        
+        ...state,
+            visibility: !state.visibility
+    }),
 }) 
 
 
