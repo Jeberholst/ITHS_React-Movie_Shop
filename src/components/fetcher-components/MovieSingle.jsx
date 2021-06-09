@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
       width: '90%',
       height: '100%',
-      maxWidth: '70vh',
+      maxWidth: '50vh',
       justifyContent: 'center',
       justifyItems: 'center',
       alignContent: 'center',
@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         height: '100%',
         fontSize: 12,
+        // height: 'fit-content',
     },
     topRow: {
         display: 'flex',
@@ -36,15 +37,17 @@ const useStyles = makeStyles((theme) => ({
     mainContainer: {
         display: 'flex',
         flexDirection: 'column',
-        width: '90',
-        maxWidth: '95%',
+        width: '100%',
+        minHeight: '30vh',
+        maxHeight: '50vh',
+        height: '80%',
+        maxWidth: '100%',
         borderTopLeftRadius: 15,
         borderTopRightRadius: 15,
-        minHeight: '50vh',
         textAlign: 'center',
         alignContent: 'center',
         alignItems: 'center',
-        objectFit: 'scale-down',
+        objectFit: 'cover',
         background: 'red',
     },
     infoContainer: {
@@ -119,7 +122,7 @@ const MovieSingle = ({ bshow }) => {
   const releaseDate = item.release_date
   const itemOverView = item.overview
   const movieGenresNamed = matchGenreIdsToName(item.genre_ids, MockGenres.genres)
-  const posterPath = createPosterPathFull('w500', item.poster_path)
+  const posterPath = createPosterPathFull('w500', item.backdrop_path)
 
   console.log(bshow)
 

@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import authService from '../../util/auth-service';
 import { userBillingInfo } from './../../mockData/mock-data-fetcher'
 
 const cartTotalStyle = makeStyles((theme) => ({
@@ -31,14 +32,17 @@ const cartTotalStyle = makeStyles((theme) => ({
     }
 }));
 
+// + ' ' + userBillingInfo.lastName}/>
 
 const CartBillingInfo = () => {
 
     const classes = cartTotalStyle();
-    // console.log(userBillingInfo) useSelector on fb-user
+    const [user] = useState(authService.getCurrentUser())
+    //console.log(user)
 
-    return(
-      <React.Fragment>
+    return user ?
+
+    (  <React.Fragment>
           <div className={classes.root}>
 
                 <div className={classes.left}>
@@ -51,19 +55,18 @@ const CartBillingInfo = () => {
                 
                 <div className={classes.right}>
 
-                    <Label text={userBillingInfo.firstName + ' ' + userBillingInfo.lastName}/>
-                    <Label text={userBillingInfo.address}/>
-                    <Label text={userBillingInfo.postalCode}/>
-                    <Label text={userBillingInfo.county}/>
-                    <Label text={userBillingInfo.country}/>
-                    
+                    <Label text={user.displayName ? user.displayName : '-'}/>
+                    <Label text={user.county ? user.county : '-'}/>
+                    <Label text={user.address ? user.address : '-'}/>
+                    <Label text={user.postalCode ? user.postalCode : '-'}/>
+                    <Label text={user.country ? user.country : '-'}/>
+
                 </div>
 
           </div>
       </React.Fragment>
   
-    );
-  
+    ): null
 };
 
 export default CartBillingInfo;
@@ -73,6 +76,9 @@ const Label = ({ text }) => {
     const classes = cartTotalStyle();
 
     return (
-        <div className={classes.label}>{text}</div>
+        <div className={classes.label}>
+            {text}
+            
+        </div>
     );
 };

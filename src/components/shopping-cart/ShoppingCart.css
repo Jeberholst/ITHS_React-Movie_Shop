@@ -9,7 +9,6 @@
     }
     [class*="cartTotal"]{
         /* background-color: lightcoral; */
-        /* width: 80%; */
         display: grid;
         gap: 5px;
         grid-template-columns: 50% 50%;
@@ -28,7 +27,6 @@
     }
     [class*="cartTotal"]{
         /* background-color: lightcoral; */
-        /* width: 100%; */
         display: grid;
         gap: 5px;
         grid-template-columns: 50% 50%;
@@ -44,8 +42,15 @@
     }
 
     [class*="cartTotal"]{
-        /* background-color: lightcoral; */
         flex-direction: column;
     }
 }
 
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
