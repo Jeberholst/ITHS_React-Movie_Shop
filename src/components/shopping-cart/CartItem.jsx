@@ -25,7 +25,8 @@ const useStyle = makeStyles((theme) => ({
       alignItems: 'center',
       objectFit: 'cover',
       backgroundRepeat: 'no-repeat',
-      minHeight: '30vh'
+      minHeight: '30vh',
+      maxWidth: '100%'
     },
     containerInfo: {
       display: 'flex',
