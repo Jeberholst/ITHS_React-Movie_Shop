@@ -1,5 +1,6 @@
 import { Button, makeStyles } from '@material-ui/core';
 import React from 'react';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     rootNotSignedIn: {
@@ -24,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 const NotSignedIn = ({ ...props }) => {
     
     const classes = useStyles();
+    const history = useHistory();
 
     return(
         <React.Fragment>
@@ -39,11 +41,10 @@ const NotSignedIn = ({ ...props }) => {
                         variant={'contained'}
                         color={'secondary'}
                         onClick={
-                            () => { 
-                                alert('Move to sign-in... popup?')
-                            }
+                            () => { history.push("/login") }
                         }>
                         Sign in
+
                         </Button>
 
                         
