@@ -160,9 +160,9 @@ const MovieSingle = ({ bshow }) => {
                         <b>{'Popularity'}</b>
                         <i>{item.popularity}</i>
                         <b>{'Vote average'}</b>
-                        <i>{item.voteAverage}</i>
+                        <i>{item.vote_average}</i>
                         <b>{'Vote count'}</b>
-                        <i>{item.voteCount}</i>
+                        <i>{item.vote_count}</i>
                 </div>
                                
                
