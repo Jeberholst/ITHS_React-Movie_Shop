@@ -122,8 +122,6 @@ const PaymentSimulator = ({ status }) => {
             }, 200
         );
        
-
-
     }
     else {
         content = null;
