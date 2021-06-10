@@ -1,9 +1,7 @@
-import { Button, Divider, IconButton, makeStyles } from '@material-ui/core';
+import { Divider, Fade, IconButton, makeStyles, Slide } from '@material-ui/core';
 import React from 'react'
 import ShoppingCartActionButtons, { BUTTON_TYPE } from '../shopping-cart/ShoppingCartActionButtons';
-import ImdbLOGO from './../../img/Other/imdb-logo-square.svg'
 import { createPosterPathFull, POSTER_SIZES } from "../../helper-functions/poster";
-import StarsComponent from '../shared-components/StarsComponent';
 import { actions as actionsMovieSection, MOVIE_SECTION_SCREENS } from '../../redux/features/movieSection'
 import { useDispatch } from 'react-redux';
 import MockGenres from '../../mockData/mock-data-genre.json';
@@ -24,7 +22,10 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         borderRadius: 10,
         objectFit: 'cover',
-        backgroundRepeat: 'no-repeat'
+        backgroundRepeat: 'no-repeat',
+        "&:hover": {
+            transform: 'scale(0.98)'
+        }
     },
     topRow: {
         display: 'flex',
@@ -98,43 +99,44 @@ const MovieMulti = ({ item, useId }) => {
   return(
         <div id={`${useID} ${item.id}`}
             className={classes.root}>
-
-            <div className={classes.mainContainer} 
-                style={{backgroundImage: `linear-gradient(to top, rgb(36, 36, 36, 0.3), rgb(15, 15, 15, 0.6)), url(${posterPath})`}}
-                >
-        
-                <div className={classes.topRow}>
-                    <ButtonMore mItem={item}/>
-                </div>
             
-                <Divider className={classes.divider}/>
+            <Slide direction={'right'} in={true} timeout={500}>
+                <div className={classes.mainContainer} 
+                    style={{backgroundImage: `linear-gradient(to top, rgb(36, 36, 36, 0.3), rgb(15, 15, 15, 0.6)), url(${posterPath})`}}
+                    >
+            
+                    <div className={classes.topRow}>
+                        <ButtonMore mItem={item}/>
+                    </div>
+                
+                    <Divider className={classes.divider}/>
 
-                <div className={classes.infoContainer}>
+                    <div className={classes.infoContainer}>
 
-                    <div className={classes.title}>
-                        <i style={{fontSize: 12}}>{title}</i>
+                        <div className={classes.title}>
+                            <i style={{fontSize: 12}}>{title}</i>
+                        </div>
+
+                        <div className={classes.releaseDate}>
+                            <i style={{fontSize: 12}}>{String(releaseDate).slice(0, 4)}</i>
+                        </div>
+                        
+
+                        <div className={classes.genres}>
+                            {movieGenresNamed.map((genre) => {
+                                return <div key={genre}>{genre}</div>
+                            })}
+
+                        </div>
+                        
                     </div>
 
-                    <div className={classes.releaseDate}>
-                        <i style={{fontSize: 12}}>{String(releaseDate).slice(0, 4)}</i>
+                    <div className={classes.bottomRow}>
+                        <ShoppingCartActionButtons mItem={item} type={BUTTON_TYPE.CART_ADD}/>
                     </div>
-                    
 
-                    <div className={classes.genres}>
-                        {movieGenresNamed.map((genre) => {
-                            return <div key={genre}>{genre}</div>
-                        })}
-
-                    </div>
-                    
                 </div>
-
-                <div className={classes.bottomRow}>
-                    <ShoppingCartActionButtons mItem={item} type={BUTTON_TYPE.CART_ADD}/>
-                 </div>
-
-            </div>
- 
+            </Slide>
         </div>
   );
 
