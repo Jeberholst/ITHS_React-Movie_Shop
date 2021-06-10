@@ -10,6 +10,8 @@ import mainSliderReducer from './mainSliderSlice'
 import genreSliderReducer from './genreSliderSlice'
 import genrePageReducer from './genrePageSlice'
 import filterBarReducer from './filterBarSlice'
+import errorHandlingReducer from './ErrorHandlingSlice'
+import loadingHandlingReducer from './loadingHandlingSlice'
 
 const rootReducer = combineReducers({
     shoppingCart: shoppingCartReducer,
@@ -23,6 +25,8 @@ const rootReducer = combineReducers({
     fetcherApi: fetcherApiReducer,
     genrePage: genrePageReducer,
     filterBar: filterBarReducer,
+    ErrorHandling: errorHandlingReducer,
+    loadingHandling: loadingHandlingReducer,
 })
 
 export { rootReducer };
