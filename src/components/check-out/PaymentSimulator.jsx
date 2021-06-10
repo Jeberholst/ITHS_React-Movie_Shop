@@ -3,6 +3,7 @@ import { LinearProgress, makeStyles, Slide } from "@material-ui/core";
 import { AttachMoneyRounded } from '@material-ui/icons';
 import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import {  actions, PAYMENT_PROCESSING_STATE } from '../../redux/features/paymentProcessor';
 
 const useStyles = makeStyles((theme) => ({
@@ -42,6 +43,7 @@ const PaymentSimulator = ({ status }) => {
     
     const classes = useStyles();
     const dispatch = useDispatch();
+    const history = useHistory();
    
     let content = null;
     let displayIcon = null;
@@ -58,7 +60,7 @@ const PaymentSimulator = ({ status }) => {
         setTimeout(function(){
                 dispatch(actions.startPaymentProcess(PAYMENT_PROCESSING_STATE.VALIDATING_INFO))
 
-            }, 3000
+            }, 1000
         );
 
     } 
@@ -69,25 +71,57 @@ const PaymentSimulator = ({ status }) => {
 
         setTimeout(function(){
                 dispatch(actions.startPaymentProcess(PAYMENT_PROCESSING_STATE.COMPLETED))
-            }, 3000
+            }, 2000
         );
 
     } 
     else if ( status.message ===  PAYMENT_PROCESSING_STATE.COMPLETED.message) {
         
         console.log('STATUS 3', status)
+
         content =  PAYMENT_PROCESSING_STATE.COMPLETED
             setTimeout(function(){
-                dispatch(actions.startPaymentProcess(PAYMENT_PROCESSING_STATE.DISPLAY_COMPLETED_IN_FULL))
-            }, 3000
+                dispatch(actions.startRedirect(PAYMENT_PROCESSING_STATE.DISPLAY_REDIRECT_2))
+
+            }, 2000
         );
     } 
-    else if ( status.message ===  PAYMENT_PROCESSING_STATE.DISPLAY_COMPLETED_IN_FULL.message) {
-
+    else if ( status.message ===  PAYMENT_PROCESSING_STATE.DISPLAY_REDIRECT_2.message) {
+        
         console.log('STATUS 4', status)
-        displayIcon = <AttachMoneyRounded/> 
-        content =  PAYMENT_PROCESSING_STATE.DISPLAY_COMPLETED_IN_FULL
 
+        content =  PAYMENT_PROCESSING_STATE.DISPLAY_REDIRECT_2
+       
+        setTimeout(function(){
+           
+            dispatch(actions.startRedirect(PAYMENT_PROCESSING_STATE.DISPLAY_REDIRECT_1))
+  
+        }, 1000
+    );
+    }
+    else if ( status.message ===  PAYMENT_PROCESSING_STATE.DISPLAY_REDIRECT_1.message) {
+        
+        content =  PAYMENT_PROCESSING_STATE.DISPLAY_REDIRECT_1
+
+        setTimeout(function(){
+         
+            dispatch(actions.startRedirect(PAYMENT_PROCESSING_STATE.DISPLAY_REDIRECT_0))
+            }, 1000
+        );
+    
+    } 
+    else if ( status.message ===  PAYMENT_PROCESSING_STATE.DISPLAY_REDIRECT_0.message) {
+       
+        // displayIcon = <AttachMoneyRounded/> 
+        content =  PAYMENT_PROCESSING_STATE.DISPLAY_REDIRECT_0
+
+        setTimeout(function(){
+                content =  PAYMENT_PROCESSING_STATE.COMPLETED
+                history.push("/profile")
+                dispatch(actions.startRedirect(PAYMENT_PROCESSING_STATE.DEFAULT))
+            }, 200
+        );
+       
     }
     else {
         content = null;
@@ -110,9 +144,9 @@ const PaymentSimulator = ({ status }) => {
     
                 <div className={classes.containerProgress} style={{ display: displayIcon ? 'none' : 'flex'}}>
                     <div style={{marginBottom: 15}}>
-                        <i>{content.status}</i>
+                        <i>{content.status ? content.status : ''}</i>
                         <i>{' / '}</i>
-                        <i>{4}</i>
+                        <i>{'6'}</i>
                     </div>
                     <LinearProgress color="secondary" />
                 </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Divider, makeStyles } from '@material-ui/core';
+import { Divider, Fade, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -30,21 +30,23 @@ const PageLableWithIcon = ({...props}) => {
     const classes = useStyles();
 
     return(
-        <div className={classes.root}>
 
-            <div className={classes.iconContainer}>
-                {props.icon}
+        <Fade in={true} timeout={500}>
+            <div className={classes.root}>
+
+                <div className={classes.iconContainer}>
+                    {props.icon}
+                </div>
+
+                <div className={classes.containerText}>
+                    {props.text}
+                </div>
+
+                <Divider className={classes.divider}/>
+
             </div>
 
-            <div className={classes.containerText}>
-                {props.text}
-            </div>
-
-            <Divider className={classes.divider}/>
-
-        </div>
-
-
+        </Fade>
     );
 
 }

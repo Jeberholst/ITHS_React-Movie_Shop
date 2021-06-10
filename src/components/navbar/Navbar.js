@@ -6,7 +6,6 @@ import { toggelMenu, setSearchResults, toggelSearch, fetchSearchResult } from '.
 import  { actions }  from '../../redux/features/movieSection'
 import  { Link } from "react-router-dom";
 import ShoppingCartBadge from './../shopping-cart/ShoppingCartBadge'
-import AuthService from "../../util/auth-service"
 import authService from '../../util/auth-service';
 import SnackBarsRedux from '../../util/SnackBarsRedux'
 import {actions as snackbar,cartNotifications}    from '../../redux/features/snackbars'
@@ -95,9 +94,9 @@ const Bar = () => {
       {/*Navigation bar*/}
       <Link to="/"><img src={dummyLogo} alt="" className="navbar_logo" /></Link>
       <div className={iconsStyle}>
-        {menuOpen? null :  <i className="fas fa-search" onClick={() => dispatch(toggelSearch())}></i> }
+        {menuOpen? null :  <i className="fas fa-search nav_icon" onClick={() => dispatch(toggelSearch())}></i> }
         {menuOpen? null :  <Link to="/shopping-cart"> <ShoppingCartBadge/> </Link> }
-        {menuOpen? <i onClick={() => handelMenuClick()} className="fas fa-times navbar__container_burger-menu"></i> :   <i onClick={() => handelMenuClick()} className="fas fa-bars navbar__container_burger-menu"></i> }
+        {menuOpen? <i onClick={() => handelMenuClick()} className="fas fa-times nav_icon"></i> :   <i onClick={() => handelMenuClick()} className="fas fa-bars nav_icon"></i> }
       
       </div>
     </div>
@@ -129,7 +128,7 @@ let Menu = () => {
     setUser(authService.getCurrentUser)
     dispatch(snackbar.displaySnackBar(cartNotifications.loggedOutSuccess))
   }
-  console.log(user)
+ 
   return(
     <div className="menu__overlay">
     

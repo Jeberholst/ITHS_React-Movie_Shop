@@ -1,8 +1,6 @@
 import {useParams} from 'react-router-dom'
 import Header from '../components/Header.js'
 import React, { useEffect, useRef } from 'react'
-
-import MovieSection from '../components/fetcher-components/MovieSection.jsx'
 import { actions, MOVIE_SECTION_SCREENS } from './../redux/features/movieSection';
 import { useDispatch, useSelector } from 'react-redux'
 import {fetchGenreMovies,setGenre,movieResults} from '../redux/features/genrePageSlice'
@@ -24,7 +22,7 @@ const GenrePage = () => {
     
 
     useEffect(() => {
-        dispatch(actions.setScreen(MOVIE_SECTION_SCREENS.GRID_MOVIES))
+        dispatch(actions.setScreen(MOVIE_SECTION_SCREENS.SLIDER_MOVIES))
         if (params.id !== id.current){
                 id.current = params.id.toLowerCase()
                 dispatch(resetFilter())

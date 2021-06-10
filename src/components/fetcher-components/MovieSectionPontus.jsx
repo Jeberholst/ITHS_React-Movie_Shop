@@ -111,7 +111,7 @@ const MovieSectionPontus = () => {
                     <div className={classes.rootGrid}>
 
                         {RESULT.map((item) => (
-                            <MovieMulti key={'genre-' + item.id} useId={'hover-container-genre'} />
+                            <MovieMulti key={'genre-' + item.id} item={item} useId={'hover-container-genre'} />
                         ))}
 
                     </div>

@@ -1,4 +1,4 @@
-import { ButtonGroup, Container, Divider, makeStyles, Slide, Zoom } from "@material-ui/core";
+import { ButtonGroup, Container, Divider, makeStyles, Slide, Typography, Zoom } from "@material-ui/core";
 import React, { useState } from "react";
 import { useSelector } from "react-redux"
 import CartItem from './CartItem'
@@ -91,6 +91,19 @@ const ShoppingCartRedux = () => {
           ) : null
     }
 
+    const checkCartNotEmpty = () => {
+      
+      return (hasCartItems) ? 
+          (
+            <Zoom in={true} mountOnEnter unmountOnExit>
+                <ShoppingCartActionButtons 
+                        style={{marginTop: 5}}
+                        mItem={''} 
+                        type={BUTTON_TYPE.CART_CLEAR}/>
+            </Zoom>
+          ) : null
+    }
+
 
     fetchers.fetchBillingInfo()
 
@@ -98,12 +111,11 @@ const ShoppingCartRedux = () => {
         <Container className={classes.root}>
 
             <div className={classes.header}>
-                <ButtonGroup>
-                  <ShoppingCartActionButtons 
-                    style={{marginTop: 5}}
-                    mItem={''} 
-                    type={BUTTON_TYPE.CART_CLEAR}/>
-                </ButtonGroup>
+
+          
+                {checkCartNotEmpty()}
+
+
             </div>
 
             <Zoom in={true} mountOnEnter unmountOnExit>
@@ -167,8 +179,8 @@ const CartListItems = () => {
       <React.Fragment>
          {/*TODO: add styling to div*/}
          {/*TODO: suggest user to go to "Section"?*/}
-        <div>
-          <p>No items added to cart :(</p>   
+        <div style={{padding: 15}}>
+          <Typography>No items added to cart :(</Typography>   
         </div>
       </React.Fragment>
     );

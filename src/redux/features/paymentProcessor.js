@@ -3,9 +3,9 @@ import { createAction, createReducer } from "@reduxjs/toolkit";
 const startPaymentProcess = createAction('start payment process');
 const startValidation = createAction('start validation');
 const setPaymentSuccess = createAction('payment completed');
+const startRedirect = createAction('starting redirect completed');
 
-const actions = { startPaymentProcess, startValidation, setPaymentSuccess };
-
+const actions = { startPaymentProcess, startValidation, setPaymentSuccess, startRedirect };
 
 const PAYMENT_PROCESSING_STATE = 
 {
@@ -25,9 +25,17 @@ const PAYMENT_PROCESSING_STATE =
     status: 3,
     message: 'Payment completed, thank you!',
   },
-  DISPLAY_COMPLETED_IN_FULL: {
+  DISPLAY_REDIRECT_2: {
     status: 4,
-    message: 'Dame esa masa',
+    message: 'Moving to receipt in 2 seconds',
+  },
+  DISPLAY_REDIRECT_1: {
+    status: 5,
+    message: 'Moving to receipt in 1 seconds',
+  },
+  DISPLAY_REDIRECT_0: {
+    status: 6,
+    message: 'Redirecting...',
   }
 
 }
@@ -41,6 +49,11 @@ const reducer = createReducer(initialState, {
       console.log("Start payment with: ", action.payload)
       const value = action.payload
       state.STATUS = value
+  }, 
+  [startRedirect]: (state, action) => {
+    console.log("Start red with: ", action.payload)
+    const value = action.payload
+    state.STATUS = value
   },  
 })
 
