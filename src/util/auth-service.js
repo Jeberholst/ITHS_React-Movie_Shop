@@ -29,8 +29,9 @@ class AuthService {
     create(user) {
         const db = firebase.firestore()
 
+        console.log(user.userId)
 
-        db.collection("users").add({
+        db.collection("users").doc(user?.userId).set({
             email: user?.email,
             userId: user?.userId,
             firstname: "",
@@ -66,7 +67,7 @@ class AuthService {
                     userId: user.uid
                 }
                 this.create(user)
-                window.location = 'profile'
+               // window.location = 'profile'
 
                 // ...
             })

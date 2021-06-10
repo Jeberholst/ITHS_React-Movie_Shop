@@ -143,6 +143,8 @@ const ProfilePage = () => {
                                    name="firstname" label="Namn" variant="outlined"/>
                         <TextField onChange={(e) => handleInput(e.target.name, e.target.value)} className={classes.textField}
                                    name="lastname" label="Efternamn" variant="outlined"/>
+                        <TextField onChange={(e) => handleInput(e.target.name, e.target.value)} className={classes.textField}
+                                   name="address" label="Address" variant="outlined"/>
                         <Button
                             type="submit"
                             fullWidth
