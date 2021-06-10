@@ -18,6 +18,8 @@ import "firebase/firestore";
 import "firebase/auth";
 import SnackBarsRedux from './util/SnackBarsRedux';
 import RegisterPage from "./pages/RegisterPage";
+import LoadEhandling from './components/ErrorHandler/ErrorPopUp';
+import Loading from './components/Loading/LoadingIcon';
 
 function App() {
     
@@ -29,9 +31,10 @@ function App() {
         <header className="App-NavBar">
           <Navbar/>
         </header>
-
         <div className='App-Main'>
+        
                 <div>
+              
                     <Switch>
                         <Route exact path="/" component={LandingPage} />
                         <Route exact path="/genre/:id" component={GenrePage} />

@@ -1,32 +1,26 @@
 
-// import React, {useEffect, useState} from 'react';
-// import * as ReactBootStrap from 'react-bootstrap';
-// import Modal from './Modal'
+import React, {useEffect, useState} from 'react';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { useDispatch, useSelector } from 'react-redux';
+import  { setLoading }  from '../../redux/features/loadingHandlingSlice'
+import Modal from './Modal'
 
-// const Loading = () =>{
+const Loading = () =>{
 
-//     const [loading,setLoading] = useState(false);
+    
+    const loadingState = useSelector((state) => state.loadingHandling.loadingState);
+    const dispatch = useDispatch();
 
-//     const LoadingSpinner = () =>{
-//         setLoading(true);
-//     }
+    return(
+       <div>
 
-//     useEffect(() =>{
-
-//         LoadingSpinner(); 
-
-//     },[]);
-
-//     return(
-//        <div>
-
-//  <Modal open={loading}>
-//  {<ReactBootStrap.Spinner animation="border" size="100" variant="danger" />}
-//  </Modal>
+ <Modal open={loadingState}>
+ {<CircularProgress color="secondary"/>}
+ </Modal>
 
          
-//        </div>
-//     );
-// }
+       </div>
+    );
+}
 
-// export default Loading;
+export default Loading;
