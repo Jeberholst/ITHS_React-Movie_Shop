@@ -36,12 +36,18 @@ const useStyle = makeStyles((theme) => ({
         alignContent: 'left',
         alignItems: 'left',
         textAlign: 'left',
+        "&:hover": {
+            transform: 'scale(1.01)'
+        }
     },
     labelRight: {
         width: '50%',
         alignContent: 'right',
         alignItems: 'right',
         textAlign: 'right',
+        "&:hover": {
+            transform: 'scale(1.01)'
+        }
     },
     containerDetails: {
         display: 'flex',

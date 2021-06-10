@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core';
+import { Fade, makeStyles } from '@material-ui/core';
 import MovieMulti from './MovieMulti';
 import { useSelector } from 'react-redux';
 import { MOVIE_SECTION_SCREENS } from '../../redux/features/movieSection';
@@ -89,10 +89,14 @@ const MovieSection = ( {...props } ) => {
            case MOVIE_SECTION_SCREENS.SLIDER_MOVIES:
                return (
                     <div className={classes.rootSlider}>
-
+                        
+                    
                         {RESULT.map((item) => (
+               
                             <MovieMulti key={'sliding-' + item.id} item={item} useId={'hover-container-slider'}/>
+                   
                         ))}
+                 
 
                     </div>
                )
@@ -101,7 +105,7 @@ const MovieSection = ( {...props } ) => {
                      <div className={classes.rootSlider}>
  
                          {RESULT.map((item) => (
-                             <MovieMulti key={'grid-' + item.id} item={item} useId={'hover-container-slider'}/>
+                                <MovieMulti key={'grid-' + item.id} item={item} useId={'hover-container-slider'}/>
                          ))}
  
                      </div>

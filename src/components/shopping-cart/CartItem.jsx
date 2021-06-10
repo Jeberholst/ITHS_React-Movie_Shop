@@ -26,7 +26,10 @@ const useStyle = makeStyles((theme) => ({
       objectFit: 'cover',
       backgroundRepeat: 'no-repeat',
       minHeight: '30vh',
-      maxWidth: '100%'
+      maxWidth: '100%',
+      "&:hover": {
+          transform: 'scale(0.98)'
+      }
     },
     containerInfo: {
       display: 'flex',
@@ -71,7 +74,7 @@ const useStyle = makeStyles((theme) => ({
       width: 'fit-content',
       padding: '6px 8px',
       letterSpacing: '0.02857em'
-  },
+    },
 }));
 
 
