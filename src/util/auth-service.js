@@ -1,7 +1,9 @@
 import firebase from "firebase/app";
 import "firebase/auth";
+import 'firebase/firestore';
 
 class AuthService {
+
 
     login(email, password) {
 
@@ -24,13 +26,46 @@ class AuthService {
         firebase.auth().signOut().then( r =>  console.log("Signed out"))
     }
 
-    register(email, password) {
+    create(user) {
+        const db = firebase.firestore()
+
+
+        db.collection("users").add({
+            email: user?.email,
+            userId: user?.userId,
+            firstname: "",
+            lastname: "",
+            address: "",
+            postalCode:"",
+            county:"",
+            country:""
+        })
+
+            .then((docRef) => {
+                console.log("Document written with ID: ", docRef.id);
+            })
+            .catch((error) => {
+                console.error("Error adding document: ", error);
+            });
+
+
+    }
+
+    register(email, password, user) {
+
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((userCredential) => {
                 // Signed in
                 console.log("created")
-                let user = userCredential.user;
+                 user = userCredential.user;
                 localStorage.setItem("user", JSON.stringify(user));
+                console.log(user)
+
+                user = {
+                    email: user.email,
+                    userId: user.uid
+                }
+                this.create(user)
                 window.location = 'profile'
 
                 // ...
@@ -41,6 +76,10 @@ class AuthService {
                 console.log(errorMessage)
                 // ..
             });
+
+
+
+
     }
 
     updateUserProfile(displayName) {
