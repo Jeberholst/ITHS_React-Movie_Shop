@@ -95,9 +95,9 @@ const Bar = () => {
       {/*Navigation bar*/}
       <Link to="/"><img src={dummyLogo} alt="" className="navbar_logo" /></Link>
       <div className={iconsStyle}>
-        {menuOpen? null :  <i className="fas fa-search" onClick={() => dispatch(toggelSearch())}></i> }
+        {menuOpen? null :  <i className="fas fa-search nav_icon" onClick={() => dispatch(toggelSearch())}></i> }
         {menuOpen? null :  <Link to="/shopping-cart"> <ShoppingCartBadge/> </Link> }
-        {menuOpen? <i onClick={() => handelMenuClick()} className="fas fa-times navbar__container_burger-menu"></i> :   <i onClick={() => handelMenuClick()} className="fas fa-bars navbar__container_burger-menu"></i> }
+        {menuOpen? <i onClick={() => handelMenuClick()} className="fas fa-times nav_icon"></i> :   <i onClick={() => handelMenuClick()} className="fas fa-bars nav_icon"></i> }
       
       </div>
     </div>

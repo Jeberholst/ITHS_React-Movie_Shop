@@ -136,18 +136,9 @@ textarea:focus, input:focus{
     cursor: pointer;  
 }
 
-
-.navbar__container_burger-menu{
-  
-}
-.navbar__container_shop-cart{
-    
-}
-.menu_x_btn{
-}
-
-.navbar_company_title{
-    
+.nav_icon{
+  z-index: 4;
+  padding: 10px;
 }
 
 /* MENU CSS */
