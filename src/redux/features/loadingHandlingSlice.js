@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const loadingHandlingSlice = createSlice({
   name: 'loadingHandling',
   initialState: {
-    loadingState: false
+    loadingState: true
   },
   reducers: {
     setLoading: (state, action) => {

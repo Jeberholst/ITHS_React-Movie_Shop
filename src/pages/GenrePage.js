@@ -7,6 +7,9 @@ import {fetchGenreMovies,setGenre,movieResults} from '../redux/features/genrePag
 import FilterBar from '../components/filterbar/FilterBar'
 import { resetFilter } from '../redux/features/filterBarSlice'
 import MovieSectionPontus from '../components/fetcher-components/MovieSectionPontus.jsx';
+import Loading from '../components/Loading/LoadingIcon.jsx';
+import { setError } from '../redux/features/ErrorHandlingSlice.js';
+import LoadEhandling from '../components/ErrorHandler/ErrorPopUp.jsx';
 
 
 
@@ -15,7 +18,7 @@ const GenrePage = () => {
     const params = useParams()
     let dispatch = useDispatch()
     let id = useRef("")
-    let ready = useSelector(state => state.genrePage.ready)
+    let status = useSelector(state => state.genrePage.status)
     let movies = useSelector(movieResults)
     
    
@@ -41,23 +44,35 @@ const GenrePage = () => {
         return () => dispatch(actions.resetMovieList()) 
     },[])
 
-    console.log("RERENDEr")
-    return(  
+    if(status === "READY"){
+        return(  
+            <div className="App-Content">
+                <Header page={`${id.current}`}>{id.current}</Header>
+                <FilterBar currentID = {id} />
+                <React.Fragment>
+                <MovieSectionPontus/>
+                {/* <MovieSection />  */}
+                </React.Fragment>
+            </div>
+        ) 
+    } else if (status === "LOADING"){
+        return(
+            <div className="App-Content">
+                <Header page={`${id.current}`}>{id.current}</Header>
+                <Loading></Loading>
+            </div>
+        )
+    }else{
+        dispatch(setError(true))
+        return( 
         <div className="App-Content">
-           
-            
             <Header page={`${id.current}`}>{id.current}</Header>
-            <FilterBar currentID = {id} />
-            {ready?
-            <React.Fragment>
-            <MovieSectionPontus/>
-            {/* <MovieSection />  */}
-            </React.Fragment>
-            :
-            <h1>LOADING</h1>
-            }
+            <LoadEhandling></LoadEhandling>
         </div>
-    ) 
+        )
+    }
+ 
+   
 
 }
 

@@ -1,6 +1,8 @@
 
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
 import { fetchTopFive } from '../../util/ApiFetcher'
+import { setError } from './ErrorHandlingSlice'
 
 export const fetchTopMovies = createAsyncThunk(
   'mainslider/fetchStatus',

@@ -24,7 +24,7 @@ export const genrePageSlice = createSlice({
     initialState: {
       result: [],
       genre:"",
-      ready:false,
+      status:"LOADING",
     },
     reducers:{
       setGenre: (state,action) => {
@@ -37,16 +37,17 @@ export const genrePageSlice = createSlice({
     },
     extraReducers: {
       [fetchGenreMovies.fulfilled]: (state,action) => {
-        console.log("adding stuff")
+        
         state.result = action.payload;
-        state.ready = true;
+        state.status = "READY";
       },
       [fetchGenreMovies.rejected]: (state,action) => {
         console.log(action.error.message)
+        state.status = "ERROR"
       },
       [fetchGenreMovies.pending]: (state,action) => {
         state.result = []
-        state.ready = false;
+        state.status = "LOADING";
       }
     }
 

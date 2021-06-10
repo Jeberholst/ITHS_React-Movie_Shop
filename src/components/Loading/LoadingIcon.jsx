@@ -9,6 +9,7 @@ const Loading = () =>{
 
     
     const loadingState = useSelector((state) => state.loadingHandling.loadingState);
+    console.log(loadingState)
     const dispatch = useDispatch();
 
     return(
