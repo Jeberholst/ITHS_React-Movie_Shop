@@ -63,7 +63,7 @@ export const genreSliderSlice = createSlice({
       setWidth:(state,action) => {
         let w = window.innerWidth > 1100 ? ((window.innerWidth*1.20) * 0.15 + 15) * state.sliders.find( obj => obj.slider === action.payload.id ).movieList.length : (window.innerWidth * 0.30 + 15.5) * state.sliders.find( obj => obj.slider === action.payload.id ).movieList.length
         let translate = (state.sliders.find( obj => obj.slider === action.payload.id ).translateX * -1) > w/2 ? (w/2) * -1 + 45 : state.sliders.find( obj => obj.slider === action.payload.id ).translateX
-        console.log(w,(state.sliders.find( obj => obj.slider === action.payload.id ).translateX * -1))
+        
         let newArray = updateItemInArray(current(state.sliders),action.payload.id, item => {
           return updateSlider(item,{width:w,translateX:translate})
       })
@@ -76,7 +76,7 @@ export const genreSliderSlice = createSlice({
     },
     extraReducers:{
       [fetchGenerSlides.fulfilled]: (state,action) =>{
-        console.log("fetch done") 
+        
         let w = window.innerWidth > 1100 ? ((window.innerWidth*1.20) * 0.15 + 15) * action.payload.movies.length : (window.innerWidth * 0.30 + 15.5) * action.payload.movies.length
         let newArray = updateItemInArray(current(state.sliders),action.payload.id, item => {
           return updateSlider(item,{movieList:action.payload.movies,width:w})

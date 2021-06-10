@@ -6,7 +6,6 @@ import { toggelMenu, setSearchResults, toggelSearch, fetchSearchResult } from '.
 import  { actions }  from '../../redux/features/movieSection'
 import  { Link } from "react-router-dom";
 import ShoppingCartBadge from './../shopping-cart/ShoppingCartBadge'
-import AuthService from "../../util/auth-service"
 import authService from '../../util/auth-service';
 import SnackBarsRedux from '../../util/SnackBarsRedux'
 import {actions as snackbar,cartNotifications}    from '../../redux/features/snackbars'
@@ -129,7 +128,7 @@ let Menu = () => {
     setUser(authService.getCurrentUser)
     dispatch(snackbar.displaySnackBar(cartNotifications.loggedOutSuccess))
   }
-  console.log(user)
+ 
   return(
     <div className="menu__overlay">
     
