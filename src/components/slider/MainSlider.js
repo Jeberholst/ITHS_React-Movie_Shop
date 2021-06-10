@@ -4,6 +4,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import {toggelSlider,fetchTopMovies, resetSlider, setWidth} from '../../redux/features/mainSliderSlice'
 import { Link } from 'react-router-dom';
 import  { actions }  from '../../redux/features/movieSection'
+import Loading from '../Loading/LoadingIcon'
+import { setError } from '../../redux/features/ErrorHandlingSlice';
+import LoadEhandling from '../ErrorHandler/ErrorPopUp';
+import { setLoading } from '../../redux/features/loadingHandlingSlice';
+
 
 
 
@@ -104,12 +109,13 @@ const MainSlider = () => {
         }else if (status === "LOADING"){
             return(
                 <div className="main-slider__container">
-                    <h1>LOADING</h1>
-                </div>
+                <Loading></Loading>           
+            </div>
                 
             )
         }else{
-            return(<h1>ERROR</h1>)
+            dispatch(setError(true))
+            return(<LoadEhandling></LoadEhandling>)
         }
 
     
