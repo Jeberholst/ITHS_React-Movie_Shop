@@ -52,6 +52,27 @@ class AuthService {
 
     }
 
+    updateUser(user){
+        const db = firebase.firestore()
+
+        let userRef = db.collection("users").doc(user.userId);
+
+        return userRef.update({
+            firstname: user.firstname,
+            lastname: user.lastname,
+            address: user.address,
+        })
+            .then(() => {
+                console.log("Document successfully updated!");
+            })
+            .catch((error) => {
+                // The document probably doesn't exist.
+                console.error("Error updating document: ", error);
+            });
+
+
+    }
+
     register(email, password, user) {
 
         firebase.auth().createUserWithEmailAndPassword(email, password)

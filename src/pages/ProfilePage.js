@@ -124,6 +124,15 @@ const ProfilePage = () => {
         AuthService.updateUserProfile(displayName)
         console.log(name, value)
         }
+        const userId = user?.uid
+        console.log(userId)
+        const newUser = {
+            userId: userId,
+            firstname: name === "firstname" ? value : null,
+            lastname:name === "lastname" ? value : null,
+            address: name === "address" ? value : null,
+        }
+        AuthService.updateUser(newUser)
 
     }
 
