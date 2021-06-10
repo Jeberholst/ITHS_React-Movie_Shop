@@ -3,7 +3,8 @@ export const POSTER_SIZES = {
     w300: 'w300',
     w400: 'w400',
     w500: 'w500',
-    w800: 'w800'
+    w800: 'w800',
+    original: 'original'
 };
 
 export function createPosterPathFull(size, endPath) {

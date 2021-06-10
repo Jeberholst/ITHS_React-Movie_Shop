@@ -54,14 +54,14 @@ const ErrorModal = ({open,children}) =>{
     
     if(!open) return null
     return ReactDom.createPortal(
-        <>
+        <React.Fragment>
         <div style={OVERLAY_STYLES}/>
         <div style={MODAL_STYLES}>
            {children}
            <Button onClick={() => refreshPage()}  style={BUTTON_STYLES} variant="outlined" color="secondary">Reload page</Button>
         </div>
              
-        </>,
+        </React.Fragment>,
         document.getElementById('ErrorHandlingPopUp')
     );
 }

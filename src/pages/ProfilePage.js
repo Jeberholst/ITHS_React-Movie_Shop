@@ -121,10 +121,10 @@ const ProfilePage = () => {
     const handleInput = (name, value) => {
         const displayName = name === 'username' ? value : null
         if (displayName){
-        AuthService.updateUserProfile(displayName)
-        console.log(name, value)
+            AuthService.updateUserProfile(displayName)
+            console.log(name, value)
         }
-        const userId = user?.uid
+        const userId = user.uid
         console.log(userId)
         const newUser = {
             userId: userId,

@@ -64,7 +64,7 @@ const SlideContainer = ({children,width,translate,id}) => {
 
 const Slide = ({movie}) => {
     let dispatch = useDispatch()
-    const posterBaseUrl = "https://image.tmdb.org/t/p/w300/"
+    const posterBaseUrl = "https://image.tmdb.org/t/p/original/"
     
     return <Link to={`/movie/${movie.id}`} onClick={() => dispatch(actions.setSelectedMovie(movie))}  style={{backgroundImage:`url(${posterBaseUrl+movie.poster_path})`}} className="gener__slide"></Link>
 }

@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     },
     year: {
         textAlign: 'left',
-        maxWidth: '90%',
+        maxWidth: '100%',
     },
     genres: {
         display: 'flex',
@@ -117,7 +117,7 @@ const MovieMulti = ({ item, useId }) => {
                             <i style={{fontSize: 12}}>{title}</i>
                         </div>
 
-                        <div className={classes.releaseDate}>
+                        <div className={classes.year}>
                             <i style={{fontSize: 12}}>{String(releaseDate).slice(0, 4)}</i>
                         </div>
                         
