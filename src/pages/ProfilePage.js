@@ -180,8 +180,14 @@ const ProfilePage = () => {
                     </div>
 
                         <div className={classes.topRow}>
-                            <Typography>{user?.receipt[0].movies[0]}</Typography>
+                            <Typography variant="h5" >Dina köp</Typography>
 
+                            {user?.receipt ?
+
+                                user?.receipt[0].movies.map(r => {
+                                 return <Typography variant="h7" >{JSON.parse(r).original_title}</Typography>
+                            })
+                             : null }
 
 
                         </div>

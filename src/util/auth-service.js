@@ -106,7 +106,7 @@ class AuthService {
                 // Signed in
                 console.log("created")
                  user = userCredential.user;
-                localStorage.setItem("user", JSON.stringify(user));
+                this.getUserFromFirebase(user)
                 console.log(user)
 
                 user = {
