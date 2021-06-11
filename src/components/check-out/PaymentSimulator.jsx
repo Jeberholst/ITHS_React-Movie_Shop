@@ -2,9 +2,11 @@
 import { LinearProgress, makeStyles, Slide } from "@material-ui/core";
 import { AttachMoneyRounded } from '@material-ui/icons';
 import React, { useState } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import {  actions, PAYMENT_PROCESSING_STATE } from '../../redux/features/paymentProcessor';
+import authService from '../../util/auth-service';
+import { sendReceipt } from './payment-functions'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -44,6 +46,8 @@ const PaymentSimulator = ({ status }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const history = useHistory();
+
+    const cartItems = useSelector(state => state.shoppingCart.listOfMovies)
    
     let content = null;
     let displayIcon = null;
@@ -95,7 +99,8 @@ const PaymentSimulator = ({ status }) => {
         setTimeout(function(){
            
             dispatch(actions.startRedirect(PAYMENT_PROCESSING_STATE.DISPLAY_REDIRECT_1))
-  
+            sendReceipt(authService.getCurrentUser().uid, cartItems.length, cartItems )
+            
         }, 1000
     );
     }
