@@ -44,7 +44,6 @@ class AuthService {
 
             .then((docRef) => {
                 console.log("Document written with ID: ", docRef.id);
-                window.location = 'profile'
 
             })
             .catch((error) => {
@@ -116,6 +115,8 @@ class AuthService {
                     userId: user.uid
                 }
                 this.create(user)
+                window.location = 'profile'
+
 
                 // ...
             })
