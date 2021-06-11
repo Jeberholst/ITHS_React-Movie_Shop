@@ -1,4 +1,4 @@
-import {Button, createMuiTheme, CssBaseline, Grid, Link, makeStyles, TextField, Typography} from "@material-ui/core";
+import {Button, createMuiTheme, CssBaseline, Grid, makeStyles, TextField, Typography} from "@material-ui/core";
 import React, {useEffect, useState} from "react";
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -6,6 +6,7 @@ import AuthService from "../util/auth-service"
 import PageLableWithIcon from "./PageLabelWithIcon";
 import {Lock} from "@material-ui/icons";
 import { ThemeProvider } from "@material-ui/styles";
+import {Link} from 'react-router-dom'
 
 export const AuthContext = React.createContext()
 
@@ -146,7 +147,7 @@ const LoginPage = () => {
                     <Grid container>
                         <Grid item className={classes.footer}
                         >
-                            <Link href="register" variant="body2">
+                            <Link to={"/register"}>
                                 {"Inget konto? Skapa ett här"}
                             </Link>
                         </Grid>

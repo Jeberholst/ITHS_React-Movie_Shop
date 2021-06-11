@@ -26,7 +26,7 @@ function App() {
   return (
       <div className="App">
 
-      <Router  basename={`${process.env.PUBLIC_URL}/`}>
+      <Router  basename={`movieplanet/`}>
         
         <header className="App-NavBar">
           <Navbar/>
