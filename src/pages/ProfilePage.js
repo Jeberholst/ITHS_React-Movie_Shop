@@ -179,6 +179,12 @@ const ProfilePage = () => {
                         <a className={classes.link} onClick={removeAccount}>Remove account</a>
                     </div>
 
+                        <div className={classes.topRow}>
+                            <Typography>{user?.receipt[0].movies[0]}</Typography>
+
+
+
+                        </div>
 
                     </div>
 
