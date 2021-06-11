@@ -23,7 +23,7 @@ class FirebaseReceipt {
 export const sendReceipt = async(docRef, movie_count, movies) => {
 
     const userDocRef = db.collection("users").doc(`${docRef}`)
-    console.log(userDocRef)
+
 
     return db.runTransaction((transaction) => {
 
