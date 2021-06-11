@@ -49,7 +49,6 @@ const CartBillingInfo = () => {
   const classes = cartTotalStyle();
   const [user] = useState(authService.getCurrentUser());
   const [userInfo, setUserInfo] = useState(intialUserInfo);
-  console.log('USER', user.uid)
 
   const fetchBillingInfo = () => {
 

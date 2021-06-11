@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: "90%",
     height: "100%",
-    maxWidth: "80vh",
+    maxWidth: "50vh",
     justifyContent: "center",
     justifyItems: "center",
     alignContent: "center",

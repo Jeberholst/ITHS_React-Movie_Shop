@@ -10,7 +10,7 @@ import { ThemeProvider } from "@material-ui/styles";
 export const AuthContext = React.createContext()
 
 
-const LoginPage = () => {
+const RegisterPage = () => {
 
     const useStyles = makeStyles((theme) => ({
         paper: {
@@ -134,4 +134,4 @@ const LoginPage = () => {
 
 }
 
-export default LoginPage
+export default RegisterPage
