@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/iths-react-movie-shop/static/css/main.783407df.chunk.css",
-    "main.js": "/iths-react-movie-shop/static/js/main.02bf0998.chunk.js",
-    "main.js.map": "/iths-react-movie-shop/static/js/main.02bf0998.chunk.js.map",
+    "main.js": "/iths-react-movie-shop/static/js/main.ee9b14ec.chunk.js",
+    "main.js.map": "/iths-react-movie-shop/static/js/main.ee9b14ec.chunk.js.map",
     "runtime-main.js": "/iths-react-movie-shop/static/js/runtime-main.9d8d85b3.js",
     "runtime-main.js.map": "/iths-react-movie-shop/static/js/runtime-main.9d8d85b3.js.map",
-    "static/js/2.3cb97696.chunk.js": "/iths-react-movie-shop/static/js/2.3cb97696.chunk.js",
-    "static/js/2.3cb97696.chunk.js.map": "/iths-react-movie-shop/static/js/2.3cb97696.chunk.js.map",
+    "static/js/2.5f2d2743.chunk.js": "/iths-react-movie-shop/static/js/2.5f2d2743.chunk.js",
+    "static/js/2.5f2d2743.chunk.js.map": "/iths-react-movie-shop/static/js/2.5f2d2743.chunk.js.map",
     "static/js/3.d77e0461.chunk.js": "/iths-react-movie-shop/static/js/3.d77e0461.chunk.js",
     "static/js/3.d77e0461.chunk.js.map": "/iths-react-movie-shop/static/js/3.d77e0461.chunk.js.map",
     "index.html": "/iths-react-movie-shop/index.html",
     "static/css/main.783407df.chunk.css.map": "/iths-react-movie-shop/static/css/main.783407df.chunk.css.map",
-    "static/js/2.3cb97696.chunk.js.LICENSE.txt": "/iths-react-movie-shop/static/js/2.3cb97696.chunk.js.LICENSE.txt",
+    "static/js/2.5f2d2743.chunk.js.LICENSE.txt": "/iths-react-movie-shop/static/js/2.5f2d2743.chunk.js.LICENSE.txt",
     "static/media/logo_planet_movie.b30a5772.webp": "/iths-react-movie-shop/static/media/logo_planet_movie.b30a5772.webp"
   },
   "entrypoints": [
     "static/js/runtime-main.9d8d85b3.js",
-    "static/js/2.3cb97696.chunk.js",
+    "static/js/2.5f2d2743.chunk.js",
     "static/css/main.783407df.chunk.css",
-    "static/js/main.02bf0998.chunk.js"
+    "static/js/main.ee9b14ec.chunk.js"
   ]
 }
