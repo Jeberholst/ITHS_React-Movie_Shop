@@ -93,13 +93,22 @@ const ProfilePage = () => {
     }
 
 
+    const findCurrentUser = (user) => {
+
+        AuthService.getUserFromFirebase(user)
+       const newUser = JSON.parse(localStorage.getItem('userFirebase'));
+        setUser(newUser)
+
+    }
+
     useEffect(() => {
         console.log(user)
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 let uid = user.uid;
-                setUser(user)
+               // setUser(user)
                 console.log("user profile page", user)
+                findCurrentUser(user)
             } else {
                 console.log("no user is signed in", user)
                 setUser(null)
@@ -124,7 +133,7 @@ const ProfilePage = () => {
             AuthService.updateUserProfile(displayName)
             console.log(name, value)
         }
-        const userId = user.uid
+        const userId = user.userId
         console.log(userId)
         const newUser = {
             userId: userId,
@@ -145,15 +154,17 @@ const ProfilePage = () => {
             {user ?
                 <ThemeProvider theme={theme}>
                     <CssBaseline/>
+                    <div>
+
                     <div className={classes.topRow}>
                         <TextField onChange={(e) => handleInput(e.target.name, e.target.value)} className={classes.textField}
                                   defaultValue={user.displayName} name="username" label="Användarnamn" variant="outlined"/>
                         <TextField onChange={(e) => handleInput(e.target.name, e.target.value)} className={classes.textField}
-                                   name="firstname" label="Namn" variant="outlined"/>
+                                   defaultValue={user.firstname}   name="firstname" label="Namn" variant="outlined"/>
                         <TextField onChange={(e) => handleInput(e.target.name, e.target.value)} className={classes.textField}
-                                   name="lastname" label="Efternamn" variant="outlined"/>
+                                   defaultValue={user.lastname}   name="lastname" label="Efternamn" variant="outlined"/>
                         <TextField onChange={(e) => handleInput(e.target.name, e.target.value)} className={classes.textField}
-                                   name="address" label="Address" variant="outlined"/>
+                                   defaultValue={user.address}      name="address" label="Address" variant="outlined"/>
                         <Button
                             type="submit"
                             fullWidth
@@ -167,6 +178,10 @@ const ProfilePage = () => {
                         </Button>
                         <a className={classes.link} onClick={removeAccount}>Remove account</a>
                     </div>
+
+
+                    </div>
+
                 </ThemeProvider>
 
             :
@@ -179,7 +194,7 @@ const ProfilePage = () => {
                 color="primary"
                 className={classes.logInButton}
                 data-testid="signin-anon"
-                onClick={() => window.location = 'register'}
+                onClick={() => window.location = 'login'}
                 >
                 Logga in
                 </Button>

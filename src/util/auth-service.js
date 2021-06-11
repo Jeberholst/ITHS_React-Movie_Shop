@@ -57,18 +57,44 @@ class AuthService {
 
         let userRef = db.collection("users").doc(user.userId);
 
-        return userRef.update({
-            firstname: user.firstname,
-            lastname: user.lastname,
-            address: user.address,
-        })
-            .then(() => {
+        if (user.firstname){
+            return userRef.update({
+                firstname: user.firstname
+            })    .then(() => {
                 console.log("Document successfully updated!");
             })
-            .catch((error) => {
-                // The document probably doesn't exist.
-                console.error("Error updating document: ", error);
-            });
+                .catch((error) => {
+                    // The document probably doesn't exist.
+                    console.error("Error updating document: ", error);
+                });
+        }
+
+        if (user.address){
+            return userRef.update({
+                address: user.address
+            })    .then(() => {
+                console.log("Document successfully updated!");
+            })
+                .catch((error) => {
+                    // The document probably doesn't exist.
+                    console.error("Error updating document: ", error);
+                });
+        }
+
+        if (user.lastname){
+            return userRef.update({
+                lastname: user.lastname
+            })    .then(() => {
+                console.log("Document successfully updated!");
+            })
+                .catch((error) => {
+                    // The document probably doesn't exist.
+                    console.error("Error updating document: ", error);
+                });
+        }
+
+
+
 
 
     }
@@ -115,6 +141,26 @@ class AuthService {
         }).catch(function(error) {
             // An error happened.
         });
+    }
+
+    getUserFromFirebase = (user) => {
+        const db = firebase.firestore()
+
+        let docRef = db.collection("users").doc(user?.uid);
+
+        docRef.get().then((doc) => {
+            if (doc.exists) {
+                console.log("Document data:", doc.data());
+                localStorage.setItem("userFirebase", JSON.stringify(doc.data()));
+
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+        });
+
     }
 
     getCurrentUser() {
