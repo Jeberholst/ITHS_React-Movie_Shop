@@ -5,8 +5,9 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import {  actions, PAYMENT_PROCESSING_STATE } from '../../redux/features/paymentProcessor';
-import authService from '../../util/auth-service';
 import { sendReceipt } from './payment-functions'
+import firebase from "firebase/app";
+import "firebase/auth";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -95,11 +96,12 @@ const PaymentSimulator = ({ status }) => {
         console.log('STATUS 4', status)
 
         content =  PAYMENT_PROCESSING_STATE.DISPLAY_REDIRECT_2
+        console.log('uid', firebase.auth().currentUser.uid)
        
         setTimeout(function(){
            
             dispatch(actions.startRedirect(PAYMENT_PROCESSING_STATE.DISPLAY_REDIRECT_1))
-            sendReceipt(authService.getCurrentUser().uid, cartItems.length, cartItems )
+            sendReceipt(firebase.auth().currentUser.uid, cartItems.length, cartItems)
             
         }, 1000
     );

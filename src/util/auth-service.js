@@ -29,7 +29,7 @@ class AuthService {
     create(user) {
         const db = firebase.firestore()
 
-        console.log(user.userId)
+        //console.log(user.userId)
 
         db.collection("users").doc(user?.userId).set({
             email: user?.email,

@@ -7,7 +7,7 @@ import {
 
 class FirebaseReceipt {
     
-    constructor (total, movies) {
+    constructor (total, movies, date) {
         this.total = total;
         this.movies = movies;
     }
@@ -23,6 +23,7 @@ class FirebaseReceipt {
 export const sendReceipt = async(docRef, movie_count, movies) => {
 
     const userDocRef = db.collection("users").doc(`${docRef}`)
+    console.log(userDocRef)
 
     return db.runTransaction((transaction) => {
 
@@ -38,7 +39,7 @@ export const sendReceipt = async(docRef, movie_count, movies) => {
                 receipt: firebase.firestore.FieldValue.arrayUnion(receipt.toFirestore(receipt))
             }
    
-            transaction.set(userDocRef, newDocProps);
+            transaction.update(userDocRef, newDocProps);
                  
         });
     
